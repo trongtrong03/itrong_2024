@@ -10,7 +10,6 @@
             <li><a href="#act2">二、Web API</a></li>
             <li><a href="#act3">三、Web API 的語法結構</a></li>
             <li><a href="#act4">四、REST 與 RESTful API</a></li>
-            <li><a href="#act8">八、什麼是 CORS？</a></li>
             <li><a href="#act9">九、前端 API 與後端 API 的差異</a></li>
             <li><a href="#act10">十、實用的 API 工具</a></li>
             <li><a href="#act11">十一、參考資料</a></li>
@@ -184,8 +183,101 @@
     </div>
     <div class="text-block" id="act4">
         <h2>四、REST 與 RESTful API</h2>
-        <p>REST 為「Representational State Transfer」的縮寫，翻譯成中文術語叫作「表現層狀態轉換」，光看名字不說理解其含意，要記起來都十分困難，但無妨，首先 REST 一詞係由 HTTP 規範主要作者之一的 Roy Fielding 於其博士論文提出的概念，它是一種「軟體架構風格」而並非 HTTP 規範（標準）。這個理論誕生的目的是幫助幫助分散在世界各地不同的應用程式、軟體都能在網際網路上能夠互相傳遞訊息，每一個網頁都可以被視為一個「資源」（resource）提供使用者使用，</p>
-        
+        <p>很多人可能都聽或看過 RESTful，卻不見得真正深入去認識它，其實我也是。之所以會想把 REST 與 RESTful 也寫進這篇文章，主要是發現在蒐集 Web API 相關資料的過程中，RESTful 出現的頻率實在太高，好奇查了一下才發現兩者關係密不可分。</p>
+        <p>先從結論開始講起吧，首先，Web API 是一門網頁應用介面技術，而 RESTful 則是符合 REST 原則發布的一種設計規範，Web API 的各種語法、實作方式基本上都是以 RESTful 為基礎進行設計的，故絕大部分教學都會建議初學者在學習 Web API 運用的過程，也一併汲取 REST 的相關知識。</p>
+        <p>REST 為「Representational State Transfer」的縮寫，翻譯成中文術語叫作「表現層狀態轉換」，光看名字不說理解其含意，要記起來都十分困難，但無妨，首先 REST 一詞係由 HTTP 規範主要作者之一的 Roy Fielding 於其博士論文提出的概念，它是一種「軟體架構風格」而並非 HTTP 規範（標準）。這個理論誕生的目的是幫助幫助分散在世界各地不同的應用程式、軟體都能在網際網路上能夠互相傳遞訊息，每一個網頁都可以被視為一個「資源」（resource）提供使用者使用，其核心原則包括：</p>
+        <h5>1. 客戶端與伺服器架構：</h5>
+        <p>客戶端和伺服器應該是相互獨立的，它們之間透過介面進行通信，從而實現解耦。</p>
+        <h5>2. 無狀態性：</h5>
+        <p>伺服器不會保存客戶端的狀態訊息，每個請求都應該包含足夠的資訊來讓伺服器理解和處理請求。</p>
+        <h5>3. 統一介面：</h5>
+        <p>系統應該提供統一的介面來對資源進行操作，資源 透過URI 進行標識，HTTP 方法用於對資源進行操作，HTTP 狀態碼用於表示操作結果，使用標準的媒體類型（如 JSON、XML 等 ）來表示資源的狀態。</p>
+        <h5>4. 快取：</h5>
+        <p>系統應該支援快取機制，以提高效能和可擴展性。</p>
+        <h5>5. 按需可擴展性：</h5>
+        <p>系統應該具有按需可擴展的特性，使得它可以根據需求進行擴展和修改。</p>
+        <p><br></p>
+        <p>至於符合 REST 理想的網路系統應該具備以下三項要素：</p>
+        <h4>1. Data elements：</h4>
+        <ul>
+            <li>Resource：the intended conceptual target of a hypertext reference</li>
+            <li>Resource identifier：URL、URN</li>
+            <li>Representation：HTML document、JPEG image</li>
+            <li>Representation metadata：media type、last-modified time</li>
+            <li>Resource metadata：source link、alternates、vary</li>
+            <li>Control data：if-modified-since、cache-control</li>
+        </ul>
+        <p>雖說其敘述了非常詳細的定義，不過其中最重要的仍莫過於這兩者：</p>
+        <h5>Resources and Resource Identifiers：</h5>
+        <p>中文稱為「資源識別子」，是 Data elements 的核心。而在 REST 架構系統中所有實體都會對應全域唯一的 Resource Identifiers 以利識別與定義，如此才能盡可能確保該實體在不同系統裡也還是能正確地指向它。我們可以想像 Resource Identifiers 就類似我們身分證的概念，身分證號碼就像人類的識別子，用來區分每一個不同的個體。</p>
+        <h5>Representations：</h5>
+        <p>在 REST 的概念中 Components 之前是透過 Representations 來表示這個資源目前的狀態，Representations 就像我們所熟悉的 Content-Type。例如索取某網站裡的某張圖片，像圖片 image/jpg 這樣的 Content-Type 就是一種 Representations。抑或者取得某用戶的個人資料，Content-Type 可能會使用 application/xml，這便又是另一種 Representations。</p>
+        <p>總而言之，客戶端（Client）會依據 Representations 正確地渲染資訊──作為客戶端倚賴的瀏覽器即是用來接受與呈現這些各式各樣的 Representations。</p>
+        <p><br></p>
+        <h4>2. Connectors：</h4>
+        <p>REST Connectors（連接器）包含了以下五種型態：</p>
+        <ul>
+            <li>Client：libwww、libwww-perl</li>
+            <li>Server：libwww、Apache API、NSAPI</li>
+            <li>Cache：browser cache、Akamai cache network</li>
+            <li>Resolver：bind (DNS lookup library)</li>
+            <li>Tunnel：SOCKS、SSL after HTTP CONNECT</li>
+        </ul>
+        <h5>Client Connectors（客戶端連接器）：</h5>
+        <p>負責將客戶端的請求發送到伺服器端，它通常封裝了 HTTP 客戶端各種功能，包含 HTTP 請求、發送請求至指定的 URL、處理伺服器響應事件等。</p>
+        <h5>Server Connectors（伺服器端連接器）：</h5>
+        <p>負責接收來自客戶端的請求，並將其轉發到適當的伺服器資源。它通常封裝 HTTP 伺服器功能，包含解析 HTTP 請求、路由請求到對應的 API、生成 HTTP 響應等。</p>
+        <h5>Cache Connectors（快取連接器）：</h5>
+        <p>負責管理快取暫存資源，以提高整個系統（包含客戶端、伺服器端）性能以及降低延遲時間。它可以暫時儲存來自伺服器端的響應資料，當後續客戶端發來相同的請求時可以立即回傳暫存資料，而不必再向伺服器端發送請求。</p>
+        <h5>Resolver Connector（解析連接器）：</h5>
+        <p>負責將客戶端請求中的資源識別子解析為實體的伺服器端資源。</p>
+        <h5>Tunnel Connector（通道連接器）：</h5>
+        <p>負責在客戶端與伺服器端之間建立通道，以便在不同網路環境中傳輸資料，通常用於處理代理伺服器或防火牆這些網路設備，當然也包含加密之類的工作。</p>
+        <p><br></p>
+        <h4>3. Components：</h4>
+        <p>REST Components（元件）包含了以下四種角色：</p>
+        <ul>
+            <li>User Agent：Netscape Navigator、Lynx、MOMspider</li>
+            <li>Origin Server：Apache httpd、Microsoft IIS</li>
+            <li>Gateway：Squid、CGI、Reverse Proxy</li>
+            <li>Proxy：CERN Proxy、Netscape Proxy、Gauntlet</li>
+        </ul>
+        <h5>User Agent（使用者代理）：</h5>
+        <p>透過客戶端連接器（Client Connectors）對伺服器端進行連線，並渲染來自伺服端的回應資料，就好比瀏覽器。</p>
+        <h5>Origin Server（來源伺服器）：</h5>
+        <p>透過伺服端連接器（Server Connectors）提供通用的介面接收來自客戶端的請求，這個介面會隱藏 Resources 的實現細節。如同我們用瀏覽器瀏覽網站，不需要了解網站運作的背後原理是什麼。</p>
+        <h5>Gateway（網關）：</h5>
+        <p>充當客戶端與伺服器端之間的溝通橋梁，負責路由的請求與響應，從而提升系統的效率與安全性。</p>
+        <h5>Proxy（代理）：</h5>
+        <p>和 Gateway 一樣都是客戶與伺服器兩端之間的中間人，比起前者主要處理路由請求與響應方面的事情，Proxy 則負責代理客戶端與伺服器端之間的通訊，提供一些偏向輔助的服務功能。</p>
+        <p><br></p>
+        <h3>RESTful：</h3>
+        <p>網路上有位撰文者將 RESTful 形容得很到位：「形容美麗（beauty）的事物可以稱為 Beautiful，同理可證，設計 REST 的系統我們則稱為 RESTful」。由於 Roy Fielding 的論文敘述中，並未對 REST 具體實作細節有太多著墨，所以 REST 普及化還是要倚賴各路團隊開發的系統是否有納入 REST 提供的建議，假如有，大家就會說它很 RESTful，意指該系統採用了 REST 的設計原則，並符合其核心概念與特點。</p>
+        <p>以下列舉幾個具代表性的 RESTful Web API 應用：</p>
+        <ul>
+            <li>Twitter API</li>
+            <li>Facebook Graph API</li>
+            <li>Google Maps API</li>
+            <li>GitHub API</li>
+            <li>Amazon S3 API</li>
+            <li>Netflix API</li>
+            <li>Flickr API</li>
+        </ul>
+        <p>由此可見 REST 已經遍佈在我們日常生活裡常使用及瀏覽的網站。</p>
+        <p><br></p>
+        <p>只是，理論的東西洋洋灑灑寫了一些想必大多數的人可能讀完都還是對 REST 懵懵懂懂，或是很難在記憶裡牢牢紮根。因此在本章節最後，我們用比較生活化的例子來形容 REST 的功用：</p>
+        <p>假設我們正在規劃一場旅行，於此次旅行使用 RESTful 設計原則來組織並安排行程。我們需要考慮以下這些要點：</p>
+        <h5>1. 資源的識別：</h5>
+        <p>旅行中安排的每一個目的地都可視為一個「資源」（Resource），例如城市、景點、飯店等，這些資源都有自己的識別要素，譬如城市的名稱、景點的地址、飯店的門牌號碼等。</p>
+        <h5>2. 統一的窗口：</h5>
+        <p>這些資源的項目琳瑯滿目，接觸方式也大相逕庭，但我們仍盡可能希望透過統一方式操作或管理它們，譬如從各大網站查詢景點或預訂房間，而這些操作通通都是利用網站或手機 APP 來完成。</p>
+        <h5>3. 無狀態性：</h5>
+        <p>俗話說「計畫趕不上變化」，即便我們出發前已經預先安排好了行程，但我們仍希望每一次決策都還是可以依據當下狀況或需求進行變更，而不受限於原本計畫的操作，例如預訂景點有突發狀況導致不能前往時，我們能自行立即變更備案，而不是杵在當下無所適從。</p>
+        <h5>4. 保持彈性與擴充性：</h5>
+        <p>我們擬定的旅行計畫應該要是可以根據需求擴充或修改的，闢入添加新的景點到計畫裡，或根據飯店 Check In 時間調整行程安排等。</p>
+        <p><br></p>
+        <p>這個例子顯示如何將 REST 的概念應用到日常生活中，以更有效地處理資源和操作。透過使用 RESTful 設計原則來組織和安排旅行，我們將可以更輕鬆地管理和規劃行程，同時也可以更好地與其他人分享和交流旅行資訊。</p>
+        <p>通篇看下來 REST 似乎是系統開發者需要注意的事情，對一般使用者來說了不了解 REST 其實並非必要知識，因為比起系統架構和設計原則，使用者通常更在乎系統的功能面、易用程度與效能，甚至對我們這些專打他人 API 的前端工程師而言恐怕也是如此。儘管如此，身為前端工程師，在知曉 REST 的原理後，或許也能為自家網站提供正向的優化幫助，進而提升使用者操作體驗。</p>
     </div>
     
 
