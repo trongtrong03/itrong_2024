@@ -1,0 +1,1504 @@
+.hikingbook-wrap {
+    position: relative;
+    animation-name: fadeUp02;
+    animation-duration: 0.5s;
+    animation-delay: 0.75s;
+    animation-fill-mode: both;
+    @include MQ(max-960) {
+        animation-name: fadeUp02_t;
+    }
+}
+
+.hikingbook-nav {
+    position: relative;
+    z-index: 10;
+    ul {
+        display: flex;
+        background-color: rgba(#FFF, .2);
+        border-radius: 0.5rem;
+        padding: 1rem;
+    }
+    li {
+        list-style-type: none;
+        flex: 1;
+        min-width: 0;
+        margin-right: 1rem;
+        a {
+            display: flex;
+            align-items: center;
+            align-content: center;
+            justify-content: center;
+            width: 100%;
+            height: 2.5rem;
+            font-size: 1em;
+            color: var(--black);
+            background-color: #fff;
+            border-radius: 0.5rem;
+            transition: all .3s;
+            &::before {
+                content: '';
+                font-family: "Font Awesome 6 Free";
+            }
+            span {
+                margin-left: .5rem;
+            }
+            &:hover,
+            &.is-active {
+                background-color: var(--c1);
+            }
+        }
+        &.lnk-back {
+            display: none;
+            a {
+                &::before {
+                    content: '\f3c5';
+                }
+            }
+        }
+        &.lnk-database {
+            a {
+                &::before {
+                    content: '\f731';
+                    font-family: 'Font Awesome 6 Brands';
+                    font-weight: 400;
+                }
+            }
+        }
+        &.lnk-routes {
+            a {
+                &::before {
+                    content: '\f4d7';
+                }
+            }
+        }
+        &.lnk-article {
+            a {
+                &::before {
+                    content: '\f5ad';
+                }
+            }
+        }
+        &.lnk-gallery {
+            a {
+                &::before {
+                    content: '\f302';
+                    font-weight: 400;
+                }
+            }
+        }
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+    @include MQ(max-768) {
+        ul {
+            padding: 0.5rem;
+        }
+        li {
+            margin-right: 0.5rem;
+            a {
+                font-size: 1.25rem;
+                span {
+                    display: none;
+                }
+            }
+            &.lnk-back {
+                display: block;
+            }
+        }
+    }
+    @include MQ(max-480) {
+    }
+}
+
+.hikingbook-head {
+    margin-bottom: 2rem;
+    padding-top: 4rem;
+    p {
+        line-height: 2;
+        font-size: 0.875em;
+    }
+    @include MQ(max-480) {
+        display: none;
+    }
+}
+
+.hikingbook-inside {
+    min-height: 40rem;
+}
+
+.hikingbook-flex {
+    display: flex;
+    @include MQ(max-768) {
+        flex-wrap: wrap;
+    }
+    @include MQ(max-480) {
+        margin-top: 2rem;
+    }
+}
+
+.hikingbook-f1,
+.hikingbook-f2 {
+    > div {
+        padding: 1rem;
+        h2 {
+            font-size: .75em;
+            color: #999;
+        }
+    }
+}
+
+.hikingbook-f1 {
+    flex: 0 0 15rem;
+    min-width: 0;
+    background-color: #F7F7F7;
+    border-radius: 0.5rem;
+    @include MQ(max-960) {
+        flex: 0 0 12rem;
+    }
+    @include MQ(max-768) {
+        flex: 1 1 100%;
+        margin-bottom: 1rem;
+    }
+}
+
+.hikingbook-f2 {
+    flex: 1;
+    min-width: 0;
+    margin-left: 1rem;
+    > div {
+        background-color: #F7F7F7;
+        border-radius: 0.5rem;
+        margin-bottom: 1rem;
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+    @include MQ(max-768) {
+        flex: 1 1 100%;
+        margin-left: 0;
+    }
+}
+
+// progress circle
+.hikingbook-progress {
+    ul {
+        text-align: center;
+        padding-top: 1rem;
+    }
+    li {
+        position: relative;
+        display: inline-block;
+        vertical-align: middle;
+        list-style-type: none;
+        margin: 0 auto;
+        padding: 1rem 0;
+        h3 {
+            display: block;
+            width: 100%;
+            text-align: center;
+            font-size: .875em;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+    }
+    @include MQ(max-768) {
+        li {
+            margin: 0 1.5rem;
+        }
+    }
+    @include MQ(max-414) {
+        ul {
+            display: flex;
+        }
+        li {
+            flex: 1;
+            min-width: 0;
+            margin: 0;
+        }
+    }
+}
+
+.progress-circle {
+    position: relative;
+    width: 8rem;
+    height: 8rem;
+    margin: 0 auto;
+    svg {
+        path {
+            &:nth-child(1) {
+                fill: #FAFAFA;
+                fill-opacity: 1;
+                stroke: #FEFEFE !important;
+            }
+            &:nth-child(2) {
+                stroke-width: 4 !important;
+                stroke: var(--c1) !important;
+                stroke-linecap: round;
+            }
+        }
+    }
+    @include MQ(max-414) {
+        width: 7rem;
+        height: 7rem;
+    }
+}
+
+.progressbar-text {
+    position: relative;
+    font-size: 2.5em;
+    font-weight: bold;
+    color: var(--black) !important;
+    &::after {
+        content: '%';
+        position: absolute;
+        bottom: -1rem;
+        left: 0;
+        display: block;
+        width: 100%;
+        text-align: center;
+        font-size: 0.5em;
+        font-weight: normal;
+    }
+    @include MQ(max-414) {
+        font-size: 2em;
+    }
+}
+
+// list
+.hikingbook-lastest-list {
+    padding-top: 1rem;
+    ul {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        grid-column-gap: 1rem;
+    }
+    li {
+        flex: 1;
+        min-width: 0;
+        list-style-type: none;
+        a {
+            display: block;
+            figure {
+                position: relative;
+                border-radius: 0.5rem;
+                margin-bottom: 0.25rem;
+                overflow: hidden;
+                &::after {
+                    content: '\f141';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    z-index: 1;
+                    display: flex;
+                    align-items: center;
+                    align-content: center;
+                    justify-content: center;
+                    width: 100%;
+                    height: 100%;
+                    font-family: 'Font Awesome 6 Free';
+                    font-weight: 400;
+                    color: var(--c1);
+                    background-color: rgba(#000, .7);
+                    opacity: 0;
+                    transition: opacity .3s;
+                }
+                img {
+                    display: block;
+                    max-width: 100%;
+                    transform: translate3d(0, 0, 0) scale(1) rotate(0.1deg);
+                    transition: all .3s;
+                }
+            }
+            hgroup {
+                line-height: 1.4;
+                text-align: center;
+                h3 {
+                    display: block;
+                    line-height: 2;
+                    font-size: .813em;
+                    color: var(--black);
+                    @include text-truncate;
+                }
+                h4 {
+                    display: block;
+                    font-size: 0.75em;
+                    color: #999;
+                    @include text-truncate;
+                }
+                h5 {
+                    display: block;
+                    font-size: 0.675em;
+                    color: #999;
+                    @include text-truncate;
+                    &::before {
+                        content: '▲';
+                        color: var(--red);
+                    }
+                }
+                time {
+                    display: block;
+                    font-size: 0.675em;
+                    color: #BBB;
+                    @include text-truncate;
+                }
+            }
+            &:hover {
+                figure {
+                    &::after {
+                        opacity: 1;
+                    }
+                    img {
+                        transform: translate3d(0, 0, 0) scale(1.1) rotate(0.1deg);
+                    }
+                }
+            }
+        }
+        
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+    @include MQ(max-960) {
+        ul {
+            grid-template-columns: repeat(5, 1fr);
+        }
+        li {
+            &:last-child {
+                display: none;
+            }
+        }
+    }
+    @include MQ(max-480) {
+        ul {
+            grid-template-columns: repeat(4, 1fr);
+        }
+        li {
+            &:nth-child(5) {
+                display: none;
+            }
+        }
+    }
+    @include MQ(max-414) {
+        ul {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        li {
+            &:nth-child(4) {
+                display: none;
+            }
+        }
+    }
+}
+
+.hikingbook-lastest-article {
+    padding-top: 1rem;
+    li {
+        list-style-type: none;
+        margin-bottom: 0.5rem;
+        a {
+            position: relative;
+            display: flex;
+            align-items: center;
+            align-content: center;
+            figure {
+                flex: 0 0 3rem;
+                min-width: 0;
+                height: 3rem;
+                border-radius: .5rem;
+                overflow: hidden;
+                span {
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                }
+            }
+            hgroup {
+                flex: 1;
+                min-width: 0;
+                margin-left: 1rem;
+                time {
+                    font-size: 0.75em;
+                    color: #999;
+                    @include text-truncate;
+                }
+                p {
+                    line-height: 2;
+                    font-size: 1em;
+                    color: var(--black);
+                    @include text-truncate;
+                    transition: color .3s;
+                }
+            }
+            &:hover {
+                hgroup {
+                    p {
+                        color: var(--c1);
+                    }
+                }
+            }
+        }
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+    @include MQ(max-480) {
+        li {
+            a {
+                hgroup {
+                    p {
+                        font-size: 0.875em;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.hikingbook-block {
+    position: relative;
+    margin-top: 4rem;
+    > h2 {
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+    }
+    @include MQ(max-480) {
+        .hikingbook-inside & {
+            margin-top: 2rem;
+        }
+    }
+}
+
+// link
+.hikingbook-link {
+    ul {
+        display: grid;
+        grid-template-columns: repeat(8, 1fr);
+        grid-column-gap: 2px;
+        grid-row-gap: 2px;
+    }
+    li {
+        list-style-type: none;
+        min-width: 0;
+        figure {
+            position: relative;
+            border: 1px solid #F7F7F7;
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+            overflow: hidden;
+            img {
+                display: block;
+                width: 100%;
+                transform: translate3d(0, 0, 0) scale(1) rotate(0.1deg);
+                transition: transform .3s;
+            }
+            figcaption {
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: 5;
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                align-content: center;
+                justify-content: center;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(#000, .7);
+                opacity: 0;
+                transition: opacity .3s;
+                a {
+                    display: flex;
+                    flex: 1 1 100%;
+                    align-content: center;
+                    align-items: center;
+                    justify-content: center;
+                    min-width: 0;
+                    height: 100%;
+                    text-align: center;
+                    font-size: 1.25rem;
+                    color: #FFF;
+                    transition: color .3s;
+                    &::before {
+                        content: '\f0c1';
+                        font-family: 'Font Awesome 6 Free';
+                        font-weight: 900;
+                    }
+                    &:hover {
+                        color: var(--c1);
+                    }
+                }
+            }
+            &:hover {
+                img {
+                    transform: translate3d(0, 0, 0) scale(1.1) rotate(0.1deg);
+                }
+                figcaption {
+                    opacity: 1;
+                }
+            }
+        }
+        hgroup {
+            h2 {
+                display: block;
+                line-height: 1.5;
+                text-align: center;
+                font-size: 0.875em;
+            }
+        }
+    }
+    @include MQ(max-1280) {
+        ul {
+            grid-template-columns: repeat(7, 1fr);
+        }
+    }
+    @include MQ(max-960) {
+        ul {
+            display: block;
+            white-space: nowrap;
+            overflow-x: auto;
+            padding-bottom: 1rem;
+        }
+        li {
+            display: inline-block;
+            vertical-align: top;
+            width: 7.5rem;
+            margin-right: 0.5rem;
+            hgroup {
+                h2 {
+                    @include text-truncate;
+                }
+            }
+            &:last-child {
+                margin-right: 0;
+            }
+            
+        }
+    }
+    @include MQ(max-480) {
+        li {
+            width: 5rem;
+        }
+    }
+}
+
+// gallery
+.hikingbook-gallery {
+    ul {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-column-gap: 2px;
+        grid-row-gap: 2px;
+    }
+    li {
+        list-style-type: none;
+        cursor: pointer;
+        figure {
+            position: relative;
+            height: 15rem;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            span {
+                display: block;
+                height: 100%;
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: 50% 50%;
+                transform: translate3d(0, 0, 0) scale(1) rotate(0.1deg);
+                transition: all .2s linear;
+            }
+            &:hover {
+                span {
+                    transform: translate3d(0, 0, 0) scale(1.05) rotate(0.1deg);
+                }
+            }
+        }
+    }
+    @include MQ(max-960) {
+        li {
+            figure {
+                height: 21vw;
+            }
+        }
+    }
+    @include MQ(max-768) {
+        li {
+            figure {
+                height: 22vw;
+            }
+        }
+    }
+    @include MQ(max-480) {
+        ul {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        li {
+            figure {
+                height: 32vw;
+            }
+            &:nth-child(7),
+            &:nth-child(8) {
+                display: none;
+            }
+        }
+    }
+}
+
+.gallery-popup-wrap {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 998;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(#000, .7);
+    animation-name: fadeIn;
+    animation-duration: .5s;
+    animation-fill-mode: forward;
+}
+
+.gallery-popup-flex {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 10;
+    display: flex;
+    width: calc(100% - 4rem);
+    max-width: 60rem;
+    height: 60vh;
+    max-height: 60rem;
+    background-color: #fff;
+    transform: translate(-50%, -50%);
+    @include MQ(max-480) {
+        top: 3rem;
+        left: 0;
+        display: block;
+        width: 100%;
+        height: calc(100% - 3rem);
+        max-height: none;
+        transform: translate(0%, 0%);
+    }
+}
+
+.gallery-popup-img {
+    display: flex;
+    flex: 0 0 50%;
+    height: 100%;
+    figure {
+        width: 100%;
+        height: 100%;
+        @include scrollbar;
+        span {
+            display: block;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: 50% 50%;
+        }
+    }
+    img {
+        display: block;
+        width: 100%;
+    }
+    @include MQ(max-480) {
+        height: 50%;
+        figure {
+            height: 100%;
+        }
+    }
+}
+
+.gallery-popup-content {
+    flex: 0 0 50%;
+    @include MQ(max-480) {
+        height: 50%;
+        overflow-y: auto;
+    }
+}
+
+.gallery-popup-content {
+    position: relative;
+    line-height: 1.75;
+    padding: 4rem 2rem;
+    p {
+        font-size: 0.875rem;
+        &:last-of-type {
+            color: #999;
+            margin-bottom: 0.5rem;
+            &:before {
+                content: '#';
+            }
+        }
+    }
+    time {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        text-align: right;
+        font-size: 0.875rem;
+        color: #AAA;
+        padding: 1rem 2rem;
+    }
+    @include MQ(max-480) {
+        padding-top: 2rem;
+        p {
+            &:last-of-type {
+                line-height: 1.2;
+                margin-top: 1rem;
+                margin-bottom: 0;
+            }
+        }
+        time {
+            position: relative;
+            line-height: 1.2;
+            text-align: left;
+            padding: 0;
+        }
+    }
+    @include MQ(max-320) {
+        padding: 1rem 1rem 4rem;
+    }
+}
+
+.gallery-popup-btn {
+    position: absolute;
+    top: 0;
+    right: -4rem;
+    button {
+        display: flex;
+        align-items: center;
+        align-content: center;
+        justify-content: center;
+        width: 4rem;
+        height: 4rem;
+        text-align: center;
+        font-size: 1.5rem;
+        color: #FFF;
+        background-color: #333;
+        margin-bottom: 2px;
+        transition: color .3s;
+        svg {
+            display: block;
+            width: 1.5rem;
+            fill: #FFF;
+            margin: 0 auto;
+        }
+        &:hover {
+            color: var(--c1);
+        }
+        &.btn-prev {
+            &::before {
+                content: '←';
+            }
+        }
+        &.btn-next {
+            &::before {
+                content: '→';
+            }
+        }
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+    .popup-close {
+        position: relative;
+    }
+    @include MQ(max-1280) {
+        top: auto;
+        bottom: -4rem;
+        right: 0;
+        button {
+            display: inline-block;
+            margin-bottom: 0;
+        }
+    }
+    @include MQ(max-480) {
+        bottom: 0;
+        button {
+            width: 3rem;
+            height: 3rem;
+            svg {
+                width: 1.5rem;
+            }
+        }
+    }
+}
+
+
+// logs
+.hikingbook-logs {
+    li {
+        list-style-type: none;
+        margin-bottom: 1rem;
+        a {
+            position: relative;
+            display: block;
+            min-height: 10rem;
+            padding: 1rem 0 2rem 17rem;
+            transform: translate3d(0, 0, 0) scale(1) rotate(0.1deg);
+            transition: transform .3s;
+            figure {
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: 0;
+                display: block;
+                width: 15rem;
+                height: 10rem;
+                background-color: #fafafa;
+                background-image: url("/images/icon/default.png");
+                background-repeat: no-repeat;
+                background-size: 50% auto;
+                background-position: 50% 50%;
+                border-radius: 0.5rem;
+                overflow: hidden;
+                span {
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                    background-position: 50% 50%;
+                }
+            }
+            h3 {
+                line-height: 1;
+                font-size: 1.125rem;
+                font-weight: bold;
+                color: #000;
+                @include text-truncate;
+                margin-bottom: 0.5rem;
+                padding: 0.25rem 0;
+                transition: color .3s;
+            }
+            p {
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 3;
+                line-height: 1.5;
+                font-size: 0.875rem;
+                font-weight: normal;
+                color: #999;
+                overflow: hidden;
+            }
+            time {
+                position: absolute;
+                bottom: 1rem;
+                font-size: 0.75rem;
+                color: #AAA;
+                &::before {
+                    content: 'published @ ';
+                }
+            }
+            &:hover {
+                transform: translate3d(0, 0, 0) scale(1.03) rotate(0.1deg);
+                h2 {
+                    color: var(--c1);
+                }
+            }
+        }
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+    @include MQ(max-768) {
+        margin-top: 4rem;
+        li {
+            a {
+                min-height: 7.5rem;
+                padding: 0 0 0 10rem;
+                figure {
+                    width: 9rem;
+                    height: 7.5rem;
+                }
+                time {
+                    bottom: 0;
+                }
+            }
+        }
+    }
+    @include MQ(max-480) {
+        width: calc(100% - 2rem);
+        margin-top: 2rem;
+    }
+    @include MQ(max-414) {
+        li {
+            a {
+                min-height: 4.5rem;
+                padding: 0 0 0 7rem;
+                figure {
+                    width: 6rem;
+                    height: 4.5rem;
+                    border-radius: .25rem;
+                }
+                h3 {
+                    display: -webkit-box;
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: 2;
+                    height: 2.5rem;
+                    line-height: 1.25rem;
+                    text-overflow: clip;
+                    -ms-text-overflow: clip;
+                    white-space: normal;
+                    overflow: hidden;
+                }
+                p {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+
+
+// mountains
+.mountains-overflow {
+    @include MQ(max-960) {
+        border: 1px solid #E8E8E8;
+        overflow-x: auto;
+    }
+}
+
+.mountains-list {
+    position: relative;
+    min-height: 20rem;
+    @include MQ(max-960) {
+        ul {
+            min-width: 56rem;
+        }
+    }
+    @include MQ(max-768) {
+        ul {
+            min-width: 44rem;
+        }
+    }
+}
+
+.mountains-tb {
+    position: sticky;
+    top: 4.5rem;
+    z-index: 5;
+    display: flex;
+    background-color: #fff;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 0.5rem;
+    padding: .5rem 0 .5rem .75rem;
+    p {
+        flex: 1;
+        min-width: 0;
+        font-size: .875rem;
+        color: #CCC;
+        padding: 0 0.5rem;
+        &.img {
+            flex: 0 0 2rem;
+        }
+        &.name {
+            flex: 0 0 10rem;
+        }
+        &.area {
+            flex: 0 0 3.5rem;
+        }
+        &.area2 {
+            flex: 0 0 10rem;
+        }
+        &.site,
+        &.lv {
+            flex: 0 0 4rem;
+            text-align: center;
+        }
+        &.lv2 {
+            flex: 0 0 5rem;
+            text-align: center;
+        }
+        &.height {
+            flex: 0 0 5rem;
+            text-align: right;
+        }
+        &.distance {
+            flex: 0 0 4rem;
+            text-align: right;
+        }
+        &.ap,
+        &.am,
+        &.day,
+        &.route,
+        &.finish {
+            flex: 0 0 3.5rem;
+            text-align: center;
+        }
+    }
+    @include MQ(max-960) {
+        top: 0;
+        min-width: 56rem;
+    }
+    @include MQ(max-768) {
+        min-width: 44rem;
+        p {
+            &.name {
+                flex: 1;
+            }
+            &.area,
+            &.trail {
+                display: none;
+            }
+        }
+    }
+}
+
+.mountains-item {
+    position: relative;
+    display: block;
+    list-style-type: none;
+    background-color: #fcfcfc;
+    border-radius: 5px;
+    overflow: hidden;
+    transition: background-color .3s ease, box-shadow .3s ease;
+    a {
+        display: block;
+        hgroup {
+            position: relative;
+            display: flex;
+            align-items: center;
+            align-content: center;
+            padding: .25rem 3.5rem .25rem .75rem;
+            figure {
+                position: relative;
+                flex: 0 0 2rem;
+                height: 2rem;
+                background-color: #EEE;
+                border-radius: 0.25rem;
+                overflow: hidden;
+                span {
+                    position: relative;
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                    background-position: 50% 50%;
+                    transition: transform .2s;
+                }
+                img {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    display: block;
+                    width: 80%;
+                    transform: translate(-50%, -50%);
+                }
+            }
+            h2 {
+                flex: 0 0 10rem;
+                min-width: 0;
+                line-height: 1.5rem;
+                font-size: .875rem;
+                font-weight: normal;
+                color: var(--black);
+                margin-bottom: 0;
+                padding: 0 0.5rem;
+                @include text-truncate;
+            }
+            p {
+                flex: 1;
+                min-width: 0;
+                line-height: 1.5rem;
+                font-size: 0.875rem;
+                color: #555;
+                padding: 0 0.5rem;
+                @include text-truncate;
+                span {
+                    margin-right: 0;
+                }
+                &.area {
+                    flex: 0 0 3.5rem;
+                }
+                &.area2 {
+                    flex: 0 0 10rem;
+                }
+                &.site {
+                    flex: 0 0 4rem;
+                    text-align: center;
+                    span {
+                        &:last-child {
+                            display: none;
+                        }
+                    }
+                }
+                &.height {
+                    flex: 0 0 5rem;
+                    text-align: right;
+                }
+                &.distance {
+                    flex: 0 0 4rem;
+                    text-align: right;
+                }
+                &.ap,
+                &.am,
+                &.day,
+                &.route {
+                    flex: 0 0 3.5rem;
+                    text-align: center;
+                }
+                &.lv {
+                    flex: 0 0 4rem;
+                    text-align: center;
+                }
+                &.lv2 {
+                    flex: 0 0 5rem;
+                    text-align: center;
+                }
+            }
+            i {
+                position: absolute;
+                top: 50%;
+                right: 0;
+                display: block;
+                width: 3.5rem;
+                height: 2rem;
+                line-height: 2rem;
+                text-align: center;
+                font-size: 0.875em;
+                transform: translateY(-50%);
+                &::after {
+                    content: '\f00c';
+                    font-family: 'Font Awesome 6 Free';
+                    font-weight: 900;
+                    color: var(--c1);
+                }
+            }
+        }
+        &:hover {
+            background-color: #dedede;
+        }
+    }
+    &:hover {
+        z-index: 3;
+        box-shadow: 0 0 8px 0 rgba(#999, .2);
+    }
+    @include MQ(max-768) {
+        overflow: visible;
+        a {
+            hgroup {
+                h2 {
+                    flex: 1;
+                }
+                p {
+                    &.area,
+                    &.trail {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.route-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    width: 100%;
+    height: 2rem;
+    font-size: 1em;
+    &.r-1 {
+        &::before {
+            content: '→';
+        }
+    }
+    &.r-2 {
+        &::before {
+            content: '';
+            width: 1rem;
+            height: 1rem;
+            border: 1px solid #BBB;
+            border-radius: 100%;
+        }
+    }
+    &.r-3 {
+        &::before {
+            content: '';
+            width: 1rem;
+            height: 6px;
+            border-top: 1px solid #BBB;
+            border-bottom: 1px solid #BBB;
+        }
+    }
+}
+
+.mountains-container {
+    padding: 5rem 2rem;
+    @include MQ(max-768) {
+        padding-top: 4rem;
+    }
+    @include MQ(max-480) {
+        padding: 2rem 1rem;
+    }
+}
+
+.mountains-content {
+    max-width: 60rem;
+    min-height: 40rem;
+    margin: 0 auto;
+}
+
+.mountains-info {
+    display: block;
+    animation-name: fadeIn;
+    animation-duration: .5s;
+    animation-fill-mode: both;
+    figure {
+        position: relative;
+        height: 25rem;
+        background-color: #ddd;
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+        background-size: cover;
+        border-radius: 0.5rem;
+        margin-bottom: 1rem;
+        overflow: hidden;
+        pointer-events: none;
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0%;
+            left: 0%;
+            width: 100%;
+            height: 100%;
+            background-image: url("/images/mountains/default.png");
+            background-repeat: no-repeat;
+            background-position: 50% 50%;
+            background-size: 10rem auto;
+        }
+        span {
+            position: relative;
+            z-index: 1;
+            display: block;
+            height: 100%;
+            background-position: 50% 50%;
+            background-size: cover;
+            background-repeat: no-repeat;
+            animation-name: mt_zoomIn;
+            animation-duration: 20s;
+            animation-direction: alternate;
+            animation-fill-mode: both;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
+    }
+    hgroup {
+        flex: 1;
+        background-color: #fafafa;
+        border-radius: 0.5rem;
+        padding: 2rem;
+        li {
+            display: flex;
+            position: relative;
+            list-style-type: none;
+            line-height: 1.5;
+            font-size: 0.875rem;
+            color: #AAA;
+            padding: 0.25rem 0;
+            span {
+                margin-right: .75rem;
+                &:first-child {
+                    flex: 0 0 auto;
+                    margin-right: 1rem;
+                }
+                &:last-child {
+                    color: var(--black);
+                    margin-right: 0;
+                }
+            }
+            a {
+                color: var(--href);
+                &.article {
+                    &::before {
+                        content: '〈 ';
+                    }
+                    &::after {
+                        content: ' 〉';
+                    }
+                    &:empty {
+                        &::before,
+                        &::after {
+                            display: none;
+                        }
+                    }
+                }
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+    h1 {
+        font-size: 2rem;
+        font-weight: bold;
+        color: var(--c1);
+        margin-bottom: 1rem;
+    }
+    h6 {
+        line-height: 1.7;
+        font-size: 0.875rem;
+        color: var(--vlack);
+        margin-bottom: 1rem;
+    }
+    @include MQ(max-768) {
+        figure {
+            height: 20rem;
+            &::before {
+                background-size: 8rem auto;
+            }
+        }
+        h1 {
+            font-size: 1.5rem;
+        }
+    }
+    @include MQ(max-480) {
+        h1 {
+            font-size: 1.25rem;
+        }
+        figure {
+            height: 15rem;
+            margin-top: 0.5rem;
+            &::before {
+                background-size: 6rem auto;
+            }
+            span {
+                display: block;
+            }
+            p {
+                position: relative;
+            }
+        }
+        hgroup {
+            padding: 1rem;
+        }
+    }
+}
+
+// routes
+.routes-list {
+    text-align: center;
+    margin-top: 1rem;
+    padding: 1rem 0;
+    white-space: nowrap;
+    overflow-x: auto;
+    @include scrollbar;
+}
+
+.routes-item {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+    &:first-child {
+        .routes-box {
+            margin-left: 0;
+            &::before {
+                display: none;
+            }
+        }
+    }
+}
+
+.routes-box {
+    position: relative;
+    text-align: center;
+    margin-left: 3rem;
+    &::before {
+        content: '\f141';
+        position: absolute;
+        top: 2rem;
+        left: -3rem;
+        display: block;
+        width: 3rem;
+        text-align: center;
+        font-size: 1rem;
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 900;
+        color: #DDD;
+    }
+    b {
+        display: block;
+        line-height: 1.5rem;
+        margin-bottom: 0.5rem;
+        &::before {
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            font-size: 1rem;
+            color: #999;
+        }
+        &.is-start {
+            &::before {
+                content: '\f54b';
+            }
+        }
+        &.is-moutain {
+            &::before {
+                content: '\f6fc';
+            }
+        }
+        &.is-house {
+            &::before {
+                content: '\f015';
+            }
+        }
+        &.is-camp {
+            &::before {
+                content: '\f6bb';
+            }
+        }
+        &.is-lake {
+            &::before {
+                content: '\f773';
+            }
+        }
+        &.is-mark {
+            &::before {
+                content: '\f66f';
+            }
+        }
+        &.is-nature {
+            &::before {
+                content: '\f1bb';
+            }
+        }
+        &.is-goal {
+            &::before {
+                content: '\f024';
+            }
+        }
+    }
+    p {
+        line-height: 1.5;
+        font-size: 0.875rem;
+    }
+    span {
+        display: block;
+        font-size: 0.75rem;
+        color: #999;
+    }
+}
+
+.hikingbook-tips {
+    p {
+        text-align: right;
+        font-size: 0.875em;
+    }
+    @include MQ(max-480) {
+        p {
+            position: absolute;
+            top: 1.5rem;
+            right: 0;
+            font-size: 0.75em;
+        }
+    }
+}

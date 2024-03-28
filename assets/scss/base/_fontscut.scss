@@ -1,0 +1,136 @@
+// Font Awesome Icon
+.element {
+    &::before {
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 400;
+        // 關閉
+        content: '\f057';
+
+        // 使用者
+        content: '\f007';
+
+        // 刪除
+        content: '\f2ed';
+
+        // 編輯
+        content: '\f044';
+
+        // 複製
+        content: '\f0c5';  // 紙
+        content: '\f24d';  // 方框
+
+        // mail
+        content: '\f0e0';  // close
+        content: '\f2b6';  // open
+    }
+    
+    &::after {
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 900;
+        // 箭頭
+        content: '\f060';  // left
+        content: '\f061';  // right
+        content: '\f062';  // up
+        content: '\f063';  // down
+        
+        // 圓底箭頭
+        content: '\f0a8';  // left
+        content: '\f0a9';  // right
+        content: '\f0aa';  // up
+        content: '\f0ab';  // down
+
+        // 大尖頭
+        content: '\f053';  // left
+        content: '\f054';  // right
+        content: '\f077';  // up
+        content: '\f078';  // down
+
+        // 小尖頭
+        content: '\f104';  // left
+        content: '\f105';  // right
+        content: '\f106';  // up
+        content: '\f107';  // down
+
+        // 圓底尖頭
+        content: '\f137';  // left
+        content: '\f138';  // right
+        content: '\f139';  // up
+        content: '\f13a';  // down
+
+        // 還原&重新整理
+        content: '\f2ea';  // 箭頭向左
+        content: '\f2f9';  // 箭頭向右
+
+        // 分享
+        content: '\f064';  // 無框
+        content: '\f14d';  // 帶框
+
+        // 播放
+        content: '\f04b';
+
+        // 下載
+        content: '\f019';
+
+        // 雲端
+        content: '\f382';  // 上傳
+        content: '\f381';  // 下載
+
+        // 刪除&關閉
+        content: '\f00d';  // 無框
+        content: '\f057';  // 圓形鏤空
+
+        // 日曆
+        content: '\f073';
+
+        // 鈴鐺&通知
+        content: '\f0f3';  // on
+        content: '\f1f6';  // off
+
+        // 眼睛
+        content: '\f06e';  // on
+        content: '\f070';  // off
+
+        // 使用者
+        content: '\f007';
+
+        // 刪除
+        content: '\f00d';  // 線條
+        content: '\f1f8';  // 填滿
+
+        // 編輯
+        content: '\f044';
+
+        // 格線
+        content: '\f009';  // 4
+        content: '\f00a';  // 9
+        content: '\f0ce';  // table
+        content: '\f00b';  // list
+        content: '\f03a';  // list較細
+
+        // 複製
+        content: '\f0c5';  // 紙
+        content: '\f14a';  // 方框
+
+        // check
+        content: '\f00c';
+        content: '\f14a';  // 方框
+        content: '\f058';  // 圓底
+
+        // 購物車
+        content: '\f07a';
+
+        // phone
+        content: '\f879';  // 向右
+        content: '\f095';  // 向左
+
+        // mail
+        content: '\f0e0';  // close
+        content: '\f2b6';  // open
+
+        // address&座標
+        content: '\f3c5';
+
+        // search
+        content: '\f002';
+    }
+}

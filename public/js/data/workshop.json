@@ -1,0 +1,272 @@
+[
+    {
+        "id": 1,
+        "href": "accordion",
+        "title": "兩層式摺疊列表（Accordion）",
+        "time": "2019-03-15",
+        "js": true,
+        "jquery": true,
+        "vue": false,
+        "css": false
+    },
+    {
+        "id": 2,
+        "href": "horizontal_tabs",
+        "title": "水平切換頁籤（Horizontal Tabs）",
+        "time": "2019-03-18",
+        "js": true,
+        "jquery": true,
+        "vue": true,
+        "css": false
+    },
+    {
+        "id": 3,
+        "href": "vertical_tabs",
+        "title": "垂直切換頁籤（Vertical Tabs）",
+        "time": "2019-03-18",
+        "js": true,
+        "jquery": true,
+        "vue": true,
+        "css": false
+    },
+    {
+        "id": 4,
+        "href": "particleground",
+        "title": "粒子特效（Particleground）",
+        "time": "2019-03-29",
+        "js": false,
+        "jquery": true,
+        "vue": false,
+        "css": false
+    },
+    {
+        "id": 5,
+        "href": "vertical_news_ticker",
+        "title": "垂直切換跑馬燈（News Ticker）",
+        "time": "2019-04-03",
+        "js": false,
+        "jquery": true,
+        "vue": false,
+        "css": false
+    },
+    {
+        "id": 6,
+        "href": "img_comparison",
+        "title": "兩張影像的拖曳比較（Image Comparison）",
+        "time": "2019-07-12",
+        "js": false,
+        "jquery": true,
+        "vue": true,
+        "css": false
+    },
+    {
+        "id": 7,
+        "href": "filter",
+        "title": "項目篩選（Filter）",
+        "time": "2019-08-29",
+        "js": false,
+        "jquery": true,
+        "vue": true,
+        "css": false
+    },
+    {
+        "id": 8,
+        "href": "masonry",
+        "title": "瀑布流排版佈局（Masonry Grid）",
+        "time": "2019-10-23",
+        "js": false,
+        "jquery": true,
+        "vue": false,
+        "css": false
+    },
+    {
+        "id": 9,
+        "href": "copy",
+        "title": "複製區域文字（Copy）",
+        "time": "2019-11-25",
+        "js": true,
+        "jquery": true,
+        "vue": false,
+        "css": false
+    },
+    {
+        "id": 10,
+        "href": "pagination",
+        "title": "分頁效果（Pagination）",
+        "time": "2020-02-02",
+        "js": false,
+        "jquery": true,
+        "vue": false,
+        "css": false
+    },
+    {
+        "id": 11,
+        "href": "textdots",
+        "title": "文字溢出省略符號（Text Dots）",
+        "time": "2020-02-13",
+        "js": false,
+        "jquery": true,
+        "vue": false,
+        "css": true
+    },
+    {
+        "id": 12,
+        "href": "datepicker",
+        "title": "日曆選擇工具（Calendar Picker）",
+        "time": "2020-04-13",
+        "js": false,
+        "jquery": true,
+        "vue": false,
+        "css": false
+    },
+    {
+        "id": 13,
+        "href": "picturefill",
+        "title": "使舊瀏覽器支援 HTML5 的 <picture> 標籤",
+        "time": "2020-04-17",
+        "js": true,
+        "jquery": false,
+        "vue": false,
+        "css": false
+    },
+    {
+        "id": 14,
+        "href": "gotop",
+        "title": "點擊返回網頁頂部的按鈕（Go Top）",
+        "time": "2020-05-01",
+        "js": true,
+        "jquery": true,
+        "vue": true,
+        "css": true
+    },
+    {
+        "id": 15,
+        "href": "placeholder",
+        "title": "點擊輸入框時提示文字變色（Placeholder）",
+        "time": "2020-07-23",
+        "js": true,
+        "jquery": true,
+        "vue": false,
+        "css": false
+    },
+    {
+        "id": 16,
+        "href": "checkbox",
+        "title": "使群組內的核選方塊（Checkbox）為單選項目",
+        "time": "2020-07-24",
+        "js": true,
+        "jquery": true,
+        "vue": false,
+        "css": false
+    },
+    {
+        "id": 17,
+        "href": "input_confirm",
+        "title": "確認密碼輸入框內容是否符合的簡易判斷功能",
+        "time": "2020-07-27",
+        "js": true,
+        "jquery": true,
+        "vue": false,
+        "css": false
+    },
+    {
+        "id": 18,
+        "href": "get_filename",
+        "title": "取得 Input File 上傳項目的名稱",
+        "time": "2020-08-03",
+        "js": true,
+        "jquery": true,
+        "vue": false,
+        "css": false
+    },
+    {
+        "id": 19,
+        "href": "password_eyes",
+        "title": "顯示或隱藏輸入框裡的密碼字串",
+        "time": "2020-08-18",
+        "js": true,
+        "jquery": true,
+        "vue": false,
+        "css": false
+    },
+    {
+        "id": 20,
+        "href": "search",
+        "title": "同步搜尋結果（Search）",
+        "time": "2020-09-10",
+        "js": false,
+        "jquery": false,
+        "vue": true,
+        "css": false
+    },
+    {
+        "id": 21,
+        "href": "image_zoom",
+        "title": "影像放大鏡（Image Zoom）",
+        "time": "2020-12-21",
+        "js": false,
+        "jquery": true,
+        "vue": false,
+        "css": false
+    },
+    {
+        "id": 22,
+        "href": "fixed_top",
+        "title": "指定元素於畫面下滑時接觸頂端順勢固定位置",
+        "time": "2021-01-04",
+        "js": true,
+        "jquery": true,
+        "vue": false,
+        "css": true
+    },
+    {
+        "id": 23,
+        "href": "table_rows",
+        "title": "會偵測寬度收納成下拉式的導覽列選單",
+        "time": "2021-01-05",
+        "js": true,
+        "jquery": false,
+        "vue": false,
+        "css": false
+    },
+    {
+        "id": 24,
+        "href": "motionblur",
+        "title": "MotionBlurJS 使動畫效果更自然的輕量化 JS 套件",
+        "time": "2021-02-01",
+        "js": true,
+        "jquery": false,
+        "vue": false,
+        "css": false
+    },
+    {
+        "id": 25,
+        "href": "overflow_nav",
+        "title": "偵測寬度自動納入下拉選單的導覽列項目",
+        "time": "2021-04-14",
+        "js": false,
+        "jquery": true,
+        "vue": false,
+        "css": false
+    },
+    {
+        "id": 26,
+        "href": "checkbox_all",
+        "title": "全選或取消 Checkbox",
+        "time": "2021-04-15",
+        "js": true,
+        "jquery": true,
+        "vue": false,
+        "css": false
+    },
+    {
+        "id": 27,
+        "href": "aos",
+        "title": "AOS──頁面滾動觸發動畫套件",
+        "time": "2023-05-14",
+        "js": true,
+        "jquery": false,
+        "vue": false,
+        "css": false
+    }
+]

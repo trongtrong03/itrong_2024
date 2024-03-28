@@ -1,0 +1,211 @@
+[
+    {
+        "id": 1,
+        "title": "臺灣登山申請一站式服務網",
+        "desc": "由內政部國家公園署提供，可以利用本站路線查詢功能查看您想爬的山是否有在本站受理的範圍內，也可以利用路線內的【展開地圖】功能詳細確認路線範圍。",
+        "href": "https://hike.taiwan.gov.tw/",
+        "article": false,
+        "path": "",
+        "cover": false,
+        "img": "",
+        "type": ""
+    },
+    {
+        "id": 2,
+        "title": "臺灣國家公園入園入山線上申請服務網",
+        "desc": "台灣很多山域在國家公園的管轄範圍內，如果想前往登山，除了申請入山證之外，也要注意是否需要辦理相關之入園證。",
+        "href": "https://npm.cpami.gov.tw/",
+        "article": false,
+        "path": "",
+        "cover": true,
+        "img": "cpami",
+        "type": ""
+    },
+    {
+        "id": 3,
+        "title": "Windy",
+        "desc": "無論是要追踪熱帶風暴還是潛在的惡劣天氣，計劃旅行，追求最喜歡的戶外運動，或者只需要知道這個週末是否會下雨，Windy 都會為我們提供最新的天氣預報",
+        "href": "https://www.windy.com/?24.144,120.684,5",
+        "article": false,
+        "path": "",
+        "cover": true,
+        "img": "windy",
+        "type": ""
+    },
+    {
+        "id": 4,
+        "title": "Hikingbook",
+        "desc": "Hikingbook 是戶外愛好者信賴的智慧夥伴，陪伴更多人安全、自在探索戶外之美。",
+        "href": "https://zh-tw.hikingbook.net/",
+        "article": false,
+        "path": "",
+        "cover": true,
+        "img": "hikingbook",
+        "type": ""
+    },
+    {
+        "id": 5,
+        "title": "健行筆記",
+        "desc": "健行筆記提供登山、健行、攀登百岳的知識與內容，建置全台最完整的步道資料庫，即時路線回報及GPX分享打造安全的登山環境。",
+        "href": "https://hiking.biji.co/",
+        "article": false,
+        "path": "",
+        "cover": true,
+        "img": "hikingbiji",
+        "type": ""
+    },
+    {
+        "id": 6,
+        "title": "台灣小百岳攻頂地圖",
+        "desc": "熱心山友所整理出的小百岳 Google Map 頁面，除了標記小百岳的位置外，也額外標記出周邊停車場的位置，極具參考價值。",
+        "href": "https://www.google.com/maps/d/viewer?mid=1Z-RTNURMOsHHllyv9_0BTw0BWNI&ll=24.15091724962965%2C120.50588790543641&z=8",
+        "article": false,
+        "path": "",
+        "cover": false,
+        "img": "",
+        "type": ""
+    },
+    {
+        "id": 7,
+        "title": "PeakFinder",
+        "desc": "群山在召喚！力爭在登山家隊伍中探索最多高山吧！ PeakFinder 讓您的夢想成真…，還能以360°全景顯示所有山脈和山峰的名稱。",
+        "href": "https://www.peakfinder.org/mobile/",
+        "article": false,
+        "path": "",
+        "cover": true,
+        "img": "peakfinder",
+        "type": ""
+    },
+    {
+        "id": 8,
+        "title": "MAPS.ME",
+        "desc": "maps.me 不但可以預先規劃登山行程、預測點到點的距離、行進方式、高度差、時間還能夠在山裡逐向導航，可以說是登山界 Google Maps。除此之外，maps.me即使沒有網路也能保存移動數據，全世界都通用。",
+        "href": "https://maps.me/",
+        "article": false,
+        "path": "",
+        "cover": true,
+        "img": "mapsme",
+        "type": ""
+    },
+    {
+        "id": 9,
+        "title": "台灣大地羅盤",
+        "desc": "「台灣大地羅盤及座標轉換工具」是一款 GPS 偵測、定位還附有座標轉換的工具，能夠輕鬆地將任何座標轉換至各種座標單位。",
+        "href": "https://outdoorsafetylab.org/",
+        "article": false,
+        "path": "",
+        "cover": true,
+        "img": "outdoorsafetylab",
+        "type": ""
+    },
+    {
+        "id": 10,
+        "title": "Relive",
+        "desc": "Relive 是一款不需要使用網路的 App，可紀錄活動路線、製作戶外活動的 3D 地貌影片。如果你喜歡外出跑步、騎自行車、健行或是任何戶外冒險，Relive 將會是你很棒的好夥伴。",
+        "href": "https://apps.apple.com/us/app/relive-run-ride-hike-more/id1201703657https:/apps.apple.com/us/app/relive-run-ride-hike-more/id1201703657",
+        "article": false,
+        "path": "",
+        "cover": true,
+        "img": "relive",
+        "type": ""
+    },
+    {
+        "id": 11,
+        "title": "Gaia GPS",
+        "desc": "在一般的地圖上，由於沒有等高線的標示，因此對於登山者來說是看不地形的，但是 Gaia GPS App 內建了等高線的 GPS 離線地圖，因此就可以準確的判斷上升下降。GPS 導航指示很即時，登山健行時非常推薦下載使用。",
+        "href": "https://www.gaiagps.com/",
+        "article": false,
+        "path": "",
+        "cover": true,
+        "img": "gaiagps",
+        "type": ""
+    },
+    {
+        "id": 12,
+        "title": "台灣山岳雜誌",
+        "desc": "「台灣山岳」以「山與人的對話」角度出發，提供豐富的山旅人文、自然生態內容、專業的戶外裝備、登山安全、醫學與法律知識，也介紹有趣的野炊料理等專欄。",
+        "href": "https://twmountain.com/",
+        "article": false,
+        "path": "",
+        "cover": true,
+        "img": "twmountain",
+        "type": ""
+    },
+    {
+        "id": 13,
+        "title": "100mountain",
+        "desc": "100mountain 百岳創立於 1982 年，提供電商購物服務。精選世界各地優質商品，從親山郊遊、風格露營、登山健行到專業探險或攀登活動，超過萬件的戶外裝備，期許提供消費者一站式購足的完整服務。",
+        "href": "https://learn.100mountain.com/",
+        "article": false,
+        "path": "",
+        "cover": true,
+        "img": "100mountain",
+        "type": ""
+    },
+    {
+        "id": 14,
+        "title": "萌芽爬山網",
+        "desc": "萌芽系列網站（Mnya Series Website，簡稱：萌芽網頁）是由多個網站連結而成，內容包含電腦資訊、學術整理、登山悠遊、公路記錄、美食分享、天文氣象、音樂娛樂、二次元、遊戲伺服、創作開發等等多個領域，永久網址為『mnya.tw』，歡迎您常來瀏覽與長期關注！",
+        "href": "https://mnya.tw/k3/",
+        "article": false,
+        "path": "",
+        "cover": true,
+        "img": "mnya",
+        "type": ""
+    },
+    {
+        "id": 15,
+        "title": "形色",
+        "desc": "立即識別植物。精準、快速、資訊豐富！不僅能夠獲得植物說明和照料秘訣，還能夠好好享受全世界多采多姿的植物照片。",
+        "href": "https://apps.apple.com/tw/app/picturethis-%E5%BD%A2%E8%89%B2%E8%AD%98%E8%8A%B1%E8%AD%98%E5%88%A5%E6%A4%8D%E7%89%A9/id1252497129",
+        "article": false,
+        "path": "",
+        "cover": true,
+        "img": "picturethis",
+        "type": ""
+    },
+    {
+        "id": 16,
+        "title": "3D繩結",
+        "desc": "打結、解結、用手指以3D模式旋轉175個以上的結！Knots 3D 是我們評價最高的3D結應用程序，會給你一個全新的視角來瞭解結！找一根繩子，開始體驗其中的樂趣吧！",
+        "href": "https://knots3d.com/",
+        "article": false,
+        "path": "",
+        "cover": true,
+        "img": "knots3d",
+        "type": ""
+    },
+    {
+        "id": 17,
+        "title": "Star Walk 2",
+        "desc": "Star Walk 2 Ads+為一種精緻的觀星應用程序，可以使您通過移動設備屏幕探索夜空。去成千上萬的恆星、彗星、星座等天體進行不會忘記的旅行。您唯一需要做的就是將手機指向天空！",
+        "href": "https://starwalk.space/zh-Hant",
+        "article": false,
+        "path": "",
+        "cover": true,
+        "img": "starwalk",
+        "type": ""
+    },
+    {
+        "id": 18,
+        "title": "Merlin Bird ID",
+        "desc": "這是什麼鳥？只要回答5個問題，或者上傳你拍的鳥種照片，Merlin鳥類辨識將為你揭曉答案。",
+        "href": "https://merlin.allaboutbirds.org/",
+        "article": false,
+        "path": "",
+        "cover": true,
+        "img": "merlin",
+        "type": ""
+    },
+    {
+        "id": 19,
+        "title": "行图",
+        "desc": "手機沒電、迷路可說是登山新手最怕的幾件事，而這款 App 的功能便可彌補。具網路上使用者實測，其和一般登山地圖相比較不耗電，只要保持 App 開啟便可將螢幕關閉仍不影響軌跡紀錄。",
+        "href": "https://apps.apple.com/tw/app/%E8%A1%8C%E5%9B%BE/id1024935786",
+        "article": false,
+        "path": "",
+        "cover": true,
+        "img": "yuliang",
+        "type": ""
+    }
+]

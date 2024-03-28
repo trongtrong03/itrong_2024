@@ -1,0 +1,42 @@
+// base
+@import "base/normalize.scss";
+@import "base/variables.scss";
+@import "base/grid.scss";
+@import "base/mixin.scss";
+
+// fontawesome
+// @import "fontawesome/brands.scss";
+// @import "fontawesome/regular.scss";
+// @import "fontawesome/solid.scss";
+// @import "fontawesome/v4-shims.scss";
+// @import "fontawesome/fontawesome.scss";
+
+@import "fontawesome/fontawesome.scss";
+@import "fontawesome/solid.scss";
+@import "fontawesome/brands.scss";
+
+
+
+
+// mods
+@import "mods/highlight";
+// @import "mods/slick";
+// @import "mods/swiper";
+@import "mods/aos";
+
+// common
+@import "layout/nuxt";
+@import "layout/layout";
+@import "layout/header";
+@import "layout/footer";
+@import "layout/animation";
+
+// pages
+@import "pages/index";
+@import "pages/about";
+@import "pages/list";
+@import "pages/text";
+@import "pages/example";
+@import "pages/mountains";
+@import "pages/error";
+@import "pages/maintain";

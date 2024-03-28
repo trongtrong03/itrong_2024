@@ -1,0 +1,226 @@
+// maintain
+.maintain-wrap {
+    position: relative;
+    // animation-name: fadeIn;
+    // animation-duration: .5s;
+    // animation-delay: .2s;
+    // animation-fill-mode: both;
+}
+
+.maintain-center {
+    width: calc(100% - 4rem);
+    max-width: var(--dw);
+    margin: 0 auto;
+    @include MQ(max-480) {
+        width: calc(100% - 2rem);
+    }
+}
+
+.maintain-content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: center;
+    min-height: calc(100dvh - 72px);
+    padding: 8rem 0;
+    h2 {
+        flex: 1 1 100%;
+        text-align: center;
+        font-size: 2rem;
+        font-weight: bold;
+    }
+    @include MQ(max-960) {
+        min-height: calc(100dvh - 4rem - 72px);
+    }
+    @include MQ(max-480) {
+        min-height: calc(100dvh - 3rem - 72px);
+        h2 {
+            font-size: 1.25rem;
+        }
+    }
+}
+
+.maintain-svg {
+    position: relative;
+    width: 420px;
+    margin: 0 auto 2rem;
+    svg {
+        width: 100%;
+    }
+    @include MQ(max-480) {
+        width: 100%;
+        max-width: 320px;
+    }
+}
+
+[class*="svg-layer"] {
+    animation-fill-mode: both;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+.svg-layer1 {
+    .st0 {
+        opacity: 0.86;
+        fill: #CBECE5;
+    }
+    .st1 {
+        fill: #CBECE5;
+    }
+}
+
+.svg-layer2 {
+    position: absolute;
+    top: 18%;
+    left: 14%;
+    z-index: 1;
+    width: 31%;
+    animation-name: maintainAni_1;
+    animation-duration: 5s;
+    .st0 {
+        fill:#53C7B4;
+    }
+}
+
+.svg-layer3 {
+    position: absolute;
+    bottom: 20%;
+    right: 20%;
+    z-index: 1;
+    width: 14%;
+    animation-name: maintainAni_2;
+    animation-duration: 3s;
+    .st0 {
+        fill:#44275D;
+    }
+}
+
+.svg-layer4 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: 100%;
+    .st0 {
+        fill: #53C7B4;
+    }
+	.st1 {
+        fill: #02687F;
+    }
+	.st2 {
+        fill: #CBECE5;
+    }
+	.st3 {
+        fill: #FFFFFF;
+    }
+	.st4 {
+        fill: #44275D;
+    }
+	.st5 {
+        fill: #008196;
+    }
+	.st6 {
+        fill: #FAF4DA;
+    }
+	.st7 {
+        fill: none;
+        stroke: #008196;
+        stroke-linecap: round;
+        stroke-miterlimit: 10;
+    }
+	.st8 {
+        opacity: 0.86;
+        fill: #CBECE5;
+    }
+}
+
+.svg-layer5 {
+    position: absolute;
+    top: 48%;
+    left: 25%;
+    z-index: 3;
+    width: 12%;
+    animation-name: maintainAni_3;
+    animation-duration: 5s;
+    .st0 {
+        fill: #53C7B4;
+    }
+	.st1 {
+        opacity: 0.74;
+        fill: #02687F;
+    }
+	.st2 {
+        fill: #FFFFFF;
+    }
+	.st3 {
+        fill: none;
+        stroke: #FFFFFF;
+        stroke-linecap: round;
+        stroke-miterlimit: 10;
+    }
+	.st4 {
+        fill:none;
+        stroke: #FFFFFF;
+        stroke-width: 0.75;
+        stroke-linecap: round;
+        stroke-miterlimit: 10;
+    }
+}
+
+.svg-layer6 {
+    position: absolute;
+    top: 39%;
+    right: 9%;
+    z-index: 3;
+    width: 28.5%;
+    animation-name: maintainAni_4;
+    animation-duration: 5s;
+    .st0 {
+        opacity: 0.74;
+        fill: #02687F;
+    }
+	.st1 {
+        fill: #53C7B4;
+    }
+	.st2 {
+        fill: #FAF4DA;
+    }
+}
+
+@keyframes maintainAni_1 {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes maintainAni_2 {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
+@keyframes maintainAni_3 {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15%);
+    }
+}
+
+@keyframes maintainAni_4 {
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(-7%);
+    }
+}
