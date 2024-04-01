@@ -704,7 +704,7 @@
             margin-bottom: 0;
         }
 
-        $list: html html5 svg css css3 sass stylus javascript api jquery ajax nodejs vue nuxtjs tabnine uiux git yarn eagle lottie;
+        $list: html html5 svg css css3 sass stylus javascript api jquery ajax nodejs vue vite nuxtjs tabnine uiux git yarn eagle lottie;
         @each $item in $list {
             &.is-#{$item} {
                 a {

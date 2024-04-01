@@ -10,9 +10,9 @@
             <li><a href="#act2">二、Web API</a></li>
             <li><a href="#act3">三、Web API 的語法結構</a></li>
             <li><a href="#act4">四、REST 與 RESTful API</a></li>
-            <li><a href="#act9">九、前端 API 與後端 API 的差異</a></li>
-            <li><a href="#act10">十、實用的 API 工具</a></li>
-            <li><a href="#act11">十一、參考資料</a></li>
+            <li><a href="#act5">五、其他 Web API 類型</a></li>
+            <li><a href="#act6">六、前端與後端 API 的差異</a></li>
+            <li><a href="#act7">七、參考資料</a></li>
         </ul>
     </div>
     <div class="text-block" id="act0">
@@ -98,11 +98,11 @@
         <p><br></p>
         <p>不過話說回來，如果你是常常執行網頁開發的切版工程師，即便對 Web API 這個詞的概念一知半解，實務上其實已經有很高概率接觸或使用過他人 API 服務的經驗，例如曾在「聯絡我們」頁面嵌入客戶地址的 Google Map：</p>
         <figure>
-            <img src="/images/learn/js/api-01.jpg">
+            <img src="/images/learn/js/api-1.jpg">
         </figure>
         <p>或是使用某款網路大神開發的 JavaScript 套件：</p>
         <figure>
-            <img src="/images/learn/js/api-02.jpg">
+            <img src="/images/learn/js/api-2.jpg">
         </figure>
         <p><a href="https://swiperjs.com/" target="_blank">Swiper</a>，一款輪播圖套件，有提供 <a href="https://swiperjs.com/swiper-api" target="_blank">Swiper API</a> 整合並簡化功能讓開發者容易上手使用。</p>
         <p>所以啦，無論出自有意還是無意，我們都高機率曾已經碰觸並且使用過 Web API 技術。不過本篇文章要談的打 API，主要是針對伺服器端上的 JSON 資料，通過 HTTP 請求的方式去撈取資料下來到自己開發的網站內使用，和前面提到的地圖外嵌、JavaScript 動態效果套件這類提供比較偏向視覺化的 API 應用不太一樣。</p>
@@ -165,7 +165,7 @@
         <p><br></p>
         <p>我們將以上這些 Web API 組成結構繪製成下方這張示意圖，應該能更清楚明白各關鍵角色之間的互動所對應的程式語法分別是哪些：</p>
         <figure>
-            <img src="/images/learn/js/api-03.jpg">
+            <img src="/images/learn/js/api-3.jpg">
         </figure>
         <p>看完模型圖，大概會有人心生疑惑：圖中的 RESTful API 又是什麼玩意？不急，下一個章節就來聊聊什麼是 REST。先來為本章節作一個結尾......目前資料串接 API 的實戰應用裡，以下這些是比較常見的技術，如果有興趣深入學習打 API 方法而又不知要得何門而入，可參考以下名單：</p>
         <ul>
@@ -263,7 +263,15 @@
             <li>Netflix API</li>
             <li>Flickr API</li>
         </ul>
-        <p>由此可見 REST 已經遍佈在我們日常生活裡常使用及瀏覽的網站。</p>
+        <p>由此可見 REST 已經遍佈在我們日常生活裡常使用及瀏覽的網站。從這些應用中我們挑出 Google Maps API 來說好了，它遵循 RESTful Web API 的設計原則有：</p>
+        <ul>
+            <li>每個功能都有自己獨有的資源識別子（URL）。</li>
+            <li>使用 HTTP 方法，譬如過發送 POST 請求到經緯度編碼的伺服器端，將編碼轉換為地址。</li>
+            <li>使用標準的 HTTP 狀態碼，例如一些錯誤狀態碼 400、404、500......等。</li>
+            <li>使用標準的資料格式，例如用 JSON 表示地圖資料、地理編碼等。</li>
+            <li>每一次的請求都包含足夠的資訊讓伺服器端進行處理，而不需要依賴之前的請求狀態。</li>
+        </ul>
+        <p>儘管 Google Maps API 嚴格來講也不算有完全按照  RESTful API 設計原則，不過很多方面仍依循其核心理念進行設計，讓使用者可輕鬆地使用 API 來建構地圖各項服務。</p>
         <p><br></p>
         <p>只是，理論的東西洋洋灑灑寫了一些想必大多數的人可能讀完都還是對 REST 懵懵懂懂，或是很難在記憶裡牢牢紮根。因此在本章節最後，我們用比較生活化的例子來形容 REST 的功用：</p>
         <p>假設我們正在規劃一場旅行，於此次旅行使用 RESTful 設計原則來組織並安排行程。我們需要考慮以下這些要點：</p>
@@ -279,10 +287,94 @@
         <p>這個例子顯示如何將 REST 的概念應用到日常生活中，以更有效地處理資源和操作。透過使用 RESTful 設計原則來組織和安排旅行，我們將可以更輕鬆地管理和規劃行程，同時也可以更好地與其他人分享和交流旅行資訊。</p>
         <p>通篇看下來 REST 似乎是系統開發者需要注意的事情，對一般使用者來說了不了解 REST 其實並非必要知識，因為比起系統架構和設計原則，使用者通常更在乎系統的功能面、易用程度與效能，甚至對我們這些專打他人 API 的前端工程師而言恐怕也是如此。儘管如此，身為前端工程師，在知曉 REST 的原理後，或許也能為自家網站提供正向的優化幫助，進而提升使用者操作體驗。</p>
     </div>
-    
-
-    <div class="text-block" id="act11">
-        <h2>十一、參考資料</h2>
+    <div class="text-block" id="act5">
+        <h2>五、其他 Web API 類型</h2>
+        <p>事實上，Web API 不單單只有 RESTful API 這一種類型，在 RESTful API 崛起的前後，都還有其他實作 Web API 的方式，本章節主要就是要來聊聊它們。不過由於現今 Web API 的主流大多數都是採用 RESTful 設計理念，因此以下這些逐漸式微或比較專注於特定環境使用的其他類型 API 並不會太深入作介紹，至少大概留個印象，才不會哪天突然蹦到眼前來卻一無所知。</p>
+        <p><br></p>
+        <h3>SOAP API：</h3>
+        <p>相較於 REST，SOAP（Simple Object Access Protocol） 屬於比較早期的技術，其起源可追溯自 1998 年，屬於第二代 XML 協定。SOAP 資料交換的方式基本都透過 XML，在傳輸效率上比 HTML 來得更慢，使用規則也比 REST 嚴謹許多，因為 SOAP 是經過明確規範的協定，REST 則比較偏向設計理念，本質上就不太相同。在早期 SOAP API 是許多企業級應用程式之間通訊的主要方式，所以即便 SOAP API 在 RESTful API 興起後慢慢走向式微，但如今仍有些傳統的系統或企業仍在使用它。</p>
+        <p><br></p>
+        <h3>gRPC：</h3>
+        <p>gRPC 是一套由 Google 開發的高性能、跨程式語言的「遠端程序呼叫」（Remote Procedure Call，RPC）框架，它基於 HTTP/2 協議，使用 protobuf 作為預設的序列化協議，可以在各種環境下輕鬆建立分散式系統。與傳統基於文字的通訊協定（如 RESTful API、SOAP API）不同，gRPC 使用二進位流進行通信，從而提高了通訊效率和效能。此外，它支援多種程式語言，包括 C、C++、Java、Go、Python 等，使得不同語言的應用程式可以輕鬆地進行遠端呼叫。</p>
+        <p>也因為支援多種程式語言的關係，gRPC API 並不侷限於 Web API 介面，客戶端、伺服器端或桌面應用程式等也都可以用來使用或開發 gRPC。</p>
+        <p>gRPC 的問世時間大約落於 2015 年，比 REST 來得晚，所以即便 gRPC 在某些需求環境下的表現會比 RESTful API 更有優勢且更有效率，但後者仍具有通用性、易使用性、靈活性等優勢，因此現階段仍然難以被取代。</p>
+        <p><br></p>
+        <h3>GraphQL：</h3>
+        <p>GraphQL 是 Facebook 於 2015 年正式公開發布的一種開源 API 執行環境，REST 可讓用戶端應用程式使用 HTTP 動態方法與伺服器交換資料，而 GraphQL 則是一種 API 查詢語言，用於定義用戶端應用程式如何從遠端伺服器請求資料的規範。GraphQL 的問世是為了回應新興社交媒體平台對速度的需求。開發人員發現，現有的 API 架構（例如 REST）大多過於冗長，且結構化無法有效地產生新聞摘要。譬如遭遇以下這些困境：</p>
+        <h5>1. 固定結構資料交換：</h5>
+        <p>RESTful API 要求用戶端請求遵循固定結構，以接收資源。這種剛性結構易於使用，但並非總是交換所需資料的最有效方法。</p>
+        <h5>2. 過度擷取和擷取不足：</h5>
+        <p>REST API 始終傳回整個資料內容。例如，從 REST API 中的 person 物件，會收到該人員的姓名、出生日期、地址和電話號碼。即使我們只需要電話號碼，卻仍然也會獲得所有資料。</p>
+        <p>當然狀況不單只有這些，這些案例充其量只是要表示 GraphQL 的主要用途之一是克服 RESTful API 一些使用上的限制，盡可能達到相輔相成的效果。</p>
+    </div>
+    <div class="text-block" id="act6">
+        <h2>六、前端與後端 API 的差異</h2>
+        <p>雖然，我們還沒開始撰寫程式碼串接 API 的實作練習，但是在本篇文章的最後想提前整理前後端各自處理 API 技術及概念是否存在差異。主要可分成三個面向：</p>
+        <h3>1. 功能：</h3>
+        <div class="text-flex">
+            <div class="f-width">
+                <div class="f-head">
+                    <div class="f-f0"></div>
+                    <div class="f-f1">前端</div>
+                    <div class="f-f1">後端</div>
+                </div>
+                <div class="f-row">
+                    <div class="f-f0">說明</div>
+                    <div class="f-f1">通常指的是供前端應用程式（如網頁、行動應用程式）呼叫的 API，這些 API 通常提供與使用者介面相關的功能。前端 WEB API 可能需要從後端 API 取得數據，並將數據呈現給使用者。</div>
+                    <div class="f-f1">通常指的是由後端應用程式提供的 API，用於處理業務邏輯、存取資料庫等，這些 API 通常提供對系統功能的訪問。</div>
+                </div>
+                <div class="f-row">
+                    <div class="f-f0">例如</div>
+                    <div class="f-f1">● 取得資料<br>● 處理使用者輸入</div>
+                    <div class="f-f1">● 用戶認證<br>● 資料儲存<br>● 業務邏輯處理</div>
+                </div>
+            </div>
+        </div>
+        <p><br></p>
+        <h3>2. 使用方式：</h3>
+        <div class="text-flex">
+            <div class="f-width">
+                <div class="f-head">
+                    <div class="f-f0"></div>
+                    <div class="f-f1">前端</div>
+                    <div class="f-f1">後端</div>
+                </div>
+                <div class="f-row">
+                    <div class="f-f0">說明</div>
+                    <div class="f-f1">通常透過 JavaScript 或其他前端程式語言調用，用於與後端 API 或第三方服務進行互動。</div>
+                    <div class="f-f1">通常由後端應用程式實作並託管，前端應用程式透過網路請求與後端 API 進行通訊。後端 WEB API 可以由各種後端框架實現，並使用各種不同的通訊協定（如 HTTP、WebSocket......等）。</div>
+                </div>
+                <div class="f-row">
+                    <div class="f-f0">例如</div>
+                    <div class="f-f1">● RESTful API<br>● GraphQL API<br>● 其他類型的 API</div>
+                    <div class="f-f1">● Spring Boot<br>● Django<br>● Express.js</div>
+                </div>
+            </div>
+        </div>
+        <p><br></p>
+        <h3>3. 安全性和權限控制：</h3>
+        <div class="text-flex">
+            <div class="f-width">
+                <div class="f-head">
+                    <div class="f-f0"></div>
+                    <div class="f-f1">前端</div>
+                    <div class="f-f1">後端</div>
+                </div>
+                <div class="f-row">
+                    <div class="f-f0">說明</div>
+                    <div class="f-f1">通常受限於前端應用程式運行的環境，安全性和權限控制主要由前端程式碼來管理。</div>
+                    <div class="f-f1">通常受限於後端應用程式的安全性和權限控制機制。後端應用程式通常會實現使用者認證、存取控制、資料驗證等功能，以確保 API 的安全性和可靠性。</div>
+                </div>
+                <div class="f-row">
+                    <div class="f-f0">例如</div>
+                    <div class="f-f1">● 使用者認證<br>● 存取控制</div>
+                    <div class="f-f1">● 使用者認證<br>● 存取控制<br>● 資料驗證</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-block" id="act7">
+        <h2>七、參考資料</h2>
         <dl>
             <dd><a href="https://medium.com/@Tommmmm/%E5%B7%A5%E7%A8%8B%E5%B8%AB%E6%95%B4%E5%A4%A9%E6%8E%9B%E5%9C%A8%E5%98%B4%E9%82%8A%E7%9A%84api%E6%98%AF%E4%BB%80%E9%BA%BC-7ab8b522d3bc" target="_blank">工程師整天掛在嘴邊的API是什麼?</a></dd>
             <dd><a href="https://rlads2021.github.io/LabBook/ch10.html" target="_blank">10 擷取網路資料：Web API</a></dd>
@@ -293,7 +385,8 @@
             <dd><a href="https://ihower.tw/blog/archives/1542?source=post_page-----7667b3054371--------------------------------" target="_blank">什麼是REST跟RESTful?</a></dd>
             <dd><a href="https://cindyliu923.medium.com/%E4%BB%80%E9%BA%BC%E6%98%AF-rest-restful-7667b3054371" target="_blank">什麼是 REST? RESTful?</a></dd>
             <dd><a href="https://blog.toright.com/posts/725/representational-state-transfer-%e8%bb%9f%e9%ab%94%e6%9e%b6%e6%a7%8b%e9%a2%a8%e6%a0%bc%e4%bb%8b%e7%b4%b9-part-i-%e5%be%9e%e4%ba%86%e8%a7%a3-rest-%e5%88%b0%e8%a8%ad%e8%a8%88-restful%ef%bc%81?source=post_page-----7667b3054371--------------------------------" target="_blank">淺談 REST 軟體架構風格 (Part.I) - 從了解 REST 到設計 RESTful！</a></dd>
-            <dd><a href="XXXX" target="_blank">XXXXXX</a></dd>
+            <dd><a href="https://aws.amazon.com/tw/compare/the-difference-between-soap-rest/" target="_blank">SOAP 與 REST 之間有何差異？</a></dd>
+            <dd><a href="https://aws.amazon.com/tw/compare/the-difference-between-graphql-and-rest/" target="_blank">GraphQL 和 REST 有何區別？</a></dd>
         </dl>
     </div>
 </div>

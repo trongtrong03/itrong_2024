@@ -458,9 +458,17 @@
     {
         "id": 58,
         "href": "js_api_intro",
-        "title": "打 API 是什麼？為什麼要打它？聊聊網頁前端呼叫 API 的大小事",
+        "title": "打 API 是什麼？為什麼要打它？聊聊 Web API 的大小事",
         "time": "2023-01-23",
         "type": "javascript",
         "class": "api"
+    },
+    {
+        "id": 59,
+        "href": "vue_vite_1",
+        "title": "我的 Vite 學習使用指南（一）：介紹＆安裝",
+        "time": "2024-03-12",
+        "type": "javascript",
+        "class": "vite"
     }
 ]

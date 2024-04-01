@@ -1925,5 +1925,16 @@
         "cover": true,
         "img": "vsco",
         "type": ["影音圖像"]
+    },
+    {
+        "id": 177,
+        "title": "Genape",
+        "desc": "Genape 可以快速生成影片腳本、圖片、文案，只要進入 AI 模板選擇影音創作，就可以看到各式各樣生成短影音的好用模板。",
+        "href": "https://app.genape.ai/templates",
+        "article": false,
+        "path": "",
+        "cover": true,
+        "img": "genape",
+        "type": ["ＡＩ生成"]
     }
 ]
