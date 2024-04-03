@@ -10,9 +10,7 @@
             <li><a href="#act2">二、環境安裝</a></li>
             <li><a href="#act3">三、結構說明</a></li>
             <li><a href="#act4">四、使用套件</a></li>
-            <li><a href="#act5">五、XXXX</a></li>
-            <li><a href="#act6">六、XXXX</a></li>
-            <li><a href="#act7">七、參考資料</a></li>
+            <li><a href="#act5">五、參考資料</a></li>
         </ul>
     </div>
     <div class="text-block" id="act0">
@@ -228,7 +226,7 @@ createApp(App).mount('#app')</code></pre>
     </div>
     <div class="text-block" id="act4">
         <h2>四、使用套件</h2>
-        <p>為了加速網頁開發效率與效能優化，現今的技術與優化可謂百花齊放，縱然 Vite 本身已經提供網頁開發的基本所需，但還是有不少第三方套件可以提供更高效率的服務。基本上大多數的開發工具都可以透過 Node.js 安裝這些第三方套件到自己專案內作使用，而 Vite 也不例外。</p>
+        <p>為了加速網頁開發效率與效能優化，現今的技術與優化工具可謂百花齊放，縱然 Vite 本身已經提供網頁開發的基本所需，但還是有不少第三方套件可以提供更高效率的服務，事實上，Vite 之所以啟動能這麼迅速，一部分原因也是捨棄掉了許多實用的第三方套件，例如 Vue router、Pinia 等，這些套件在其他框架大多都已經包含在安裝指令裡，Vite 則是要再額外手動自己裝進來，算是使用 Vite 的一個小小缺點吧。但基本上大多數的開發工具都可以透過 Node.js 安裝這些第三方套件到自己專案內作使用，Vite 自然也不例外。</p>
         <p>Vite 用來管理這些第三方套件引用的相關設定主要集中在 <b>vite.config.js</b> 這支檔案裏面，以下是其初始的程式碼內容：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-javascript">import { defineConfig } from 'vite'
@@ -239,7 +237,7 @@ export default defineConfig({
   plugins: [vue()],
 })</code></pre>
         </div>
-        <p>可以看到它採用了 ESM 的語法，透過 <em>import</em> 和 <em>export</em> 來定義與配置外部套件。每個第三方套件的安裝與引用方式不見得都一樣，不過通常它們的文件都會提供相關引用設定流程，倒也不用太擔心不知道該怎麼使用。</p>
+        <p>可以看到它的程式碼結構採用 ESM 的語法，透過 <em>import</em> 和 <em>export</em> 來定義與配置外部套件。每個第三方套件的安裝與引用方式不見得都一樣，不過通常它們的文件都會提供相關引用設定流程，倒也不用太擔心不知道該怎麼使用。</p>
         <p>以下是比較多人使用或推薦的第三方套件：</p>
         <div class="text-flex">
             <div class="f-width">
@@ -250,84 +248,106 @@ export default defineConfig({
                 </div>
                 <div class="f-row">
                     <div class="f-f1">★★★</div>
-                    <div class="f-f3">vue-router</div>
+                    <div class="f-f3"><a href="https://www.npmjs.com/package/vue-router" target="_blank" >vue-router</a></div>
                     <div class="f-f5">Vue Router 是 Vue.js 官方提供的路由管理器，主要用於 SPA 網頁應用中以實現客戶端路由。</div>
                 </div>
                 <div class="f-row">
                     <div class="f-f1">★★★</div>
-                    <div class="f-f3">pinia</div>
+                    <div class="f-f3"><a href="https://www.npmjs.com/package/pinia" target="_blank" >pinia</a></div>
                     <div class="f-f5">取代 vuex 成為 Vue3 最推薦的狀態管理工具。</div>
                 </div>
                 <div class="f-row">
                     <div class="f-f1">★★☆</div>
-                    <div class="f-f3">eslint</div>
+                    <div class="f-f3"><a href="https://www.npmjs.com/package/eslint" target="_blank" >eslint</a></div>
                     <div class="f-f5">用來檢查 JavaScript 程式碼中的潛在問題或風格錯誤，提高程式碼的一致性、安全性與易讀性。</div>
                 </div>
                 <div class="f-row">
                     <div class="f-f1">★★☆</div>
-                    <div class="f-f3">vite-plugin-restart</div>
+                    <div class="f-f3"><a href="https://vueschool.io/articles/vuejs-tutorials/eslint-and-prettier-with-vite-and-vue-js-3/" target="_blank" >Prettier</a></div>
+                    <div class="f-f5">用來優化程式碼，使其風格保持一致，常與 ESLint 一同搭配使用。</div>
+                </div>
+                <div class="f-row">
+                    <div class="f-f1">★☆☆</div>
+                    <div class="f-f3"><a href="https://www.npmjs.com/package/vite-plugin-restart" target="_blank" >vite-plugin-restart</a></div>
                     <div class="f-f5">如果在編譯過程中修改了 vite.config.js 文件的設定，就必須重新啟動 Vite 開發服務器，而此套件可以提供自動監聽並重啟的服務。</div>
                 </div>
                 <div class="f-row">
                     <div class="f-f1">★★☆</div>
-                    <div class="f-f3">unplugin-vue-components</div>
+                    <div class="f-f3"><a href="https://www.npmjs.com/package/unplugin-vue-components" target="_blank" >unplugin-vue-components</a></div>
                     <div class="f-f5">Vue 的組件自動 import，可以省略在目標文件引用組件需要自行添加 <em>import</em> 指令的步驟。</div>
                 </div>
                 <div class="f-row">
                     <div class="f-f1">★★☆</div>
-                    <div class="f-f3">unplugin-auto-import</div>
+                    <div class="f-f3"><a href="https://www.npmjs.com/package/unplugin-auto-import" target="_blank" >unplugin-auto-import</a></div>
                     <div class="f-f5">Vue3 hooks 自動 import。</div>
                 </div>
                 <div class="f-row">
                     <div class="f-f1">★★☆</div>
-                    <div class="f-f3">vite-plugin-compression</div>
+                    <div class="f-f3"><a href="https://www.npmjs.com/package/vite-plugin-compression2" target="_blank" >vite-plugin-compression</a></div>
                     <div class="f-f5">使用 gzip 及 brotli 來壓縮靜態資源，以減少輸出檔案的大小。</div>
                 </div>
                 <div class="f-row">
                     <div class="f-f1">★☆☆</div>
-                    <div class="f-f3">vite-plugin-imagemin</div>
+                    <div class="f-f3"><a href="https://www.npmjs.com/package/@vheemstra/vite-plugin-imagemin" target="_blank" >vite-plugin-imagemin</a></div>
                     <div class="f-f5">用來壓縮圖片，減少檔案大小以提升網頁讀取性能。</div>
                 </div>
                 <div class="f-row">
                     <div class="f-f1">★☆☆</div>
-                    <div class="f-f3">vitejs-plugin-legacy</div>
+                    <div class="f-f3"><a href="https://www.npmjs.com/package/@vitejs/plugin-legacy" target="_blank" >vitejs-plugin-legacy</a></div>
                     <div class="f-f5">Vite 的 ESM 任務主要是基於瀏覽器原生的 ESM，這個套件是用來支援那些本身沒有 ESM 功能的舊版本瀏覽器，讓 Vite 也能正常運作。</div>
                 </div>
                 <div class="f-row">
                     <div class="f-f1">★☆☆</div>
-                    <div class="f-f3">vue-global-api</div>
+                    <div class="f-f3"><a href="https://www.npmjs.com/package/vue-global-api" target="_blank" >vue-global-api</a></div>
                     <div class="f-f5">在同時安裝 eslint 與 unplugin-auto-import 套件的環境下，後者可能會因為前者產生報錯提示，這個套件主要就是用來解決這個問題。</div>
                 </div>
                 <div class="f-row">
                     <div class="f-f1">★★☆</div>
-                    <div class="f-f3">axios</div>
+                    <div class="f-f3"><a href="https://www.npmjs.com/package/axios" target="_blank" >axios</a></div>
                     <div class="f-f5">如果專案有需要串接 API，這個套件是比較流行的選擇。</div>
                 </div>
                 <div class="f-row">
                     <div class="f-f1">★★☆</div>
-                    <div class="f-f3">sass</div>
+                    <div class="f-f3"><a href="https://www.npmjs.com/package/sass" target="_blank" >sass</a></div>
                     <div class="f-f5">CSS 預處理器的一種，使開發 CSS 更有效率。</div>
                 </div>
                 <div class="f-row">
                     <div class="f-f1">★☆☆</div>
-                    <div class="f-f3">tailwindcss</div>
+                    <div class="f-f3"><a href="https://www.npmjs.com/package/tailwindcss" target="_blank" >tailwindcss</a></div>
                     <div class="f-f5">Tailwind CSS 是現在不少開發工具喜好的 CSS 框架，具有快速建立網頁外觀 UI 的優點。</div>
                 </div>
             </div>
         </div>
-        
+        <p>這裡先不一口氣把需要的套件全部裝進來，而是會隨著學習進程推進再陸續安裝所需的套件，如此也比較容易感受到第三方套件與 Vite 原生寫法之間的便利差異。在官方文件中，是以支援舊版瀏覽器也能支援 ESM 的套件 <b>plugin-legacy</b> 作為示範，我們依樣畫葫蘆照著指示進行安裝：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-bash">npm add -D @vitejs/plugin-legacy</code></pre>
+        </div>
+        <figure>
+            <img src="/images/learn/js/vite-1-9.jpg">
+        </figure>
+        <p>這樣就能完成 <b>plugin-legacy</b> 的安裝了，安裝進來的檔案會存放於 <b>node_modules</b> 資料夾中。除了安裝之外，還需要在設定檔把該套件引用進來，才能讓 Vite 知道要去使用這個套件，以及依照文件裡定義的參數去運作。以下是 <b>vite.config.js</b> 設置內容：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-javascript">import legacy from '@vitejs/plugin-legacy'
+import { defineConfig } from 'vite'
+
+export default defineConfig({
+    plugins: [
+        legacy({
+            targets: ['defaults', 'not IE 11'],
+        }),
+    ],
+})</code></pre>
+        </div>
+        <p>然而不是所有的第三方套件都是在 <b>vite.config.js</b> 作設定，有的會告訴我們說要在 <b>main.js</b> 之類的入口文件作引用的動作，在閱讀套件相關說明文件時需多加留意。</p>
     </div>
-
-
-    <div class="text-block" id="act7">
-        <h2>七、參考資料</h2>
+    <div class="text-block" id="act5">
+        <h2>五、參考資料</h2>
         <dl>
             <dd><a href="https://v4.vitejs.dev/" target="_blank">Vite</a></dd>
             <dd><a href="https://www.youtube.com/watch?v=rNQIA0Fe9KQ&list=PLbOfcOk7bN42Kzp1wQsoLuU0vPUmFBe-X&index=1" target="_blank">Vue3 + Vite 快速上手 Get Startrd</a></dd>
             <dd><a href="https://www.explainthis.io/zh-hant/swe/what-is-vite" target="_blank">Vite 是什麼? 為什麼要用 Vite? 它解決了哪些問題? 又是如何解決?</a></dd>
             <dd><a href="https://tw511.com/a/01/48012.html" target="_blank">基於 vite 建立 vue3 全家桶專案（vite + vue3 + tsx + pinia）</a></dd>
             <dd><a href="https://juejin.cn/post/7256723839941476412" target="_blank">vite的插件推荐+vite环境基础配置+vite打包项目的常用优化</a></dd>
-            <dd><a href="xxxxxxx" target="_blank">XXXXXXXX</a></dd>
         </dl>
     </div>
 </div>

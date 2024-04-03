@@ -470,5 +470,45 @@
         "time": "2024-03-12",
         "type": "javascript",
         "class": "vite"
+    },
+    {
+        "id": 60,
+        "href": "vue_vite_2",
+        "title": "我的 Vite 學習使用指南（二）：網頁應用規劃與路由設定",
+        "time": "2024-03-13",
+        "type": "javascript",
+        "class": "vite"
+    },
+    {
+        "id": 61,
+        "href": "vue_vite_3",
+        "title": "我的 Vite 學習使用指南（四）：CSS 與 Sass",
+        "time": "2024-03-17",
+        "type": "javascript",
+        "class": "vite"
+    },
+    {
+        "id": 63,
+        "href": "vue_vite_4",
+        "title": "我的 Vite 學習使用指南（五）：Pinia",
+        "time": "2024-03-20",
+        "type": "javascript",
+        "class": "vite"
+    },
+    {
+        "id": 64,
+        "href": "vue_vite_5",
+        "title": "我的 Vite 學習使用指南（六）：建構打包",
+        "time": "2024-03-24",
+        "type": "javascript",
+        "class": "vite"
+    },
+    {
+        "id": 65,
+        "href": "vue_vite_7",
+        "title": "我的 Vite 學習使用指南（七）：create-vue",
+        "time": "2024-03-28",
+        "type": "javascript",
+        "class": "vite"
     }
 ]
