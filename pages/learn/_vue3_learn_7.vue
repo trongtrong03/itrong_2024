@@ -1,6 +1,6 @@
 <template>
     <NuxtLayout name="article">
-        <TempArticle :propValue="67" fileType="learnList" />
+        <TempArticle :propValue="68" fileType="learnList" />
 <!-- start -->
 <div class="text-content">
     <div class="text-catalog">
@@ -193,12 +193,11 @@ console.log(demo);    // Uncaught (in promise) ReferenceError: demo is not defin
         <figure>
             <img src="/images/learn/js/vue3-learn-7-4.jpg">
         </figure>
-
-
-
-
-
-        <!-- <div class="text-code" v-pre>
+        <p>只不過實務上還是以直接接收傳遞值的寫法比較常見。</p>
+        <p><br></p>
+        <p>前面講完父組件如何傳遞簡單的值給子組件，接著來看父組件如果要傳陣列資料給子組件使用，該怎麼做？</p>
+        <p>以下方父組件裡的程式碼為例：</p>
+        <div class="text-code" v-pre>
             <pre><code class="language-html">&lt;template&gt;
     &lt;User/&gt;
 &lt;/template&gt;
@@ -206,7 +205,7 @@ console.log(demo);    // Uncaught (in promise) ReferenceError: demo is not defin
 &lt;script setup lang="ts"&gt;
     import User from "./components/User.vue";
     import { reactive } from "vue";
-    import { type Users } from "./types"
+    import { type Users } from "./types";
 
     let userList = reactive&lt;Users&gt;([
         { id: 1, name: "阿比", age: 18},
@@ -215,10 +214,75 @@ console.log(demo);    // Uncaught (in promise) ReferenceError: demo is not defin
     ])
 &lt;/script&gt;</code></pre>
         </div>
-        <p>我們用 <em>reactive</em> 定義了一個響應式的陣列資料，並且套用 <em>Users</em> 的規範標準。</p> -->
-        
+        <p>我們用 <em>reactive</em> 定義了一個響應式的陣列資料，並且套用第一個章節建立的 TS 自定義類型 <em>Users</em> 的規範標準。</p>
+        <p>現在要把 <em>userList</em> 的資料傳遞給 <em>&lt;User/&gt;</em>，和單純透過自訂屬性賦值不同，我們需要借助 <em>v-bind</em> 定義一個屬性名稱，然後把 <em>userList</em> 賦值給它：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-html">&lt;template&gt;
+    &lt;User :list="userList"/&gt;
+&lt;/template&gt;</code></pre>
+        </div>
+        <p>回到子組件，把 <em>list</em> 傳遞給它：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-html">&lt;template&gt;
+    &lt;h2>{{ list }}&lt;/h2&gt;
+&lt;/template&gt;
+
+&lt;script setup lang="ts"&gt;
+    import {} from 'vue';
+
+    defineProps(["list"]);
+&lt;/script&gt;</code></pre>
+        </div>
+        <p>如此應該就能在頁面上看到傳遞進來的資料了：</p>
+        <figure>
+            <img src="/images/learn/js/vue3-learn-7-5.jpg">
+        </figure>
+        <p>當然直接這樣秀出來在畫面上不怎麼美觀，既然子組件已經能取得傳遞進來的資料，那後續就能依照設計風格自行調整排版。例如：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-html">&lt;template&gt;
+    &lt;ul&gt;
+        &lt;li v-for="item in list" :key="item.id"&gt;
+            &lt;p&gt;{{ item.name }} - {{ item.age }}&lt;/p&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/template&gt;</code></pre>
+        </div>
+        <p>雖然發展到這裡，子組件確實已經能接收來自父組件傳遞的陣列資料，但光只是這樣寫仍無法避免一些風險，比如今天父組件傳給 <em>list</em> 的東西不是陣列資料，而是單純的值呢？例如數字 3，那麼子組件接收到的資料就只是單純的數字，原本的 <em>v-for="item in list"</em> 的 <em>list</em> 值變成了 <em>3</em>，導致 <em>v-for</em> 以為程式的指令是要將 <em>li</em> 重複寫三次。而元素裡面抓取的 <em>name</em> 和 <em>age</em> 也因為找不到這些對應的屬性，最終只能顯示空白。</p>
+        <p>對於謹慎的開發者來說要避免這樣的疏失並非多困難的事情，但無法保證團隊裡的其他人也是如此，且再仔細的人也總有百密一疏的時候，如果不小心一個手滑把選起來的資料改掉了，終究還是會造成程式問題。既然如此，一開始便設定好限制，就能最大幅度降低意外狀況的發生。</p>
+        <p>所以，在父組件資料已經套上規範的情況下，子組件同樣也要加上規範限制：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-javascript">defineProps&lt;{list:Users}&gt;;</code></pre>
+        </div>
+        <p>當父組件要傳遞了不符合 TS 自定義規範的資料給子組件，瀏覽器就會發出警告：</p>
+        <blockquote class="is-danger">
+            <p>[Vue warn]: Invalid prop: type check failed for prop "list". Expected Array, got Number with value 3.</p>
+        </blockquote>
+        <p>我們還可以更進一步限制必要性：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-javascript">defineProps&lt;{list?:Users}&gt;;</code></pre>
+        </div>
+        <p><em>?</em> 表示非必要性，加入此符號，那麼當父組件從頭到尾都沒傳遞 <em>list</em> 資料給子組件，子組件沒接收到資料，就不會去處理 <em>v-for="item in list"</em> 的內容，DOM 也不會去渲染它。</p>
+        <p>如果沒有設定非必要性的狀況下，子組件引用了父組件沒有傳遞的資料，則瀏覽器會發出警告：</p>
+        <blockquote class="is-danger">
+            <p>main.ts:6 [Vue warn]: Missing required prop: "list" </p>
+        </blockquote>
+        <p>但是限制必要性的目的不是單純忽略警告而已，通常既然設下了限制必要性，就會同時設定一個預設值，好讓子組件在接收到不存在的資料時，另外顯示預設的內容，而不是讓畫面該功能區塊徒留一抹空白......</p>
+        <p>要設定預設值，需要先引入 <em>withDefaults</em> 函式：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-javascript">import { withDefaults } from 'vue';</code></pre>
+        </div>
+        <p>然後把前面寫的 <em>defineProps</em> 放進去 <em>withDefaults</em> 函式裡面，並於後方 <em>{ }</em> 添加 <em>list</em> 的預設資料：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-javascript">withDefaults(defineProps<{list?:Users}>(), {
+    list:()=> [{
+        id: 0,
+        name: "阿比",
+        age: 18
+    }]
+});</code></pre>
+        </div>
+        <p>如此便大功告成，假如子組件接收到了父組件不存在的資料參數，那麼子組件原本要呈現資料的位置內容就會是它預設的內容了。</p>
     </div>
-    
     <div class="text-block" id="act3">
         <h2>三、參考資料</h2>
         <dl>
