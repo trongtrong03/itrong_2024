@@ -11,12 +11,15 @@
             <li><a href="#act3">三、Vue Router 路由設定：RouterLink</a></li>
             <li><a href="#act4">四、Vue Router 路由設定：RouterView</a></li>
             <li><a href="#act5">五、建立錯誤警示頁面路由</a></li>
-            <li><a href="#act5">五、參考資料</a></li>
+            <li><a href="#act6">六、建立嵌套路由</a></li>
+            <li><a href="#act7">七、參考資料</a></li>
         </ul>
     </div>
     <div class="text-block" id="act0">
         <h2>序、前言</h2>
-        <p>儘管 Vite 可同時支援 Vue2 Option API 與 Vue3 Composition API 的語法格式，但本系列文章秉持能使用 Vue3 就不用 Vue2 來寫程式的原則進行練習。</p>
+        <p>安裝好 Vite 所需環境並建立好基本的專案架構後，從這篇文章開始我們將探索如何使用 Vite 創建單頁網頁應用程序（SPA），而本篇除了介紹 Vite 生成的架構外，也會把重點聚焦於各功能組件之間如何相互聯繫，也就「路由」設定。</p>
+        <p>所謂的路由（Routing），是指在網頁應用中，根據用戶請求的 URL 來決定如何響應這個請求的過程。簡單來說，路由就是根據 URL 將用戶導向到不同頁面或視圖的過程。在前端開發中，特別是單頁網頁應用（SPA），路由是非常重要的概念。SPA 通常只有一個 HTML 文件，當用戶與應用互動時，它會動態地更新現有頁面內容，而不會重新加載整個頁面。路由的作用就是根據用戶操作，動態改變應用中的內容，從而實現不同頁面之間的切換和導航。</p>
+        <p>此外，儘管 Vite 可同時支援 Vue2 Option API 與 Vue 3 Composition API 的語法格式，但本系列文章都會秉持能使用 Vue 3 就不用 Vue 2 來寫程式的原則進行練習。</p>
     </div>
     <div class="text-block" id="act1">
         <h2>一、Vite 網頁應用的初始規劃</h2>
@@ -53,8 +56,8 @@ src
 &lt;style scoped&gt;
 &lt;/style&gt;</code></pre>
         </div>
-        <p>Vite 提供的範例程式碼中我只保留關鍵結構，其他不是很重要的內容都已先移除。你可以看到整個檔案內容主要分成三個部分，分別是 <em>script</em>、<em>template</em>、<em>style</em>，這種結構是 Vue3 Composition API 的一種格式寫法，對比傳統 Vue2 結構，Vue3 使 Vue 結構更加簡潔且容易閱讀，而且每一支組件的 JavaScript 與 CSS 樣式只會在該組件作用域範圍內有作用，不會干擾到其他組件。</p>
-        <p>此外，和過往 Vue2 <em>template</em> 的下一層至少還需要一個包裹多個平行階層的 <em>div</em> 作為網頁應用的「進入點」（entry point）不同，Vue3 的 <em>template</em> 允許開發者直接將同階層的程式碼或組件放在 <em>template</em> 下一層。</p>
+        <p>Vite 提供的範例程式碼中我只保留關鍵結構，其他不是很重要的內容都已先移除。你可以看到整個檔案內容主要分成三個部分，分別是 <em>script</em>、<em>template</em>、<em>style</em>，這種結構是 Vue 3 Composition API 的一種格式寫法，對比傳統 Vue 2 結構，Vue 3 使 Vue 結構更加簡潔且容易閱讀，而且每一支組件的 JavaScript 與 CSS 樣式只會在該組件作用域範圍內有作用，不會干擾到其他組件。</p>
+        <p>此外，和過往 Vue2 <em>template</em> 的下一層至少還需要一個包裹多個平行階層的 <em>div</em> 作為網頁應用的「進入點」（entry point）不同，Vue 3 的 <em>template</em> 允許開發者直接將同階層的程式碼或組件放在 <em>template</em> 下一層。</p>
         <p>傳統的寫法範例：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-html">&lt;template&gt;
@@ -65,7 +68,7 @@ src
     &lt;/div&gt;
 &lt;/template&gt;</code></pre>
         </div>
-        <p>轉換成 Vue3：</p>
+        <p>轉換成 Vue 3：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-html">&lt;template&gt;
     &lt;Header /&gt;
@@ -97,7 +100,7 @@ src
     &lt;h1&gt;{{ msg }}&lt;/h1&gt;
 &lt;/template&gt;</code></pre>
         </div>
-        <p>上方程式碼結構同樣已簡化只保留 <em>props</em> 賦值的相關內容，可以看到 Vue3 的 <em>props</em> 定義方式和 Vue2 有所不同（但本質是一樣的），Vue3 的 <em>props</em> 被當作普通的變數而不再是物件方法。</p>
+        <p>上方程式碼結構同樣已簡化只保留 <em>props</em> 賦值的相關內容，可以看到 Vue 3 的 <em>props</em> 定義方式和 Vue2 有所不同（但本質是一樣的），Vue 3 的 <em>props</em> 被當作普通的變數而不再是物件方法。</p>
         <p>當 Vite 原始範例於 <b>App.vue</b> 引用此組件時，傳入了 <em>msg="Vite + Vue"</em> 值給 <b>HelloWorld.vue</b> <em v-pre>&lt;h1&gt;{{ msg }}&lt;/h1&gt;</em> 標籤去接收。如果我們在其他組件也引用了 <b>HelloWorld.vue</b>，我們可以賦予其他值給 <em>msg</em>，讓不同組件的 <em v-pre>&lt;h1&gt;{{ msg }}&lt;/h1&gt;</em> 都能呈現各自設定的內容，非常方便。</p>
         <p><br></p>
         <p>以下將 Vite 預設建立的結構整理成一張圖表，幫助我們能更直觀地瞭解各文件之間的關係導向：</p>
@@ -133,7 +136,7 @@ src
         <figure>
             <img src="/images/learn/js/vite-2-3.jpg">
         </figure>
-        <p>（其實原本我是想透過 Vite 官方文件提供的指令一步步把初始專案打造成理想的樣子，但後來發現 Node.js 提供的 Vue3 專案創建指令實在是太香了，著實沒什麼必要自己一步步手動安裝，加入它跟著使用比較輕鬆愉悅。）</p>
+        <p>（其實原本我是想透過 Vite 官方文件提供的指令一步步把初始專案打造成理想的樣子，但後來發現 Node.js 提供的 Vue 3 專案創建指令實在是太香了，著實沒什麼必要自己一步步手動安裝，加入它跟著使用比較輕鬆愉悅。）</p>
         <p>兩者檔案內容對比：</p>
         <figure>
             <img src="/images/learn/js/vite-2-4.jpg">
@@ -180,7 +183,7 @@ src
         <h2>三、Vue Router 路由設定：RouterLink</h2>
         <p>我們也可以寫成 <em>router-link</em>，兩種標籤寫法皆表示同樣的功能，都是用來定義路由跳轉的連結目標。</p>
         <blockquote>
-            <p><em>RouterLink</em> 是  Vue3 Composition API <em>import</em> 進來的寫法；<em>router-link</em> 則是 Vue Router 提供的原生標籤。</p>
+            <p><em>RouterLink</em> 是  Vue 3 Composition API <em>import</em> 進來的寫法；<em>router-link</em> 則是 Vue Router 提供的原生標籤。</p>
         </blockquote>
         <p><em>to</em> 表示要前往指定的組件目標，範例中分別連向 <em>/</em> 與 <em>/about</em>，這時問題來啦，這個路由連結是怎麼決定的呢？答案在 <b>router/index.js</b>：</p>
         <div class="text-code" v-pre>
@@ -400,16 +403,189 @@ const router = createRouter({
         <figure>
             <img src="/images/learn/js/vite-2-16.jpg">
         </figure>
-        <p>需要注意的是，<em>routes</em> NotFound 的設定不能放在最前面，否則會影響動態路由的捕捉，一般來說都會放在整個 <em>routes</em> 陣列的最下方。</p>
+        <p>需要注意的是，<em>routes</em> NotFound 的設定不能放在最前面，否則會影響動態路由的捕捉，一般來說都會放在整個 <em>routes</em> 陣列物件順序的最下方。</p>
     </div>
-    
+    <div class="text-block" id="act6">
+        <h2>六、建立嵌套路由</h2>
+        <p>儘管前面已經學會如何透過 Vue Router 實現 SPA 多個功能頁面組件之間的路由切換，但實務上我們很快會發現，目前學的路由操作似乎無法完全適用於所有網站架構。舉一個明顯的狀況就是當網頁的架構有好幾層的時候，例如：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-bash">Home
+About
+├── AAA
+├── BBB
+└── CCC</code></pre>
+        </div>
+        <p>或許當下直覺會想建立 AAA、BBB、CCC 三個 <b>.vue</b> 組件，然後循之前所學的模式，透過 <em>routes</em> 各自建立 <em>path</em>，再讓 RouterLink 指向它們。這個思路嚴格來講也不算全然錯誤，畢竟某種程度上它也是能達到類似子分頁嵌套的效果，只不過它會有兩個問題：</p>
+        <ol>
+            <li>子分頁的路由無法吃到選中效果（<em>.router-link-active</em>）。</li>
+            <li>不好釐清組件的從屬嵌套關係。</li>
+        </ol>
+        <p>面對嵌套路由的問題，Vue Router 的中文文件也有提供相關設定教學：<a href="https://router.vuejs.org/zh/guide/essentials/nested-routes.html" target="_blank">嵌套路由</a>，不過教學主要是針對動態路由的操作，對只需要呈現靜態內容的我們小萌新來說一時半刻也不好吸收，但沒關係，以下我們一步步來實作。</p>
+        <p>比較常見的嵌套形式有兩種，第一種是嵌套的路由導覽列只會在該嵌套最上層的組件內容出現；另一種則是全站顯示嵌套路由，比如滑鼠經過某導覽項目浮現的子選單，恆存於 <b>App.vue</b> 父組件當中。</p>
+        <p>在開始講述這兩種形式建立方法之前，我們需要先部屬好基本的嵌套結構，沿用本章節開頭的架構範例，我們在 <b>view/</b> 資料夾中新增 <b>about/</b> 資料夾，此舉目的是要讓開發者與團隊清楚瞭解到該資料夾裡面的 <b>.vue</b> 組件都是 About 從屬的嵌套內容。接著在資料夾裡面分別新增 <b>a.vue</b>、<b>b.vue</b>、<b>c.vue</b> 三個組件，並加入程式碼──</p>
+        <p><b>a.vue</b>：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-html">&lt;template&gt;
+    &lt;h1&gt;AAA&lt;/h1&gt;
+&lt;/template&gt;</code></pre>
+        </div>
+        <p>（<b>b.vue</b> 的內容為 BBB，<b>c.vue</b> 內容則是 CCC。）</p>
+        <p>建置完後的網頁應用結構：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-bash">index.html
+src
+├── components
+├── router
+│    └── index.js
+├── views
+│    ├── HomeView.vue
+│    ├── AboutView.vue
+│    └── about
+│         ├── a.vue
+│         ├── b.vue
+│         └── c.vue
+└── App.vue</code></pre>
+        </div>
+        <p><br></p>
+        <h3>1. 功能組件裡的嵌套路由：</h3>
+        <p>示意圖：</p>
+        <figure>
+            <img src="/images/learn/js/vite-2-17.jpg">
+        </figure>
+        <p>首先，調整 <b>App.vue</b> 的結構：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-html">&lt;template&gt;
+    &lt;header&gt;
+        &lt;nav&gt;
+            &lt;RouterLink to="/"&gt;Home&lt;/RouterLink&gt;
+            &lt;RouterLink to="/about"&gt;About&lt;/RouterLink&gt;
+        &lt;/nav&gt;
+    &lt;/header&gt;
+    &lt;RouterView /&gt;
+&lt;/template&gt;</code></pre>
+        </div>
+        <p>再來是 <b>AboutView.vue</b>：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-html">&lt;template&gt;
+    &lt;RouterLink to="/about/aaa">AAA&lt;/RouterLink&gt;
+    &lt;RouterLink to="/about/bbb"&gt;BBB&lt;/RouterLink&gt;
+    &lt;RouterLink to="/about/ccc"&gt;CCC&lt;/RouterLink&gt;
+    &lt;RouterView /&gt;
+&lt;/template&gt;</code></pre>
+        </div>
+        <p>這個組件對應的路由是 <b>/about</b>，所以我們可以稱它是整個 About 功能的父組件，本範例要不要添加其他內容自己決定，但通常父組件除了嵌套路由之外也會同時函蓋一些資訊。而放在這個組件內的嵌套路由就是 About 的子組件，白話來說就是子頁面或細頁。</p>
+        <p>你會發現除了 <b>App.vue</b>，我們也在 <b>AboutView.vue</b> 加入了 <em>&lt;RouterView /&gt;</em>，這是要用來顯示嵌套路由組件的內容。</p>
+        <p>修改 <b>router/index.js</b> 的設定（只列出 <em>routes</em> 的部份）：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-javascript">routes: [
+    {
+        path: '/',
+        name: 'home',
+        component: HomeView
+    },
+    {
+        path: '/about',
+        name: 'about',
+        component: () => import('../views/AboutView.vue'),
+        children: [
+            {
+                path: 'aaa',
+                name: 'AAA',
+                component: () => import('../views/about/a.vue'),
+            },
+            {
+                path: 'bbb',
+                name: 'BBB',
+                component: () => import('../views/about/b.vue'),
+            },
+            {
+                path: 'ccc',
+                name: 'CCC',
+                component: () => import('../views/about/c.vue'),
+            }
+        ]
+    }
+]</code></pre>
+        </div>
+        <p>建立嵌套路由的關鍵是 <em>children</em> 屬性，我們在 About 路由對應的物件裡加入該屬性，表示在該屬性裡面的子物件路由，都從屬於 About 路由底下。</p>
 
-    <div class="text-block" id="act5">
-        <h2>五、參考資料</h2>
+        
+        <p><br></p>
+        <h3>2. 父組件裡的嵌套路由：</h3>
+        <p>示意圖：</p>
+        <figure>
+            <img src="/images/learn/js/vite-2-18.jpg">
+        </figure>
+        <p>首先，調整 <b>App.vue</b> 的結構：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-html">&lt;template&gt;
+    &lt;header&gt;
+        &lt;nav&gt;
+            &lt;RouterLink to="/"&gt;Home&lt;/RouterLink&gt;
+            &lt;RouterLink to="/about"&gt;About&lt;/RouterLink&gt;
+            &lt;div&gt;
+                &lt;RouterLink to="/about/aaa"&gt;AAA&lt;/RouterLink&gt;
+                &lt;RouterLink to="/about/bbb"&gt;BBB&lt;/RouterLink&gt;
+                &lt;RouterLink to="/about/ccc"&gt;CCC&lt;/RouterLink&gt;
+            &lt;/div&gt;
+        &lt;/nav&gt;
+    &lt;/header&gt;
+    &lt;RouterView /&gt;
+&lt;/template&gt;</code></pre>
+        </div>
+        <p>把 About 嵌套路由的導覽項目添加到父組件裡面，也有些人會把父組件共用功能例如 Header 或 Footer 另外寫在 <b>components</b> 子組件作引用，使 <b>App.vue</b> 的程式結構看起來更加簡潔。</p>
+        <p>再來是 <b>AboutView.vue</b>：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-html">&lt;template&gt;
+    &lt;RouterView /&gt;
+&lt;/template&gt;</code></pre>
+        </div>
+        <p>只留下 <em>&lt;RouterView /&gt;</em>，用來渲染子組件的內容。</p>
+        <p>修改 <b>router/index.js</b> 的設定（只列出 <em>routes</em> 的部份）：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-javascript">routes: [
+    {
+        path: '/',
+        name: 'home',
+        component: HomeView
+    },
+    {
+        path: '/about',
+        name: 'about',
+        redirect: '/about/aaa',
+        component: () => import('../views/AboutView.vue'),
+        children: [
+            {
+                path: 'aaa',
+                name: 'AAA',
+                component: () => import('../views/about/a.vue'),
+            },
+            {
+                path: 'bbb',
+                name: 'BBB',
+                component: () => import('../views/about/b.vue'),
+            },
+            {
+                path: 'ccc',
+                name: 'CCC',
+                component: () => import('../views/about/c.vue'),
+            }
+        ]
+    }
+]</code></pre>
+        </div>
+        <p>基本上和前一個作法的設定差不多，最大的差異在於 <em>about</em> 物件中新增了一條屬性：<em>redirect: '/about/aaa'</em>。這個屬性是用來設定該路由的重新導向，為什麼要設置它？因為我們如果直接點擊導覽列中的 <em>&lt;RouterLink to="/about"&gt;About&lt;/RouterLink&gt;</em>，路由會切換至 <b>AboutView.vue</b> 組件，可是該組件內容只剩下提供給嵌套路由渲染組件用的 <em>&lt;RouterView /&gt;</em>，所以當路由進入到 <b>/about</b>，畫面將是一片空白（因為沒有載入到其他嵌套路由，自然也就沒有內容可以顯示）。</p>
+        <p>因此，我們需要給 <b>/about</b> 一個重新導向的路由目標，讓使用者從任何管道進入該路由時能自動導向到指定的其他路由。在這個範例中，我們設置 <b>/about</b> 的 <em>redirect</em> 是 <b>/about/aaa</b>，當使用者觸發 <b>/about</b> 路由，網址會直接轉向到 <b>/about/aaa</b>。</p>
+        <p><br></p>
+        <p>本篇有關路由的基礎應用先寫到這裡，不過說是基礎，其實還有很多基礎方法都沒有說到，包含動態錄由，<em>push</em>、<em>replace</em>、<em>go</em> 方法的應用與差異，以及 <b>router/index.js</b> 設定檔中的 <em>history</em> 設定......等等，更別說其他像是 Navigation Guards 以及 Fetching API 等進階概念，可見 Vue Router 為 SPA 網頁應用設計所提供的幫助有多重要，由於現階段還在極新手階段，只練習幾個靜態路由需要的設定及模擬實務上會遇到的狀況，前面提到那些尚未觸及的運用，暫且留到日後再行介紹。</p>
+    </div>
+    <div class="text-block" id="act7">
+        <h2>七、參考資料</h2>
         <dl>
             <dd><a href="https://v4.vitejs.dev/" target="_blank">Vite</a></dd>
             <dd><a href="https://router.vuejs.org/zh/introduction.html" target="_blank">Vue Router 官方中文文件</a></dd>
             <dd><a href="https://www.youtube.com/watch?v=rNQIA0Fe9KQ&list=PLbOfcOk7bN42Kzp1wQsoLuU0vPUmFBe-X&index=1" target="_blank">Vue3 + Vite 快速上手 Get Startrd</a></dd>
+            <dd><a href="https://www.youtube.com/watch?v=lZk4peRTbdg" target="_blank">Vite 開發工具起步走～，開發 React、Vue 等 JS 框架新神器</a></dd>
         </dl>
     </div>
 </div>

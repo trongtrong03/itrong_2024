@@ -82,10 +82,10 @@
         <figure>
             <img src="/images/learn/js/vite-1-3.jpg">
         </figure>
-        <p>如果使用過別款打包工具或開發工具，對這樣的結構組成應該不陌生。不過目前這樣也僅僅只是建立好 Vite 本身的基礎設定而已，Node.js 用來管理各種工具與存放開發指額外自行安裝套件的 <b>node_modules</b> 資料夾並沒有在結構裡面，沒有它就無法執行專案開發過程所需的 <b>npm</b> 各項指令，所以我們需要再自行安裝它。</p>
+        <p>如果使用過別款打包工具或開發工具，對這樣的結構組成應該不陌生。不過目前這樣也僅僅只是建立好 Vite 本身的基礎設定而已，Node.js 用來管理各種工具與存放開發指額外自行安裝套件的 <b>node_modules/</b> 資料夾並沒有在結構裡面，沒有它就無法執行專案開發過程所需的 <b>npm</b> 各項指令，所以我們需要再自行安裝它。</p>
         <figure>
             <img src="/images/learn/js/vite-1-4.jpg">
-            <figcaption>在沒有 <b>node_modules</b> 資料夾的情況下直接執行 <b>npm</b> 指令會出現無法執行的警告訊息。</figcaption>
+            <figcaption>在沒有 <b>node_modules/</b> 資料夾的情況下直接執行 <b>npm</b> 指令會出現無法執行的警告訊息。</figcaption>
         </figure>
         <p>安裝指令：</p>
         <div class="text-code" v-pre>
@@ -114,7 +114,7 @@
     </div>
     <div class="text-block" id="act3">
         <h2>三、結構說明</h2>
-        <p>雖然執行完 Vite 與 <b>node_modules</b> 的安裝後就能順利進入開發編譯，但這還不是 Vite 這套工具的完全體，尚有許多環境與變數要調整設定、或安裝擴充套件來使整個 Vite 專案更飽滿。不過在那之前，我們先來了解一下 <em>npm create vite</em> 裝進來的檔案各自有什麼用途，以及它的 Vue 結構是怎麼樣建置的。</p>
+        <p>雖然執行完 Vite 與 <b>node_modules/</b> 的安裝後就能順利進入開發編譯，但這還不是 Vite 這套工具的完全體，尚有許多環境與變數要調整設定、或安裝擴充套件來使整個 Vite 專案更飽滿。不過在那之前，我們先來了解一下 <em>npm create vite</em> 裝進來的檔案各自有什麼用途，以及它的 Vue 結構是怎麼樣建置的。</p>
         <p>如果要轉成 MPA 當然也可以，不過我們需要自行手動調整結構，只是這部分不在本文章討論範圍內，所以暫時不作相關探討。</p>
         <figure>
             <img src="/images/learn/js/vite-1-8.jpg">
@@ -254,7 +254,7 @@ export default defineConfig({
                 <div class="f-row">
                     <div class="f-f1">★★★</div>
                     <div class="f-f3"><a href="https://www.npmjs.com/package/pinia" target="_blank" >pinia</a></div>
-                    <div class="f-f5">取代 vuex 成為 Vue3 最推薦的狀態管理工具。</div>
+                    <div class="f-f5">取代 vuex 成為 Vue 3 最推薦的狀態管理工具。</div>
                 </div>
                 <div class="f-row">
                     <div class="f-f1">★★☆</div>
@@ -279,7 +279,7 @@ export default defineConfig({
                 <div class="f-row">
                     <div class="f-f1">★★☆</div>
                     <div class="f-f3"><a href="https://www.npmjs.com/package/unplugin-auto-import" target="_blank" >unplugin-auto-import</a></div>
-                    <div class="f-f5">Vue3 hooks 自動 import。</div>
+                    <div class="f-f5">Vue 3 hooks 自動 import。</div>
                 </div>
                 <div class="f-row">
                     <div class="f-f1">★★☆</div>
@@ -325,7 +325,7 @@ export default defineConfig({
         <figure>
             <img src="/images/learn/js/vite-1-9.jpg">
         </figure>
-        <p>這樣就能完成 <b>plugin-legacy</b> 的安裝了，安裝進來的檔案會存放於 <b>node_modules</b> 資料夾中。除了安裝之外，還需要在設定檔把該套件引用進來，才能讓 Vite 知道要去使用這個套件，以及依照文件裡定義的參數去運作。以下是 <b>vite.config.js</b> 設置內容：</p>
+        <p>這樣就能完成 <b>plugin-legacy</b> 的安裝了，安裝進來的檔案會存放於 <b>node_modules/</b> 資料夾中。除了安裝之外，還需要在設定檔把該套件引用進來，才能讓 Vite 知道要去使用這個套件，以及依照文件裡定義的參數去運作。以下是 <b>vite.config.js</b> 設置內容：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-javascript">import legacy from '@vitejs/plugin-legacy'
 import { defineConfig } from 'vite'

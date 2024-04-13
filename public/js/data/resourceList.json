@@ -1936,5 +1936,27 @@
         "cover": true,
         "img": "genape",
         "type": ["ＡＩ生成"]
+    },
+    {
+        "id": 178,
+        "title": "Claude 3",
+        "desc": "Claude 是由 Anthropic 推出的 AI 模型，同時也是能與人類對話的 AI 互動服務。我們可以像使用 ChatGPT 一樣，直接從網站上與 Claude 互動，也能調用 Claude API，投入企業內部開發。Claude 擅長處理文字，可以生成包含文件、信件、問答等大量內容，也能夠編輯、重寫、摘要、分類這些內容。",
+        "href": "https://claude.ai/login?returnTo=%2F",
+        "article": false,
+        "path": "",
+        "cover": true,
+        "img": "claude",
+        "type": ["ＡＩ生成"]
+    },
+    {
+        "id": 179,
+        "title": "Gemini",
+        "desc": "Gemini Advanced 使用 Google 最強大的 AI 模型 Ultra 1.0。結合 Ultra 1.0 後，更能處理高難度的工作，像是寫程式、邏輯推理、遵從複雜指令及協助創作。除此之外，也將持續更新拓展服務，並提供專屬功能。",
+        "href": "https://gemini.google.com/advanced",
+        "article": false,
+        "path": "",
+        "cover": true,
+        "img": "gemini",
+        "type": ["ＡＩ生成"]
     }
 ]

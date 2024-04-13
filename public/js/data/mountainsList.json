@@ -21191,10 +21191,10 @@
         "application_m": false,
         "intro": "鰲峰山步道位於台中市清水區「鰲峰山公園」內，是大肚山台地最北側之山脈，擁有豐富地貌的自然景觀公園，大片草原、綠樹，以及運動健身設施，是當地人的運動及休憩場所。當地人稱做「虎頭崎古道」，是昔日後山居民來往清水大街的主要途徑。鰲峰山觀景平台是園區內最著名的地標，更是欣賞夕陽、夜景的最佳地點，擁有「百萬級夜景」的美名。",
         "notes": "",
-        "img": false,
+        "img": true,
         "gpx": "https://hiking.biji.co/index.php?q=trail&act=gpx_detail&id=2636559",
-        "finish": false,
-        "fDate": "",
+        "finish": true,
+        "fDate": "2024-04-03",
         "article": "",
         "aLink": ""
     },

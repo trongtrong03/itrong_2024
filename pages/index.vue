@@ -162,6 +162,15 @@
         });
     };
 
+    onBeforeMount(() => {
+        funcAOS();
+    });
+
+    onUpdated(() => {
+        funcAOS();
+    });
+
+
     /* scroll down button */
     const scrollDown = () => {
         const scrollDownButton = document.getElementById("scrollDown");
@@ -172,6 +181,10 @@
         });
     };
 
+    onMounted(() => {
+        scrollDown();
+    });
+
     /* 視差滾動 */
     const parallax = () => {
         if (typeof Parallax !== 'undefined') {
@@ -181,6 +194,14 @@
             });
         }
     };
+
+    onMounted(() => {
+        parallax();
+    });
+
+    onUpdated(() => {
+        parallax();
+    });
 
     /* 圖片跑馬燈 */
     const marquee = () => {
@@ -199,19 +220,7 @@
         });
     }
 
-    // 生命鉤子
-    onBeforeMount(() => {
-        funcAOS();
-    });
-
     onMounted(() => {
-        scrollDown();
-        parallax();
         marquee();
-    });
-
-    onUpdated(() => {
-        funcAOS();
-        parallax();
     });
 </script>

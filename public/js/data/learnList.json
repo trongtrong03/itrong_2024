@@ -466,7 +466,7 @@
     {
         "id": 59,
         "href": "vue_vite_1",
-        "title": "我的 Vite 學習使用指南（一）：介紹＆安裝",
+        "title": "我的 Vite 學習使用指南（一）：介紹與安裝",
         "time": "2024-03-12",
         "type": "javascript",
         "class": "vite"
@@ -482,33 +482,65 @@
     {
         "id": 61,
         "href": "vue_vite_3",
-        "title": "我的 Vite 學習使用指南（四）：CSS 與 Sass",
+        "title": "我的 Vite 學習使用指南（三）：CSS 與預處理器",
         "time": "2024-03-17",
         "type": "javascript",
         "class": "vite"
     },
     {
-        "id": 63,
-        "href": "vue_vite_4",
-        "title": "我的 Vite 學習使用指南（五）：Pinia",
-        "time": "2024-03-20",
+        "id": 62,
+        "href": "vue3_learn_1",
+        "title": "循序漸進學 Vue3（一）：從入門開始",
+        "time": "2024-01-02",
         "type": "javascript",
-        "class": "vite"
+        "class": "vue"
+    },
+    {
+        "id": 63,
+        "href": "vue3_learn_2",
+        "title": "循序漸進學 Vue3（二）：響應式資料定義 ref＆reactive",
+        "time": "2024-01-04",
+        "type": "javascript",
+        "class": "vue"
     },
     {
         "id": 64,
-        "href": "vue_vite_5",
-        "title": "我的 Vite 學習使用指南（六）：建構打包",
-        "time": "2024-03-24",
+        "href": "vue3_learn_3",
+        "title": "循序漸進學 Vue3（三）：計算屬性 computed",
+        "time": "2024-01-07",
         "type": "javascript",
-        "class": "vite"
+        "class": "vue"
     },
     {
         "id": 65,
-        "href": "vue_vite_7",
-        "title": "我的 Vite 學習使用指南（七）：create-vue",
-        "time": "2024-03-28",
+        "href": "vue3_learn_4",
+        "title": "循序漸進學 Vue3（四）：監視屬性 watch",
+        "time": "2024-01-08",
         "type": "javascript",
-        "class": "vite"
+        "class": "vue"
+    },
+    {
+        "id": 66,
+        "href": "vue3_learn_5",
+        "title": "循序漸進學 Vue3（五）：自動執行的響應式副作用 watchEffect",
+        "time": "2024-01-10",
+        "type": "javascript",
+        "class": "vue"
+    },
+    {
+        "id": 67,
+        "href": "vue3_learn_6",
+        "title": "循序漸進學 Vue3（六）：元素標籤的 ref 屬性",
+        "time": "2024-01-17",
+        "type": "javascript",
+        "class": "vue"
+    },
+    {
+        "id": 68,
+        "href": "vue3_learn_7",
+        "title": "循序漸進學 Vue3（七）：組件之間的傳遞 props",
+        "time": "2024-01-19",
+        "type": "javascript",
+        "class": "vue"
     }
 ]
