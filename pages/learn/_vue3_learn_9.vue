@@ -7,9 +7,10 @@
         <ul>
             <li><a href="#act0">序、前言</a></li>
             <li><a href="#act1">一、路由基本切換</a></li>
-            <li><a href="#act2">二、如何辨別路由組件與一般組件</a></li>
-            <li><a href="#act3">三、XXXX</a></li>
-            <li><a href="#act4">四、參考資料</a></li>
+            <li><a href="#act2">二、辨別路由組件與一般組件</a></li>
+            <li><a href="#act3">三、路由器的工作模式</a></li>
+            <li><a href="#act4">四、to 屬性寫法與路由命名</a></li>
+            <li><a href="#act5">五、參考資料</a></li>
         </ul>
     </div>
     <div class="text-block" id="act0">
@@ -158,6 +159,7 @@ app.mount('#app');</code></pre>
 &lt;/header&gt;</code></pre>
         </div>
         <p>當然要堅持使用原生 HTML 的 <em>&lt;a&gt;</em> 也不是不行，只是這樣會失去使用 Vue Router 的好處。</p>
+        <p><br></p>
         <h5>修改展示區塊的標籤內容：</h5>
         <p>在原本規劃用來展示各組件內容的 <em>main</em> 元素標籤裡，加上 <em>&lt;RouterView/&gt;</em> 標籤：</p>
         <div class="text-code" v-pre>
@@ -193,15 +195,118 @@ app.mount('#app');</code></pre>
         <p>這樣即使沒有畫箭頭示意，也能明確看出目前展示的內容是來自於哪一個頁面路由導航。</p>
     </div>
     <div class="text-block" id="act2">
-        <h2>二、如何辨別路由組件與一般組件</h2>
+        <h2>二、辨別路由組件與一般組件</h2>
+        <p>簡單扼要來說，要分辨使用的組件究竟是哪一種，最通俗直接的方法就是那些需要手動寫在標籤裡引用的都可以稱為一般組件，比如有一個 <b>SearchResult.vue</b> 組件，如果要引用它的方式是 <em>&lt;SearchResult/&gt;</em>，那便是一般組件。而路由組件不是經過標籤去實現，而是依靠路由規則所渲染出來的，比如在路由設定文件裡設定：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-javascript">import Products from "../components/Products.vue";
+const router = createRouter({
+    routes: [
+        {
+            path: "/products",
+            component: Products
+        },
+    ]
+});</code></pre>
+        </div>
+        <p>那麼這個 <b>Products.vue</b> 則稱為路由組件。</p>
+        <p>但是實務開發專案的時候會盡量把路由組件和一般組件分開管理以避免混淆，路由組件通常會存放在 <b>pages/</b> 或 <b>view/</b> 資料夾，而一般組件則通常指的是放置在 <b>components</b> 裡的組件。雖說這樣的資料夾命名和分類不是絕對，不過我們所使用的框架及工具，以及像 GitHub 這類可以看到其他開發者或團隊公開的開源程式碼，大多數也都是按照這樣的標準來管理組件。</p>
+        <p>於是原先我們範例中的組件結構：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-bash">src
+├── components
+│    ├── About.vue
+│    ├── Header.vue
+│    ├── Home.vue
+│    └── News.vue
+└── App.vue</code></pre>
+        </div>
+        <p>（<b>Header.vue</b> 是後來把 <em>&lt;header&gt;</em> 結構獨立拉出來建立的一個子組件）</p>
+        <p>按照上述的常見的架構規劃，將路由與一般組件歸納為：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-bash">src
+├── components
+│    └── Header.vue
+├── pages
+│    ├── About.vue
+│    ├── Home.vue
+│    └── News.vue
+└── App.vue</code></pre>
+        </div>
+        <p>歸類好後記得回頭更改路由設定文件裡的路徑位置。</p>
+    </div>
+    <div class="text-block" id="act3">
+        <h2>三、路由器的工作模式</h2>
+        <p>之前有提到，如果要讓路由器能順利運作，必須在 <em>createRouter</em> 設定它的工作模式：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-javascript">history: createWebHistory(),</code></pre>
+        </div>
+        <p>假如沒有設定工作模式，瀏覽器就無法順利渲染畫面，同時會回報錯誤警告：</p>
+        <blockquote class="is-error">
+            <p>Uncaught Error: Provide the "history" option when calling "createRouter()": https://next.router.vuejs.org/api/#history.</p>
+        </blockquote>
+        <p>它的意思是在創建路由器（router）時，必須提供一個名為 <em>history</em> 的選項，這是因為 Vue Router 需要知道應該如何管理應用程序的路由歷史記錄。</p>
+        <p>Vue Router 有兩種工作模式，分別是 History 與 Hash 模式。</p>
+        <p><br></p>
+        <h3>History：</h3>
+        <div class="text-code" v-pre>
+            <pre><code class="language-javascript">history: createWebHistory(),</code></pre>
+        </div>
+        <h5>優點：</h5>
+        <p>URL 較美觀，不會有 <em>#</em> 字符，較貼近傳統網站的 URL，例如：itrong.com/about，對 SEO 相對友善。</p>
+        <h5>缺點：</h5>
+        <p>網站正式上線時可能需要伺服器端配合處理路徑問題，否則重新整理網頁可能會產生 404 錯誤。</p>
+        <p><br></p>
+        <h3>Hash：</h3>
+        <div class="text-code" v-pre>
+            <pre><code class="language-javascript">history: createWebHashHistory(),</code></pre>
+        </div>
+        <h5>優點：</h5>
+        <p>相容性較佳，即使是舊瀏覽器也能正常運作，同時亦不太需要伺服器端處理路徑問題。</p>
+        <h5>缺點：</h5>
+        <p>URL 會夾帶 <em>#</em> 字符，看上去相對比較不美觀，例如：itrong.com/#/about，且 SEO 優化也會比較差。</p>
+        
+
         
     </div>
-    
     <div class="text-block" id="act4">
-        <h2>四、參考資料</h2>
+        <h2>四、to 屬性寫法與路由命名</h2>
+        <p>使用 <em>&lt;RouterLink&gt;</em> 實作路由導航，會透過 <em>to</em> 屬性設定該導航項目指向的組件路徑，譬如：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-html">&lt;RouterLink to="/about"&gt;About&lt;/RouterLink&gt;</code></pre>
+        </div>
+        <p>而除了直接給予路徑這種字串型別寫法外，還有另外一種物件型別式的寫法，搭配 v-bind 使用：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-html">&lt;RouterLink :to="{ path:'/about' }"&gt;About&lt;/RouterLink&gt;</code></pre>
+        </div>
+        <p>這種寫法又可以衍生出為路由定義名稱後直接引用名稱的方式：</p>
+        <p><b>router/index.ts</b>：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-javascript">const router = createRouter({
+    routes: [
+        {
+            name: "關於我們",
+            path: "/about",
+            component: About
+        },
+    ]
+});</code></pre>
+        </div>
+        <p>組件 RouterLink 引用：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-html">&lt;RouterLink :to="{ name: '關於我們' }"&gt;About&lt;/RouterLink&gt;</code></pre>
+        </div>
+        <p>在網頁只需要一層路由的情況下，使用純字串定義路由導航通常沒什麼問題，不過如果網站的路由有多個嵌套，就會比較需要物件型別式的寫法了。</p>
+    </div>
+    <div class="text-block" id="act5">
+        <h2>五、參考資料</h2>
         <dl>
             <dd><a href="https://cn.vuejs.org/" target="_blank">Vue.js</a></dd>
-            <dd><a href="https://www.youtube.com/watch?v=49b150tKIUc&list=PLmOn9nNkQxJEnGM4Jf0liBcyedAtuQq-O&index=29" target="_blank">【极简Vue3】029 自定义hooks</a></dd>
+            <dd><a href="https://www.youtube.com/watch?v=49b150tKIUc&list=PLmOn9nNkQxJEnGM4Jf0liBcyedAtuQq-O&index=30" target="_blank">【极简Vue3】030 对路由的理解</a></dd>
+            <dd><a href="https://www.youtube.com/watch?v=49b150tKIUc&list=PLmOn9nNkQxJEnGM4Jf0liBcyedAtuQq-O&index=31" target="_blank">【极简Vue3】031 路由 基本切换效果</a></dd>
+            <dd><a href="https://www.youtube.com/watch?v=49b150tKIUc&list=PLmOn9nNkQxJEnGM4Jf0liBcyedAtuQq-O&index=32" target="_blank">【极简Vue3】032 路由 两个注意点</a></dd>
+            <dd><a href="https://www.youtube.com/watch?v=49b150tKIUc&list=PLmOn9nNkQxJEnGM4Jf0liBcyedAtuQq-O&index=33" target="_blank">【极简Vue3】033 路由 路由器工作模式</a></dd>
+            <dd><a href="https://www.youtube.com/watch?v=49b150tKIUc&list=PLmOn9nNkQxJEnGM4Jf0liBcyedAtuQq-O&index=34" target="_blank">【极简Vue3】034 路由 to的两种写法</a></dd>
+            <dd><a href="https://www.youtube.com/watch?v=49b150tKIUc&list=PLmOn9nNkQxJEnGM4Jf0liBcyedAtuQq-O&index=35" target="_blank">【极简Vue3】035 路由 命名路由</a></dd>
         </dl>
     </div>
 </div>

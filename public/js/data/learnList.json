@@ -554,8 +554,16 @@
     {
         "id": 70,
         "href": "vue3_learn_9",
-        "title": "循序漸進學 Vue3（九）：路由 route",
+        "title": "循序漸進學 Vue3（九）：路由基本概念",
         "time": "2024-01-23",
+        "type": "javascript",
+        "class": "vue"
+    },
+    {
+        "id": 71,
+        "href": "vue3_learn_10",
+        "title": "循序漸進學 Vue3（十）：路由嵌套與傳遞參數（query）",
+        "time": "2024-01-24",
         "type": "javascript",
         "class": "vue"
     }
