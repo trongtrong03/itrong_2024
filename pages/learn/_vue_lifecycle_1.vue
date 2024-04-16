@@ -35,7 +35,7 @@
         </figure>
         <p>序章曾經提到，Vue 生命週期包含各自不同階段執行程式的「生命週期鉤子（Lifecycle Hooks）」，Vue1.0 主要有六個鉤子函式，分別是 <em>created</em>、<em>beforeCompile</em>、<em>compile</em>、<em>ready</em>、<em>beforeDestory</em>、<em>destoryed</em>，也就是上圖中紅框底紅字的項目。</p>
         <p><br></p>
-        <h3><em>created</em></h3>
+        <h3>created</h3>
         <p>在 Vue 實例創建完成後立即同步調用。此時實例通常已經完成「數據觀測」（Observe Data）、「事件初始化」（Init Events）、數據綁定、計算屬性、方法、watcher / 事件回調等解析工作，但是還沒有開始執行 DOM 的編譯，因此看不到 <em>el</em> 和 <em>$el</em> 屬性的存在。</p>
         <p><strong><em>el</em> 和 <em>$el</em> 是什麼？</strong></p>
         <p>首先，<em>el</em> 是 Vue 實例裡其中一個選項屬性，主要用於指定該實例要「渲染」（或稱「掛載」）到 DOM 的哪一個元素。舉例來說：</p>
@@ -63,24 +63,24 @@ var element = vm.$el;
         </div>
         <p><em>vm.$el</em> 將會引用 <em>#app</em> 所在的 DOM 元素，簡單來說就是方便我們在進行 DOM 互動事件時可以更方便、簡潔地去引用 Vue 實例。</p>
         <p><br></p>
-        <h3><em>beforeCompile</em></h3>
+        <h3>beforeCompile</h3>
         <p>Compile 一詞翻譯成中文是「編譯」的意思，所以 <em>beforeCompile</em> 指的是在編譯之前的鉤子函式。在這個鉤子裡面的程式會在模板（Template）編譯開始前被調用，不過在這個階段除了模板編譯還沒開始外，DOM 其實也仍處於尚未被渲染生成的狀態。</p>
         <figure>
             <img src="/images/learn/js/vue-lifecycle-2.jpg">
         </figure>
         <p>在 <em>beforeCompile</em> 進入 <em>compile</em> 階段這之間，Vue 實例會開始解析模板，並生成在虛擬的 DOM 記憶體裡，因為是虛擬的，所以瀏覽器實際畫面仍未能顯示解析的內容。</p>
         <p><br></p>
-        <h3><em>compile</em></h3>
+        <h3>compile</h3>
         <p>編譯完成後立即調用裡面的程式。通常在這個階段時所有指令都已生效，因此像是數據的變化都將會觸發 DOM 的更新，然而即便如此，此階段還不能保證 <em>$el</em> 也已經渲染到 DOM 裡面。</p>
         <p><br></p>
-        <h3><em>ready</em></h3>
+        <h3>ready</h3>
         <p>根據官方文件的解釋，<em>ready</em> 會在編譯結束和 <em>$el</em> 首次渲染至 DOM 後調用，例如銜接在第一次 <em>attached</em> 鉤子之後。雖然生命週期圖表裡沒有 <em>attached</em>，但 <em>attached</em> 也是生命週期中的其中一個鉤子，它的呼叫時間點主要在 <em>vm.$el</em> 渲染進 DOM 之後，但有個前提，必須是由 Vue 指令或實例方法（例如 <em>$appendTo()</em>）插入才會觸發，直接針對 <em>vm.$el</em> 操作並無法觸發這個鉤子。</p>
         <p><br></p>
-        <h3><em>beforeDestory</em></h3>
+        <h3>beforeDestory</h3>
         <p>Destory 是銷毀的意思，如此一來 <em>beforeDestory</em> 意思就不難懂了，指的就是實例開始銷毀前調用的函式，而此時實例仍保有目前的功能。</p>
         <p>因此，<em>beforeDestory</em> 階段通常會執行一些資源清理的工作，譬如取消計時器、解除事件監聽器、銷毀子組件......等等。</p>
         <p><br></p>
-        <h3><em>destoryed</em></h3>
+        <h3>destoryed</h3>
         <p><em>destoryed</em> 是 Vue 實例生命週期的最後一站，它會在實例被銷毀後才調用，此時實例中的所有指令都已經解除綁定，裡面的子組件也已通通被銷毀。</p>
         <p>通常情況下，<em>destoryed</em> 鉤子在這個階段大多用來執行記憶體釋放之類的最終清理動作，和 <em>beforeDestory</em> 的主要差別在於實例進入銷毀階段的執行時機。</p>
     </div>
@@ -92,7 +92,7 @@ var element = vm.$el;
         </figure>
         <p>仔細看會發現原本 1.0 生命週期中的 <em>compile</em>、<em>ready</em> 等鉤子不見了，取而代之的則是 <em>mounted</em>，此外還新增了 <em>updated</em> 這個新的鉤子函式。在這裡我將 2.0 版的生命週期拆成各個執行階段，一邊重新複習 Vue 實例生命週期，一邊認識 2.0 版本修改及新增的鉤子函式其具體用途：</p>
         <p><br></p>
-        <h3><em>beforeCreate</em>、<em>created</em></h3>
+        <h3>beforeCreate、created</h3>
         <figure>
             <img src="/images/learn/js/vue-lifecycle-4.jpg">
         </figure>
@@ -105,7 +105,7 @@ var element = vm.$el;
         <figure>
             <img src="/images/learn/js/vue-lifecycle-6.jpg">
         </figure>
-        <h3><em>beforeMount</em></h3>
+        <h3>beforeMount</h3>
         <p><em>beforeMount</em> 鉤子裡的程式會在 Vue 實例開始渲染到 DOM 之前被觸發，在這個階段通常會執行一些資料數據請求、DOM 操作準備之類的預請求動作。緊接其之後 Vue 實例就會將生成在虛擬記憶體裡的模板正式掛載到實體的 DOM 畫面上：</p>
         <blockquote>Create vm.$el and replace "el" with it</blockquote>
         <p>以下將這段話透過程式碼範例逐步解釋 <em>vm.$el</em> 創建與取代的過程：</p>
@@ -138,7 +138,7 @@ var element = vm.$el;
         <h6>3. 取代 <em>el</em> 屬性：</h6>
         <p>一旦 Vue 實例建立完成且也渲染到 DOM 時，<em>vm.$el</em> 就會取代 <em>el</em> 屬性，變成我們在瀏覽器畫面上看到的樣子。這個過程是由 Vue.js 自行處理的，我們不需要手動去呼叫或更改它。</p>
         <p><br></p>
-        <h3><em>mounted</em></h3>
+        <h3>mounted</h3>
         <p>此時 DOM 已經編譯出 Vue 實例的內容（<em>vm.$el</em> 已替換掉 <em>el</em>），<em>mounted</em> 裡頭對 DOM 的操作基本上已可生效，在這個階段大多執行除了前面提到的 DOM 操作事件（例如新增、修改、刪除元素屬性、樣式或內容）外，以及請求數據、呼叫事件監聽器（例如偵測滑鼠滾動事件、鍵盤偵測等）、啟動計時器、初始化第三方插件、執行動畫或過渡效果......等任務，又或者向其他組件發送事件或調用方法。</p>
         <p>然而，<em>mounted</em> 並不能保證 Vue 實例中的子組件也都被渲染完成，因此有些操作方法可能無法正確地被執行，假如我們希望等整個 DOM 都渲染完成在執行某些任務，可以在 <em>mounted</em> 鉤子內使用 vm.$nextTick 函式。</p>
         <p>例如：</p>
@@ -153,12 +153,12 @@ var element = vm.$el;
         <figure>
             <img src="/images/learn/js/vue-lifecycle-8.jpg">
         </figure>
-        <h3><em>beforeUpdate</em></h3>
+        <h3>beforeUpdate</h3>
         <p>還記得先前曾說 Vue 是由資料驅動畫面嗎？當組件的數據資料發生變化時，Vue 會重新渲染組件以反映這些變化，而 Vue2.0 引入 <em>beforeUpdate</em> 和 <em>updated</em> 這兩個生命週期鉤子的用意是為了更好地控制組件的更新過程，而不必全然依賴 Vue 默認的渲染行為。</p>
         <p>誠如 <em>beforeCreate</em> 之於 <em>created</em>、<em>beforeMount</em> 之於 <em>mounted</em> 的關係，<em>beforeUpdate</em> 鉤子會在組件開始要重新渲染之前被觸發，通常在這個階段我們可以做一些備份數據資料、更新前的清理執行，或異步操作等。異步操作像是透過網路向伺服器端請求數據（利用 AJAX、Fetch API 或 Axios 等）、設置計時器、執行動畫......等。</p>
         <p>不過需要注意的是，由於 Vue 在 <em>beforeUpdate</em> 鉤子執行後仍會繼續計算新的虛擬 DOM，若我們在這期間執行上述異步操作行為且會影響到組件的數據狀態，是有可能出現一些意外狀況，所以必須謹慎處理。</p>
         <p><br></p>
-        <h3><em>updated</em></h3>
+        <h3>updated</h3>
         <p><em>updated</em> 生命週期鉤子會在組件重新渲染完成後被觸發，這時表示組件已經更新且也與 DOM 同步更新完成（意即數據和頁面都是新的並保持同步），在這個階段我們可以執行一些與更新後的 DOM 相關操作，譬如透過 JavaScript 取得指定的元素、執行動畫效果......等。</p>
         <p>然而，Vue 官方並不建議在 <em>updated</em> 裡進行一些會使數據發生變化的操作，這主要出自以下兩個理由：</p>
         <p>1. 不必要的性能消耗：<br>因為 <em>updated</em> 是在組件完成更新後觸發的，這意味著組件的 DOM 也已經同步更新完成，若我們又在 <em>updated</em> 再次更改數據的狀態，那麼又會觸發另一輪組件的更新，導致重新渲染進而產生不必要的性能消耗，包含 CPU、記憶體、網路......都有可能。</p>
@@ -177,7 +177,7 @@ var element = vm.$el;
         <figure>
             <img src="/images/learn/js/vue-lifecycle-9.jpg">
         </figure>
-        <h3><em>beforeDestroy</em>、<em>destroyed</em></h3>
+        <h3>beforeDestroy、destroyed</h3>
         <p>Vue2.0 實例銷毀階段與 1.0 版本雷同，<em>beforeDestroy</em> 會在 Vue 實例銷毀前被調用，因為是在銷毀前，此時 Vue 實例裡面的組件仍然在運作中，我們可以做一些關閉監視器、計時器取消、解除事件綁定之類的清理工作，以防止記憶體洩漏或不必要的資源占用。</p>
         <p><em>destroyed</em> 則在 Vue 實例完全銷毀後才被呼叫，在這個生命週期鉤子裡，Vue 實例已完全被銷毀，我們已無法訪問 DOM 裡頭的元素，以及組件裡的數據和方法，因此通常在這個鉤子裡執行的也會是一些額外的清理動作。</p>
     </div>
@@ -285,7 +285,7 @@ var element = vm.$el;
         </div>
         <p>由於 Vue 會在內部自動處理整個生命週期過程，所以即便我們這時還沒有添加任何生命週期鉤子，Vue 也已自行編譯完成並將 <em>vm.$el</em> 渲染到 DOM 指定的 <em>el</em>（<em>#app</em>），因此光是這樣簡單一個範例，我們就已經能在畫面上看到 Hello! Vue 的字樣。</p>
         <p><br></p>
-        <h3><em>beforeCreate</em>：</h3>
+        <h3>beforeCreate：</h3>
         <p>此時 Vue 實例還在初始化階段，尚未實際被建立，因此實例裡任何數據和方法都還沒有開始綁定。</p>
         <div class="text-code" v-pre>
             <pre><code class="language-javascript">var vm = new Vue({
@@ -306,7 +306,7 @@ var element = vm.$el;
 // this.$el: undefined</code></pre>
         </div>
         <p><br></p>
-        <h3><em>created</em>：</h3>
+        <h3>created：</h3>
         <p>在這個階段實例已經建立好了，實例裡頭的數據和方法已可被取得，但 <em>$el</em> 仍未渲染到 DOM 裡面，因此 Console 它依然是 <em>undefined</em>：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-javascript">var vm = new Vue({
@@ -320,13 +320,13 @@ var element = vm.$el;
     }
 });</code></pre>
         </div>
-        <h3><em>created</em>：</h3>
+        <h3>created：</h3>
         <div class="text-code" v-pre>
             <pre><code class="language-javascript">// this.message: Hello! Vue
 // this.$el: undefined</code></pre>
         </div>
         <p><br></p>
-        <h3><em>beforeMount</em>：</h3>
+        <h3>beforeMount：</h3>
         <p>Vue 實例在這時已從虛擬 DOM 中渲染至實體 DOM 上，<em>$el</em> 已經可以取得 <em>el</em> 指定的 DOM 元素，只是 data 裡面的數據還沒完全轉換到 DOM 裡面。</p>
         <div class="text-code" v-pre>
             <pre><code class="language-javascript">var vm = new Vue({
@@ -348,7 +348,7 @@ var element = vm.$el;
 // &lt;div id="app"&gt;{{ message }}&lt;/div&gt;</code></pre>
         </div>
         <p><br></p>
-        <h3><em>mounted</em>：</h3>
+        <h3>mounted：</h3>
         <p>在調用 <em>mounted</em> 生命週期鉤子時，原本實例裡的內容已經綁定到 DOM 元素，所以基本上到這個階段能看到 Vue 實例完整的樣貌。</p>
         <div class="text-code" v-pre>
             <pre><code class="language-javascript">var vm = new Vue({
@@ -370,7 +370,7 @@ var element = vm.$el;
 // &lt;div id="app"&gt;Hello! Vue&lt;/div&gt;</code></pre>
         </div>
         <p><br></p>
-        <h3><em>beforeUpdate</em>：</h3>
+        <h3>beforeUpdate：</h3>
         <p>在來 <em>beforeUpdate</em> 和 <em>updated</em> 這兩個鉤子的用途主要是應對實例裡的數據發生變化時而調用，為了產生變化效果，我們需要於範例 HTML 程式結構中增設一個按鈕以方便我們去改變 <em>message</em> 的值：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-html">&lt;div id="app"&gt;
@@ -400,7 +400,7 @@ var element = vm.$el;
         </div>
         <p>因為鉤子名稱中帶有「before」，所以是在 <em>updated</em> 更新 DOM 階段之前被觸發，因此會看到 <em>message</em> 的值是被更新了，但還沒同步到 DOM 的畫面上。</p>
         <p><br></p>
-        <h3><em>updated</em>：</h3>
+        <h3>updated：</h3>
         <p>看完上一個 <em>beforeUpdate</em> 的解釋和執行結果，相信不必說太多，腦子裡大概也浮現結果了吧？我們直接看範例：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-javascript">var vm = new Vue({
@@ -423,7 +423,7 @@ var element = vm.$el;
         </div>
         <p>DOM 畫面上的 <em>message</em> 已經從原本的 Hello! Vue 更新成 New world! 值了。</p>
         <p><br></p>
-        <h3><em>beforeDestroy</em>、<em>destroyed</em>：</h3>
+        <h3>beforeDestroy、destroyed：</h3>
         <p>最後是有關銷毀 Vue 實例的兩個鉤子放在一起講，它們代表一個 Vue 實例生命週期的結束。有些人可能會以為銷毀也意味著該實例也會從 DOM 移除，其實不然，舉例來說：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-html">&lt;div id="app"&gt;

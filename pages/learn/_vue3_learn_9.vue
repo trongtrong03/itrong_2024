@@ -1,0 +1,217 @@
+<template>
+    <NuxtLayout name="article">
+        <TempArticle :propValue="70" fileType="learnList" />
+<!-- start -->
+<div class="text-content">
+    <div class="text-catalog">
+        <ul>
+            <li><a href="#act0">序、前言</a></li>
+            <li><a href="#act1">一、路由基本切換</a></li>
+            <li><a href="#act2">二、如何辨別路由組件與一般組件</a></li>
+            <li><a href="#act3">三、XXXX</a></li>
+            <li><a href="#act4">四、參考資料</a></li>
+        </ul>
+    </div>
+    <div class="text-block" id="act0">
+        <h2>序、前言</h2>
+        <p>路由是一種網路設備或軟體的功能，用於將資料包從一個網路傳輸到另一個網路。它決定資料包應該通過哪條路徑進行傳輸，以確保它們能夠到達目的地。</p>
+        <p>用來管理路由的設備就叫路由器，它們在網路中幫助不同裝置連接不同的網路並管理資料流量的傳輸。路由器透過查看封包中的目標位址，並根據預先配置的路由表來決定最佳路徑。這樣，它們可以將封包從發送方傳送到接收方，即使這兩者位於不同的網路中也可以實現。</p>
+        <p>用說的不好咀嚼，直接看示意圖會比較快一些：</p>
+        <figure>
+            <img src="/images/learn/js/vue3-learn-9-1.jpg">
+        </figure>
+        <p>而在網頁前後端的技術中也有所謂的路由，概念和網際網路的路由有些相像，只不過路由器的接口變成了「Key」，而銜接的每一台設備則是「Value」。因此，上面這張圖如果要用來詮釋網頁應用的路由示意，就會是：</p>
+        <figure>
+            <img src="/images/learn/js/vue3-learn-9-2.jpg">
+        </figure>
+        <p>所以，站在網頁程式語言的角度來看，路由（route）指的是一組 key 與 value 的對應關係，若存在多組路由，則需要經過路由器（router）的管理。那麼，網頁為什麼會需要路由？其實主要是為了實現 SPA 單頁式網頁應用，用來切換不同資訊的頁面內容。至於具體如何設定、有哪些功能，以及其它一些相關知識，本篇文章將逐一進行探討。</p>
+    </div>
+    <div class="text-block" id="act1">
+        <h2>一、路由基本切換</h2>
+        <p>我們首先要知道 Vue.js 實現 SPA 路由導航需要有哪些東西：</p>
+        <ol>
+            <li>導航區塊、展示區塊</li>
+            <li>路由器</li>
+            <li>路由的規則（什麼路徑、對應什麼組件）</li>
+            <li>形成之組件（.vue）</li>
+        </ol>
+        <p>網頁路由建構的第一步必須要先規劃好放置路由項目的導航區塊，以及展示各個功能的內容區塊。所以我們在根組件 <b>App.vue</b> 建立以下內容：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-html">&lt;template&gt;
+    &lt;!-- 導航區塊 --&gt;
+    &lt;header&gt;
+        &lt;nav&gt;
+            &lt;a href=""&gt;Home&lt;/a&gt;
+            &lt;a href=""&gt;About&lt;/a&gt;
+            &lt;a href=""&gt;News&lt;/a&gt;
+        &lt;/nav&gt;
+    &lt;/header&gt;
+    &lt;!-- 展示區塊 --&gt;
+    &lt;main&gt;
+    &lt;/main&gt;
+&lt;/template&gt;</code></pre>
+        </div>
+        <p>導航區塊的部分，我先設置了三個導航項目，分別是「Home」、「About」、「News」，它們分別對應網頁的首頁、關於我們、最新消息這三個資訊頁面。而 <em>&lt;main&gt;</em> 則是預計要用來放置上述資訊內容的展示區塊，目前則還沒有任何內容。</p>
+        <p>再來要安裝路由器，Vue.js 本身有提供一款名叫 Vue Router 用來處理路由相關設定的第三方套件，如果是使用 Vite 來開發 Vue 3，那麼在最一開始創建專案的時候系統就會詢問是否要安裝 Vue Router，假如當時沒有選擇安裝的話，也可以透過 NPM 指令安裝到專案裡：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-bash">npm i vue-router</code></pre>
+        </div>
+        <p>安裝完成後，手動在 <b>src/</b> 資料夾建立 <b>router/</b> 資料夾，並且新增一個 <b>index.ts</b> 文件。</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-bash">src
+└── router
+    └── index.ts</code></pre>
+        </div>
+        <p>這個文件就是用來管理整個網頁應用的路由設定，進入該文件執行以下兩件事情：創建一個路由器，並且將其導出。</p>
+        <p>但在創建之前，必不可少的就是要先把 Vue Router 引用進來：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-javascript">import { createRouter } from "vue-router";</code></pre>
+        </div>
+        <p>創建路由器，語法格式為：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-javascript">const router = createRouter({
+    routes: []
+});</code></pre>
+        </div>
+        <p>可以將這個函式理解為創建路由器（<em>router</em>），以用來管理眾多路由（<em>routes</em>），因此需要透過陣列來存放各個路由的資料。前面有提過，路由是一個 key 值與 value 值的對應關係，因此每一組路由都是獨立的物件，且至少會有兩個屬性，分別是 <em>path</em> 與 <em>component</em>，<em>path</em> 表示路徑，<em>component</em> 則表示來源組件。例如：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-javascript">import Home from "../components/Home.vue";
+
+const router = createRouter({
+    routes: [
+        {
+            path: "/home",
+            component: Home
+        }
+    ]
+});</code></pre>
+        </div>
+        <p>倘如工作環境是使用 VS Code 開發 Vue，且也有安裝相關擴充套件輔助，不用等到網頁渲染，這時編輯器應該已經為上述程式碼劃上了象徵警告的紅色波浪線，原因是我們並沒有設定路由的工作模式（關於工作模式的詳細介紹後面章節會再說明），所以必須再加上這段：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-javascript">import { createRouter, createWebHistory } from "vue-router";
+import Home from "../components/Home.vue";
+
+const router = createRouter({
+    history: createWebHistory(),
+    routes: [
+        {
+            path: "/home",
+            component: Home
+        }
+    ]
+});</code></pre>
+        </div>
+        <p>路由設定完後，別忘記最後要將程式碼導出，否則其他檔案無法取得這支文件裡面的函式內容：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-javascript">export default router;</code></pre>
+        </div>
+        <p>連同另外兩個功能的路由，以下展示完整的路由設定檔的程式碼結構：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-javascript">import { createRouter, createWebHistory } from "vue-router";
+import Home from "../components/Home.vue";
+import About from "../components/About.vue";
+import News from "../components/News.vue";
+
+const router = createRouter({
+    history: createWebHistory(),
+    routes: [
+        {
+            path: "/home",
+            component: Home
+        },
+        {
+            path: "/about",
+            component: About
+        },
+        {
+            path: "/news",
+            component: News
+        }
+    ]
+});
+
+export default router;</code></pre>
+        </div>
+        <p>再來是要讓這個路由文件運作，打開 <b>main.ts</b>，把路由器引入進去：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-javascript">import router from './router'</code></pre>
+        </div>
+        <p>原本下方 <em>createApp(App).mount('#app')</em> 這行意思是創建一個應用並將整個應用掛載到 <em>#app</em> 容器中，因為需要多調用 <em>router</em> 功能，所以得重新改寫架構：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-javascript">const app = createApp(App);
+app.use(router);
+app.mount('#app');</code></pre>
+        </div>
+        <p>最後一步是把各組件內容呈現在展示區，以及修改導航路由標籤。回到 <b>App.vue</b>，分別引用「RouterLink」、「RouterView」功能：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-javascript">import { RouterLink, RouterView } from 'vue-router'</code></pre>
+        </div>
+        <h5>修改導航區塊的標籤內容：</h5>
+        <p>最一開始我們於導航區塊的連結是採用傳統 HTML 所使用的 <em>&lt;a&gt;</em> 標籤，在 Vue Router 我們則要改使用它提供的 <em>&lt;RouterLink&gt;</em>，並且把 <em>href</em> 改成 <em>to</em> 屬性：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-html">&lt;header&gt;
+    &lt;nav&gt;
+        &lt;RouterLink to="/home"&gt;Home&lt;/RouterLink&gt;
+        &lt;RouterLink to="/about"&gt;About&lt;/RouterLink&gt;
+        &lt;RouterLink to="/news"&gt;News&lt;/RouterLink&gt;
+    &lt;/nav&gt;
+&lt;/header&gt;</code></pre>
+        </div>
+        <p>當然要堅持使用原生 HTML 的 <em>&lt;a&gt;</em> 也不是不行，只是這樣會失去使用 Vue Router 的好處。</p>
+        <h5>修改展示區塊的標籤內容：</h5>
+        <p>在原本規劃用來展示各組件內容的 <em>main</em> 元素標籤裡，加上 <em>&lt;RouterView/&gt;</em> 標籤：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-html">&lt;main&gt;
+    &lt;RouterView /&gt;
+&lt;/main&gt;</code></pre>
+        </div>
+        <p>加入此標籤，當 <em>RouterLink</em> 導向指定的路由時，就會將路徑對應的組件內容渲染到這個標籤所在位置。</p>
+        <p>至此路由的基本切換功能就搞定了，我們可以從瀏覽器測試切換的效果如何：</p>
+        <figure>
+            <img src="/images/learn/js/vue3-learn-9-3.jpg">
+        </figure>
+        <p>點擊 About：</p>
+        <figure>
+            <img src="/images/learn/js/vue3-learn-9-4.jpg">
+        </figure>
+        <p><br></p>
+        <h3>為導航區塊項目加上選中狀態：</h3>
+        <p>上面的範例，假如截圖沒有箭頭指示，其實不容易看出目前展示區塊展示的內容目前屬於哪一個導航路由，細數坊間各大類型的網站平台，絕大多數當網頁切換到不同頁面的時候，被選中的導航項目會有特別樣式，好讓使用者更清晰地知道目前自己正處於網站的哪一個功能裡面。如果希望 <em>RouterLink</em> 也可以實現這樣的功能，我們只需要在 <em>&lt;RouterLink&gt;</em> 標籤加上 <em>active-class</em> 屬性即可。例如：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-html">&lt;header&gt;
+    &lt;nav&gt;
+        &lt;RouterLink to="/home" active-class="is-active"&gt;Home&lt;/RouterLink&gt;
+        &lt;RouterLink to="/about" active-class="is-active"&gt;About&lt;/RouterLink&gt;
+        &lt;RouterLink to="/news" active-class="is-active"&gt;News&lt;/RouterLink&gt;
+    &lt;/nav&gt;
+&lt;/header&gt;</code></pre>
+        </div>
+        <p>隨意為自定義的 <em>is-active</em> 類別選擇器加上一些樣式效果，例如背景變成紅色，而文字顏色改為白色，來看看實際效果：</p>
+        <figure>
+            <img src="/images/learn/js/vue3-learn-9-5.jpg">
+        </figure>
+        <p>這樣即使沒有畫箭頭示意，也能明確看出目前展示的內容是來自於哪一個頁面路由導航。</p>
+    </div>
+    <div class="text-block" id="act2">
+        <h2>二、如何辨別路由組件與一般組件</h2>
+        
+    </div>
+    
+    <div class="text-block" id="act4">
+        <h2>四、參考資料</h2>
+        <dl>
+            <dd><a href="https://cn.vuejs.org/" target="_blank">Vue.js</a></dd>
+            <dd><a href="https://www.youtube.com/watch?v=49b150tKIUc&list=PLmOn9nNkQxJEnGM4Jf0liBcyedAtuQq-O&index=29" target="_blank">【极简Vue3】029 自定义hooks</a></dd>
+        </dl>
+    </div>
+</div>
+<!-- end -->
+    </NuxtLayout>
+</template>
+
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+</script>

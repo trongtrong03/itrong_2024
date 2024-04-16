@@ -168,17 +168,17 @@ export default {
     </div>
     <div class="text-block" id="act3">
         <h2>三、生命週期鉤子</h2>
-        <h3><em>beforeCreate</em>、<em>created</em></h3>
+        <h3>beforeCreate、created</h3>
         <p>這兩個生命週期鉤子主要進行一些數據或方法初始化的作業，這時 Vue 實例尚未渲染到 <em>el</em> 和 <em>$el</em>，因此 DOM 還看不到我們創建的 Vue 實例。至於 Vue 實例在 <em>beforeCreate</em> 階段仍無法透過其創建時定義的 VM（ViewModel）獲取裡面建立的數據（Data）、方法（Methods），直到 <em>created</em> 這個階段才能取得內容。</p>
         <p>儘管 Vue3.0 的生命週期表中仍將這兩個生命鉤子列入實例流程圖裡，但由於 Vue3.0 Composition API 新增 <em>setup</em> 入口函式，其實已經不再需要使用 <em>beforeCreate</em> 與 <em>created</em>，但為了保留對 Vue2.0 的相容性，故現階段我們仍可以在 Vue3.0 的生命週期表裡看見這兩個鉤子的存在，不過誠如前面所述，Vue3.0 開始已經不需要它們，在官方文件 <a href="https://cn.vuejs.org/api/composition-api-lifecycle.html#onunmounted" target="_blank">Composition API</a> 說明中也已看不到相關敘述。</p>
         <p><br></p>
-        <h3><em>beforeMount</em>、<em>mounted</em></h3>
+        <h3>beforeMount、mounted</h3>
         <p>生命週期來到 Mount 階段，表示 Vue 實例裡的資料和方法即將要掛載進 DOM 裡面，<em>beforeMount</em> 表示在實例掛載進 DOM 之前被觸發，<em>mounted</em> 則表示資料已經渲染進 DOM 裡面，取代原本 DOM 對應元素裡面的內容。</p>
         <p><br></p>
-        <h3><em>beforeUpdated</em>、<em>updated</em></h3>
+        <h3>beforeUpdated、updated</h3>
         <p>當實例中的資料發生改變時觸發，讓 DOM 重新掛載更新後的數據。在 <em>beforeUpdated</em> 生命鉤子階段，新的資料雖然已經被更新，但尚未與 DOM 對應元素同步，而 <em>updated</em> 則表示新的數據以經同步到 DOM 對應元素裡面。</p>
         <p><br></p>
-        <h3><em>beforeUnmount</em>、<em>unmounted</em></h3>
+        <h3>beforeUnmount、unmounted</h3>
         <p>雖然換了個名字，但生命週期定義和用途與 Vue2.0 的 <em>beforeDestroyed</em>、<em>destroyed</em> 相同，表示 Vue 實例進入銷毀階段，<em>beforeUnmount</em> 表示在銷毀之前，<em>unmounted</em> 階段則完全銷毀綁定的資料數據、事件監聽、Watch 等方法（雖說是銷毀，但不意味著這些已經掛載到 DOM 裡面的內容就會被移除，它銷毀的涵義其實是指操作它的實例已不會再繼續追蹤、管理）。</p>
     </div>
     <div class="text-block" id="act4">

@@ -542,5 +542,21 @@
         "time": "2024-01-19",
         "type": "javascript",
         "class": "vue"
+    },
+    {
+        "id": 69,
+        "href": "vue3_learn_8",
+        "title": "循序漸進學 Vue3（八）：使用自定義的 hooks",
+        "time": "2024-01-20",
+        "type": "javascript",
+        "class": "vue"
+    },
+    {
+        "id": 70,
+        "href": "vue3_learn_9",
+        "title": "循序漸進學 Vue3（九）：路由 route",
+        "time": "2024-01-23",
+        "type": "javascript",
+        "class": "vue"
     }
 ]
