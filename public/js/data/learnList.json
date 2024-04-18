@@ -562,8 +562,16 @@
     {
         "id": 71,
         "href": "vue3_learn_10",
-        "title": "循序漸進學 Vue3（十）：路由嵌套與傳遞參數（query）",
+        "title": "循序漸進學 Vue3（十）：路由嵌套與參數傳遞",
         "time": "2024-01-24",
+        "type": "javascript",
+        "class": "vue"
+    },
+    {
+        "id": 72,
+        "href": "vue3_learn_11",
+        "title": "循序漸進學 Vue3（十一）：路由的 props 設定",
+        "time": "2024-01-29",
         "type": "javascript",
         "class": "vue"
     }
