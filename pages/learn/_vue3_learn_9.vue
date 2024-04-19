@@ -10,7 +10,8 @@
             <li><a href="#act2">二、辨別路由組件與一般組件</a></li>
             <li><a href="#act3">三、路由器的工作模式</a></li>
             <li><a href="#act4">四、to 屬性寫法與路由命名</a></li>
-            <li><a href="#act5">五、參考資料</a></li>
+            <li><a href="#act5">五、路由的重新定向</a></li>
+            <li><a href="#act6">六、參考資料</a></li>
         </ul>
     </div>
     <div class="text-block" id="act0">
@@ -298,7 +299,52 @@ const router = createRouter({
         <p>在網頁只需要一層路由的情況下，使用純字串定義路由導航通常沒什麼問題，不過如果網站的路由有多個嵌套，就會比較需要物件型別式的寫法了。</p>
     </div>
     <div class="text-block" id="act5">
-        <h2>五、參考資料</h2>
+        <h2>五、路由的重新定向</h2>
+        <p>你可能已經發現，前面的範例練習一直存在著一個問題，那就是當網頁沒有進入任何組件的時候（或者也可以說是首頁），RouterView 是一片空白：</p>
+        <figure>
+            <img src="/images/learn/js/vue3-learn-9-6.jpg">
+        </figure>
+        <p>與此同時，瀏覽器的 Console 視窗也存在一則警告：</p>
+        <blockquote class="is-danger">
+            <p>[Vue Router warn]: No match found for location with path "/"</p>
+        </blockquote>
+        <p>意思是在說找不到與根路徑匹配的路由配置。</p>
+        <p>要解決這個問題有兩種方式，第一種是在 <em>routes</em> 另外定義一個根路徑的路由配置，然後指定我們想要呈現在首頁的組件：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-javascript">const router = createRouter({
+    routes: [
+        {
+            path: "/",
+            component: Home
+        },
+    ]
+});</code></pre>
+        </div>
+        <p>實測結果：</p>
+        <figure>
+            <img src="/images/learn/js/vue3-learn-9-7.jpg">
+        </figure>
+        <p>這種方法會讓首頁的 URL 看起來很單純，但缺點就是導覽列如果也有 home 的路由項目，你會發現在根路徑情況下，home 的路由不被判定在被選中狀態。</p>
+        <p><br></p>
+        <p>另一種則是使用 <em>redirect</em> 屬性，並指定要前往的組件路徑，那麼不管網頁是直接進入根路徑還是使用者強制手動進入根路徑，網頁都會自動導向至我們設定的指定路徑：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-javascript">const router = createRouter({
+    routes: [
+        {
+            path: "/",
+            redirect: "/home"
+        },
+    ]
+});</code></pre>
+        </div>
+        <p>實測結果：</p>
+        <figure>
+            <img src="/images/learn/js/vue3-learn-9-8.jpg">
+        </figure>
+        <p>因為根路徑會強制轉到 home 組件，所以路由判定會附加選中狀態的樣式，只是使用者造訪網頁根路徑（首頁）時，網址後方必定會有網站指定的導向路由名稱，對部分人來說可能看起來就沒那麼美觀。</p>
+    </div>
+    <div class="text-block" id="act6">
+        <h2>六、參考資料</h2>
         <dl>
             <dd><a href="https://cn.vuejs.org/" target="_blank">Vue.js</a></dd>
             <dd><a href="https://www.youtube.com/watch?v=49b150tKIUc&list=PLmOn9nNkQxJEnGM4Jf0liBcyedAtuQq-O&index=30" target="_blank">【极简Vue3】030 对路由的理解</a></dd>

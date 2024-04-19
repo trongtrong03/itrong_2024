@@ -574,5 +574,21 @@
         "time": "2024-01-29",
         "type": "javascript",
         "class": "vue"
+    },
+    {
+        "id": 73,
+        "href": "vue3_learn_12",
+        "title": "循序漸進學 Vue3（十二）：路由 push V.S. replace",
+        "time": "2024-02-03",
+        "type": "javascript",
+        "class": "vue"
+    },
+    {
+        "id": 74,
+        "href": "vue3_learn_13",
+        "title": "循序漸進學 Vue3（十三）：編程式路由導航",
+        "time": "2024-02-04",
+        "type": "javascript",
+        "class": "vue"
     }
 ]
