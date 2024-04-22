@@ -590,5 +590,13 @@
         "time": "2024-02-04",
         "type": "javascript",
         "class": "vue"
+    },
+    {
+        "id": 75,
+        "href": "vue3_learn_14",
+        "title": "循序漸進學 Vue3（十四）：集中式狀態管理（Pinia）",
+        "time": "2024-02-11",
+        "type": "javascript",
+        "class": "vue"
     }
 ]

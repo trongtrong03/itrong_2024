@@ -1,0 +1,59 @@
+<template>
+    <NuxtLayout name="article">
+        <TempArticle :propValue="75" fileType="learnList" />
+<!-- start -->
+<div class="text-content">
+    <div class="text-catalog">
+        <ul>
+            <li><a href="#act0">序、前言</a></li>
+            <li><a href="#act1">一、狀態管理的本質</a></li>
+            <li><a href="#act2">二、xxxx</a></li>
+            <li><a href="#act3">三、xxxxx</a></li>
+            <li><a href="#act4">四、參考資料</a></li>
+        </ul>
+    </div>
+    <div class="text-block" id="act0">
+        <h2>序、前言</h2>
+        <p>細看目前的網頁前端開發生態，將龐大的程式碼切割成更細小，分離出可管理的部分，好讓開發者可以重複使用，這樣的作法儼然已是不可避免的主流趨勢，實現這樣理想的常見有兩種設計方法，一是「模組化」（Modularization），另一種則是「組件化」（Componentization）。前者通常可以由原生 JavaScript ES6 Modules 機制實現，或是 Node.js 的 CommonJS、Asynchronous Module Definition（AMD）等；後者則有我們熟知的 Vue.js、React.js 這類著名的前端框架工具，它們將程式分解為各自獨立、可重複使用的模組，每個模組都可稱為組件，這些組件通常都具有明確定義的功能和介面。儘管模組化與組件化設計原則看起來十分相似，不過兩者的著重點與應用場景略有不同，模組化較著重於程式碼結構的分解與組織，組件化則比較關注使用者介面的建構和管理。</p>
+        <p>因為本系列文章的主角是 Vue.js，所以重點會聚焦在組件化的討論，而 Vue.js、React.js 這些前端框架之所以能成為現今網頁前端開發的主流，除了其提供最基本的組件化功能外，它們還重視另一個非常重要的特性──狀態管理。什麼是狀態管理？為什麼要重視？它能為組件化設計帶來哪些正面影響？接下來的內容將要深入探討組件與狀態管理之間的關係。</p>
+    </div>
+    <div class="text-block" id="act1">
+        <h2>一、狀態管理的本質</h2>
+        <p>在開始講狀態管理之前，我們需要先認識組件的概念。儘管之前一系列的文章已經提到各式各樣不同名詞的組件，例如父與子組件、一般與路由組件等，但這些組件名稱多半是依據功能面與結構面來做稱呼。如果要銜接之後要敘述的狀態管理，那麼我們應該要把組件精確分成兩種類型，分別是「原語组件」（Primitive Component）以及「複合組件」（Composite Component）</p>
+        <p><br></p>
+        <h3>原語組件（Primitive Component）：</h3>
+        <p>原語組件是指應用程式中最基本的組件，通常是具有特定功能或樣式的組件，例如按鈕、輸入方塊、標籤等。這些組件通常是簡單的、不包含其他組件的基本建構塊。在 Vue.js 中，我們可以透過定義全域或局部的組件來建立原語組件，然後在應用程式中多次使用它們。</p>
+        <p>原語組件不可分割，也沒有子結構，就像物理世界的原子一樣，是最基本的單位。</p>
+        <p><br></p>
+        <h3>複合組件（Composite Component）：</h3>
+        <p>複合組件是由一個或多個原語組件或其他複合組件組合而成的更複雜的組件。複合組件通常用於建立應用程式中的更大的功能塊或介面部分。它們可以包含邏輯、樣式和其他組件，並且可以根據需要重複使用。在 Vite 創建的專案裡，基本會有一個用來呈現各個組件的根組件 <b>App.vue</b>，它就是複合組件的一種，因為它可能包含多個原語組件以及其他複合組件，形成應用程式的整體結構。</p>
+        <p>複合組件可以將多個相同或不同的組件組合起來形成一個小型的文檔樹（Lite Dom Tree），以用來實現網頁多樣且複雜的功能，如果有必要，我們也可以再把這個小型文檔樹再包裝成一個組件，成為其它小型文檔樹的材料，宛如物理世界的分子一般，具備無限的組合性。</p>
+        <p>雖然小型文檔樹是複合組件重要的組成部分，但卻不是複合組件的全部，廣泛來說複合組件其實就是 JavaScript 物件，它有構造函式，也有一些被調用時可以進一步操作的設定。譬如接收傳遞過來的一些 Props 參數，或是自定義一些方法，像是向伺服器端發送請求索取資料等。</p>
+        <p>複合組件物件內部所包含的資料通常稱為「內聯數據」（Inline Data），內聯數據是只屬於該組件自身的資料，假如要傳給其他組件，則必須透過傳遞參數的方式，把內聯數據轉移給它的子組件，而子組件也可以透過同樣的方式，再將自己的內聯數據傳遞給它的子組件（孫組件），逐級類推直到原語組件。</p>
+        <p>當瀏覽器載入頁面時，從最頂層的複合組件開始建構，然後內聯數據逐層被傳遞，直到整個頁面渲染完成，一旦瀏覽器關閉頁面，內聯數據與複合組件則雙雙被移除，這就是網頁一次生命週期的完整流程，由此可見內聯數據只會在頁面運行期間有效。至於這些內聯數據其實就是網頁應用中所需要管理的「狀態」，開發者們將內聯數據視為狀態並進行管理，它可以被瀏覽器渲染顯示，但卻不是一個永久持續存在的資料，只在網頁開啟到關閉之間有效。</p>
+
+
+
+        
+    </div>
+    
+    <div class="text-block" id="act4">
+        <h2>四、參考資料</h2>
+        <dl>
+            <dd><a href="https://cn.vuejs.org/" target="_blank">Vue.js</a></dd>
+            <dd><a href="https://www.youtube.com/watch?v=49b150tKIUc&list=PLmOn9nNkQxJEnGM4Jf0liBcyedAtuQq-O&index=41" target="_blank">【极简Vue3】041 路由 编程式路由导航</a></dd>
+            <dd><a href="https://zhuanlan.zhihu.com/p/439233719" target="_blank">vue3时代下的状态管理方式探索</a></dd>
+            <dd><a href="https://5xcampus.com/posts/from-vuex-to-pinia" target="_blank">從 Vuex 到 Pinia：Vue 狀態管理的進化</a></dd>
+        </dl>
+    </div>
+</div>
+<!-- end -->
+    </NuxtLayout>
+</template>
+
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+</script>
