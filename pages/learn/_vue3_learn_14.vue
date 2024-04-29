@@ -9,7 +9,9 @@
             <li><a href="#act1">一、狀態管理的本質</a></li>
             <li><a href="#act2">二、集中式狀態管理</a></li>
             <li><a href="#act3">三、Vuex 與 Pinia</a></li>
-            <li><a href="#act4">四、參考資料</a></li>
+            <li><a href="#act4">四、Pinia 安裝與設定</a></li>
+            <li><a href="#act5">五、儲存與讀取資料數據</a></li>
+            <li><a href="#act6">六、參考資料</a></li>
         </ul>
     </div>
     <div class="text-block" id="act0">
@@ -62,13 +64,172 @@
     <div class="text-block" id="act3">
         <h2>三、Vuex 與 Pinia</h2>
         <p>在 Vue.js 框架比較常見，或者說主流的狀態管理工具有兩款，分別是 <a href="https://vuex.vuejs.org/zh/" target="_blank">Vuex</a> 以及 <a href="https://pinia.vuejs.org/" target="_blank">Pinia</a>，它們分別各自對應 Vue 2 與 Vue 3 推薦的首款選擇，如果第一次接觸狀態管理工具且使用的版本為 Vue 3 ，多數前輩或教學都會建議直接學 Pinia 就好，那是因為 Pinia 不僅是基於 Vuex 之上改善後者一些缺點及更加優化功能，同時也專門配合 Vue 3 Composition API 語法格式，且相容 TypeScript。</p>
+        <blockquote>
+            <p>Pinia 起源于一次探索 Vuex 下一个迭代的实验，因此结合了 Vuex 5 核心团队讨论中的许多想法。最后，我们意识到 Pinia 已经实现了我们在 Vuex 5 中想要的大部分功能，所以决定将其作为新的推荐方案来代替 Vuex。</p>
+            <p>与 Vuex 相比，Pinia 不仅提供了一个更简单的 API，也提供了符合组合式 API 风格的 API，最重要的是，搭配 TypeScript 一起使用时有非常可靠的类型推断支持。</p>
+        </blockquote>
+        <p>以上摘錄自 Pinia 中文文件「<a href="https://pinia.vuejs.org/zh/introduction.html" target="_blank">對比 Vuex</a>」說明。</p>
+        <p>Vuex V.S. Pinia：</p>
+        <div class="text-flex">
+            <div class="f-width">
+                <div class="f-head">
+                    <div class="f-f0"></div>
+                    <div class="f-f1">Vuex</div>
+                    <div class="f-f1">Pinia</div>
+                </div>
+                <div class="f-row">
+                    <div class="f-f0">優點</div>
+                    <div class="f-f1">
+                        <p>1. 穩定性高，具有豐富的生態系統和文件支持。</p>
+                        <p>2. 提供強大功能，包括狀態持久化、模塊化、插件支持等，能應對大多數的狀態管理需求。</p>
+                    </div>
+                    <div class="f-f1">
+                        <p>1. 設計上更為簡潔，提供了更純粹的狀態管理解決方案，適合用於小型應用。</p>
+                        <p>2. 支援 TypeScript。</p>
+                        <p>3. 整合 Composition API。</p>
+                    </div>
+                </div>
+                <div class="f-row">
+                    <div class="f-f0">缺點</div>
+                    <div class="f-f1">
+                        <p>1. 複雜度高。</p>
+                        <p>2. 學習曲線陡峭。</p>
+                    </div>
+                    <div class="f-f1">
+                        <p>1. 資源較少。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p><br></p>
+        <p>前面提到集中式狀態管理的精髓是將複合組件的功用扁平化，將資料數據通通撈出來到狀態中心整合管理，複合組件將成為只有處理視覺的函式組件。然而，在 Pinia 的概念裡，比較強調只要將「共享」的資料數據撈出來集中管理就好，個別組件獨有的資料還是留在該組件，沒有必要定義在狀態中心反而使得文件不易閱讀。</p>
+    </div>
+    <div class="text-block" id="act4">
+        <h2>四、Pinia 安裝與設定</h2>
+        <h6>1. NPM 安裝 Pinia 套件：</h6>
+        <p>在專案裡下達 Pinia 安裝指令：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-bash">npm install pinia</code></pre>
+        </div>
+        <p><br></p>
+        <h6>2. 設定文件引入 Pinia：</h6>
+        <p>開啟 <b>main.ts</b>，將 Pinia 引入進來並創建它：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-javascript">import { createPinia } from 'pinia';    // 引入 pinia
+const pinia = createPinia();    // 建立 pinia
+app.use(pinia);    // 安裝 pinia</code></pre>
+        </div>
+        <p><br></p>
+        <h6>3. 建立資料夾與文件：</h6>
+        <div class="text-code" v-pre>
+            <pre><code class="language-bash">src
+└── store
+     ├── a.ts
+     ├── b.ts
+     └── n.ts</code></pre>
+        </div>
+        <p>在專案 <b>src/</b> 資料夾內建立 <b>store/</b> 資料夾，這個資料夾就象徵 Pinia 的實體，而裡頭文件的名稱一般情況會與要撈出共享資料的組件同名，比如有一個 <b>Count.vue</b> 組件有資料要提取出來給狀態中心，那麼 <b>store/</b> 裡頭就會建立一個 <b>count.ts</b> 或者 <b>Count.ts</b>，這樣我們才能明確知道它以及其他組件引用的源頭是誰。或者也有些人會將同樣類型的資料分類進行管理，像是和使用者有關的資料統一集中存放在 <b>user.ts</b>。</p>
+        <p><br></p>
+        <p>下一章開始將進入實際操作的環節，既然要操作，首先就必須先有範例才能提供給 Pinia 發揮的空間，範例規劃的結構如下：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-bash">src
+├── components
+│    ├── Count.vue
+│    └── Trail.vue
+└── App.vue</code></pre>
+        </div>
+        <p>各組件功能說明：</p>
+        <p><b>Count.vue</b>：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-html">&lt;template&gt;
+    &lt;section class="count"&gt;
+        &lt;p&gt;當前總和：{{ sum }}&lt;/p&gt;
+        &lt;select v-model.number="selectVal"&gt;
+            &lt;option value="1"&gt;1&lt;/option&gt;
+            &lt;option value="2"&gt;2&lt;/option&gt;
+            &lt;option value="3"&gt;3&lt;/option&gt;
+        &lt;/select&gt;
+        &lt;button @click="add()"&gt;加&lt;/button&gt;
+        &lt;button @click="minus()"&gt;減&lt;/button&gt;
+    &lt;/section&gt;
+&lt;/template&gt;
+
+&lt;script setup lang="ts" name="Count"&gt;
+    import { ref } from 'vue';
+
+    const sum = ref(1);
+    const selectVal = ref(1);
+
+    function add(){
+        sum.value += selectVal.value;
+    }
+
+    function minus(){
+        sum.value -= selectVal.value;
+    }
+&lt;/script&gt;</code></pre>
+        </div>
+        <p>這支組件的功能是一個基本的總合計算，使用者通過下拉選單選擇要加減的數字，然後透過按鈕對目前的總合進行所選之數字進行累加或減少。譬如下拉選單選擇了「3」，則點擊「加」的按鈕，<em>sum</em> 初始值將從 1 累計為 4，再按一次「加」按鈕則從 4 變更為 7......依此類推。若在目前總合 7 的時候將選項變更為 2 並按下「減」的按鈕，則當前總合 7 就會變為 5。</p>
+        <p><br></p>
+        <p><b>Trail.vue</b>：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-html">&lt;template&gt;
+    &lt;section class="text"&gt;
+        &lt;p&gt;林業保育署自然步道：{{ randomTrail.TR_CNAME }}&lt;/p&gt;
+        &lt;button @click="getData()"&gt;產生&lt;/button&gt;
+    &lt;/section&gt;
+&lt;/template&gt;
+
+&lt;script setup lang="ts" name="Trail">
+    import { ref } from 'vue';
+    import axios from 'axios';
+
+    const randomTrail = ref({ TR_CNAME: '' });
+
+    async function getData(){
+        try {
+            let result = await axios.get("https://data.moa.gov.tw/Service/OpenData/ForestRtBasic.aspx?IsTransData=1&UnitId=D51");
+
+            let randomIndex = Math.floor(Math.random() * result.data.length);
+            randomTrail.value = result.data[randomIndex];
+        }
+        catch (error) {
+            console.error("Error fetching data:", error);
+        }
+    }
+&lt;/script&gt;</code></pre>
+        </div>
+        <p>這是一個按下按鈕就會隨機生成一條步道的組件，步道名單的來源是政府公開平台的 JSON 資料，並透過 Axios 來打 API。</p>
+        <p><br></p>
+        <p><b>App.vue</b>：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-html">&lt;template&gt;
+    &lt;Count/&gt;
+    &lt;hr&gt;
+    &lt;Trail/&gt;
+&lt;/template&gt;
+
+&lt;script setup lang="ts"&gt;
+    import Count from "./components/Count.vue";
+    import Trail from "./components/Trail.vue";
+&lt;/script&gt;</code></pre>
+        </div>
+        <p>根組件沒有什麼特別的地方，主要就是調用前面寫的兩個組件，使其渲染並運作。</p>
+    </div>
+    <div class="text-block" id="act5">
+        <h2>五、儲存與讀取資料數據</h2>
+        
+
+
         
     </div>
+
     
-    <div class="text-block" id="act4">
-        <h2>四、參考資料</h2>
+    <div class="text-block" id="act6">
+        <h2>六、參考資料</h2>
         <dl>
             <dd><a href="https://cn.vuejs.org/" target="_blank">Vue.js</a></dd>
+            <dd><a href="https://pinia.vuejs.org/introduction.html" target="_blank">Pinia</a></dd>
             <dd><a href="https://www.youtube.com/watch?v=49b150tKIUc&list=PLmOn9nNkQxJEnGM4Jf0liBcyedAtuQq-O&index=41" target="_blank">【极简Vue3】041 路由 编程式路由导航</a></dd>
             <dd><a href="https://zhuanlan.zhihu.com/p/439233719" target="_blank">vue3时代下的状态管理方式探索</a></dd>
             <dd><a href="https://5xcampus.com/posts/from-vuex-to-pinia" target="_blank">從 Vuex 到 Pinia：Vue 狀態管理的進化</a></dd>
