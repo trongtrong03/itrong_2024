@@ -39,6 +39,33 @@
                 </div>
                 <button class="accordin-close" @click="isActive = 0;"></button>
             </div>
+            <div class="accordin-item" :class="isActive==1002 ? 'is-active' : ''">
+                <div class="accordin-title" @click="isActive = 1002;">
+                    <p>"getActivePinia()" was called but there was no active Pinia. Are you trying to use a store before calling "app.use(pinia)"?</p>
+                </div>
+                <div class="accordin-content">
+                    <p>這個錯誤通常發生在你試圖在 Vue 應用程式中使用 Pinia store 之前，忘記了將 Pinia 實例掛載到 Vue 應用程式上，而且必須確保 <em>app.use(pinia)</em> 必須在組件掛載（<em>app.mount</em>）之前先執行。</p>
+                    <p>如果使用 Vite 框架，設定通常在 <b>main.js</b> 或 <b>main.ts</b> 文件：</p>
+                    <div class="text-code" v-pre>
+                        <pre><code class="language-javascript">import { createApp } from 'vue'
+import { createPinia } from 'pinia'
+import App from './App.vue'
+
+const app = createApp(App);
+const pinia = createPinia();
+
+app.use(pinia);
+app.mount('#app');</code></pre>
+                    </div>
+                    <p>如果 <em>app.mount</em> 比 <em>app.use</em> 還要早執行便會發生錯誤：</p>
+                    <div class="text-code" v-pre>
+                        <pre><code class="language-javascript">app.mount('#app');
+app.use(pinia);</code></pre>
+                    </div>
+                    <p>像這樣就不行。</p>
+                </div>
+                <button class="accordin-close" @click="isActive = 0;"></button>
+            </div>
         </div>
     </div>
     <div class="text-block" id="act2">
