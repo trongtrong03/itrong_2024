@@ -594,7 +594,15 @@
     {
         "id": 75,
         "href": "vue3_learn_14",
-        "title": "循序漸進學 Vue3（十四）：使用 Pinia 實現集中式狀態管理",
+        "title": "循序漸進學 Vue3（十四）：使用 Pinia 實現集中式狀態管理──上",
+        "time": "2024-02-11",
+        "type": "javascript",
+        "class": "vue"
+    },
+    {
+        "id": 76,
+        "href": "vue3_learn_15",
+        "title": "循序漸進學 Vue3（十五）：使用 Pinia 實現集中式狀態管理──下",
         "time": "2024-02-11",
         "type": "javascript",
         "class": "vue"

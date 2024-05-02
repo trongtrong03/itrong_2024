@@ -276,7 +276,7 @@ function changeUser(){
     </div>
     <div class="text-block" id="act4">
         <h2>四、響應式資料解構 toRefs 與 toRef</h2>
-        <p>在闡述 <em>toRefs</em> 與 <em>toRef</em> 用途之前，先稍微聊聊 JavaScript 的建構賦值。JavaScript 的解構賦值是一種能方便地從陣列或物件中提取資料並賦值給變數的語法。它允許我們使用類似模式匹配的語法，從複雜的資料結構中提取部分資料，然後將這些資料賦值給變數。它的基本語法格式為：</p>
+        <p>在闡述 <em>toRefs</em> 與 <em>toRef</em> 用途之前，先稍微聊聊 JavaScript 的解構賦值。JavaScript 的解構賦值是一種能方便地從陣列或物件中提取資料並賦值給變數的語法。它允許我們使用類似模式匹配的語法，從複雜的資料結構中提取部分資料，然後將這些資料賦值給變數。它的基本語法格式為：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-javascript">let [variable1, variable2, ...rest] = array;</code></pre>
         </div>
@@ -336,8 +336,8 @@ console.log(name, age);    // 阿比, 18</code></pre>
         <p>答案也是可以。</p>
         <div class="text-code" v-pre>
             <pre><code class="language-html">&lt;template&gt;
-    &lt;h1&gt;姓名：{{ name }}&lt;/h1&gt;    &lt;-- 阿比 --&gt;
-    &lt;h2&gt;年齡：{{ age }}&lt;/h2&gt;    &lt;-- 18 --&gt;
+    &lt;h1&gt;姓名：{{ name }}&lt;/h1&gt;    &lt;!-- 阿比 --&gt;
+    &lt;h2&gt;年齡：{{ age }}&lt;/h2&gt;    &lt;!-- 18 --&gt;
 &lt;/template&gt;</code></pre>
         </div>
         <h5>3. 承上，如果我們點擊按鈕觸發 <em>changeUser</em> 事件，資料是否會發生變化？</h5>
