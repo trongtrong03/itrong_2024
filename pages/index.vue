@@ -13,6 +13,7 @@
             <b></b>
         </button>
     </section>
+    <!-- about -->
     <section id="scrollArea" class="index-about-wrap">
         <div class="index-about-ceter" data-aos="custom">
             <div class="index-about-title">
@@ -78,6 +79,7 @@
             </div>
         </div>
     </section>
+    <!-- job -->
     <section class="index-job-wrap">
         <div class="index-job-ceter" data-aos="custom">
             <div class="index-job-title">
@@ -119,6 +121,7 @@
             <MyNuxtLink to="/learn" class="more-button"></MyNuxtLink>
         </div>
     </section>
+    <!-- hiker -->
     <section class="index-hiker-wrap">
         <div class="index-hiker-ceter" data-aos="custom">
             <div class="index-hiker-title">
@@ -134,7 +137,6 @@
         </div>
     </section>
 </template>
-
 
 <script setup lang="ts">
     useHead({
