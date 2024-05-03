@@ -10,13 +10,10 @@
                     <div class="list-select">
                         <button></button>
                         <select @change="setType($event)" @click="filterOpen = false">
-                            <option value="" selected>全部</option>
-                            <option value="html">HTML</option>
-                            <option value="css">CSS</option>
-                            <option value="javascript">JavaScript</option>
-                            <option value="design">設計相關</option>
-                            <option value="develop">開發工具</option>
-                            <option value="others">其他</option>
+                            <option value="" selected>全部({{ jsonData.length }})</option>
+                            <template v-for="(count, type) in getTypeCountsSorted()">
+                                <option :value="type">{{ typeDisplayMap[type] }} ({{ count }})</option>
+                            </template>
                         </select>
                     </div>
                     <div class="list-input">
@@ -50,9 +47,8 @@
 </template>
 
 <script setup lang="ts">
+    /* 定義資料類型 */
     const jsonData = ref([]);
-    const jsonDataLength = computed(() => jsonData.value.length);
-    const isActive = ref(1);
     const filterOpen = ref(false);
     const Filters = ref({
         title: "",
@@ -118,4 +114,31 @@
         await fetchData(jsonData, 'learnList', true);
         isDataLoaded.value = true;
     });
+
+    /* 計算每個 type 的數量並按照特定順序排序 */
+    // 將類型名稱映射到顯示名稱的對應表
+    const typeDisplayMap = {
+        'html': 'HTML',
+        'css': 'CSS',
+        'javascript': 'JavaScript',
+        'design': '設計相關',
+        'develop': '開發工具',
+        'others': '其他'
+    };
+
+    const getTypeCountsSorted = () => {
+        const typeCounts = {};
+        jsonData.value.forEach(item => {
+            typeCounts[item.type] = (typeCounts[item.type] || 0) + 1;
+        });
+
+        // 依據顯示名稱的映射表順序排序
+        const sortedTypeCounts = {};
+        Object.keys(typeDisplayMap).forEach(key => {
+            if (typeCounts[key]) {
+                sortedTypeCounts[key] = typeCounts[key];
+            }
+        });
+        return sortedTypeCounts;
+    };
 </script>

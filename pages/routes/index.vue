@@ -111,6 +111,10 @@
 </template>
 
 <script setup lang="ts">
+    /* 調用 NavItemActive.ts */
+    NavItemActive(".lnk-mountain");
+
+    /* 定義資料類型 */
     const jsonData = ref([]);
     const jsonDataLength = computed(() => jsonData.value.length);
     const filterOpen = ref(false);

@@ -603,7 +603,15 @@
         "id": 76,
         "href": "vue3_learn_15",
         "title": "循序漸進學 Vue3（十五）：使用 Pinia 實現集中式狀態管理──下",
-        "time": "2024-02-11",
+        "time": "2024-02-12",
+        "type": "javascript",
+        "class": "vue"
+    },
+    {
+        "id": 77,
+        "href": "vue3_learn_16",
+        "title": "循序漸進學 Vue3（十六）：組件之間的 props 通信",
+        "time": "2024-02-19",
         "type": "javascript",
         "class": "vue"
     }

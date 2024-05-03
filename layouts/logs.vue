@@ -1,7 +1,7 @@
 <template>
     <article id="wrap" class="page-logs">
         <!--header -->
-        <Header :propNavLinkVal="propNavLinkVal" />
+        <Header />
         <!-- main -->
         <main class="main-wrap">
             <div class="main-inside">
@@ -25,5 +25,6 @@
 </template>
 
 <script setup lang="ts">
-    const propNavLinkVal = "hikingbook";
+    /* 調用 NavItemActive.ts */
+    NavItemActive(".lnk-mountain");
 </script>

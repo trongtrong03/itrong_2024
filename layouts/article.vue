@@ -1,7 +1,7 @@
 <template>
     <article id="wrap">
         <!--header -->
-        <Header :propNavLinkVal="propNavLinkVal" />
+        <Header />
         <!-- main -->
         <main class="main-wrap">
             <div class="main-inside">
@@ -27,7 +27,8 @@
 </template>
 
 <script setup lang="ts">
-    const propNavLinkVal = "learn";
+    /* 調用 NavItemActive.ts */
+    NavItemActive(".lnk-learn");
     
     // 引用 Prism
     import Prism from 'prismjs';

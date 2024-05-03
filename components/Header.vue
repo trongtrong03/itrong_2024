@@ -23,17 +23,17 @@
                 </NuxtLink>
             </div>
             <div class="nav-link">
-                <NuxtLink to="/hikingbook" @click="navToggleActiveRemove" class="lnk-mountain" :class="propNavLinkVal=='hikingbook' ? 'is-active' : ''" title="登山健行">
+                <NuxtLink to="/hikingbook" @click="navToggleActiveRemove" class="lnk-mountain" title="登山健行">
                     <span>登山健行</span>
                 </NuxtLink>
             </div>
             <div class="nav-link">
-                <NuxtLink to="/learn" @click="navToggleActiveRemove" class="lnk-learn" :class="propNavLinkVal=='learn' ? 'is-active' : ''" title="學習筆記">
+                <NuxtLink to="/learn" @click="navToggleActiveRemove" class="lnk-learn" title="學習筆記">
                     <span>學習筆記</span>
                 </NuxtLink>
             </div>
             <div class="nav-link">
-                <NuxtLink to="/workshop" @click="navToggleActiveRemove" class="lnk-workshop" :class="propNavLinkVal=='workshop' ? 'is-active' : ''" title="工作坊">
+                <NuxtLink to="/workshop" @click="navToggleActiveRemove" class="lnk-workshop" title="工作坊">
                     <span>工作坊</span>
                 </NuxtLink>
             </div>
@@ -50,15 +50,10 @@
 </template>
 
 <script setup lang="ts">
-    // 使用 props 來傳入各個模板的值
-    const props = defineProps({
-        propNavLinkVal: {
-            type: String,
-            required: true,
-        }
-    });
-
+    /* 定義資料類型 */
     const navActive = ref(false);
+
+    // nav active event
     const navToggleActive = () => {
         navActive.value = !navActive.value;
         document.body.classList.remove('no-scroll');

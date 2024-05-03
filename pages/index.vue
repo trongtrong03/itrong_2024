@@ -69,7 +69,7 @@
                     </hgroup>
                 </div>
             </div>
-            <MyNuxtLink to="/about" class="more-button"></MyNuxtLink>
+            <NuxtLink to="/about" class="more-button"></NuxtLink>
             <div class="index-about-bg">
                 <ul>
                     <li><b></b><b></b><b></b><b></b><b></b><b></b></li>
@@ -118,7 +118,7 @@
                     </ul>
                 </hgroup>
             </div>
-            <MyNuxtLink to="/learn" class="more-button"></MyNuxtLink>
+            <NuxtLink to="/learn" class="more-button"></NuxtLink>
         </div>
     </section>
     <!-- hiker -->
@@ -133,7 +133,7 @@
             <div class="index-hiker-marquee">
                 <div class="index-hiker-photo" v-for="index in 30" :key="index"></div>
             </div>
-            <MyNuxtLink to="/hikingbook" class="more-button"></MyNuxtLink>
+            <NuxtLink to="/hikingbook" class="more-button"></NuxtLink>
         </div>
     </section>
 </template>

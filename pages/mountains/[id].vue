@@ -95,7 +95,7 @@
                     </hgroup>
                 </div>
                 <div class="main-bottom">
-                    <MyNuxtLink to="/mountains">返回</MyNuxtLink>
+                    <NuxtLink to="/mountains">返回</NuxtLink>
                 </div>
             </div>
         </div>
@@ -103,11 +103,14 @@
 </template>
 
 <script setup lang="ts">
-    // 使用 ref 创建响应式数据
+    /* 調用 NavItemActive.ts */
+    NavItemActive(".lnk-mountain");
+
+    /* 定義資料類型 */
     const jsonData = ref([]);
     const postID = ref(null);
 
-    // 获取路由参数
+    // 取得路由傳參
     const route = useRoute();
     postID.value = route.params.id;
 
@@ -116,7 +119,7 @@
         await fetchData(jsonData, 'mountainsList');
     });
 
-    // 创建一个方法来获取数据
+    // 建立一個方法來取得資料數據
     const getIndex = (id) => {
         return jsonData.value.find(item => item.id === id) || {};
     };

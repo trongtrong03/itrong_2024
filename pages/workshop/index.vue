@@ -69,6 +69,7 @@
 </template>
 
 <script setup lang="ts">
+    /* 定義資料類型 */
     const jsonData = ref([]);
     const jsonDataLength = computed(() => jsonData.value.length);
     const isActive = ref(1);

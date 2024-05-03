@@ -1,6 +1,5 @@
 <template>
     <article id="wrap">
-        <slot name="header" />
         <!--header -->
         <Header />
         <!-- main -->
