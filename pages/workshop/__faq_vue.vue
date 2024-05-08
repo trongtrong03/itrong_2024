@@ -76,6 +76,20 @@ app.use(pinia);</code></pre>
     <div class="text-block" id="act3">
         <h2>三、其他疑難雜症</h2>
         <div class="text-accordin is-others">
+            <div class="accordin-item" :class="isActive==3001 ? 'is-active' : ''">
+                <div class="accordin-title" @click="isActive = 3001;">
+                    <p>如何修改範圍（Scoped）外的 CSS 樣式？</p>
+                </div>
+                <div class="accordin-content">
+                    <p>可以使用 <em>:deep(＜inner-selector＞)</em> 語法，括號裡面指定要修改的選擇器。例如：</p>
+                    <div class="text-code" v-pre>
+                        <pre><code class="language-css">:deep(.demo-wrap){
+    /* CSS 樣式 */
+}</code></pre>
+                    </div>
+                </div>
+                <button class="accordin-close" @click="isActive = 0;"></button>
+            </div>
         </div>
     </div>
 </div>
