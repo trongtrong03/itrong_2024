@@ -8605,10 +8605,10 @@
         "application_m": false,
         "intro": "坑內坑舊名茄苳坑，位於彰化縣二水鄉，早先居民要上受天宮進香，因此走出一條「進香古道」。步道出入口分別位在彰化縣二水鄉受德宮旁以及南投縣名間鄉豐柏路旁的木棧平臺，串連彰化縣與南投縣兩地，可循標示至松柏嶺受天宮，也可規劃周邊步道成為環狀路線。",
         "notes": "",
-        "img": false,
+        "img": true,
         "gpx": "https://hiking.biji.co/index.php?q=trail&act=gpx_detail&id=2795626",
-        "finish": false,
-        "fDate": "",
+        "finish": true,
+        "fDate": "2024-05-11",
         "article": "",
         "aLink": ""
     },

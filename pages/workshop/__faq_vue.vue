@@ -66,6 +66,37 @@ app.use(pinia);</code></pre>
                 </div>
                 <button class="accordin-close" @click="isActive = 0;"></button>
             </div>
+            <div class="accordin-item" :class="isActive==1003 ? 'is-active' : ''">
+                <div class="accordin-title" @click="isActive = 1003;">
+                    <p>Vite TS npm run build 發生一堆錯誤警告</p>
+                </div>
+                <div class="accordin-content">
+                    <p>假設 Vite 專案採用 TypeScript 開發模式，但並沒有很嚴謹遵守 TypeScript 的相關規範，在最後打包（npm run build）階段很容易會噴出一堆錯誤警告導致專案無法順利打包，如下圖所示：</p>
+                    <figure>
+                        <img src="/images/learn/js/vite-faq-1.jpg">
+                    </figure>
+                    <p>其實許多警告項目也不完全是會影響網頁運行的錯誤，但動輒幾十甚至上百的警告，要一條條處理其實也要花不少時間，如果想要跳過 TypeScript 嚴格規則並快速進行打包，可以找到專案內的 <b>package.json</b> 檔案，找到這一段程式碼：</p>
+                    <div class="text-code" v-pre>
+                        <pre><code class="language-javascript">"scripts": {
+    "dev": "vite",
+    "build": "run-p type-check \"build-only {@}\" --",
+    "preview": "vite preview",
+    "build-only": "vite build",
+    "type-check": "vue-tsc --build --force"
+},</code></pre>
+                    </div>
+                    <p>將 <em>type-check</em> 相關的項目移除即可：</p>
+                    <div class="text-code" v-pre>
+                        <pre><code class="language-javascript">"scripts": {
+    "dev": "vite",
+    "build": "run-p \"build-only {@}\" --",
+    "preview": "vite preview",
+    "build-only": "vite build"
+},</code></pre>
+                    </div>
+                </div>
+                <button class="accordin-close" @click="isActive = 0;"></button>
+            </div>
         </div>
     </div>
     <div class="text-block" id="act2">
