@@ -610,7 +610,7 @@
     {
         "id": 77,
         "href": "vue3_learn_16",
-        "title": "循序漸進學 Vue3（十六）：組件之間的 props 通信",
+        "title": "循序漸進學 Vue3（十六）：組件之間的 props 通信──上",
         "time": "2024-02-19",
         "type": "javascript",
         "class": "vue"
