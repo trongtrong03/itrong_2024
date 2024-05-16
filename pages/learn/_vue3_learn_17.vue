@@ -8,7 +8,8 @@
             <li><a href="#act0">序、前言</a></li>
             <li><a href="#act1">一、任意組件之間的通信（mitt）</a></li>
             <li><a href="#act2">二、祖孫組件之間的通信（$attrs）</a></li>
-            <li><a href="#act3">三、參考資料</a></li>
+            <li><a href="#act3">三、祖孫組件之間的通信（provide＆inject）</a></li>
+            <li><a href="#act4">四、參考資料</a></li>
         </ul>
     </div>
     <div class="text-block" id="act0">
@@ -389,7 +390,11 @@ onUnmounted(() => {
         </figure>
     </div>
     <div class="text-block" id="act3">
-        <h2>三、參考資料</h2>
+        <h2>三、祖孫組件之間的通信（provide＆inject）</h2>
+        
+    </div>
+    <div class="text-block" id="act4">
+        <h2>四、參考資料</h2>
         <dl>
             <dd><a href="https://cn.vuejs.org/" target="_blank">Vue.js</a></dd>
             <dd><a href="https://github.com/developit/mitt" target="_blank">Github - mitt</a></dd>
