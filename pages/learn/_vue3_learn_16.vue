@@ -349,13 +349,68 @@ defineExpose({ dog });</code></pre>
         <figure>
             <img src="/images/learn/js/vue3-learn-16-8.jpg">
         </figure>
-
-
-        
     </div>
     <div class="text-block" id="act4">
         <h2>四、子組件修改父組件的資料（$parent）</h2>
-        
+        <p>上個章節介紹了父組件如何修改子組件提供給外部存取的資料，這個章節則反過來敘述子組件如何變父組件的資料，原理其實大同小異，只不過這裡要用的是 <em>$parent</em>。</p>
+        <p>父組件 <b>Parents.vue</b>：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-html">&lt;template&gt;
+    &lt;article&gt;
+        &lt;h1&gt;父組件&lt;/h1&gt;
+        &lt;p&gt;目前數字：{{ num }}&lt;/p&gt;
+        &lt;section&gt;
+            &lt;Child/&gt;
+        &lt;/section&gt;
+    &lt;/article&gt;
+&lt;/template&gt;
+
+&lt;script setup lang="ts" name="Parents"&gt;
+    import Child from "./Child.vue";
+    import { ref } from "vue";
+
+    const num = ref(10);
+&lt;/script&gt;</code></pre>
+        </div>
+        <p>子組件 <b>Child.vue</b>：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-html">&lt;template&gt;
+    &lt;div&gt;
+        &lt;h1&gt;子組件&lt;/h1&gt;
+        &lt;button @click="changeNum($parent)"&gt;改變數字&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script setup lang="ts" name="Child"&gt;
+    function changeNum(parent){
+        console.log(parent);
+    }
+&lt;/script&gt;</code></pre>
+        </div>
+        <p>可以看到子組件定義觸發事件所傳入的參數為 <em>$parent</em>，它可以用來存取父組件釋放給子組件操作的資料。是的，這裡提到了父組件釋放出來的資料，所以就如同子組件提供給外部使用的資料需要 <em>defineExpose</em>，父組件同理也要將它想釋放的資料提供給 <em>defineExpose</em>，於是父組件那邊我們需要再加上這一行：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-javascript">defineExpose({ num });</code></pre>
+        </div>
+        <p>確認畫面，點擊子組件按鈕確認 Console 輸出的結果：</p>
+        <figure>
+            <img src="/images/learn/js/vue3-learn-16-9.jpg">
+        </figure>
+        <p>確認已經可以取得父組件提供的資料 <em>num</em>，那後續子組件的事件就能改寫自己預期的函式內容了，例如：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-javascript">function changeNum(parent){
+    parent.num += 1;
+}</code></pre>
+        </div>
+        <p>結果：</p>
+        <figure>
+            <img src="/images/learn/js/vue3-learn-16-10.jpg">
+        </figure>
+        <p><br></p>
+        <p>最後補充一點，經過這一連串的操作，可能有些人疑惑為什麼 <em>changeNum(parent)</em> 裡的 <em>parent.num += 1;</em> 不需要加上 <em>.value</em>？修改 Ref 的值不是應該要修改 <em>.value</em> 嗎？然而當我 <em>parent.num.value += 1;</em> 這樣寫時瀏覽器會回傳錯誤報告：</p>
+        <blockquote class="is-error">
+            <p>chunk-2FDUVFJ5.js?v=49a9ac89:1722 Uncaught TypeError: Cannot create property 'value' on number '11'</p>
+        </blockquote>
+        <p>其實，無論是 <em>$parent</em> 還是 <em>$refs</em>，它們真身其實都是 <em>reactive</em> 響應式物件，之前我們有學過，包裹在 <em>reactive</em> 響應式物件裡面的 Ref 資料，若要對其值進行操作，是不需要添加 <em>.value</em> 的，這就是為什麼上面這個範例不需要添加 <em>.value</em> 就能直接修改 <em>parent.num</em> 的值。</p>
     </div>
     <div class="text-block" id="act5">
         <h2>五、參考資料</h2>
