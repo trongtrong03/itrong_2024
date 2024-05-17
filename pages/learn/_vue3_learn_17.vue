@@ -207,8 +207,8 @@ onUnmounted(() => {
     </div>
     <div class="text-block" id="act2">
         <h2>二、祖孫組件之間的通信（$attrs）</h2>
-        <p>首先我們觀賞以下父子組件的程式碼結構範例：</p>
-        <p><b>Parents.vue</b>：</p>
+        <p>首先我們閱讀以下父子組件的程式碼結構範例：</p>
+        <p>父組件 <b>Parents.vue</b>：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-html">&lt;template&gt;
     &lt;article&gt;
@@ -229,7 +229,7 @@ onUnmounted(() => {
 &lt;/script&gt;</code></pre>
         </div>
         <p>父組件結構中定義了三筆 Ref 資料，並且將它們全部傳遞給子組件。</p>
-        <p><b>Child.vue</b>：</p>
+        <p>子組件 <b>Child.vue</b>：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-html">&lt;template&gt;
     &lt;div&gt;
@@ -381,7 +381,7 @@ onUnmounted(() => {
 &lt;/template&gt;
 
 &lt;script setup lang="ts" name="GrandChild"&gt;
-    defineProps(["num", "number"])
+    defineProps(["num", "number"]);
 &lt;/script&gt;</code></pre>
         </div>
         <p>實際結果：</p>
@@ -391,6 +391,170 @@ onUnmounted(() => {
     </div>
     <div class="text-block" id="act3">
         <h2>三、祖孫組件之間的通信（provide＆inject）</h2>
+        <p>本章節一樣要敘述的是祖孫之間的資料通信，上一章節我們揭露透過 <em>$attrs</em> 可以將祖組件的資料存放在 attrs 此一特殊屬性內，讓孫組件自由去存取祖組件特定的資料，不過如果要使用 <em>$attrs</em>，非但祖孫組件都要進行相關設定，中間層的子組件同樣也需要 <em>v-bind="attrs"</em>，扮演祖孫之間資料通信的橋樑。然而事實上，Vue 還有另一種方式，讓祖孫組件之間可以直接溝通，而不需要子組件居中進行協調。</p>
+        <p>按照慣例，先準備練習範例的前置程式碼，首先是父組件（祖先）<b>Parents.vue</b> 的部分：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-html">&lt;template&gt;
+    &lt;article&gt;
+        &lt;h1&gt;父組件&lt;/h1&gt;
+        &lt;p&gt;Num  || {{ num }}&lt;/p&gt;
+        &lt;p&gt;User || Name：{{ user.name }} / Age：{{ user.age }}&lt;/p&gt;
+        &lt;section&gt;
+            &lt;Child /&gt;
+        &lt;/section&gt;
+    &lt;/article&gt;
+&lt;/template&gt;
+
+&lt;script setup lang="ts" name="Parents"&gt;
+    import Child from "./Child.vue";
+    import { ref, reactive } from "vue";
+
+    const num = ref(3);
+    const user = reactive({
+        name: "阿比",
+        age: 18
+    });
+&lt;/script&gt;</code></pre>
+        </div>
+        <p>在父組件中定義了兩筆資料，分別是一筆純數字 <em>num</em> 的 Ref，以及一份 <em>user</em> 的 Reactive 響應式物件資料。</p>
+        <p>子組件 <b>Child.vue</b>：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-html">&lt;template&gt;
+    &lt;div&gt;
+        &lt;h1&gt;子組件&lt;/h1&gt;
+        &lt;GrandChild /&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script setup lang="ts" name="Child"&gt;
+    import GrandChild from './GrandChild.vue';
+&lt;/script&gt;</code></pre>
+        </div>
+        <p>由於本章節重點是祖孫組件之間的直接通信，所以子組件的程式結構只有單純引入孫組件 <b>GrandChild.vue</b> 的功能，基本上不會參與本次練習內容。</p>
+        <p>孫組件 <b>GrandChild.vue</b>：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-html">&lt;template&gt;
+    &lt;div&gt;
+        &lt;h1&gt;孫組件&lt;/h1&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script setup lang="ts" name="GrandChild"&gt;&lt;/script&gt;</code></pre>
+        </div>
+        <p>孫組件目前只有基礎模板結構，在後續練習會逐步增加通信所需的程式方法。</p>
+        <p>現在開始進行祖孫組件之間的資料通信，從父組件（祖組件）一方直接傳遞資料給孫組件，使用的方法為 <em>provide</em> 函式，首先於父組件引用 <em>provide</em>：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-javascript">import Child from "./Child.vue";
+import { ref, reactive, provide } from "vue";
+
+const num = ref(3);
+const user = reactive({
+    name: "阿比",
+    age: 18
+});
+
+// 向後代提供資料數據
+provide("myNum", num);
+provide("myInfo", user);</code></pre>
+        </div>
+        <p><em>provide</em> 函式中一共填入兩個參數，第一個是提供給後代的資料要叫什麼名字，第二個則是該資料的名稱，雖然字面上這兩個意思看起來相近，但其實第一個值的意思是為該資料定義一個自定義的名稱，第二個值則是該資料本身的命名。</p>
+        <p>註解中的「後代」自然也包含子組件，不過本次練習的目的是不經由子組件也能直接向孫組件提供資料，所以我們跳過子組件，直接在孫組件進行下一步操作。</p>
+        <p>在孫組件的部分，同樣也要引用一個函式方法，叫做 <em>inject</em>，inject 有注入的意思。</p>
+        <p>孫組件 <b>GrandChild.vue</b>：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-html">&lt;template&gt;
+    &lt;div&gt;
+        &lt;h1&gt;孫組件&lt;/h1&gt;
+        &lt;p&gt;Num  || {{ x }}&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script setup lang="ts" name="GrandChild"&gt;
+    import { inject } from "vue";
+
+    // 接收前代的資料
+    const x = inject("myNum");
+&lt;/script&gt;</code></pre>
+        </div>
+        <p>範例中定義 <em>x</em> 變數來調用 <em>inject</em> 函式，雖說 x 這個變數命名有些隨便，但主要目的是讓我們能更清楚了解個組件資料定義與引用的變數名稱之間的關聯性。</p>
+        <p>實際畫面呈現：</p>
+        <figure>
+            <img src="/images/learn/js/vue3-learn-17-11.jpg">
+        </figure>
+        <p>事實上，<em>inject</em> 函式也可以傳入第二個參數，即替代值（或稱預設值），意思是假如第一個參數引用的資料名稱是 <em>provide</em> 所沒有的，例如：<em>inject("yourNum", 999)</em>，那麼變數 x 注入的資料值將會是 999：</p>
+        <figure>
+            <img src="/images/learn/js/vue3-learn-17-12.jpg">
+        </figure>
+        <p>使用替代值的好處除了可以避免後代組件不慎引用了前代不存在的資料導致畫面資料缺失，也可以技巧性地跳過 TS 的泛型檢查，譬如我們現在接著引用 <em>myInfo</em>：</p>
+        <p>孫組件 <b>GrandChild.vue</b>：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-html">&lt;template&gt;
+    &lt;div&gt;
+        &lt;h1&gt;孫組件&lt;/h1&gt;
+        &lt;p&gt;Num  || {{ x }}&lt;/p&gt;
+        &lt;p&gt;User || Name：{{ user.name }} / Age：{{ user.age }}&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script setup lang="ts" name="GrandChild"&gt;
+    import { inject } from "vue";
+
+    // 接收前代的資料
+    const x = inject("myNum");
+    const user = inject("myInfo");
+&lt;/script&gt;</code></pre>
+        </div>
+        <p>實際畫面呈現：</p>
+        <figure>
+            <img src="/images/learn/js/vue3-learn-17-13.jpg">
+        </figure>
+        <p>儘管程式渲染後的畫面結果沒問題，但你會發現 VS Code 的程式碼卻出現警告：</p>
+        <figure>
+            <img src="/images/learn/js/vue3-learn-17-14.jpg">
+        </figure>
+        <p>原因是 TS 無法推斷出孫組件模板裡使用的 <em>user</em> 是什麼資料，所以如果我們能在 <em>inject</em> 函式替 myInfo 定義好預設的替代資料內容，就可以巧妙地解決這個錯誤警告：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-javascript">const user = inject("myInfo", { name: "不具名", age: 0 });</code></pre>
+        </div>
+        <figure>
+            <img src="/images/learn/js/vue3-learn-17-15.jpg">
+        </figure>
+        <p><br></p>
+        <h3>與前代組件的資料互動</h3>
+        <p>前面已介紹前代組件 <em>provide</em> 資料給後代組件 <em>inject</em>，不免俗地也要來聊聊後代組件是否能直接修改前代組件的資料。概念和之前其他通信方式大同小異，主要還是要由前代組件（父組件）先定義好更改資料的事件方法，讓後代組件進行觸發操作。</p>
+        <p>所以，我們於父組件 <b>Parents.vue</b> 新增以下方法：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-javascript">function changeNumber(value){
+    num.value += value;
+}</code></pre>
+        </div>
+        <p><em>provide</em> 原本只有傳遞 <em>num</em> 資料，現在多了 <em>changeNumber</em> 方法要一起傳給後代，這時我們可以透過物件形式將這兩筆囊括起來：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-javascript">provide("myNum", {num, changeNumber});</code></pre>
+        </div>
+        <p>來到孫組件 <b>GrandChild.vue</b>，我們透過解構賦值的方式，將 <em>myNum</em> 提供的物件分離解析出來：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-javascript">const {num, changeNumber} = inject("myNum", "替代值");</code></pre>
+        </div>
+        <p>在模板添加事件觸發按鈕：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-html">&lt;template&gt;
+    &lt;div&gt;
+        &lt;h1&gt;孫組件&lt;/h1&gt;
+        &lt;p&gt;Num  || {{ num }}&lt;/p&gt;
+        &lt;button @click="changeNumber(10)"&gt;改變數字&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/template&gt;</code></pre>
+        </div>
+        <p>在按鈕觸發的事件中，只要點擊一下按鈕，就會傳送 10 給 <em>changeNumber</em> 裡的 <em>value</em>，並與 <em>num.value</em> 進行加總：</p>
+        <figure>
+            <img src="/images/learn/js/vue3-learn-17-16.jpg">
+        </figure>
+        <p>至於替代值與處理 TS 泛型檢查的部分可以這樣定義：</p>
+        <div class="text-code" v-pre>
+            <pre><code class="language-javascript">const {num, changeNumber} = inject("myNum", {num:0, changeNumber:(params:number)=>{}});</code></pre>
+        </div>
+
         
     </div>
     <div class="text-block" id="act4">

@@ -491,7 +491,7 @@
         "id": 62,
         "href": "vue3_learn_1",
         "title": "循序漸進學 Vue3（一）：從入門開始",
-        "time": "2024-01-02",
+        "time": "2024-04-02",
         "type": "javascript",
         "class": "vue"
     },
@@ -499,7 +499,7 @@
         "id": 63,
         "href": "vue3_learn_2",
         "title": "循序漸進學 Vue3（二）：響應式資料定義 ref＆reactive",
-        "time": "2024-01-04",
+        "time": "2024-04-04",
         "type": "javascript",
         "class": "vue"
     },
@@ -507,7 +507,7 @@
         "id": 64,
         "href": "vue3_learn_3",
         "title": "循序漸進學 Vue3（三）：計算屬性 computed",
-        "time": "2024-01-07",
+        "time": "2024-04-07",
         "type": "javascript",
         "class": "vue"
     },
@@ -515,7 +515,7 @@
         "id": 65,
         "href": "vue3_learn_4",
         "title": "循序漸進學 Vue3（四）：監視屬性 watch",
-        "time": "2024-01-08",
+        "time": "2024-04-08",
         "type": "javascript",
         "class": "vue"
     },
@@ -523,7 +523,7 @@
         "id": 66,
         "href": "vue3_learn_5",
         "title": "循序漸進學 Vue3（五）：自動執行的響應式副作用 watchEffect",
-        "time": "2024-01-10",
+        "time": "2024-04-10",
         "type": "javascript",
         "class": "vue"
     },
@@ -531,7 +531,7 @@
         "id": 67,
         "href": "vue3_learn_6",
         "title": "循序漸進學 Vue3（六）：元素標籤的 ref 屬性",
-        "time": "2024-01-17",
+        "time": "2024-04-17",
         "type": "javascript",
         "class": "vue"
     },
@@ -539,7 +539,7 @@
         "id": 68,
         "href": "vue3_learn_7",
         "title": "循序漸進學 Vue3（七）：組件之間的傳遞 props",
-        "time": "2024-01-19",
+        "time": "2024-04-19",
         "type": "javascript",
         "class": "vue"
     },
@@ -547,7 +547,7 @@
         "id": 69,
         "href": "vue3_learn_8",
         "title": "循序漸進學 Vue3（八）：使用自定義的 hooks",
-        "time": "2024-01-20",
+        "time": "2024-04-20",
         "type": "javascript",
         "class": "vue"
     },
@@ -555,7 +555,7 @@
         "id": 70,
         "href": "vue3_learn_9",
         "title": "循序漸進學 Vue3（九）：路由基本概念",
-        "time": "2024-01-23",
+        "time": "2024-04-23",
         "type": "javascript",
         "class": "vue"
     },
@@ -563,7 +563,7 @@
         "id": 71,
         "href": "vue3_learn_10",
         "title": "循序漸進學 Vue3（十）：路由嵌套與參數傳遞",
-        "time": "2024-01-24",
+        "time": "2024-04-24",
         "type": "javascript",
         "class": "vue"
     },
@@ -571,7 +571,7 @@
         "id": 72,
         "href": "vue3_learn_11",
         "title": "循序漸進學 Vue3（十一）：路由的 props 設定",
-        "time": "2024-01-29",
+        "time": "2024-04-29",
         "type": "javascript",
         "class": "vue"
     },
@@ -579,7 +579,7 @@
         "id": 73,
         "href": "vue3_learn_12",
         "title": "循序漸進學 Vue3（十二）：路由 push V.S. replace",
-        "time": "2024-02-03",
+        "time": "2024-05-03",
         "type": "javascript",
         "class": "vue"
     },
@@ -587,7 +587,7 @@
         "id": 74,
         "href": "vue3_learn_13",
         "title": "循序漸進學 Vue3（十三）：編程式路由導航",
-        "time": "2024-02-04",
+        "time": "2024-05-04",
         "type": "javascript",
         "class": "vue"
     },
@@ -595,7 +595,7 @@
         "id": 75,
         "href": "vue3_learn_14",
         "title": "循序漸進學 Vue3（十四）：使用 Pinia 實現集中式狀態管理──上",
-        "time": "2024-02-11",
+        "time": "2024-05-6",
         "type": "javascript",
         "class": "vue"
     },
@@ -603,23 +603,31 @@
         "id": 76,
         "href": "vue3_learn_15",
         "title": "循序漸進學 Vue3（十五）：使用 Pinia 實現集中式狀態管理──下",
-        "time": "2024-02-12",
+        "time": "2024-05-8",
         "type": "javascript",
         "class": "vue"
     },
     {
         "id": 77,
         "href": "vue3_learn_16",
-        "title": "循序漸進學 Vue3（十六）：組件之間的 props 通信──上",
-        "time": "2024-02-19",
+        "title": "循序漸進學 Vue3（十六）：組件之間的通信──父與子",
+        "time": "2024-05-11",
         "type": "javascript",
         "class": "vue"
     },
     {
         "id": 78,
         "href": "vue3_learn_17",
-        "title": "循序漸進學 Vue3（十七）：組件之間的 props 通信──下",
-        "time": "2024-02-26",
+        "title": "循序漸進學 Vue3（十七）：組件之間的通信──平行組件＆祖與孫",
+        "time": "2024-05-15",
+        "type": "javascript",
+        "class": "vue"
+    },
+    {
+        "id": 79,
+        "href": "vue3_learn_18",
+        "title": "循序漸進學 Vue3（十八）：組件之間的通信──插槽",
+        "time": "2024-05-17",
         "type": "javascript",
         "class": "vue"
     }
