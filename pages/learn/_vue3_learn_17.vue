@@ -14,7 +14,7 @@
     </div>
     <div class="text-block" id="act0">
         <h2>序、前言</h2>
-        <p>本篇文章承襲上一篇文章的主題「組件之間的 props 通信」，此為下篇，上一篇文章主要在記述父子組件之間的資料數據交換的各種方式，而這篇則要探討其他關係的通信方式，根據不同的組件關係，所使用的操作方法也有所不同。</p>
+        <p>本篇文章承襲上一篇文章的主題「組件之間的通信」，此為第二篇，而上一篇文章主要在記述父子組件之間的資料數據交換的各種方式，這篇則要探討其他關係的通信方式，根據不同的組件關係，所使用的操作方法也有所不同。</p>
     </div>
     <div class="text-block" id="act1">
         <h2>一、任意組件之間的通信（mitt）</h2>
@@ -554,8 +554,6 @@ provide("myInfo", user);</code></pre>
         <div class="text-code" v-pre>
             <pre><code class="language-javascript">const {num, changeNumber} = inject("myNum", {num:0, changeNumber:(params:number)=>{}});</code></pre>
         </div>
-
-        
     </div>
     <div class="text-block" id="act4">
         <h2>四、參考資料</h2>

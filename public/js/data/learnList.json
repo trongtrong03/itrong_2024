@@ -626,7 +626,7 @@
     {
         "id": 79,
         "href": "vue3_learn_18",
-        "title": "循序漸進學 Vue3（十八）：組件之間的通信──插槽",
+        "title": "循序漸進學 Vue3（十八）：組件之間的通信──插槽（slot）",
         "time": "2024-05-17",
         "type": "javascript",
         "class": "vue"
