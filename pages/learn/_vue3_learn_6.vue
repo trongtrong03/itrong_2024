@@ -1,3 +1,18 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、為什麼需要 ref 屬性？' },
+        { id: 2, title: '二、在組件引入上加入 ref' },
+        { id: 3, title: '三、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="67" fileType="learnList" />
@@ -5,21 +20,20 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、為什麼需要 ref 屬性？</a></li>
-            <li><a href="#act2">二、在組件引入上加入 ref</a></li>
-            <li><a href="#act3">三、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>本篇文章要講述的是 Vue 3 模板元素標籤的新屬性──<em>ref</em>，有些人可能會跟我一樣產生疑惑，<em>ref</em> 不就是那個用來宣告響應式資料的其中一種方式嗎？怎麼也能用在元素標籤裡了？事實上，雖然它們一樣都叫做 ref，但本質並不是相同的東西。</p>
         <p>定義響應式資料的 <em>ref</em> 是一個函式，它用來接收一個任何型別的參數，然後返回一個響應式的可引用物件，這個物件包含了一個 <em>.value</em> 屬性，用以獲取或修改其原本設定的值。所以這就是為什麼我們在任何函式要調用或修改 <em>ref</em> 的值時，大多時候都需要加上 <em>.value</em>。</p>
         <p>但是在模板 HTML 元素標籤中的 <em>ref</em> 則是一個特殊屬性，用於在元件或 DOM 元素上建立一個參考。這個引用可以在 JavaScript 中透過 <em>this.$refs</em> 或 <em>ref</em> 屬性來訪問，用於直接操作對應的元件實例或 DOM 元素。</p>
         <p>如此我們就對模板元素中的 <em>ref</em> 有了初步認識，本篇文章的內容要來聊聊為何 Vue 3 會誕生這樣一個特殊屬性，它能幫助我們在實務上解決哪些問題。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、為什麼需要 ref 屬性？</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>首先，以下有段 HTML 程式碼：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-html">&lt;template&gt;
@@ -116,8 +130,8 @@ function getElement (){
         </figure>
         <p>會發現渲染進來的元素沒有被添加任何名稱，而之所以用 <em>ref</em> 創建一個變數名稱，是為了用來儲存由它所標記的內容，例如這個例子儲存了 <em>third</em>。</p>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、在組件引入上加入 ref</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>我們都知道 Vue.js 有個特性就是可以在某個組件模板裡引入另一個組件，那引入的組件是否也可以添加 <em>ref</em> 識別呢？既然有這個疑慮我們就直接來做實驗，承襲上個章節的範例，我們在 <b>App.vue</b> 引用的 <em>&lt;User/&gt;</em> 子組件上加入 <em>ref</em>：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-html">&lt;template&gt;
@@ -183,8 +197,8 @@ defineExpose({ a, b, c });</code></pre>
         </figure>
         <p>可以看到 Console 回傳的訊息中，包含了 <em>a</em>、<em>b</em>、<em>c</em> 三個 <em>ref</em> 資料的物件。</p>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <dl>
             <dd><a href="https://cn.vuejs.org/" target="_blank">Vue.js</a></dd>
             <dd><a href="https://www.youtube.com/watch?v=40mG6pYE3rw&list=PLmOn9nNkQxJEnGM4Jf0liBcyedAtuQq-O&index=23" target="_blank">【极简Vue3】023 标签的ref属性</a></dd>
@@ -194,10 +208,3 @@ defineExpose({ a, b, c });</code></pre>
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

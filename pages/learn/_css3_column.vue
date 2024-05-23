@@ -1,3 +1,21 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、Column 基本概念' },
+        { id: 2, title: '二、如何分割欄位？' },
+        { id: 3, title: '三、如何改變欄位的間距？' },
+        { id: 4, title: '四、欄位內的標題處理' },
+        { id: 5, title: '五、如何製作瀑布流佈局？' },
+        { id: 6, title: '六、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="25" fileType="learnList" />
@@ -5,21 +23,17 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、Column 基本概念</a></li>
-            <li><a href="#act2">二、如何分割欄位？</a></li>
-            <li><a href="#act3">三、如何改變欄位的間距？</a></li>
-            <li><a href="#act4">四、欄位內的標題處理</a></li>
-            <li><a href="#act5">五、如何製作瀑布流佈局？</a></li>
-            <li><a href="#act6">六、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>假設有個排版的需求，希望網頁上的文章能像報章雜誌那樣呈現多欄排列的樣貌，一般我們可能會使用 <em>float</em> 或 <em>display: inline-block</em> 屬性達到預期效果。不過在 CSS3 中，Column 系列屬性就能直接將一段文字分割成欄，使其具有多欄式陳列內容的編排方式，此外，也有人活用其特性，實現過往得搭配 JavaScript 才能做到的「瀑布流」（Masonry）布局。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、Column 基本概念</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>在進入 CSS3 Column 語法相關應用前，我們必須先釐清一些概念：當我們檢視一張表格或一個陣列矩陣的時候，橫向會稱為「列」，縱向則稱為「行」，但在部份華語國家，例如中國，則剛好相反，橫向為行，縱向為列，因此我們讀到相關文章時，有時候會產生行列混亂的錯覺，實乃雙方詞語定義上的誤會。而行列交織的每一個區塊，則通常稱為「欄」。</p>
         <p>示意圖：</p>
         <figure>
@@ -70,8 +84,8 @@
             </div>
         </div>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、如何分割欄位？</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>假設目前有一個文字區域，其原本 HTML 程式碼片段如下：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-html">&lt;section&gt;
@@ -116,8 +130,8 @@
         </div>
         <p>屬性值先後不影響渲染結果，如果只設定一個值，會由瀏覽器自行判斷是 <em>column-width</em> 還是 <em>column-count</em>，然後去對版面進行欄位分割的調整。</p>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、如何改變欄位的間距？</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p>用來改變欄位之間距離的屬性是 <em>column-gap</em>，例如：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-css">section {
@@ -156,8 +170,8 @@
         </div>
         <p>如果要拆開來寫，個別定義和 <em>border</em> 一樣，分別是 <em>column-rule-width</em>（寬度）、<em>column-rule-style</em>（樣式）以及<em>column-rule-color</em>（顏色）。</p>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、欄位內的標題處理</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <p>假設添加 <em>columns</em> 屬性的區塊，裡面包含了標題和內文，通常 <em>columns</em> 會將整個區域內所有元素一視同仁進行分欄調配，但一般我們閱讀文章時，標題通常會佔據一整列，而不會跟內文混合在一起被切割。雖說可以直接把標題元素拉出 Column 區域外來解決問題，但秉持著不修改原先 HTML 程式碼片段的前提，是否有什麼 CSS 屬性可以直接處理這個問題？有的，答案是 <em>column-span</em> 這個屬性。</p>
         <div class="text-code" v-pre>
             <pre><code class="language-css">h1 {
@@ -173,8 +187,8 @@
             </div>
         </div>
     </div>
-    <div class="text-block" id="act5">
-        <h2>五、如何製作瀑布流佈局？</h2>
+    <div class="text-block" :id="'act' + catalog[5].id">
+        <h2 v-text="catalog[5].title"></h2>
         <p>最後來講講瀑布流佈局，所謂瀑布流（Masonry），指的是向下排列卡片式物件的一種編排模式，尤其是各物件高度不一的情況下，透過瀑布流進行編排是相當常見的作法，知名的設計師平台 <a href="https://www.pinterest.com/">Pinterest</a> 便是其中一例經典。</p>
         <figure>
             <img src="/images/learn/css/column-2.jpg">
@@ -190,8 +204,8 @@
         </div>
         <p>僅需 <em>columns-count</em> 和 <em>columns-gap</em> 兩個屬性分別設定欄數與間距即可。儘管輕鬆簡單，但仔細看排版會發現效果也非完美無瑕，舉例來說，我們可以從實例中的圖片編號發現，其物件是採先上下後左右的均分方式進行排序，而非先左右後上下的正常邏輯，當要進行特定條件的篩選排序（例如：時間）時，使用 CSS3 Column 實現的瀑布流佈局顯然會存在難以善了的問題。JavaScript 與 CSS3 的瀑布流佈局皆有各自優缺之處，要採用哪一種方式實現就自行斟酌。</p>
     </div>
-    <div class="text-block" id="act6">
-        <h2>六、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[6].id">
+        <h2 v-text="catalog[6].title"></h2>
         <dl>
             <dd><a href="https://wcc723.github.io/css/2015/07/23/css-column/" target="_blank">CSS column 教學</a></dd>
             <dd><a href="https://ithelp.ithome.com.tw/articles/10195002?sc=rss.iron" target="_blank">CSS：column 瀑布流版型</a></dd>    
@@ -201,10 +215,3 @@
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

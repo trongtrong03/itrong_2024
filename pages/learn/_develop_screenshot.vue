@@ -1,3 +1,19 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、Google Chrome' },
+        { id: 2, title: '二、Firefox' },
+        { id: 3, title: '三、IE Edge' },
+        { id: 4, title: '四、Opera' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="38" fileType="learnList" />
@@ -5,20 +21,18 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、Google Chrome</a></li>
-            <li><a href="#act2">二、Firefox</a></li>
-            <li><a href="#act3">三、IE Edge</a></li>
-            <li><a href="#act4">四、Opera</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>儘管作業系統本身就有內建截圖功能，但一般情況下僅能擷取螢幕顯示範圍內的畫面，若只想裁切畫面中的部分區域，或是想擷取整個網頁的完整頁面，通常得借助第三方工具軟體的幫助，像是 <a href="https://picpick.app/zh-tw/" target="_blank">PicPick</a>、<a href="https://app.prntscr.com/zh-cn/index.html" target="_blank">Lightshot</a>、<a href="https://www.screenpresso.com/" target="_blank">Screenpresso</a>...等熱門截圖工具輔助，方能達到目的。</p>
         <p>事實上，假如你今天想截圖的對象是瀏覽器中的網頁，倒不必假手第三方工具的協助，部分瀏覽器本身就有支援螢幕截圖的功能，且步驟通常也不繁瑣，以下一起來看看如何操作。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、Google Chrome</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <h6>1. 按下「F12」啟用開發者模式</h6>
         <p>如果使用的是 MAC 電腦的話則是 <em>⌘Command</em> + <em>Option</em> + <em>I</em>。</p>
         <figure>
@@ -45,8 +59,8 @@
             <figcaption>透過 Full size screenshot 功能轉存的影像畫面。</figcaption>
         </figure>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、Firefox</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>Firefox 啟用截圖功能的方式較簡單，其快捷鍵為 <em>Ctrl</em> + <em>Shift</em> + <em>S</em>。</p>
         <figure>
             <img src="/images/learn/dev/screenshot/screenshot-6.jpg">
@@ -66,8 +80,8 @@
             <img src="/images/learn/dev/screenshot/screenshot-9.jpg">
         </figure>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、IE Edge</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p>為人揶揄且詬病的 IE 已經是過去式了，現今微軟主打的 IE Edge 捲土重來，頗有一舉搶回最多用戶使用的瀏覽器寶座之氣勢。同樣 IE Edge 也有內建畫面截圖的功能，不過前提是你安裝的 Egde 版本必須在版本 94 以上。</p>
         <figure>
             <img src="/images/learn/dev/screenshot/screenshot-10.jpg">
@@ -89,8 +103,8 @@
             <figcaption>繪圖功能面板裡提供多種顏色及畫筆粗細供使用者自行調整。</figcaption>
         </figure>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、Opera</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <p>雖然 Opera 使用者數量不若前三者龐大，但 Opera 瀏覽器的截圖快照功能的獨特性在於它可以將擷取的畫面轉存成 PDF 檔，若有這方面需求的使用者，不妨可以考慮看看。</p>
         <figure>
             <img src="/images/learn/dev/screenshot/screenshot-15.jpg">
@@ -103,10 +117,3 @@
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

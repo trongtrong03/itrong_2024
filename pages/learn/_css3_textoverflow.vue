@@ -1,3 +1,19 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、強制斷行' },
+        { id: 2, title: '二、單行文字溢出省略符' },
+        { id: 3, title: '三、多行文字溢出省略符' },
+        { id: 4, title: '四、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="36" fileType="learnList" />
@@ -5,19 +21,17 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、強制斷行</a></li>
-            <li><a href="#act2">二、單行文字溢出省略符</a></li>
-            <li><a href="#act3">三、多行文字溢出省略符</a></li>
-            <li><a href="#act4">四、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>在網頁開發過程中，很常遇到客戶會要求在文字排版上，針對溢出指定行數的文章內容能以「...」的方式取代溢出文字，早期大多是透過 JavaScript 去限制內容顯示的字元數，或是判斷當文字超過區塊內容寬度時，隱藏溢出文字並自動加上「...」的字樣。不過在 CSS3 發佈之後，這樣的需求已經不必再仰賴 JavaScript 去實現了，透過屬性樣式表的設定就能輕鬆實現這方面的需求，以下就來看看要如何定義屬性。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、強制斷行</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>進入正題之前，先來介紹稍微與主題有點關聯的用法，也就是文字強制斷行的使用方式。為什麼文字需要強制斷行？什麼情況下會需要它？在中文語系中比較不會遇到這樣的問題，不過對使用拉丁字母的西方國家來說，每一個單字之間皆會以一個空格區分開來，若該行最後一個單字超過段落區域寬度，則會自動跳到下一行開始繼續書寫。這種排版方式乍看之下沒有問題，但你是否想過如果有個單字字元長度超過區塊寬度呢？例如大家「耳熟能詳」的火山矽肺症（45 個英文字母），又或者是荒謬的「肌聯蛋白」，一共由 189,819 個字母組成的破天荒數字之英文字，當他們被寫入段落時，排版會出現什麼樣的情景？</p>
         <p>不賣關子，直接來看看結果：</p>
         <div class="text-codepen">
@@ -68,8 +82,8 @@
         </div>
         <p>嗯！版面看起來美觀多了，但你發現了嗎？看似完美的版面設定，卻也潛藏著一個問題──那就是 <em>word-break</em> 的強制換行，可是會連同單字本身一同「腰斬」的！仔細看會發現部分行間尾端的單字會被截斷至下一行，使用者閱讀的時候可能會有不易判讀的情況。因此，雖然這兩個屬性常常綁定在一起使用，但要不要用 <em>word-break</em> 最好還是先和團隊商討後再決定使用與否。</p>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、單行文字溢出省略符</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>單行溢出的省略符應該是最常看見的應用方式，實現其效果的核心屬性為 <em>text-overflow</em>，主要用於設定文字溢出的處理方式。其預設值為 <em>clip</em>，表示直接裁切溢出的文字內容。而要以「...」表示溢出文字的屬性值為 <em>ellipsis</em>，不過光設定此屬性並無法直接實現我們要的結果，還必須搭配 <em>white-space: nowrap</em>（強制文字不換行），以及 <em>overflow: hidden</em>（隱藏溢出內容）這兩個屬性才有作用。</p>
         <p>語法：</p>
         <div class="text-code" v-pre>
@@ -89,8 +103,8 @@
             </p>
         </div>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、多行文字溢出省略符</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p>單行溢出大多用於文章列表、產品封面的標題，而多行溢出的需求大多在限定區域範圍內的簡短介紹段落被提出，核心屬性為 <em>line-clamp</em>，同樣要搭配其他屬性才能實現需求，以下直接先列出語法格式，再來一一講解各屬性的功用：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-css">p {
@@ -126,8 +140,8 @@
         </div>
         <p>如此在 Compass 編譯到這個選擇器時就不會多事，誤把 <em>box-orient</em> 給剔除掉了。</p>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <dl>
             <dd><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/-webkit-line-clamp" target="_blank">MDN</a></dd>
         </dl>
@@ -136,10 +150,3 @@
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

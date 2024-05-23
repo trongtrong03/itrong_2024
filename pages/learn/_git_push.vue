@@ -1,3 +1,19 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、remote' },
+        { id: 2, title: '二、push' },
+        { id: 3, title: '三、補充' },
+        { id: 4, title: '四、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="29" fileType="learnList" />
@@ -5,19 +21,17 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、remote</a></li>
-            <li><a href="#act2">二、push</a></li>
-            <li><a href="#act3">三、補充</a></li>
-            <li><a href="#act4">四、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>除了在本機端版控檔案外，同步推送到遠端儲存庫進行備份也是 Git 價值所在之一，本篇文章將來談談如何把自己電腦裡的專案備份到遠端儲存庫中，這裡主要會使用到兩種指令：<em>remote</em> 與 <em>push</em>，分別用來處理遠端的操作，以及將檔案推送至遠端儲存庫上。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、remote</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>在前一篇文章 <a href="git_github" target="_blank">Git 筆記（三）：使用 GitHub 建立遠端儲存庫（repository）</a> 裡，我們已透過 GitHub 建立帳戶並新增了一個可提供本機端 Git 專案進行遠端備份的遠端儲存庫，接下來我們將透過 <em>remote</em> 指令將這個遠端儲存庫與本機端欲同步備份的專案進行連結。</p>
         <figure>
             <img src="/images/learn/dev/git-github-4.jpg">
@@ -54,8 +68,8 @@
         </figure>
         <p>可以發現指令返回的結果多了一筆我們從 GitHub 新增的遠端儲存庫，其主機名稱為「origin」。也就是說，原本 <em>remote add</em> 那一串指令裡有一個 <em>origin</em> 的字串，指的便是新增遠端儲存庫的主機名稱，這個名稱可以隨個人偏好或團隊要求而變更。</p>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、push</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>建立好遠端與本機端儲存庫的連結後，我們就可以將專案版控同步備份到遠端上了，其核心指令為 <em>push</em>，因此我們在看 Git 相關中文文件時，常常會看到作者將同步備份的行為稱作「推送」。</p>
         <div class="text-code" v-pre>
             <pre><code class="language-git">$git push -u origin master</code></pre>
@@ -91,8 +105,8 @@
         </div>
         <p>使用者可能以為 <em>push --all</em> 會將版控檔案推送到全部的遠端儲存庫，經實際測試後得到的結果並不然。<em>push --all</em> 指令會以前次使用者推送遠端儲存庫為依據執行推送。</p>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、補充</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p>以下繼續補充一些有關遠端儲存庫的指令操作：</p>
         <p><br></p>
         <h3>顯示遠端儲存庫主機名稱：</h3>
@@ -118,8 +132,8 @@
             <pre><code class="language-git">$git remote rename origin2 itrong</code></pre>
         </div>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <dl>
             <dd><a href="https://git-scm.com/" target="_blank">Git</a></dd>
             <dd><a href="https://github.com/" target="_blank">GitHub</a></dd>
@@ -129,10 +143,3 @@
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

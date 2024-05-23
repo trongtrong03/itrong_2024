@@ -1,3 +1,20 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 1, title: '一、錯誤訊息' },
+        { id: 2, title: '二、警告提示' },
+        { id: 3, title: '三、其他疑難雜症' },
+    ]);
+
+    // avtive
+    const isActive = ref(0);
+</script>
+
 <template>
     <NuxtLayout name="workshop">
         <hgroup class="text-heading">
@@ -7,13 +24,13 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act1">一、錯誤訊息</a></li>
-            <li><a href="#act2">二、警告提示</a></li>
-            <li><a href="#act3">三、其他疑難雜症</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、錯誤訊息</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <div class="text-accordin is-error">
             <div class="accordin-item" :class="isActive==1001 ? 'is-active' : ''">
                 <div class="accordin-title" @click="isActive = 1001;">
@@ -99,13 +116,13 @@ app.use(pinia);</code></pre>
             </div>
         </div>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、警告提示</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <div class="text-accordin is-warning">
         </div>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、其他疑難雜症</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <div class="text-accordin is-others">
             <div class="accordin-item" :class="isActive==3001 ? 'is-active' : ''">
                 <div class="accordin-title" @click="isActive = 3001;">
@@ -121,18 +138,28 @@ app.use(pinia);</code></pre>
                 </div>
                 <button class="accordin-close" @click="isActive = 0;"></button>
             </div>
+            <div class="accordin-item" :class="isActive==3002 ? 'is-active' : ''">
+                <div class="accordin-title" @click="isActive = 3002;">
+                    <p>如何改變 Vite 的 port？</p>
+                </div>
+                <div class="accordin-content">
+                    <p>執行 Vite 的 <em>npm run dev</em> 指令時，預設的本機端伺服器網址為 <b>http://localhost:5173/</b>，若因為一些因素想修改它初始 port 值，可從 <b>vite.config</b> 文件著手進行變更：</p>
+                    <div class="text-code" v-pre>
+                        <pre><code class="language-javascript">export default defineConfig({
+    server: {
+        port: 3006,
+    },
+
+    // 其他設定
+})</code></pre>
+                    </div>
+                    <p>範例中我們將 port 設定為 3006，那麼下次執行 <em>npm run dev</em> 後，網址就將會是 <b>http://localhost:3006/</b> 了。</p>
+                </div>
+                <button class="accordin-close" @click="isActive = 0;"></button>
+            </div>
         </div>
     </div>
 </div>
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-
-    const isActive = ref(0);
-</script>

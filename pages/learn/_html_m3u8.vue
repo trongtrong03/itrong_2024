@@ -1,3 +1,21 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、認識 HTTP Live Streaming' },
+        { id: 2, title: '二、什麼是 M3U8？' },
+        { id: 3, title: '三、如何下載與轉換' },
+        { id: 4, title: '四、FFmpeg 工具介紹' },
+        { id: 5, title: '五、使用 JS 播放 M3U8' },
+        { id: 6, title: '六、其他名詞補充' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="42" fileType="learnList" />
@@ -5,21 +23,17 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、認識 HTTP Live Streaming</a></li>
-            <li><a href="#act2">二、什麼是 M3U8？</a></li>
-            <li><a href="#act3">三、如何下載與轉換</a></li>
-            <li><a href="#act4">四、FFmpeg 工具介紹</a></li>
-            <li><a href="#act5">五、使用 JS 播放 M3U8</a></li>
-            <li><a href="#act6">六、其他名詞補充</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>在介紹 M3U8 之前，先來講講 HTTP Live Streaming 這項技術，縮寫為 HLS 的 HTTP Live Streaming 是由蘋果公司提出基於 HTTP 的一種串流媒體網路傳輸協定，一般我們稱之為「HTTP 即時串流」。它把整個將影片檔案細分為較小且可下載的 HTTP 檔案，並經由 HTTP 通訊協定傳遞檔案，使用者透過所使用之裝置載入這些 HTTP 檔案，以影片的格式來進行播放，這就是 HLS 的運作原理。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、認識 HTTP Live Streaming</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>承襲序章對 HTTP Live Streaming 粗略的介紹，我們接著來談談使用 HLS 的優點。使用 HLS 的優點是：只要能連上網路的裝置，基本上都支援 HTTP，因此相較於其他使用專屬伺服器的串流通訊而言更容易實行。而真正最大的好處，在於 HLS 串流可依據網路傳輸的速度，單純提高或降低影片的品質，盡可能不干擾影片播放的進度。例如 Youtube，我們觀看影片時，畫質有時會因為網速下降而自動調整為低解析度，但是當網速恢復正常時，畫質也隨之調整回較高解析度的品質，這便是 HLS 實行下的表現（自適應位元速率串流）──當然我們也可以手動自行切換。不過假如沒有此功能，緩慢的網速可能會直接導致影片停止播放。</p>
         <p>HLS 具體是如何運作的，我們可以透過下圖了解：</p>
         <figure>
@@ -42,8 +56,8 @@
         <p><strong>如何判斷下載的檔案是否為 HLS？</strong></p>
         <p>基本上，下載的檔案如果是 <em>.m3u8</em> 或 <em>.ts</em> 格式，基本上就能確定它使用的是 HLS 技術。</p>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、什麼是 M3U8？</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>看完 HTTP Live Streaming 的介紹，大概能推論出 M3U8 就是 HLS 運作過程中用來輔助用戶端裝置判讀影音來源的播放清單格式，而 M3U8 是 M3U 的其中一根細枝，後面的 8 則表示該格式採用 UTF-8 進行編碼。</p>
         <p>M3U8 格式檔案的副檔名為 <em>.m3u8</em>，屬於純文字檔，基本上大多數的文字編輯器都能開啟它，包含 Windows 的記事本。</p>
         <figure>
@@ -74,8 +88,8 @@
             <img src="/images/learn/html/m3u8/m3u8-6.jpg">
         </figure>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、如何下載與轉換</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p>除了支援播放串流影音之外，VLC media player 也可以把裡面影音內容下載下來（或稱轉換）。步驟如下：</p>
         <h6>1. 在輸入串流網址的下方「播放」旁箭頭->「轉換」</h6>
         <figure>
@@ -159,8 +173,8 @@
         </blockquote>
         <p>當然除了以上提到的應用程式、線上工具，網路上依然有不少提供相關服務的軟體、套件，例如 Google Chrome 的線上應用程式商店裡有一款名為「<a href="https://chrome.google.com/webstore/detail/%E7%8C%AB%E6%8A%93/jfedfbgedapdagkghmgibemcoggfppbb">貓抓</a>」的擴充套件也具備相同的功能，有相關需求或對此感興趣的人可以多方嘗試看看。</p>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、FFmpeg 工具介紹</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <p>前面幾個章節大概介紹了 M3U8 的歷史淵源，以及相關播放及下載方式，而本章節則說明要如何自行製作 M3U8 播放清單。這裡使用首選的工具為 <a href="https://ffmpeg.org/" target="_blank">FFmpeg</a>，它是一款基於 C 程式語言開發的開源多媒體處理框架，FF 指的是 Fast Forward（快進之意），可以為各種影音格式的檔案執行解碼、編碼、串流...等動作。</p>
         <p><br></p>
         <h3>Windows 安裝流程：</h3>
@@ -347,8 +361,8 @@ $ ./ffmpeg [option]</code></pre>
             <li><a href="https://youtu.be/fAYLSs5srfI" target="_blank">ffmpeg实用教程：7 音频转码指南</a></li>
         </ul>
     </div>
-    <div class="text-block" id="act5">
-        <h2>五、使用 JS 播放 M3U8</h2>
+    <div class="text-block" :id="'act' + catalog[5].id">
+        <h2 v-text="catalog[5].title"></h2>
         <p>由於只有 MAC 的 Safari 瀏覽器能直接讀取 M3U8 的播放清單，其他作業系統與瀏覽器（包含在 MAC 安裝的其他瀏覽器）若開啟 M3U8 檔案只能讀取其內部的編碼指令，或是直接下載檔案到本機端裡面。因此，我們需要藉由套件讓使用者可以在這些瀏覽器順利播放 M3U8 串流播放清單。也許你會疑問為什麼透過 JavaScript 就可以做到原本瀏覽器做不到的事情（播放 HLS）？其實這和 W3C 的 Media Source Extensions 規範有關，有關 Media Source Extensions 的詳細介紹會放在補充章節說明，這裡只要先知道我們可以利用一些熱門、常見且容易使用的 JavaScript 框架、函式庫，像是 <a href="https://videojs.com/" target="_blank">Video.js</a>、<a href="https://hls-js.netlify.app/demo/" target="_blank">hls.js</a> ...等來實現播放串流影音的需求，而本章節中將以 hls.js 作為我們的首選輔助套件。</p>
         <p><br></p>
         <h3>套件介紹：</h3>
@@ -453,8 +467,8 @@ $ ./ffmpeg [option]</code></pre>
             </div>
         </div>
     </div>
-    <div class="text-block" id="act6">
-        <h2>六、其他名詞補充</h2>
+    <div class="text-block" :id="'act' + catalog[6].id">
+        <h2 v-text="catalog[6].title"></h2>
         <p>本章節將針對整篇文章所提及的一些專有名詞或技術做一些補充介紹。</p>
         <p><br></p>
         <h3>HTTP：</h3>
@@ -522,10 +536,3 @@ IndexVideo1_4.ts
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

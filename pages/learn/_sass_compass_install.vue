@@ -1,3 +1,21 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、Compass 是什麼？' },
+        { id: 2, title: '二、我該如何進行環境安裝？' },
+        { id: 3, title: '三、要如何在專案裡使用 Compass？' },
+        { id: 4, title: '四、config.rb 的功用是什麼？' },
+        { id: 5, title: '五、快速懶人包' },
+        { id: 5, title: '六、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="6" fileType="learnList" />
@@ -5,29 +23,25 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、Compass 是什麼？</a></li>
-            <li><a href="#act2">二、我該如何進行環境安裝？</a></li>
-            <li><a href="#act3">三、要如何在專案裡使用 Compass？</a></li>
-            <li><a href="#act4">四、config.rb 的功用是什麼？</a></li>
-            <li><a href="#act5">五、快速懶人包</a></li>
-            <li><a href="#act6">六、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>在正式提到 <a href="http://compass-style.org/" target="_blank">Compass</a> 之前，得先稍微將話題兜到 Sass 上。假如此刻你對 Sass 的認識仍處於一問三不知的階段，只需知道 Sass 是一套可以幫助我們更有效開發 CSS 的編譯工具即可。根據書寫規則的不同（顯著差異在於巢狀結構），Sass 又可分為 Sass 與 SCSS 兩種格式，但不管要用哪一種格式來寫 CSS 樣式，使用的工作電腦都必須安裝可支援語法的依賴，而本篇介紹的主角 Compass 便是其中之一。至於有關 Sass / SCSS 的詳細內容則留待日後其他篇幅再作介紹，本篇主要重點在於介紹如何安裝並使用 Compass。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、Compass 是什麼？</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>誠如 Sass 是一套讓 CSS 開發更具效率的工具，Compass 則是一款可以更加簡化 Sass 作業的輔助工具，它不僅可以自動補足部分 CSS 屬性因應不同瀏覽器產生的不同前綴，也提供許多類似 Javascript 的函式，例如 <em>for</em> 迴圈、<em>if</em> 敘述句等，又或者內建 CSS3 函數、Reset 重置表、圖片合併、產出壓縮...林林總總多樣功能，自其正式問世後，很快地成為受諸多網頁前端工程師喜愛的 Sass 開發工具之一。</p>
         <blockquote class="is-warning">
             <p>唯比較可惜的是 Compass 在 2014 年之後就不再持續維護更新，許多功能放到多年後的現今要不已經過時，不然就是有更佳的替代方案，編譯 Sass 的任務也多由 Gulp、Webpack 之類的自動化管理工具取代。</p>
         </blockquote>
         <p>既然如此，為什麼還要介紹 Compass 呢？畢竟對許多網頁前端初學者而言，要馬上學會 Gulp、Webpack 這類基於 NodeJS 打造的管理工具並不容易。因此，Compass 即便不再更新，卻仍舊是幫助初學者由淺入深的不錯門檻之一。</p>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、我該如何進行環境安裝？</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>開始使用 Compass 編寫 Sass 之前，我們需要在工作電腦裡下載並安裝以下這些程式：</p>
         <ol>
             <li>Ruby</li>
@@ -61,8 +75,8 @@
         </div>
         <p>Ruby、Sass、Compass 皆分別安裝完畢後，我們就可以開始在自己的工作電腦用 Compass 編譯 Sass 了。</p>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、要如何在專案裡使用 Compass？</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <h6>1. 建立空白資料夾並移動至資料夾內。</h6>
         <p>假設我們要在 D 槽建立並執行由 Compass 編譯的專案，而資料夾名稱為「demo」，那麼其完整資料夾路徑就是 <b>D:/demo</b>。開啟終端機或命令提示字元，輸入下方指令：</p>
         <div class="text-code" v-pre>
@@ -119,8 +133,8 @@
         <p><br></p>
         <p>以上便是專案導入 Compass 並使用的流程，簡單來說只要架設起 Compass 作業環境後，往後基本上只需要 <em>cd</em> 資料夾並 <em>compass watch</em> 編譯 Sass 這兩項指令就能撰寫專案的 CSS。</p>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、config.rb 的功用是什麼？</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <p><b>config.rb</b> 是 Compass 專案不可缺少的設定文件，它記載著 Compass 執行編譯時所需的相關參數。儘管我們不能隨意刪除它，但有些參數細節可以視個人或團隊的需要去作變更，本節將介紹其設定文件的幾個重要參數，以及可以額外新增哪些參數進去。</p>
         <p>我們先來看看透過 <em>compass create</em> 所產生預設 <b>config.rb</b> 文件裡的配置內容：</p>
         <div class="text-code" v-pre>
@@ -297,8 +311,8 @@ asset_cache_buster {|*args| nil }</code></pre>
             <p>假如你在變更 <b>config.rb</b> 參數時已正在執行 <em>compass watch</em>，則必須終止並重新進行監控，<b>config.rb</b> 新變更的參數才會生效。</p>
         </blockquote>
     </div>
-    <div class="text-block" id="act5">
-        <h2>五、快速懶人包</h2>
+    <div class="text-block" :id="'act' + catalog[5].id">
+        <h2 v-text="catalog[5].title"></h2>
         <p>以下筆記從初始安裝到編譯專案的完整指令流程：</p>
         <h6>1. 下載、安裝 <a href="https://rubyinstaller.org/" target="_blank">RubyInstaller</a>。</h6>
         <h6>2. 於命令提示字元視窗依序輸入以下指令：</h6>
@@ -318,8 +332,8 @@ compass watch</code></pre>
         </div>
 
     </div>
-    <div class="text-block" id="act6">
-        <h2>六、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[6].id">
+        <h2 v-text="catalog[6].title"></h2>
         <dl>
             <dd><a href="http://compass-style.org/" target="_blank">Compass</a></dd>
             <dd><a href="http://blog.shihshih.com/installing-the-sass-and-compass/" target="_blank">CSS開發工具(Sass + Compass)的環境安裝教學及基本操作</a></dd>
@@ -331,10 +345,3 @@ compass watch</code></pre>
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

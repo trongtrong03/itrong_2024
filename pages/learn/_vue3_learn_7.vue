@@ -1,3 +1,18 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、建立 TS 接口與自定義類型' },
+        { id: 2, title: '二、父子組件的傳遞通訊' },
+        { id: 3, title: '三、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="68" fileType="learnList" />
@@ -5,19 +20,18 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、建立 TS 接口與自定義類型</a></li>
-            <li><a href="#act2">二、父子組件的傳遞通訊</a></li>
-            <li><a href="#act3">三、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p><em>props</em> 是 Vue.js 中用於父子組件通訊的機制。 透過 <em>props</em>，父組件可以向子組件傳遞數據，子組件則可以接收並使用這些資料。 在 Vue.js 中，子組件透過在自身的選項中定義 <em>props</em> 來聲明需要接收的屬性，並且這些屬性可以在子組件的模板中直接使用。</p>
         <p>到了 Vue 3，<em>props</em> 的使用方式和 Vue 2 基本上仍然相同，不過 Vue 3 採用 Composition API 的架構，所以語法格式和 Vue 2 會有些差異，此外也新增了一些特殊函式 API，讓 <em>props</em> 使用上更加強大。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、建立 TS 接口與自定義類型</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>Vue 3 除了主打 Compostion API 此一特色之外，也提倡開發者多使用 TypeScript 作為撰寫 Vue 3 的主要程式語言，所以在開始使用 <em>props</em> 之前，我們先稍微學習一些 TypeScript 的語法，把要用來傳遞的參數制定一套「規格化」的標準。不過重點還是放在 Vue 3 <em>props</em> 的運用，所以不會太深入 TypeScript 的語法規則。</p>
         <h3>為什麼需要制定標準？</h3>
         <p>假設現在有個子組件，它的程式碼內容如下：</p>
@@ -140,8 +154,8 @@ export type Users = UserInter[]    // 新增自定義類型，引用自 UserInte
             <img src="/images/learn/js/vue3-learn-7-2.jpg">
         </figure>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、父子組件的傳遞通訊</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>首先要有一個基本認知：父組件可以傳遞資料給子組件，但子組件不能傳遞資料給父組件。基於這個原則，接下來範例我們把 <b>App.vue</b> 當作父組件，簡單為其引用的子組件提供一個屬性值：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-html">&lt;template&gt;
@@ -283,8 +297,8 @@ console.log(demo);    // Uncaught (in promise) ReferenceError: demo is not defin
         </div>
         <p>如此便大功告成，假如子組件接收到了父組件不存在的資料參數，那麼子組件原本要呈現資料的位置內容就會是它預設的內容了。</p>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <dl>
             <dd><a href="https://cn.vuejs.org/" target="_blank">Vue.js</a></dd>
             <dd><a href="https://www.youtube.com/watch?v=PnJXrVdbXOw&list=PLmOn9nNkQxJEnGM4Jf0liBcyedAtuQq-O&index=25" target="_blank">【极简Vue3】025 props的使用</a></dd>
@@ -294,10 +308,3 @@ console.log(demo);    // Uncaught (in promise) ReferenceError: demo is not defin
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

@@ -1,3 +1,22 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、如何使用？' },
+        { id: 2, title: '二、data-aos 參數一覽' },
+        { id: 3, title: '三、JavaScript 參數一覽' },
+        { id: 4, title: '四、CSS 版本' },
+    ]);
+
+    // avtive
+    const isActive = ref(0);
+</script>
+
 <template>
     <NuxtLayout name="workshop">
         <TempArticle :propValue="27" fileType="workshop" />
@@ -5,19 +24,17 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、如何使用？</a></li>
-            <li><a href="#act2">二、data-aos 參數一覽</a></li>
-            <li><a href="#act3">三、JavaScript 參數一覽</a></li>
-            <li><a href="#act4">四、CSS 版本</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p><a href="https://michalsnik.github.io/aos/" target="_blank">AOS</a>，全名「Animate On Scroll Library」，是一款輕量、且容易使用的畫面滾動觸發動畫套件，引用這款套件並將指定元素添加 AOS 提供的 <em>data</em> 屬性後，當該元素進入畫面滾動範圍內，即可觸發簡易的進場動畫，例如淡入淡出、縮放、移動等效果。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、如何使用？</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>僅需下載 AOS 提供的 <a href="https://unpkg.com/aos@next/dist/aos.js" target="_blank">JS</a> 文件並置入專案資料夾內，然後在網頁文件中引用它即可：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-html">&lt;script src="https://unpkg.com/aos@next/dist/aos.js"&gt;&lt;/script&gt;</code></pre>
@@ -33,8 +50,8 @@
         </div>
         <p><em>data-aos</em> 屬性表示該元素要套用的觸發進場動畫是什麼效果，有淡入淡出（Fade）、翻轉（Flip）、滑動（Slide）、縮放（Zoom）四大種類。除了設置效果類型外，也可以針對動畫觸發的執行時間、延遲、速度曲線等做細部設定，甚至還可以調整動畫元素的觸發位置，像是以左上角為觸發基準，或是中下位置等。有關 <em>data-aos-</em> 系列的相關屬性及參數設置，請見下一章說明。</p>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、data-aos 參數一覽</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <h3>data-aos</h3>
         <p><em>data-aos</em> 表示動畫的類型，有淡入淡出（Fade）、翻轉（Flip）、滑動（Slide）、縮放（Zoom）四大種類，例如：</p>
         <div class="text-code" v-pre>
@@ -314,8 +331,8 @@
             </div>
         </div>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、JavaScript 參數一覽</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p>基本調用 AOS.js 的語法為 <em>AOS.init();</em>，我們可以在括號裡面傳入其他設定參數，來取代原本套件裡作者設定的預設值，以下是全域參數項目：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-javascript">AOS.init({
@@ -348,10 +365,3 @@
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

@@ -1,3 +1,20 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、前置部署' },
+        { id: 2, title: '二、建立版本庫' },
+        { id: 3, title: '三、提交流程-Bash' },
+        { id: 4, title: '四、提交流程-Tortoisegit' },
+        { id: 5, title: '五、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="27" fileType="learnList" />
@@ -5,20 +22,17 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、前置部署</a></li>
-            <li><a href="#act2">二、建立版本庫</a></li>
-            <li><a href="#act3">三、提交流程-Bash</a></li>
-            <li><a href="#act4">四、提交流程-Tortoisegit</a></li>
-            <li><a href="#act5">五、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>上一篇我們已經掌握 Git 是如何進行版本控制的了，從這篇開始學習如何在本地端的專案裡使用 Git 進行版本控制。個人使用的作業系統為 Windows，儘管對 Git 操作而言差別不大，但如果是非 Git 的命令提示字元指令相關操作會以 Windows OS 作記（若你是 Mac 或 Linux 系統的使用者只能先說聲抱歉啦）。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、前置部署</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>為了方便操作，首先我們創建一個內容包含三個記事本檔案的資料夾「<b>demo</b>」，以當作實務練習的對象。若你要直接使用手邊已經存在的專案也可以，版控流程都是一樣的，與資料夾內容無關。</p>
         <figure>
             <img src="/images/learn/dev/git-init-1.jpg">
@@ -38,8 +52,8 @@
             <pre><code class="language-bash">cd demo</code></pre>
         </div>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、建立版本庫</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>在專案還沒建立版本庫之前，任何有關 Git 的指令皆無效，因此我們必須先在專案資料夾裡建立版本庫，其指令語法為：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-git">$git init</code></pre>
@@ -59,8 +73,8 @@
             <img src="/images/learn/dev/git-init-6.jpg">
         </figure>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、提交流程-Bash</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <figure>
             <img src="/images/learn/dev/git-process-1.jpg">
         </figure>
@@ -101,8 +115,8 @@
             <img src="/images/learn/dev/git-init-9.jpg">
         </figure>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、提交流程-Tortoisegit</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <p>看完了 Bash 本地端版控流程，我們接著看看 Tortoisegit 要如何操作。</p>
         <figure>
             <img src="/images/learn/dev/git-init-10.jpg">
@@ -142,8 +156,8 @@
         <p><br></p>
         <p>以上就是在自己工作電腦的專案建立 Git 並進行提交版本控制的基本流程了，基本上每一次版控都會需要 <em>add</em> 然後 <em>commit</em>，最後再上傳至遠端儲存庫儲存，以防電腦損壞而無法救回資料，或是方便其他專案團隊成員協同作業。而我們將本機檔案上傳的動作在 Git 稱之為 <em>push</em>（推送），而從遠端將檔案下載下來（更新成最新版本）的行為則叫做 <em>pull</em>（拉取），這些方法將於下一篇文章繼續介紹。</p>
     </div>
-    <div class="text-block" id="act5">
-        <h2>五、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[5].id">
+        <h2 v-text="catalog[5].title"></h2>
         <dl>
             <dd><a href="https://git-scm.com/" target="_blank">Git</a></dd>
             <dd><a href="https://gitbook.tw/chapters/introduction/what-is-git.html" target="_blank">什麼是 Git？為什麼要學習它？</a></dd>
@@ -153,10 +167,3 @@
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

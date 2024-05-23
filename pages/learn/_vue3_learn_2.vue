@@ -1,3 +1,20 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、reactive 物件型別的響應式資料' },
+        { id: 2, title: '二、ref 物件型別的響應式資料' },
+        { id: 3, title: '三、ref V.S. reactive' },
+        { id: 4, title: '四、響應式資料解構 toRefs 與 toRef' },
+        { id: 5, title: '五、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="63" fileType="learnList" />
@@ -5,20 +22,17 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、reactive 物件型別的響應式資料</a></li>
-            <li><a href="#act2">二、ref 物件型別的響應式資料</a></li>
-            <li><a href="#act3">三、ref V.S. reactive</a></li>
-            <li><a href="#act4">四、響應式資料解構 toRefs 與 toRef</a></li>
-            <li><a href="#act5">五、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>上一篇文章的後半段開始學習 Vue 3 響應式資料定義方法的一小部分，說明基本型別的值，可以利用 <em>ref</em> 使其成為可以被更新的響應式資料。這篇文章除了會繼續深入說明 <em>ref</em> 的用法，也會講講另一個定義方法──<em>reactive</em>，同時也會對兩者進行對比，從中理解各自不同之處。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、reactive 物件型別的響應式資料</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <div class="text-code" v-pre>
             <pre><code class="language-html">&lt;template&gt;
     &lt;h1&gt;姓名：{{ name }}&lt;/h1&gt;
@@ -120,8 +134,8 @@
 })</code></pre>
         </div>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、ref 物件型別的響應式資料</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>說完了 <em>reactive</em>，這個章節又來回頭講講 <em>ref</em>。只是根據前面的說法，再看看本章節的標題，不免產生一個問號：不是說 <em>ref</em> 是用來定義基本型別的響應式資料嗎？怎麼標題又說讓 <em>ref</em> 去定義物件型別響應式資料呢？事實上，是我先前說的不精確，<em>reactive</em> 確實只能用來定義物件型別的響應式資料，若強硬地要用它來定義基本型別倒也不是完全不行，譬如：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-html">&lt;template&gt;
@@ -187,8 +201,8 @@
         </figure>
         <p>你會發現 _value 那一項後方的值，和 <em>reactive</em> 一樣都是 Proxy(Object)，細節也如出一轍、絲毫不差。由此可見，物件響應式資料並非 <em>ref</em> 本身就可以定義的，它只是接收到我們傳入的物件型別資料，去借用 <em>reactive</em> 來實現響應式，所以即便一概使用 <em>ref</em> 建立響應式資料，也不代表 <em>reactive</em> 毫無用處。</p>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、ref V.S. reactive</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p>雖然，完全使用 <em>ref</em> 定義網頁應用的響應式資料是可行的，但我們還是要不免俗地分析一下這兩者的對比，以及各自適合的使用時機。</p>
         <p>先說說所有網頁應用都使用 <em>ref</em> 的壞處，大概就是如果開發者要變更 <em>ref</em> 資料的數值，需要時時刻刻記得在變數後方添加 <em>.value</em>。（如果在 VS Code 安裝 Volar 擴充模組就可以解決這個困擾，該模組可以自動為開發者補上 <em>.value</em>）</p>
         <p>而 <em>reactive</em> 除了有著不能用來定義基本型別資料的缺點外，如果要用它來重新分配一個新的物件，那麼它將會失去響應式功能。什麼是重新分配新的物件？舉例來說：</p>
@@ -274,8 +288,8 @@ function changeUser(){
             <li>若需要一個物件型別的響應式資料，但層級較深，或者與表單較相關聯者，建議使用 <em>reactive</em>。</li>
         </ul>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、響應式資料解構 toRefs 與 toRef</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <p>在闡述 <em>toRefs</em> 與 <em>toRef</em> 用途之前，先稍微聊聊 JavaScript 的解構賦值。JavaScript 的解構賦值是一種能方便地從陣列或物件中提取資料並賦值給變數的語法。它允許我們使用類似模式匹配的語法，從複雜的資料結構中提取部分資料，然後將這些資料賦值給變數。它的基本語法格式為：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-javascript">let [variable1, variable2, ...rest] = array;</code></pre>
@@ -440,8 +454,8 @@ let name = toRef(user, "name");
 console.log(name.value);    // 阿比</code></pre>
         </div>
     </div>    
-    <div class="text-block" id="act5">
-        <h2>五、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[5].id">
+        <h2 v-text="catalog[5].title"></h2>
         <dl>
             <dd><a href="https://cn.vuejs.org/" target="_blank">Vue.js</a></dd>
             <dd><a href="https://www.youtube.com/watch?v=d5mrJfl6UWM&list=PLmOn9nNkQxJEnGM4Jf0liBcyedAtuQq-O&index=1" target="_blank">【极简Vue3】001 Vue3开篇</a></dd>
@@ -451,10 +465,3 @@ console.log(name.value);    // 阿比</code></pre>
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

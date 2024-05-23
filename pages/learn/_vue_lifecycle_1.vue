@@ -1,3 +1,21 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、Vue 1.0 的生命週期' },
+        { id: 2, title: '二、Vue 2.0 的生命週期' },
+        { id: 3, title: '三、1.0 與 2.0 的不同' },
+        { id: 4, title: '四、透過範例實際觀察' },
+        { id: 5, title: '五、其他補充' },
+        { id: 6, title: '六、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="43" fileType="learnList" />
@@ -5,17 +23,13 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、Vue1.0 的生命週期</a></li>
-            <li><a href="#act2">二、Vue2.0 的生命週期</a></li>
-            <li><a href="#act3">三、1.0 與 2.0 的不同</a></li>
-            <li><a href="#act4">四、透過範例實際觀察</a></li>
-            <li><a href="#act5">五、其他補充</a></li>
-            <li><a href="#act6">六、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <blockquote>每个 Vue 组件实例在创建时都需要经历一系列的初始化步骤，比如设置好数据侦听，编译模板，挂载实例到 DOM，以及在数据改变时更新 DOM。在此过程中，它也会运行被称为生命周期钩子的函数，让开发者有机会在特定阶段运行自己的代码。</blockquote>
         <p>這段文字引述自 <a href="https://cn.vuejs.org/guide/essentials/lifecycle.html" target="_blank">Vue.js</a> 官方對其程式語言的「生命週期」所給出的解釋，若要用比較簡短的一句話概括，生命週期指的是「Vue 實例從創建到銷毀的過程」，其中，Vue 實例指的是其應用核心的建構體，譬如：</p>
         <div class="text-code" v-pre>
@@ -26,8 +40,8 @@
         <p>儘管根據版本不同，上面宣告的建構方式也會不太一樣，但基本上只要建立這樣的一個程式碼結構，就代表創建了一個 Vue 的實例。一個 Vue 實例通常包含了 Vue 組件的數據、方法、計算屬性、生命週期鉤子......等等，其中，生命週期鉤子（Lifecycle Hooks）為 Vue 實例帶來各種不同階段或情境所應該執行的函式，像是創建、初始化、編譯、更新、銷毀等等，這些鉤子便形成它所屬 Vue 實例的生命週期。</p>
         <p>Vue 從西元 2015 年發展至今也已推出第三代版本，生命週期隨著版本更新亦推陳出新，本篇文章筆記之重點將著墨於學習 Vue 的生命週期內容，以及比較各版本之間的差異。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、Vue1.0 的生命週期</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>有別於傳統網頁開發一般都透過 JavaScript 選取指定元素的 ID 或 class，修改我們想要變動的區塊內容，Vue 採用的是「資料驅動畫面」模式，只要宣告變數的值發生改變，DOM 就會立即自動做更新，而不需要我們再手動去更新畫面。資料驅動畫面的好處令開發者只需專注在資料數據的管理和程式邏輯，不用再分神處理手動更新 DOM 的方法，不僅簡化前端開發的過程，也提高了程式碼的可讀與易維護性。</p>
         <p>在 Vue1.0 版本裡，官方提供的生命週期流程圖是這個樣子的：</p>
         <figure>
@@ -84,8 +98,8 @@ var element = vm.$el;
         <p><em>destoryed</em> 是 Vue 實例生命週期的最後一站，它會在實例被銷毀後才調用，此時實例中的所有指令都已經解除綁定，裡面的子組件也已通通被銷毀。</p>
         <p>通常情況下，<em>destoryed</em> 鉤子在這個階段大多用來執行記憶體釋放之類的最終清理動作，和 <em>beforeDestory</em> 的主要差別在於實例進入銷毀階段的執行時機。</p>
     </div>
-    <div class="text-block" id="act2">
-        <h2>Vue2.0 的生命週期</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>Vue 1.0 於 2015 年 10 月問世，翌年 9 月緊接著發佈 2.0 版本，這個版本無論在語法結構或性能優化層面都有顯著的改進與加強，可以說是奠定 Vue 成為 JavaScript 熱門前端框架的一大關鍵。在 2.0 版本裡，Vue 實例的生命週期相較 1.0 版本也有些不小的改動，以下是 Vue 2.0 的生命週期圖表：</p>
         <figure>
             <img src="/images/learn/js/vue-lifecycle-3.jpg">
@@ -181,8 +195,8 @@ var element = vm.$el;
         <p>Vue2.0 實例銷毀階段與 1.0 版本雷同，<em>beforeDestroy</em> 會在 Vue 實例銷毀前被調用，因為是在銷毀前，此時 Vue 實例裡面的組件仍然在運作中，我們可以做一些關閉監視器、計時器取消、解除事件綁定之類的清理工作，以防止記憶體洩漏或不必要的資源占用。</p>
         <p><em>destroyed</em> 則在 Vue 實例完全銷毀後才被呼叫，在這個生命週期鉤子裡，Vue 實例已完全被銷毀，我們已無法訪問 DOM 裡頭的元素，以及組件裡的數據和方法，因此通常在這個鉤子裡執行的也會是一些額外的清理動作。</p>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、1.0 與 2.0 的不同</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p>在對比環節我們透過表格來比較 Vue1.0 與 2.0 版本的生命週期差異：</p>
         <div class="text-flex">
             <div class="f-width">
@@ -265,8 +279,8 @@ var element = vm.$el;
         <p><strong>2. 移除 <em>attached</em> 與 <em>detached</em>：</strong></p>
         <p>1.0 這兩個生命週期鉤子是在實例渲染至 DOM 以及從 DOM 移除時調用，但 2.0 版本分別用 <em>mounted</em> 及 <em>beforeDestroy</em> 取代，藉以減少混淆，並提高可讀性。</p>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、透過範例實際觀察</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <p>單純只看圖文可能不好理解 Vue 生命週期實際上的運作與 DOM 之間的因果變化，接下來我們透過程式碼範例來跑一次 <em>data</em> 和 <em>$el</em> 於 Vue2.0 各階段生命週期鉤子裡呈現的結果為何。</p>
         <p>首先，我們在 HTML 文件寫好要指定給 Vue 實例渲染（掛載）的 DOM 元素：</p>
         <div class="text-code" v-pre>
@@ -462,8 +476,8 @@ var element = vm.$el;
         </div>
         <p>如此一來 Vue 銷毀時也會將 DOM 結構裡面的 <em>&lt;div id="app"&gt;</em> 元素也一併移除掉。</p>
     </div>
-    <div class="text-block" id="act5">
-        <h2>五、其他補充</h2>
+    <div class="text-block" :id="'act' + catalog[5].id">
+        <h2 v-text="catalog[5].title"></h2>
         <p><strong>組件是指模板（Template）嗎？</strong></p>
         <p>答案為否。在 Vue 世界裡，組件指的是可以重複使用的 Vue 實例，它們可以多次建構並嵌套在其他組件之中。因為組件視同 Vue 實例，因此包含了資料數據、方法、生命週期...等內容，理所當然也包含模板。至於模板在 Vue 實例中扮演的角色主要是用來定義組件的結構和佈局，以描述組件的外觀。</p>
         <p><br></p>
@@ -497,8 +511,8 @@ button.addEventListener("click", function () {
         <p>後者則在 Vue 實例中使用。</p>
 
     </div>
-    <div class="text-block" id="act6">
-        <h2>六、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[6].id">
+        <h2 v-text="catalog[6].title"></h2>
         <dl>
             <dd><a href="https://v1-cn.vuejs.org/api/#compiled" target="_blank">Vue 1.0</a></dd>
             <dd><a href="https://v2.cn.vuejs.org/v2/api/#mounted" target="_blank">Vue.js 2.0</a></dd>
@@ -516,10 +530,3 @@ button.addEventListener("click", function () {
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

@@ -1,3 +1,18 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、常見優化項目' },
+        { id: 2, title: '二、什麼是 AMP？' },
+        { id: 3, title: '三、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="12" fileType="learnList" />
@@ -5,18 +20,17 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、常見優化項目</a></li>
-            <li><a href="#act2">二、什麼是 AMP？</a></li>
-            <li><a href="#act3">三、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>隨著網頁開發技術、工具的演化變遷，針對網站本身的效能與 SEO 優化亦產生些許變化，儘管最直接、快速的方式仍是透過升級主機硬體，來提升網站伺服器回應的時間。根據 Google 官方提供的資訊，主機回應的速度最好能控制在 200 毫秒以內，假如伺服器主機回應的時間總是過長，且當網速流量增大時，資料庫連線總是頻繁地遭遇無法連線的情況，這意味著我們應該考慮將主機進行升級。然而，考量金錢成本問題，「升級主機」往往不會是開發者端最優先的解答，因此，從網站程式碼與所使用的各種檔案仍是多數開發者與評測工具著重的目標，而這也是本篇文章聚焦的主題──網頁開發者可以透過那些方式，提升、優化自己的網站。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、常見優化項目</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <ul>
             <li>圖片壓縮</li>
             <li>移除未使用的 JavaScript / CSS</li>
@@ -131,8 +145,8 @@
         <p>AMP 的全名叫做 Accelerated Mobile Pages，是 Google 為了提升行動版網頁速度所推出的項目。AMP 的運作機制其實也是一種快取的概念，只是這個快取存在 Google 伺服器裡面，所以當使用者在手機上打開 AMP 頁面時，會發現上方網址列是 Google 的網址，因為 Google 把該網頁儲存在它的快取裡面，只有當使用者對網站進行第二次點擊互動時，才會導向網站自己的網址。</p>
         <p>若想知道更多有關 AMP 的說明，請見下一章的介紹。</p>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、什麼是 AMP？</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p><a href="https://amp.dev/" target="_blank">Accelerated Mobile Pages</a>，簡稱AMP，顧名思義指的就是「加速手機頁面」，意思就是一種為了加快讀取網站內容而生的框架技術，它是由 Google 於 2016 年正式發布的服務項目。</p>
         <p>為什麼需要 AMP？主要原因有兩個：「手機使用者激增」以及「手機效能不一」。</p>
         <h3>手機使用者激增</h3>
@@ -225,8 +239,8 @@
             <li>因 AMP 網站屬於 Google 網域，可能導致流量分散</li>
         </ol>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <dl>
             <dd><a href="https://zh.wikipedia.org/zh-tw/Accelerated_Mobile_Pages" target="_blank">維基百科 - Accelerated Mobile Pages</a></dd>
             <dd><a href="https://frankknow.com/what-is-amp/" target="_blank">維基百科 - Accelerated Mobile Pages</a></dd>
@@ -236,10 +250,3 @@
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

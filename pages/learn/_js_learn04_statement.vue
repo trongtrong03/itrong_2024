@@ -1,3 +1,21 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、條件敘述句' },
+        { id: 2, title: '二、迴圈敘述句' },
+        { id: 3, title: '三、跳躍敘述句' },
+        { id: 4, title: '四、例外處理' },
+        { id: 5, title: '五、總結' },
+        { id: 6, title: '六、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="48" fileType="learnList" />
@@ -5,17 +23,13 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、條件敘述句</a></li>
-            <li><a href="#act2">二、迴圈敘述句</a></li>
-            <li><a href="#act3">三、跳躍敘述句</a></li>
-            <li><a href="#act4">四、例外處理</a></li>
-            <li><a href="#act5">五、總結</a></li>
-            <li><a href="#act6">六、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>程式腳本的每一句指令都可以稱為敘述句（Statement），用來驅使電腦執行我們寫下的規則。一句完整的敘述句會以分號 <em>;</em> 作為結尾，向 JavaScript 表示一段可執行運算的程式。根據這個定義，我們回首複習一下變數是如何做宣告的：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-javascript">var price = 20;</code></pre>
@@ -31,8 +45,8 @@
         <p>由一對大括號（或稱花括號）<em>{ }</em> 標示的區塊即為程式區塊，一個程式區塊內可包含一或多個敘述句。此外，程式區塊結尾不需要加上分號。</p>
         <p>有了 <em>;</em> 與 <em>{ }</em> 在程式碼代表意義的認知後，接下來學習各種類型的敘述句表現手法，應該會相對容易閱讀許多。大體而言，敘述句的種類可區分為四種：條件敘述句、迴圈敘述句、跳躍敘述句，以及例外處理。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、條件敘述句</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>條件敘述句的語法有兩種：<em>if</em> 與 <em>switch</em>。</p>
         <p><br></p>
         <h3>if：</h3>
@@ -144,8 +158,8 @@ checkColor("blue");    // 藍色</code></pre>
         </div>
         <p><em>switch</em> 與 <em>if</em> 條件的差別在於前者會只讀取跟參數相符條件式裡的敘述句；而後者則讀取所有條件與其敘述句，效能消耗較 <em>switch</em> 來得多，渲染就會比較慢。</p>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、迴圈敘述句</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>當我們想重複執行某件事情（敘述句）十遍，直覺想到的可能是直接在編輯器裡面輸入十次內容，例如：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-javascript">console.log("1");
@@ -262,8 +276,8 @@ while (i &lt; 3);
             <li>動作希望至少被執行一次時──使用 <em>do...while</em>。</li>
         </ul>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、跳躍敘述句</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p>跳躍敘述句也有人稱跳出敘述句，用途如其名，指在程式執行到某種情況時，利用跳躍句迫使程式退出。看到這裡，腦海是否馬上浮現出了什麼？是的，<em>switch</em> 條件式裡使用到的 <em>break</em> 即是跳躍敘述句的一員。<em>break</em> 不僅可以使用在 <em>switch</em>，也可以用於迴圈。除了 <em>break</em> 之外，常見的跳躍句尚有：<em>continue</em>、<em>return</em>。</p>
         <p><br></p>
         <h3>break：</h3>
@@ -311,8 +325,8 @@ while (i &lt;= 10) {
         <h3>return：</h3>
         <p><em>return</em> 用來回覆函式（function）呼叫的變數，它只能出現在函式裡，若用在迴圈將會造成程式錯誤。關於 <em>return</em> 的介紹，在 <a href="/learn/_js_learn02_function" target="_blank">〈重新認識 JavaScript（二）──函式 Function〉</a> 一文中已有著墨，這裡就不再重複贅述。</p>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、例外處理</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <p>JavaScript 有一組詞彙術語，名叫「Control flow and error handling」，Control flow 中文翻譯為「流程控制」，指的是我們可以透過各種敘述句以增加程式的互動性，前面介紹的條件、迴圈、跳躍等敘述句皆屬於此類。至於「error handling」就是本章節的主角──例外處理，然而相信多數人這時會產生疑惑了，Error 不是應該翻作「錯誤」嗎？語意和「例外」不該劃上等號的。事實上根據程式語言的釋義，在程式語言世界裡只有「Exception Handling」的說法，也就是例外處理，而不存在「Error handling」，因為錯誤在定義上是無法被處理的。只是對 JavaScript 而言，Error handling 是比較廣泛、直觀的說法，它暗示了對錯誤和例外情況的處理，無論這些錯誤是由錯誤的程式碼還是外部因素引起的，在某些情況下，例外和錯誤這兩個術語可能被用來表示不同類型的問題，但在許多場合下它們是通用的。因此，在程式設計的上下文中，通常使用 Error handling 這個術語來描述處理錯誤和例外的機制。</p>
         <p>說了這麼多，究竟錯誤在開發程式的過程什麼時候會發生呢？以下列舉一些常見錯誤狀況：</p>
         <ol>
@@ -415,8 +429,8 @@ finally {
 }</code></pre>
         </div>
     </div>
-    <div class="text-block" id="act5">
-        <h2>五、總結</h2>
+    <div class="text-block" :id="'act' + catalog[5].id">
+        <h2 v-text="catalog[5].title"></h2>
         <p>回顧本篇文章，精簡總結一下我們從變數身上學到哪些東西：</p>
         <h5>1. 條件敘述句</h5>
         <ul>
@@ -469,8 +483,8 @@ finally {
             </div>
         </div>
     </div>
-    <div class="text-block" id="act6">
-        <h2>六、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[6].id">
+        <h2 v-text="catalog[6].title"></h2>
         <dl>
             <dd><a href="https://www.books.com.tw/products/0010744702" target="_blank">《JavaScript & JQuery：網站互動設計程式進化之道》</a></dd>
             <dd><a href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Statements/if...else" target="_blank">MDN web docs</a></dd>
@@ -486,10 +500,3 @@ finally {
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

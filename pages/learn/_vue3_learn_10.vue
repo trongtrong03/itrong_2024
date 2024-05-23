@@ -1,3 +1,20 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、建立嵌套路由' },
+        { id: 2, title: '二、路由之間的傳遞參數：query' },
+        { id: 3, title: '三、路由之間的傳遞參數：params' },
+        { id: 4, title: '四、query V.S. params' },
+        { id: 5, title: '五、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="71" fileType="learnList" />
@@ -5,21 +22,18 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、建立嵌套路由</a></li>
-            <li><a href="#act2">二、路由之間的傳遞參數：query</a></li>
-            <li><a href="#act3">三、路由之間的傳遞參數：params</a></li>
-            <li><a href="#act4">四、query V.S. params</a></li>
-            <li><a href="#act5">五、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>前一篇文章大概講述了關於 Vue 路由的基本使用方法，如同最後章節進一步說明 <em>to</em> 屬性時說的，網站規劃假如只有單一路由階級，那麼路由設定不需要這麼麻煩，直接用字串導向各個路由組件即可。但實際上開發專案應該頗有感，很多網站基本都有好幾層路由導航，比如最新消息底下點擊標題會連結到內文頁面，又好比會員系統裡有會員資料、訂單查詢、支付綁定......等功能，像這樣至少有二至三層或更多層的網頁架構，用物件來撰寫路由可能會比單純用字串表示來得更加推薦。</p>
         <p>本篇文章除了探究箇中緣由外，同時也會學著如何一步步建立多個路由層級的嵌套路由架構。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、建立嵌套路由</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>承襲上一篇文章建立好的架構：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-bash">src
@@ -176,8 +190,8 @@
         </figure>
         <p>至於目前 <b>NewsView.vue</b> 組件裡面的內容都是純靜態的，故還無法隨著路由切換而動態渲染相對應的內容，下個章節傳遞參數就是要來講講要如何把各個資料的參數傳遞給各自對應的路由。</p>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、路由之間的傳遞參數：query</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>在上個章節完成的範例，無論我們點擊哪一個子路由（新聞標題01、02、03），右側展示區塊的內容就是紋絲不動，始終只呈現 <b>NewsView.vue</b> 裡面預設的內容，假如希望它能隨著子路由切換，自動接收該路由所擁有的資料，那麼我們需要透過傳遞的方式，將資料傳遞給目標路由。</p>
         <p>在 Vue Router 裡存在兩種與參數有關的功能，分別是 <em>query</em> 以及 <em>params</em>，本章節要敘述的是第一種。</p>
         <p><em>query</em> 表示的方式很簡單，只要在 <em>RouterLink</em> 的 <em>to</em> 所指向的具體路由規則路徑中加入一個 <em>?</em>，就表示接下來將傳遞什麼參數進去，比如我們在 <em>?</em> 後方加上「dog=阿比」：</p>
@@ -265,8 +279,8 @@
 &lt;/RouterLink&gt;</code></pre>
         </div>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、路由之間的傳遞參數：params</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p><em>params</em> 同樣也具備路由傳遞的功能，但是和 <em>query</em> 有些區別，具體差異留到文章末端再行比較，章節開頭先來說說該怎麼運用 <em>params</em>。</p>
         <p>首先，我們在 <b>New.vue</b> 的 RouterLink，把響應式資料中的三個屬性名稱添加進去：</p>
         <div class="text-code" v-pre>
@@ -403,8 +417,8 @@ let route =  useRoute();</code></pre>
         </div>
         <p><em>?</em> 的意思為可傳也可不傳，有了這個符號，當某筆動態資料沒有 <em>content</em> 屬性，RouterView 的「新聞內容」欄位就會是空的，而不受其他資料渲染記錄的影響。</p>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、query V.S. params</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <p><br></p>
         <h4>1. 傳遞方式：</h4>
         <h5>query：</h5>
@@ -436,8 +450,8 @@ let route =  useRoute();</code></pre>
         <h5>params：</h5>
         <p>參數直接包含在 URL 路徑中，所以它們在傳遞過程中不需要額外的序列化。</p>
     </div>
-    <div class="text-block" id="act5">
-        <h2>五、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[5].id">
+        <h2 v-text="catalog[5].title"></h2>
         <dl>
             <dd><a href="https://cn.vuejs.org/" target="_blank">Vue.js</a></dd>
             <dd><a href="https://www.youtube.com/watch?v=49b150tKIUc&list=PLmOn9nNkQxJEnGM4Jf0liBcyedAtuQq-O&index=36" target="_blank">【极简Vue3】036 路由 嵌套路由</a></dd>
@@ -447,10 +461,3 @@ let route =  useRoute();</code></pre>
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

@@ -1958,5 +1958,16 @@
         "cover": true,
         "img": "gemini",
         "type": ["ＡＩ生成"]
+    },
+    {
+        "id": 180,
+        "title": "Photopea",
+        "desc": "Photopea 是一個功能強大的在線圖像編輯工具，它模仿了 Adobe Photoshop 的許多功能，並且可以直接在網頁瀏覽器中使用。這使得 Photopea 成為一個方便的選擇，特別是當你需要在不同的設備上處理圖像，但不想安裝專門的軟體。",
+        "href": "https://www.photopea.com/",
+        "article": false,
+        "path": "",
+        "cover": true,
+        "img": "photopea",
+        "type": ["影音圖像"]
     }
 ]

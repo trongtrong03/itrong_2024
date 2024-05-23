@@ -1,3 +1,24 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、什麼是 Flexible Box？' },
+        { id: 2, title: '二、認識主軸與交錯軸' },
+        { id: 3, title: '三、如何讓子元件水平居中排列？' },
+        { id: 4, title: '四、如何讓子元件垂直居中排列？' },
+        { id: 5, title: '五、子元件之間的對齊方式能不一樣嗎？' },
+        { id: 6, title: '六、子元件是否能換行或多行排列？' },
+        { id: 7, title: '七、可以改變子元件的順序嗎？' },
+        { id: 8, title: '八、父容器 flex 與 inline-flex 的差異？' },
+        { id: 9, title: '九、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="14" fileType="learnList" />
@@ -5,20 +26,13 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、什麼是 Flexible Box？</a></li>
-            <li><a href="#act2">二、認識主軸與交錯軸</a></li>
-            <li><a href="#act3">三、如何讓子元件水平居中排列？</a></li>
-            <li><a href="#act4">四、如何讓子元件垂直居中排列？</a></li>
-            <li><a href="#act5">五、子元件之間的對齊方式能不一樣嗎？</a></li>
-            <li><a href="#act6">六、子元件是否能換行或多行排列？</a></li>
-            <li><a href="#act7">七、可以改變子元件的順序嗎？</a></li>
-            <li><a href="#act8">八、父容器 flex 與 inline-flex 的差異？</a></li>
-            <li><a href="#act9">九、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>在 Div 佈局概念還未普及之前，網頁前端開發者們習慣用 Table 進行網頁排版，但受限表格欄列式並排的排版結構，很難實現或必須用更多的表格嵌套實現較繁瑣的版型設計，隨著 Div 佈局的興起，其較自由又簡便的格式遂逐漸取代 Table，成為迄今依舊蔚為主流的排版佈局。然而，儘管 Div 大大提升網頁排版的靈活度，但是在部分需求上仍顯得支絀──例如令元素垂直居中對齊且等高，排版必須使用不下於 Table 階層數量的 Div 才能達到需求。例如：</p>
         <div class="text-codepen">
             <p class="codepen" data-height="360" data-theme-id="dark" data-default-tab="css,result" data-user="itrong" data-slug-hash="oNjrmjq" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="CSS: table-cell">
@@ -29,8 +43,8 @@
         </div>
         <p>到了令網頁排版有大幅度變革的 CSS3 時代，排版佈局的方法也有顯著的提升，「CSS Flexible Box Layout」便是其中之一。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、什麼是 Flexible Box？</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>CSS Flexible Box Layout，一般以 Flexbox 稱之，它是一種彈性容器（盒子），可以更簡單有效解決複雜的網頁佈局，譬如序章描述想實現的垂直居中效果，無論是 Tabale 或傳統 Div 設置 <em>display: table</em> 的應用，都需要插入大量的 HTML 標籤做嵌套，但如果透過 Flexbox 便可以大大減少 Div 的使用。</p>
         <p>Flexbox 的結構概念是這樣子的：</p>
         <figure>
@@ -127,8 +141,8 @@
             </div>
         </div>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、認識主軸與交錯軸</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>彈性盒子許多屬性的參數運作，都是基於主軸與交錯軸去進行排序或對齊的，什麼是主軸與交錯軸？以下透過一圖以蔽之：</p>
         <figure>
             <img src="/images/learn/css/flexbox-2.jpg">
@@ -195,8 +209,8 @@
         <p>再進階來說，彈性盒子的父容器會以 <em>flex-direction</em> 設定的方向為「主軸」，與之垂直的另一軸則稱為「交錯軸」，它將會直接影響 <em>justify-content</em> 與 <em>align-items</em> 等屬性的對齊依據。一般而言，若 <em>flex-direction</em> 設定是水平排列，則 <em>justify-content</em> 將會是水平方向對齊方式（主軸為水平），<em>align-items</em> 則是對齊垂直方向（交錯軸為垂直）。</p>
         <p>但除非你是 CSS Flexbox 運用自如的宗師達人，不然一般情況下不是很建議修改 <em>flex-direction</em> 的方向機制，尤其是對正在使用的彈性盒子佈局進行維護時，任意改變 <em>flex-direction</em> 的值很可能導致整個網頁排版的崩潰。後續的文章說明，皆會以多數瀏覽器原本的預設值（<em>row</em>）為主。</p>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、如何讓子元件水平居中排列？</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p>當父容器中的子元件未填滿整個寬度空間時，若要使子元件水平方向居中，我們需要在父容器對應的 CSS 選擇器裡，添加 <em>justify-content</em> 屬性，此屬性主要就是用來定義子元件要如何對齊父容器的主軸。</p>
         <p>在未設置 <em>justify-content</em> 屬性前，子元件在父容器裡的排列是靠「頭」（左）開始排列：</p>
         <div class="text-code" v-pre>
@@ -304,8 +318,8 @@
             <img src="/images/learn/css/flexbox-3.jpg">
         </figure>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、如何讓子元件垂直居中排列？</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <p>還記得前面提過的主軸與交錯軸嗎？在預設條件下，彈性盒子裡的主軸呈水平方向，而掌控主軸子元件對齊的屬性是 <em>justify-content</em>，用來設置交錯軸──意即垂直方向的對齊屬性，則是 <em>align-items</em> 屬性，所以從某個方面來說，這兩個屬性可謂相對的存在。</p>
         <p>但有點和 <em>justify-content</em> 預設值將子元件靠頭對齊不同，<em>align-items</em> 的預設值（<em>stretch</em>）是將子元件拉伸填滿整個父容器的高度，而非子元件本身 Content 的高度。最明顯的一點在於當某個子元件的高度比其他來的高，但所有子元件的高度仍然相同。例如：</p>
         <div class="text-example">
@@ -366,8 +380,8 @@
             <p>預設值 <em>stretch</em> 是很有意思的屬性值，它會將所有子元件的高度自動撐滿至與父容器同高，這在部分排版布局上（例如兩欄式排版左右要等高）非常實用。然而，需要注意的是若子元件一旦設定高度，則此參數便無效。</p>
         </blockquote>
     </div>
-    <div class="text-block" id="act5">
-        <h2>五、子元件之間的對齊方式能不一樣嗎？</h2>
+    <div class="text-block" :id="'act' + catalog[5].id">
+        <h2 v-text="catalog[5].title"></h2>
         <p>上一個章節問題介紹的是父容器裡的子元件垂直對齊方式，<em>align-items</em> 設定的值會套用到父容器裡面的所有子元件，那如果要針對某些子元件之間的對齊方式，則需要針對目標子元件添加 <em>align-self</em> 屬性。</p>
         <p>例如：</p>
         <div class="text-code" v-pre>
@@ -417,8 +431,8 @@
         </div>
         <p>此外要注意的是，假設父容器已設定 <em>align-item</em>，而某個子元件也有設定 <em>align-self</em> 情況下，則該子元件在交錯軸對齊的位置將會以自身的 <em>align-self</em> 屬性值為主。</p>
     </div>
-    <div class="text-block" id="act6">
-        <h2>六、子元件是否能換行或多行排列？</h2>
+    <div class="text-block" :id="'act' + catalog[6].id">
+        <h2 v-text="catalog[6].title"></h2>
         <p>CSS Flexbox 中有一個 <em>flex-wrap</em> 屬性，可以令父容器裡的子元件超過、溢出父容器寬度範圍時，是否要進行換行或其他動作。通常瀏覽器預設值為 <em>nowrap</em>，也就是不換行，若子元件有設定 <em>flex-shrink</em> 收縮值，一旦子元件總佔寬超過父容器寬度，那些收縮值不為 <em>0</em> 的子元件就會向內收縮；反之若所有子元件都不允許收縮，則會直接溢出父容器外。</p>
         <p>例如：</p>
         <div class="text-code" v-pre>
@@ -553,8 +567,8 @@
             </div>
         </div>
     </div>
-    <div class="text-block" id="act7">
-        <h2>七、可以改變子元件的順序嗎？</h2>
+    <div class="text-block" :id="'act' + catalog[7].id">
+        <h2 v-text="catalog[7].title"></h2>
         <p>有時候網頁前端作業時，會遇到原本左 A 右 B 並排的區塊，在 RWD 縮放到某一區間時要改為左 B 右 A 的排版需求，有時甚至不單單只是如此，也可能是上 A 下左 B 右 C，變成上 B 下左 C 右 A 之類的，如果是過去傳統的佈局方法，總是令開發者一個頭兩個大。不過，CSS Flexbox 可以漂亮地解決開發者這方面的困擾。</p>
         <p>雖說前面練習各種彈性盒子的相關屬性語法中，其實已經多次改變了子元件在畫面上顯示的順序，譬如透過 <em>flex-direction</em> 進行方向的反轉，不過這些充其量都是針對父容器裡的子元件做出整體的排序調整，若要在不變更 HTML 標籤順序的前提下，用 CSS 改變子元件的排列順序，那麼就需要 <em>order</em> 這個強大的屬性了，而這也是彈性盒子比過去傳統 Table 與 Div 佈局來得更強大、更具「彈性」靈活的優勢之一。</p>
         <p><em>order</em> 的使用方式很簡單，只要直接添加在子元件對應的 CSS 選擇器裡，並依想要排序的順序給數字值即可，數字越大，表示優先度越靠後。</p>
@@ -613,8 +627,8 @@
 }</code></pre>
         </div>
     </div>
-    <div class="text-block" id="ac8">
-        <h2>八、父容器 flex 與 inline-flex 的差異？</h2>
+    <div class="text-block" :id="'act' + catalog[8].id">
+        <h2 v-text="catalog[8].title"></h2>
         <p>要將 HTML 元素標籤的 <em>display</em> 屬性定義為彈性盒子，CSS 提供兩種參數值，分別是 <em>flex</em> 與 <em>inline-flex</em>，這兩者的差別在哪裡呢？或許有些眼尖的人會覺得似乎和 <em>block</em> 及 <em>inline-block</em> 有異曲同工之妙，事實上也的確如此。</p>
         <p><em>flex</em> 等同 <em>block</em> 的排列模式，會獨自佔據 HTML Content 裡的一整列，會將同階層的前後其他元素推擠到上或下列的位置；而 <em>inline-flex</em> 則類似 <em>inline-block</em>，會接受與其他同質的前後元素並排，除非 HTML Content 的一列空間塞不下，才會將後續其他元素推移到下一列去。</p>
         <p>單純文字說明不容易理解，我們直接觀看實際演練的結果：</p>
@@ -626,8 +640,8 @@
             </p>
         </div>
     </div>
-    <div class="text-block" id="act9">
-        <h2>九、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[9].id">
+        <h2 v-text="catalog[9].title"></h2>
         <dl>
             <dd><a href="https://developer.mozilla.org/en-US/docs/Glossary/Flexbox" target="_blank">MDN web docs</a></dd>
             <dd><a href="https://www.oxxostudio.tw/articles/201501/css-flexbox.html" target="_blank">深入解析 CSS Flexbox</a></dd>
@@ -638,10 +652,3 @@
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

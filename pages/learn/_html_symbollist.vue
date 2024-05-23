@@ -1,3 +1,21 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、常用特殊符號' },
+        { id: 2, title: '二、數學單位特殊符號' },
+        { id: 3, title: '三、貨幣符號' },
+        { id: 4, title: '四、方向符號' },
+        { id: 5, title: '五、其他特殊符號' },
+        { id: 6, title: '六、線上工具' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="1" fileType="learnList" />
@@ -5,23 +23,19 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、常用特殊符號</a></li>
-            <li><a href="#act2">二、數學單位特殊符號</a></li>
-            <li><a href="#act3">三、貨幣符號</a></li>
-            <li><a href="#act4">四、方向符號</a></li>
-            <li><a href="#act5">五、其他特殊符號</a></li>
-            <li><a href="#act6">六、線上工具</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>一篇文章的構成，除了各國自己使用的語言外，還包含一些特殊符號，它們通常具備計算用途或象徵標記之類的功能，因此這些特殊符號也經常會寫在 HTML 文章裡。然而部份特殊符號（尤其是括號符、計算符）同時也是 HTML 程式碼的必要組成，在編譯輸出時，某些時候可能會被判定為程式碼的一部份，導致不會被顯示在頁面上。</p>
         <p>為了避免這種情況，HTML 針對常用的特殊符號標記提供對應的編碼，當我們使用的特殊符號無法順利顯示在文章上時，可改用編碼取代便能正確地被編譯出來。</p>
         <p>本篇主要目的將常見特殊符號及相應的編碼整理成表格，以便查找。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、常用特殊符號</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <div class="text-flex">
             <div class="f-width">
                 <div class="f-head">
@@ -92,8 +106,8 @@
             </div>
         </div>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、數學單位特殊符號</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <div class="text-flex">
             <div class="f-width">
                 <div class="f-head">
@@ -194,8 +208,8 @@
             </div>
         </div>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、貨幣符號</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <div class="text-flex">
             <div class="f-width">
                 <div class="f-head">
@@ -226,8 +240,8 @@
             </div>
         </div>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、方向符號</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <div class="text-flex">
             <div class="f-width">
                 <div class="f-head">
@@ -288,8 +302,8 @@
             </div>
         </div>
     </div>
-    <div class="text-block" id="act5">
-        <h2>五、其他特殊符號</h2>
+    <div class="text-block" :id="'act' + catalog[5].id">
+        <h2 v-text="catalog[5].title"></h2>
         <div class="text-flex">
             <div class="f-width">
                 <div class="f-head">
@@ -430,18 +444,11 @@
             </div>
         </div>
     </div>
-    <div class="text-block" id="act6">
-        <h2>六、線上工具</h2>
+    <div class="text-block" :id="'act' + catalog[6].id">
+        <h2 v-text="catalog[6].title"></h2>
         <p>網路上也有許多提供特殊符號對應程式碼的線上工具，例如 <a href="https://www.toptal.com/designers/htmlarrows/" target="_blank">HTML Arrows</a> 便是其中之一，它不僅提供 HTML 格式的符號代碼，還有其他格式例如 Unicode、Hex Code，可說是非常便利。</p>
     </div>
 </div>
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

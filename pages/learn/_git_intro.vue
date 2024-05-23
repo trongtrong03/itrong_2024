@@ -1,3 +1,20 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、認識版本控制的種類' },
+        { id: 2, title: '二、學習 Git 的原因' },
+        { id: 3, title: '三、安裝 Git 與初始設定' },
+        { id: 4, title: '四、基本流程簡述' },
+        { id: 5, title: '四、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="26" fileType="learnList" />
@@ -5,20 +22,17 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、認識版本控制的種類</a></li>
-            <li><a href="#act2">二、學習 Git 的原因</a></li>
-            <li><a href="#act3">三、安裝 Git 與初始設定</a></li>
-            <li><a href="#act4">四、基本流程簡述</a></li>
-            <li><a href="#act5">五、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>無論是個人獨立作業或是團隊協作，在專案開發、修改乃至於維護上，皆需要進行版本控管，以防專案損壞時，苦無可以回溯的版本去進行修復。對任何專案而言，保存檔案是很重要的工作，善用版本控制系統，可以有效記錄檔案之間的演進過程與歷史變更訊息，方便管理者取回特定版本的資料。而本系列要學習記錄的主題，是時下廣受開發者或團隊歡迎的 Git 版本控制系統，以下就一同探索 Git 的世界吧。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、認識版本控制的種類</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>在正式學習 Git 之前，我們需先認識版本控制有哪些類型。大抵可分為三類：</p>
         <p><br></p>
         <h3>1. 本機端版本控制系統</h3>
@@ -55,8 +69,8 @@
             <li>承上，即使單一開發人員或伺服器損壞，仍然可以從其他人員取得最新檔案。</li>
         </ol>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、學習 Git 的原因</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>以前還沒開始使用版本控制工具管理專案之前，自己跟公司在備份專案時使用的方法都是較傳統的本機端及集中化的管理方式，例如下圖所示：</p>
         <figure>
             <img src="/images/learn/dev/git-intro-4.jpg">
@@ -76,8 +90,8 @@
             <figcaption>Git 在 Version Control 一欄獲得極高的支持率。</figcaption>
         </figure>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、安裝 Git 與初始設定</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p>本節要介紹的是安裝 Git 與其初始使用者設定的方法：</p>
         <p><br></p>
         <h6>1. 下載 Git 並安裝</h6>
@@ -132,8 +146,8 @@ $ git config --global user.email</code></pre>
         <p><br></p>
         <p>以上就是 Git 的使用者資訊設定方式，或許會有人問該用 GUI 或 Bash 哪一種方式比較好？這其實沒有所謂的最佳答案，若已熟悉 Bash 指令，操作 Git 時會非常迅速俐落。但 GUI 較容易上手且可以用流程圖表示版控歷程記錄的分支、合併關係，是純顯示程式碼指令的 Bash 介面無法達到的視覺表現。</p>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、基本流程簡述</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <p>在 Git 工作區域大抵可分為三個部分，分別是工作目錄（Working Directory）、暫存區域（Staging Area）以及版本儲存庫（.git directory（Repository））。其中，版本儲存庫依照個人、團隊的需求或差異，又可分為本地端（Local）以及遠端（Remote），以下我們先敘述本地端的版控流程，然後再來講遠端的部分。</p>
         <figure>
             <img src="/images/learn/dev/git-process-1.jpg">
@@ -163,8 +177,8 @@ $ git config --global user.email</code></pre>
         <h6>2. 將檔案的快照新增到暫存區域。</h6>
         <h6>3. 交暫存區域的檔案，使其永久儲存在 Git 目錄。</h6>
     </div>
-    <div class="text-block" id="act5">
-        <h2>五、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[5].id">
+        <h2 v-text="catalog[5].title"></h2>
         <dl>
             <dd><a href="https://git-scm.com/" target="_blank">Git</a></dd>
             <dd><a href="https://gitbook.tw/chapters/introduction/what-is-git.html" target="_blank">什麼是 Git？為什麼要學習它？</a></dd>
@@ -174,10 +188,3 @@ $ git config --global user.email</code></pre>
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

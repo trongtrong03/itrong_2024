@@ -1,3 +1,20 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、濾鏡規則與效果一覽' },
+        { id: 2, title: '二、濾鏡效果展示' },
+        { id: 3, title: '三、多重定義' },
+        { id: 4, title: '四、相容性支援' },
+        { id: 5, title: '五、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="24" fileType="learnList" />
@@ -5,20 +22,17 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、濾鏡規則與效果一覽</a></li>
-            <li><a href="#act2">二、濾鏡效果展示</a></li>
-            <li><a href="#act3">三、多重定義</a></li>
-            <li><a href="#act4">四、相容性支援</a></li>
-            <li><a href="#act5">五、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>「我的圖片要在滑鼠移到上方的時候從灰階轉變成原色」──相信很多網頁前端開發者都有承接過類似的視覺表現需求。早期較直覺的處理方式，不外乎是透過繪圖軟體將原圖另外儲存灰階的圖片，利用 CSS <em>hover</em> 或 HTML <em>onmouseover</em>、<em>onmouseout</em> 觸發，又或者是使用 jQuery <em>hover</em> 事件達到圖片置換的效果。這些方法當然不會說它們不好，只不過在 CSS3 蓬勃發展的現在，網頁對影像處理上也有顯著提升，其中，<em>filter</em> 便是用來為圖片添加濾鏡的屬性，讓我們得以不需要再透過額外出圖的方式，就能實現圖片濾鏡變換的效果。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、濾鏡規則與效果一覽</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>以下是 CSS3 <em>filter</em> 屬性基本的語法規則：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-css">selector {
@@ -91,8 +105,8 @@
             <p>為了避免誤導，以下章節開始不再稱「圖片」套用濾鏡，而以「元素」取代之。</p>
         </blockquote>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、濾鏡效果展示</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>這個章節要來展示 <em>filter</em> 內建的十大效果呈現出來的結果會是什麼樣子的：</p>
         <p><br></p>
         <h3>grayscale：</h3>
@@ -271,8 +285,8 @@
             </div>
         </div>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、多重定義</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p>如同 <em>transform</em> 屬性，同一個元素亦可以套用多個 <em>filter</em> 效果，只需要各濾鏡參數之間用「空格」間隔開來即可。例如：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-css">img {
@@ -289,8 +303,8 @@
             </div>
         </div>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、相容性支援</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <p>截至 2020 年，幾乎各大主流瀏覽器都已經能省略各自的兼容前綴，成功判讀 CSS3 的屬性標準定義。唯獨 IE──是的，令諸多開發者頭疼的萬惡 IE 瀏覽器，儘管隨 Windows 10 OS 推出的 IE Edge 已經改善不少，但包含末代版本 11 在內的 舊 IE，一律不支援標準的 <em>filter</em> 語法格式，從 <a href="https://caniuse.com/#feat=css-filters" target="_blank">Can I use</a> 網站中就能清楚看出：</p>
         <figure>
             <img src="/images/learn/css/filter-1.jpg">
@@ -305,8 +319,8 @@
         </div>
         <p>然而，也有一派專家認為這條 IE 替代語法可能沒有效果，並提出透過 SVG 或 Canvas 圖形繪製的方式才是最佳的兼容方案。至於如何利用 SVG、Canvas 實現濾鏡的效果，由於這已經超過 CSS3 的範疇，因此就先不在這篇文章進行記述，待日後有開這兩者的學習筆記再行補述。</p>
     </div>
-    <div class="text-block" id="act5">
-        <h2>五、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[5].id">
+        <h2 v-text="catalog[5].title"></h2>
         <dl>
             <dd><a href="http://blog.shihshih.com/css-filter/" target="_blank">簡單究好--CSS濾鏡效果</a></dd>
             <dd><a href="https://zhuanlan.zhihu.com/p/125137964" target="_blank">知乎--CSS filter与前端滤镜</a></dd>
@@ -317,10 +331,3 @@
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

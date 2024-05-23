@@ -1,3 +1,20 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、文字陰影' },
+        { id: 2, title: '二、文字漸層' },
+        { id: 3, title: '三、文字描邊與鏤空' },
+        { id: 4, title: '四、特效賞析' },
+        { id: 5, title: '五、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="37" fileType="learnList" />
@@ -5,20 +22,17 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、文字陰影</a></li>
-            <li><a href="#act2">二、文字漸層</a></li>
-            <li><a href="#act3">三、文字描邊與鏤空</a></li>
-            <li><a href="#act4">四、特效賞析</a></li>
-            <li><a href="#act5">五、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>過去 CSS 針對文字的操作大多集中於大小、字距或換行方面的格式調整，較少就文字本身效果方面做變化，而 CSS3 則大幅度補足了這方面的缺憾，不僅可以利用相關屬性給予文字特殊的效果變化，也可以結合其他像是變形（Transform）或濾鏡（Filter）這類型的特效屬型，讓文字有更多元、豐富的呈現方式。本篇文章內容主要介紹些 CSS3 新增的文字特效屬性，以及分享一些網路各路高手利用純 CSS 語法編寫的特效文字創作。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、文字陰影</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>相信不少人都知道 <em>box-shadow</em> 屬性可以用來設置元素陰影，但該屬性只能針對元素本身，無法套用到元素內的文字上，如果想賦予文字陰影，則必須使用 <em>text-shadow</em> 屬性。</p>
         <p>語法規則：</p>
         <div class="text-code" v-pre>
@@ -71,8 +85,8 @@
             </div>
         </div>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、文字漸層</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>實現文字漸層的方法並非單一屬性直接去設置，而核心屬性 <em>background-clip</em> 也並非是單純針對文字特效誕生的屬性，以下我們先來看語法範例，再來講解各屬性的用途：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-css">h1 {
@@ -119,8 +133,8 @@
             <p>目前 <em>background-clip</em> 瀏覽器相容性仍不高，建議添加前綴以防部份瀏覽器不支援語法格式。</p>
         </blockquote>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、文字描邊與鏤空</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p>就像 <em>text-shadow</em> 之於 <em>box-shadow</em>，CSS3 同樣提供設定文字邊框的新屬性，其語法為：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-css">selector {
@@ -148,8 +162,8 @@
             </div>
         </div>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、特效賞析</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <p>最後這個章節我們來看看一些神人如何活用 CSS 屬性來實現文字的有趣特效吧！</p>
         <div class="text-link">
             <div>
@@ -262,8 +276,8 @@
             </div>
         </div>
     </div>
-    <div class="text-block" id="act5">
-        <h2>五、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[5].id">
+        <h2 v-text="catalog[5].title"></h2>
         <dl>
             <dd><a href="https://www.kip.com.tw/modules/news/article.php?storyid=37" target="_blank">CSS 3背景新屬性：background-clip</a></dd>
             <dd><a href="https://medium.com/coding-hot-pot/%E8%AA%8D%E8%AD%98-css-%E5%B1%AC%E6%80%A7-background-clip-94592b72a0d0" target="_blank">認識 css 屬性 background-clip</a></dd>
@@ -273,10 +287,3 @@
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

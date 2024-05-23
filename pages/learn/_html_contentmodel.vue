@@ -1,3 +1,19 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、Block 與 Inline 的比較' },
+        { id: 2, title: '二、七大內容模型' },
+        { id: 3, title: '三、透明內容模型（Transparent）' },
+        { id: 4, title: '四、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="11" fileType="learnList" />
@@ -5,19 +21,17 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、Block 與 Inline 的比較</a></li>
-            <li><a href="#act2">二、七大內容模型</a></li>
-            <li><a href="#act3">三、透明內容模型（Transparent）</a></li>
-            <li><a href="#act4">四、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>CSS 規範規定 HTML 所有元素都有默認的 <em>display</em> 屬性，早期 HTML 標準將元素歸納為兩大類：區塊元素（Block）與行內元素（Inline），分別與 CSS <em>display</em> 屬性中的 <em>display</em> 值和 <em>inline</em> 值相對應。但在 HTML5 中，對於元素分類已賦予新的定義，使開發者得以更加清楚了解它們的種類及適用條件。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、Block 與 Inline 的比較</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>首先，我們透過表格來理解兩者的不同之處：</p>
         <div class="text-flex">
             <div class="f-width">
@@ -56,8 +70,8 @@
         </figure>
         <p>由此可知，<b>Flow content</b> 幾乎涵蓋所有其他內容模型的元素，而部分內容模型之間也會有重疊的部份，亦即是說單一 HTML 元素滿足特定情境條件下，就會歸類於不同的內容模型。</p>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、七大內容模型</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>本節將針對 HTML5 定義的七大內容模型（Content Models）做概略的介紹與說明。</p>
         <h3>Flow content（流動型內容）：</h3>
         <p>此一內容模型幾乎涵蓋所有存在於 <em>&lt;body&gt;</em> 裡的所有元素，換句話說，像 <em>&lt;title&gt;</em>、<em>&lt;meta&gt;</em> 這類只會在 <em>&lt;head&gt;</em> 內使用的就不屬 Flow content 範疇。</p>
@@ -81,8 +95,8 @@
         <p>此類型的元素作用在於定義網頁與其他外部資源的關係，或是記載網站本身的資訊或行為。基本上放在 <em>&lt;head&gt;</em> 裡的元素都屬此模型內容，例如：<em>&lt;title&gt;</em>、<em>&lt;meta&gt;</em>、<em>&lt;link&gt;</em>、<em>&lt;style&gt;</em>、<em>&lt;script&gt;</em>...等。</p>
         <p><br></p>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、透明內容模型（Transparent）</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p><b>Transparent</b> 是一個很特殊的分類，透明元素可包含其他元素，<em>&lt;a&gt;</em> 就是典型的透明內容模型元素，我們很常自己或看到他人在 <em>&lt;a&gt;</em> 裡面嵌套其他內容模型的元素，然而，必須依循一定規則才可算是合法。什麼樣叫做合法？為方便了解，我們搬出 HTML4 之前提到「行內元素不能包含區塊元素」的規則，來檢視 <em>&lt;p&gt;</em>（行內元素）與 <em>&lt;div&gt;</em>（區塊元素）之間的嵌套關係：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-html">&lt;div&gt;
@@ -143,8 +157,8 @@
         </div>
         <p>最後這個例子，由於 <em>&lt;a&gt;</em> 與 <em>&lt;body&gt;</em> 間已無其他父級元素，因此 <em>&lt;a&gt;</em> 內的子元素就可以包含任一 <b>Flow content</b> 的元素。</p>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <dl>
             <dd><a href="https://read01.com/QodoDa.html#.Xnm3CYgzY-U" target="_blank">網頁面包屑導航是什麼？</a></dd>
             <dd><a href="https://kknews.cc/zh-tw/code/8bvvmrg.html" target="_blank">什麼是麵包屑導航？—SEO相關知識</a></dd>
@@ -155,10 +169,3 @@
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

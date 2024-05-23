@@ -1,3 +1,21 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、如何安裝' },
+        { id: 2, title: '二、如何編譯' },
+        { id: 3, title: '三、指令列表' },
+        { id: 4, title: '四、Autoprefixer' },
+        { id: 5, title: '五、預處理器語言' },
+        { id: 5, title: '六、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="15" fileType="learnList" />
@@ -5,24 +23,20 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、如何安裝</a></li>
-            <li><a href="#act2">二、如何編譯</a></li>
-            <li><a href="#act3">三、指令列表</a></li>
-            <li><a href="#act4">四、Autoprefixer</a></li>
-            <li><a href="#act5">五、預處理器語言</a></li>
-            <li><a href="#act6">六、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <figure>
             <img src="/images/learn/css/stylus-1.png">
         </figure>
         <p><a href="https://stylus-lang.com/" target="_blank">Stylus</a> 是 CSS 的預處理器工具之一。什麼是預處理器？預處理器（Preprocessor）是程式中處理輸入資料，產生能用來輸入到其他程式的資料的程式。看上去有點饒舌，但沒關係，我們只要知道 CSS 的預處理器能讓我們更快速、方便地編寫 CSS 樣式即可。而本篇文章將來對 Stylus 的用途、語法、與其他預處理器的異同、優缺點等作一系列的介紹。如果你在接觸 Stylus 之前已經學會 Sass，那麼 Stylus 的語法應該也難不倒你。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、如何安裝</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>首先，我們得知道 Stylus 是來自於 <a href="https://nodejs.org/en/">Node.js</a>，因此使用之前，必須先確認工作電腦是否有安裝 Node.js 環境，我們可以打開命令提示字元，透過下方指令確認電腦是否已有安裝：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-bash">node -v</code></pre>
@@ -38,8 +52,8 @@
             <img src="/images/learn/css/stylus-13.jpg">
         </figure>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、如何編譯</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>Stylus 有多種編譯的方法，分別是針對單一或多個檔案，又或是編譯整個資料夾內的 .styl 檔案，以及將檔案編譯到其他資料夾位置，更甚者還有即時監聽編譯的服務，以下個別進行介紹。</p>
         <p><br></p>
         <h3>單一檔案編譯：</h3>
@@ -115,8 +129,8 @@
             <img src="/images/learn/css/stylus-10.jpg">
         </figure>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、指令列表</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p>除了上一章節介紹的指令之外，Stylus 的指令其實還有很多，以下列舉幾項個人認為一般開發者可能比較常使用的指令：</p>
         <div class="text-flex">
             <div class="f-width">
@@ -171,8 +185,8 @@
         </div>
         <p>這個指令的意思為當 <em>styl</em> 資料夾裡的 <b>.styl</b> 文件一旦有所變更，儲存檔案時就會立即執行編譯，並輸出 CSS 文件至外層的 <em>css</em> 資料夾中。</p>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、Autoprefixer</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <p><a href="https://www.npmjs.com/package/autoprefixer-stylus" target="_blank">Autoprefixer</a> 是用來處理部份 CSS3 語法在不同瀏覽器需要添加指定前綴的工具，如果有瀏覽器兼容性要求的開發者建議安裝這個套件。安裝指令為：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-bash">npm install autoprefixer-stylus -g</code></pre>
@@ -196,8 +210,8 @@
             <figcaption>使用 Autoprefixer 編譯輸出的結果。</figcaption>
         </figure>
     </div>
-    <div class="text-block" id="act5">
-        <h2>五、預處理器語言</h2>
+    <div class="text-block" :id="'act' + catalog[5].id">
+        <h2 v-text="catalog[5].title"></h2>
         <p>CSS 的預處理器主流有三款，分別是 Sass、Less 與 Stylus。其中以 Sass 的發展最早，以換行與縮排的方式大幅簡化 CSS 的語法編寫方式，但後來也已兼容傳統添加分號、花括號的寫法，成為比 Sass 語法更容易閱讀的 SCSS。</p>
         <p>Less 則以 JavaScript 為依歸，毋須像 Sass 使用前必須得先安裝 Ruby、Compass 等額外環境，Less 只需將 <b>less.js</b> 下載下來就能直接在專案裡使用，不經編譯的動作即可在網頁呈現 <b>.less</b> 格式的樣式表。然而相對 Sass 而言，Less 的編寫並不若其那般簡單自由。</p>
         <p>Stylus 來自 Node.js，是三者中最晚誕生的預處理器，知名度與使用度並未前兩者廣泛，不過現今的網頁專案開發許多都會利用 Node.js，幾乎每名網頁工程師的電腦都有安裝，因此如果使用 Stylus 只需要幾個 <b>npm</b> 指令就可以搞定。</p>
@@ -239,8 +253,8 @@
         </div>
         <p>它們雖各有優缺，卻沒有絕對的好或不好，只有適不適合自己的開發需求。選擇適當的 CSS 預處理器語言並導入專案裡，就能讓專案開發更加輕鬆、快速。以上就是 Stylus 的基本簡介及使用方法，下一篇文章將介紹 Stylus 的語法和函數。</p>
     </div>
-    <div class="text-block" id="act6">
-        <h2>六、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[6].id">
+        <h2 v-text="catalog[6].title"></h2>
         <dl>
             <dd><a href="https://stylus-lang.com/" target="_blank">stylus</a></dd><!-- https://stylus.bootcss.com/ -->
             <dd><a href="https://www.jianshu.com/p/c22dd5d95bf2" target="_blank">css预处理器stylus基本用法 - 简书</a></dd>
@@ -251,10 +265,3 @@
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

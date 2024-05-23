@@ -1,3 +1,25 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、判斷陣列及轉換資料（isArray、of、from）' },
+        { id: 2, title: '二、新增陣列資料（unshift、push）' },
+        { id: 3, title: '三、刪除陣列資料（shift、pop）' },
+        { id: 4, title: '四、增刪改陣列資料（splice）' },
+        { id: 5, title: '五、合併陣列資料（concat）' },
+        { id: 6, title: '六、截取陣列資料（slice）' },
+        { id: 7, title: '七、複製陣列資料（copyWithin）' },
+        { id: 8, title: '八、填充陣列資料（fill）' },
+        { id: 9, title: '九、反轉陣列資料（reverse）' },
+        { id: 10, title: '十、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="51" fileType="learnList" />
@@ -5,25 +27,17 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、判斷陣列及轉換資料（isArray、of、from）</a></li>
-            <li><a href="#act2">二、新增陣列資料（unshift、push）</a></li>
-            <li><a href="#act3">三、刪除陣列資料（shift、pop）</a></li>
-            <li><a href="#act4">四、增刪改陣列資料（splice）</a></li>
-            <li><a href="#act5">五、合併陣列資料（concat）</a></li>
-            <li><a href="#act6">六、截取陣列資料（slice）</a></li>
-            <li><a href="#act7">七、複製陣列資料（copyWithin）</a></li>
-            <li><a href="#act8">八、填充陣列資料（fill）</a></li>
-            <li><a href="#act9">九、反轉陣列資料（reverse）</a></li>
-            <li><a href="#act5">十、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>本篇主題將延續上一篇文章，聚焦於 JavaScript 陣列的常用方法進行說明以及如何運用，不過陣列的操作方法非常繁多，所以拆成上、下兩篇文章來記述，而各章節順序與歸類僅基於本新手小白的觀感安排，所以不保證方法歸類一定合乎邏輯，僅供參考爾爾。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、判斷陣列及轉換資料（isArray、of、from）</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <h3>Array.isArray：</h3>
         <p><em>Array.isArray()</em> 方法可以用來判斷指定的目標物件是否為陣列，如果判斷結果是陣列，則回傳 <em>true</em>，反之則傳回 <em>false</em>。例如：</p>
         <div class="text-code" v-pre>
@@ -78,8 +92,8 @@ console.log(arrFromSet);    // [1, 2, 3, 4]</code></pre>
         </div>
         <p>總體來說，當我們需要將類陣列資料或其他可迭代對象轉換成陣列時，便是 <em>Array.from</em> 派上用場的時候，而它也可以就現有的陣列另外建立一個新的陣列，作到類似複製陣列的「淺拷貝」作用，這樣在操作新陣列資料的時候，也可以避免影響到來源對象的原始內容。</p>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、新增陣列資料（unshift、push）</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <h3>unshift：</h3>
         <p><em>unshift()</em> 方法可以將新的資料新增到指定陣列的「前面」，或者也可以說是「左側」。例如：</p>
         <div class="text-code" v-pre>
@@ -115,8 +129,8 @@ console.log(nameList);    // ["王小明","李大華","張小芬","盧小小","�
         <p>需要注意的是，這兩個方法都是針對指定陣列本身進行新增資料的操作，因此會影響到指定陣列原本的內容及陣列長度。如果希望在以不更動原有陣列為前提情況下添加新的資料，則可使用 <em>concat()</em> 方法，藉由建立新的陣列來合併不同來源之陣列資料的方式，就可以避免動到原本的陣列資料。</p>
         <p>關於 <em>concat()</em> 方法會在後續章節更進一步介紹與實作。</p>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、刪除陣列資料（shift、pop）</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <h3>shift：</h3>
         <p><em>shift()</em> 方法可以刪除指定陣列中最前面（或稱左側）的資料。例如：</p>
         <div class="text-code" v-pre>
@@ -149,8 +163,8 @@ console.log(newList);    // ["王小明"]</code></pre>
         </div>
         <p>可以從輸出結果中發現，這些會影響原始陣列資料的操作方法，執行後會回傳它處理的資料，譬如 <em>shift()</em> 刪除指定陣列的第一筆資料，所以範例中它回傳了「王大明」這筆資料結果，且原始陣列 nameList 也依然受到該方法的影響更新了它的內容，由此得證我那天真的想法並不成立。</p>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、增刪改陣列資料（splice）</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <p><em>splice()</em> 是陣列裡功能非常強大的方法之一。它可以對指定陣列進行新增、刪除、修改等動作，其語法結構一共包含了三個參數：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-javascript">arrayObject.splice(index, howmany, item1,.....,itemN)</code></pre>
@@ -218,8 +232,8 @@ console.log(nameList);    // ["王小明","李大華","盧小小"]</code></pre>
         </div>
         <p>索引值 為 -1，代表範例陣列最後一個的資料「張小芬」被移除，然後新增「盧小小」到陣列中。</p>
     </div>
-    <div class="text-block" id="act5">
-        <h2>五、合併陣列資料（concat）</h2>
+    <div class="text-block" :id="'act' + catalog[5].id">
+        <h2 v-text="catalog[5].title"></h2>
         <p><em>concat()</em> 方法用於合併二至多個不同的陣列，例如：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-javascript">var a = ["A1", "A2", "A3"];
@@ -253,8 +267,8 @@ console.log(a);    // ["A1","A2","A3"]</code></pre>
 console.log(a);    // ["A1","A2","A3","B1","B2","B3","C1","C2","C3"]</code></pre>
         </div>
     </div>
-    <div class="text-block" id="act6">
-        <h2>六、截取陣列資料（slice）</h2>
+    <div class="text-block" :id="'act' + catalog[6].id">
+        <h2 v-text="catalog[6].title"></h2>
         <p><em>slice()</em> 方法可以截取陣列中的資料，使其成為新的陣列，雖說是「截取」，但也並非直接從原陣列裡把指定資料「剪」出來，而是比較近似複製的概念。<em>slice()</em> 一共可填兩個參數，分別代表索引值（<em>index</em>）的起始值與結束值。具體公式為：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-javascript">ary.slice(start, end)</code></pre>
@@ -311,8 +325,8 @@ nameList.slice(-3, -1);  // 從右邊第三位截取至右邊第一位</code></p
         </div>
         <p>這是因為 <em>slice()</em> 只能允許從指定索引值位置開始向後（右）提取資料，不能向前（左），上面的例子即表示要從右邊數來第二筆資料向左擷取到第一筆資料，不符合此方法的操作邏輯。</p>
     </div>
-    <div class="text-block" id="act7">
-        <h2>七、複製陣列資料（copyWithin）</h2>
+    <div class="text-block" :id="'act' + catalog[7].id">
+        <h2 v-text="catalog[7].title"></h2>
         <p><em>copyWithin()</em> 方法可以複製陣列的資料，並從指定索引值的位置開始將複製的資料覆蓋原本位置的資料。它一共可填入三個參數值，語法規則如下：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-javascript">ary.copyWithin(target, start, end);</code></pre>
@@ -359,8 +373,8 @@ console.log(result);    // ["王小明","李大華","李大華","張小芬","黃
         <p><br></p>
         <p>總而言之，不管如何複製，新的複製陣列長度會與原本複製對象的陣列長度相同，只是依據我們填入的參數改變對應位置資料的值而已。</p>
     </div>
-    <div class="text-block" id="act8">
-        <h2>八、填充陣列資料（fill）</h2>
+    <div class="text-block" :id="'act' + catalog[8].id">
+        <h2 v-text="catalog[8].title"></h2>
         <p><em>fill()</em> 方法可用來將陣列中的資料填充為指定的值，其語法規則為：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-javascript">ary.fill(value, start, end);</code></pre>
@@ -379,8 +393,8 @@ nameList.fill("林小玉", 0, 3);    // ["林小玉","林小玉","林小玉","�
         </div>
         <p>從陣列索引值為 0，意即第一個位置的值開始，一直填充新的資料至索引值為 3 的資料位置，但該筆資料不會被填充，所以實際上只有索引值 0 到 2 的原本資料被「林小玉」給填充取代。理所當然地，使用 <em>fill()</em> 方法會影響原本目標陣列的資料內容。</p>
     </div>
-    <div class="text-block" id="act9">
-        <h2>九、反轉陣列資料（reverse）</h2>
+    <div class="text-block" :id="'act' + catalog[9].id">
+        <h2 v-text="catalog[9].title"></h2>
         <p><em>reverse()</em> 方法可以用於反轉陣列裡的資料，也就是原本最後一筆資料變成第一個，倒數第二變成第二...依此類推。例如：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-javascript">var nameList = ["王小明", "李大華", "張小芬", "盧小小"];
@@ -390,8 +404,8 @@ console.log(nameList);    // ["盧小小","張小芬","李大華","王小明"]</
         </div>
         <p>透過範例可知此方法會影響原本陣列資料的排列順序。</p>
     </div>
-    <div class="text-block" id="act10">
-        <h2>十、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[10].id">
+        <h2 v-text="catalog[10].title"></h2>
         <dl>
             <dd><a href="https://www.books.com.tw/products/0010744702" target="_blank">《JavaScript & JQuery：網站互動設計程式進化之道》</a></dd>
             <dd><a href="https://www.fooish.com/javascript/array/" target="_blank">JavaScript Array (陣列)</a></dd>
@@ -405,10 +419,3 @@ console.log(nameList);    // ["盧小小","張小芬","李大華","王小明"]</
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

@@ -1,3 +1,20 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、var' },
+        { id: 2, title: '二、let' },
+        { id: 3, title: '三、const' },
+        { id: 4, title: '四、總結' },
+        { id: 5, title: '五、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="54" fileType="learnList" />
@@ -5,20 +22,17 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、var</a></li>
-            <li><a href="#act2">二、let</a></li>
-            <li><a href="#act3">三、const</a></li>
-            <li><a href="#act4">四、總結</a></li>
-            <li><a href="#act5">五、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>以前學 JavaScript 的第一堂課，一定會學到變數是由關鍵字 <em>var</em> 來作宣告，然後再將變數運用到之後的函式之中。但自 ES2015 版本（也可以泛稱 <b>ES6</b>）問世開始，變數宣告方式除了原本的 <em>var</em>，還新增了 <em>const</em> 與 <em>let</em> 這兩種方式。當然，JavaScript 不可能平白無故白白增加兩個性質功能一樣的東西把工程師搞矇，本篇主要來談談為什麼 <b>ES6</b> 要特地新增兩個變數宣告方式，它們與過往長年我們所使用的 <em>var</em> 有什麼差異。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、var</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>在 <b>ES6</b> 釋出之前，JavaScript 宣告變數有兩種方式，一種是無關鍵字宣告賦值，另一種則是透過關鍵字 <em>var</em> 來作宣告。無關鍵字宣告變數的方式舉例如下：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-javascript">x = 1;
@@ -108,8 +122,8 @@ var y = "hello!";
 console.log(y);    // "hello!"</code></pre>
         </div>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、let</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>作用域（Scope）指的是一個變數的生存範圍，在 <b>ES6</b> 版本之前，變數的作用域指的是 <em>function</em>，在 <em>function</em> 外宣告的則叫作「全域變數」（Global Variable）；在 <em>function</em> 內宣告的變數稱為「區域變數」（Local Variable）。</p>
         <p><em>function</em> 內的作用域稱為「函式作用域」（Function Scope），但 <b>ES6</b> 則新增一種名為「區塊」（Block）的概念，是為「區塊作用域」（Block Scope），它主要用來解決函式作用域可能導致的汙染問題（詳情可見前一章 <em>var</em> 的全域作用域污染說明），配合 <em>let</em> 與 <em>const</em> 變數宣告方式，限制並避免區塊內的變數汙染到全域範圍。</p>
         <p>區塊作用域指的是由大括號 <em>{ }</em> 界定的程式碼區塊，在大括號囊括範圍裡的程式碼都屬於區塊作用域一部份，像是 <em>if</em>、<em>for</em>、<em>while</em> ...等，當然，也包含 <em>function</em>。</p>
@@ -227,8 +241,8 @@ y = 5;
 console.log(y);    // 5</code></pre>
         </div>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、const</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p><em>const</em> 可視為規矩更嚴謹的 <em>let</em>，首先，<em>const</em> 宣告時就必須給予「常數」（Constant），否則編譯時就會直接報錯。我們先看透過 <em>let</em> 宣告變數卻不給值的情況下，程式敘述句去存取變數的話會得到啥結果：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-javascript">let x;
@@ -275,8 +289,8 @@ console.log(obj);    // {"name": "John", "years": 33}</code></pre>
         <h3>重複宣告：</h3>
         <p>不是我要虎頭蛇尾，基本上 <em>let</em> 的特性與限制於 <em>const</em> 身上通通都有，但 <em>const</em> 比 <em>let</em> 又多了必須先給值，以及常數保護這些更加嚴謹的特性。</p>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、總結</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <p>最後，我們將無宣告變數與 <em>var</em>、<em>let</em>、<em>cont</em> 以各自章節細分的主題──「作用域範圍」、「變數提升」、「重複宣告」，彙整成表格來作整體比較。</p>
         <p><br></p>
         <h3>作用域範圍：</h3>
@@ -438,8 +452,8 @@ console.log(obj);    // {"name": "John", "years": 33}</code></pre>
             <li>使用 <em>const</em> 可以減少錯誤，因為它防止了對不應該更改的變數進行意外的重新賦值。</li>
         </ul>
     </div>
-    <div class="text-block" id="act5">
-        <h2>五、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[5].id">
+        <h2 v-text="catalog[5].title"></h2>
         <dl>
             <dd><a href="https://nicolakacha.coderbridge.io/2020/09/29/javascript-scope-hoisting/" target="_blank">JavaScript: Scope & Hoisting</a></dd>
             <dd><a href="https://tw.alphacamp.co/blog/javascript-var-let-const" target="_blank">JS var 變數的秘密：一文看懂 var、let、const 無宣告變數細節</a></dd>
@@ -453,10 +467,3 @@ console.log(obj);    // {"name": "John", "years": 33}</code></pre>
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

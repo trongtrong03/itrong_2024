@@ -1,3 +1,20 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、父子組件之間的通信（defineProps）' },
+        { id: 2, title: '二、自定義事件傳遞資料給父組件（defineEmits）' },
+        { id: 3, title: '三、父組件修改子組件的資料（$refs）' },
+        { id: 4, title: '四、子組件修改父組件的資料（$parent）' },
+        { id: 5, title: '五、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="77" fileType="learnList" />
@@ -5,20 +22,17 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、父子組件之間的通信（defineProps）</a></li>
-            <li><a href="#act2">二、自定義事件傳遞資料給父組件（defineEmits）</a></li>
-            <li><a href="#act3">三、父組件修改子組件的資料（$refs）</a></li>
-            <li><a href="#act4">四、子組件修改父組件的資料（$parent）</a></li>
-            <li><a href="#act5">五、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>在早前〈循序漸進學 Vue3（七）：組件之間的傳遞 props〉一文中已經有稍微學習組件之間如何進行資料傳遞，我們稱之為 Props，而組件之間也不是只有常見的父子傳遞而已，有可能是父與孫、平輩與平輩等多種情境的組件狀態，不同關聯下的 Props 使用方式也有所區別，本篇文章主要便是要來學習在各種組件關係要如何正確地運用 Props 傳遞資料給對方。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、父子組件之間的通信（defineProps）</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>父子組件之間的通信既常見也相對單純，因為也不太需要牽涉路由或其他操作，首先我們準備妥以下要用來練習 props 功能的父子組件程式碼結構範例：</p>
         <p><b>Parents.vue</b>（父組件）：</p>
         <div class="text-code" v-pre>
@@ -134,8 +148,8 @@
             <img src="/images/learn/js/vue3-learn-16-4.jpg">
         </figure>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、自定義事件傳遞資料給父組件（defineEmits）</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>上個章節提到如果要傳遞子組件的資料給父組件，需要透過父組件先傳遞一個函式給子組件，讓子組件透過函式把值回傳給父組件。除了這個作法，其實還有另一種比起前者或許稍微麻煩，卻也算相當常見的作法，這個作法叫做「自定義事件」。</p>
         <p>首先，我們在父組件模板載入子組件標籤的位置，加入一個自定義事件的名稱，譬如 send-item：</p>
         <div class="text-code" v-pre>
@@ -228,8 +242,8 @@ onMounted(()=>{
 });</code></pre>
         </div>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、父組件修改子組件的資料（$refs）</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p>前面都在說如何傳遞與接收資料，這一章節要談的是父組件如何對子組件的資料進行修改......或者說「更新」子組件的資料也許更適當。首先規劃的基本父子組件的結構如下：</p>
         <p>父組件 <b>Parents.vue</b>：</p>
         <div class="text-code" v-pre>
@@ -350,8 +364,8 @@ defineExpose({ dog });</code></pre>
             <img src="/images/learn/js/vue3-learn-16-8.jpg">
         </figure>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、子組件修改父組件的資料（$parent）</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <p>上個章節介紹了父組件如何修改子組件提供給外部存取的資料，這個章節則反過來敘述子組件如何變父組件的資料，原理其實大同小異，只不過這裡要用的是 <em>$parent</em>。</p>
         <p>父組件 <b>Parents.vue</b>：</p>
         <div class="text-code" v-pre>
@@ -412,8 +426,8 @@ defineExpose({ dog });</code></pre>
         </blockquote>
         <p>其實，無論是 <em>$parent</em> 還是 <em>$refs</em>，它們真身其實都是 <em>reactive</em> 響應式物件，之前我們有學過，包裹在 <em>reactive</em> 響應式物件裡面的 Ref 資料，若要對其值進行操作，是不需要添加 <em>.value</em> 的，這就是為什麼上面這個範例不需要添加 <em>.value</em> 就能直接修改 <em>parent.num</em> 的值。</p>
     </div>
-    <div class="text-block" id="act5">
-        <h2>五、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[5].id">
+        <h2 v-text="catalog[5].title"></h2>
         <dl>
             <dd><a href="https://cn.vuejs.org/" target="_blank">Vue.js</a></dd>
             <dd><a href="https://www.youtube.com/watch?v=49b150tKIUc&list=PLmOn9nNkQxJEnGM4Jf0liBcyedAtuQq-O&index=52" target="_blank">【极简Vue3】052 组件通信 方式1 props</a></dd>
@@ -424,10 +438,3 @@ defineExpose({ dog });</code></pre>
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

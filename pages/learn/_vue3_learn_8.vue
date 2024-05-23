@@ -1,3 +1,19 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、什麼是 hooks？' },
+        { id: 2, title: '二、如何自定義 hooks？' },
+        { id: 3, title: '三、hooks 進階應用' },
+        { id: 4, title: '四、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="69" fileType="learnList" />
@@ -5,28 +21,26 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、什麼是 hooks？</a></li>
-            <li><a href="#act2">二、如何自定義 hooks？</a></li>
-            <li><a href="#act3">三、hooks 進階應用</a></li>
-            <li><a href="#act4">四、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>首先，我們回顧一張圖片：</p>
         <figure>
             <img src="/images/learn/js/vue3-learn-1-2.jpg">
         </figure>
         <p>這張圖是在描繪 Vue 3 Composition API 是如何管理組件裡使用到的所有函式，和過去 Vue 2 Options API 要將一個功能的函式拆分到各個選項配置不同，前者更傾向於不把函式裡的程式碼分離，如此一來無論是閱讀還是維護都會比後者來得直覺、易懂。但如果一個函式功能會運用於很多組件上呢？是否能像傳統 JavaScript 那樣，把共用或會重複使用的函式拉出來獨立成一支檔案進行使用或管理，這樣當函式功能需要調整時，只需要針對那支檔案進行修改即可？答案是肯定的，這種作法在 Vue 3 裡稱為 hooks，本篇文章內容便是要來講述如何建立自定義的 hooks。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、什麼是 hooks？</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>在 Vue 3 中，hooks 通常指的是 Composition API 中的一組函式，用於在函式元件中組織和重複使用程式碼。Composition API 是 Vue 3 中新增的特性，它提供了一種更靈活、更可組合的方式來編寫建邏輯，相較於 Vue 2 的選項式 API，它更強調邏輯的組織和重用。</p>
         <p>所以，我們前面學的 <em>setup</em>、<em>ref</em>、<em>reactive</em>、<em>computed</em>、<em>watch</em>......等等，其實也都是 hooks 的一種，因為它們都是 Composition API 函式。</p>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、如何自定義 hooks？</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>假設目前有個組件，其功能如下：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-html">&lt;template&gt;
@@ -142,8 +156,8 @@ export default function (){
         </div>
         <p>可以看見組件的程式碼不僅變清爽了，若有其它組件也重複使用到相同功能的函式，未來該功能需要修改時，只需要找出 hooks 引用來源的文件進行維護就好，不需要每個組件一一去調整。</p>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、hooks 進階應用</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p>hooks 的功能不單只是用來封裝函式裡的功能，它也可以為功能添加生命鉤子，比如前面範例的加總功能，我們可以加入 <em>onMounted</em> 生命鉤子，讓組件掛載完成後立即執行鉤子裡面的內容：</p>
         <p><b>useSum.ts</b>：</p>
         <div class="text-code" v-pre>
@@ -193,8 +207,8 @@ export default function (){
         </div>
         <p>每點擊一次按鈕，輸出的值就會以 1 -- 10、2 -- 20、3 -- 30 ...依此類推累計。</p>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <dl>
             <dd><a href="https://cn.vuejs.org/" target="_blank">Vue.js</a></dd>
             <dd><a href="https://www.youtube.com/watch?v=49b150tKIUc&list=PLmOn9nNkQxJEnGM4Jf0liBcyedAtuQq-O&index=29" target="_blank">【极简Vue3】029 自定义hooks</a></dd>
@@ -204,10 +218,3 @@ export default function (){
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

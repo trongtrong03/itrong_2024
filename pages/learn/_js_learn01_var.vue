@@ -1,3 +1,21 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、如何宣告變數？' },
+        { id: 2, title: '二、作用域是什麼？' },
+        { id: 3, title: '三、變數的資料型別' },
+        { id: 4, title: '四、變數的命名規則' },
+        { id: 5, title: '五、總結' },
+        { id: 6, title: '六、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="45" fileType="learnList" />
@@ -5,17 +23,13 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、如何宣告變數？</a></li>
-            <li><a href="#act2">二、作用域是什麼？</a></li>
-            <li><a href="#act3">三、變數的資料型別</a></li>
-            <li><a href="#act4">四、變數的命名規則</a></li>
-            <li><a href="#act5">五、總結</a></li>
-            <li><a href="#act6">六、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <blockquote>
             <p>JavaScript variables are containers for storing data values.</p>
         </blockquote>
@@ -24,8 +38,8 @@
         <p>JavaScript 會透過定義變數的方式，快速取得每一次數值變動後的計算結果，最後更新到畫面元素裡（即 HTML 的元素標籤），對於掌管網頁動態資訊來往的 JavaScript 而言，基本上任何程式操作都很難脫離變數獨自去執行，因此，變數可說是 JavaScript 這門程式語言的重要核心之一，無時無刻都會看見也會使用到它。</p>
         <p>本篇文章學習 JavaScript 變數包含以下這些要點：</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、如何宣告變數？</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>使用變數之前，必須先發佈通知，這個動作包含建立變數，以及賦予變數名稱。此一過程我們稱之為「宣告（declare）」，在 JavaScript ES6 版本發布之前，一貫使用 <em>var</em> 這個詞（variables 的簡寫）來宣告變數。</p>
         <p>例如：</p>
         <div class="text-code" v-pre>
@@ -63,8 +77,8 @@
             <pre><code class="language-javascript">var dog = "阿比";    // 好的宣告</code></pre>
         </div>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、作用域是什麼？</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>「作用域」一詞在程式語言原名叫做 Scope，指的是變數（或函式）的可見性與其訪問的範圍，作用域的概念存在於許多程式語言，而不同程式語言也各自具有不同的作用域規則與特點，例如 Python 的變數作用域取決於函式的定義範圍；Java 雖然和 Python 相似，但它的變數只能在代碼區塊內部宣告，通常不能在該區塊之外的地方訪問其內部宣告的變數。</p>
         <p>回到 JavaScript，我們來看看 MDN 對作用域的解釋是怎樣說的：</p>
         <blockquote>
@@ -506,8 +520,8 @@ console.log(outerVar);    // Uncaught ReferenceError: outerVar is not defined
 console.log(innerVar);    // Uncaught ReferenceError: innerVar is not defined</code></pre>
         </div>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、變數的資料型別</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p>我們常常會看見或聽別人說 JavaScript 是「弱型別」的程式語言，什麼是弱型別程式語言？這個問題留到本章節末段再來解釋，我們首先要知道的是，在電腦程式語言世界裡，存在著「型別」這樣的一個系統，用來定義程式語言中的數值或運算式之類型。拿第一個章節的 <em>var price;</em> 為例，當沒有將任何數值指定給宣告變數的狀況下，其回傳值結果為 <em>undefined</em>，這個 <em>undefined</em> 就是 JavaScript 其中一種型別。而 <em>var price = 20;</em> 時，回傳的結果為 <em>20</em>，它也是型別的一種，屬於「數值（Number）資料型別」。或許看到這裡會狐疑定義變數數值的型別究竟有什麼用？當然有用，就像我們會用「元」來定論某個商品的售價，而不是以公分或顏色作為交易單位。對程式語言而言，型別象徵變數值的特徵，不同資料類型的型別，必須適才適所地運用在適當的程式邏輯。</p>
         <p>目前 ECMAScript 最新的標準定義了七種資料型別，分別是：</p>
         <div class="text-flex">
@@ -650,8 +664,8 @@ console.log(a);     // "100300"</code></pre>
         </div>
         <p><em>a</em> 回傳的結果為 <em>"100300"</em>，為字串相加。儘管它不像 PHP 這麼聰明，會自動將字串轉為數字並作加總計算，可是也不會像 JAVA 如同 NBA 裁判奉行零容忍原則般說一不二，依舊會回傳出個結果給我們。雖然比起強型別，弱型別語言的彈性較大，但不嚴謹招致錯誤轉型判斷的可能也比前者來的高（像 JavaScript 就是很好的例子），畢竟程式語言不是開發者本人，無法準確地判斷開發者給予的數值究竟是不是本人所期望的，因此培養編寫程式時反覆檢查的習慣非常重要。</p>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、變數的命名規則</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <p>英文字母的大小寫在諸多程式語言是不同的字詞，對 JavaScript 而言也不例外，除此之外，當我們在宣告變數名稱的時候，也有一些命名規則需要遵循或注意。本章節談論變數命名主要分為兩種談論方向，一是變數命名的規則，二是應該用什麼樣的命名方式比較適當。</p>
         <p><br></p>
         <h3>命名規則：</h3>
@@ -889,8 +903,8 @@ var AnimalPlanetChannel = "動物星球頻道";</code></pre>
         <p><br></p>
         <p>以上命名觀念不單侷限於變數命名，函式命名方式同樣也適用。</p>
     </div>
-    <div class="text-block" id="act5">
-        <h2>五、總結</h2>
+    <div class="text-block" :id="'act' + catalog[5].id">
+        <h2 v-text="catalog[5].title"></h2>
         <p>回顧本篇文章，精簡總結一下我們從變數身上學到哪些東西：</p>
         <h5>1. 變數宣告方式</h5>
         <ul>
@@ -976,8 +990,8 @@ var AnimalPlanetChannel = "動物星球頻道";</code></pre>
             </div>
         </div>
     </div>
-    <div class="text-block" id="act6">
-        <h2>六、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[6].id">
+        <h2 v-text="catalog[6].title"></h2>
         <dl>
             <dd><a href="https://www.books.com.tw/products/0010744702" target="_blank">《JavaScript & JQuery：網站互動設計程式進化之道》</a></dd>
             <dd><a href="https://cythilya.github.io/2018/10/11/types/" target="_blank">你懂 JavaScript 嗎？#4 型別（Types）</a></dd>
@@ -994,10 +1008,3 @@ var AnimalPlanetChannel = "動物星球頻道";</code></pre>
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

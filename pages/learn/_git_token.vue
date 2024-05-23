@@ -1,3 +1,19 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、原由' },
+        { id: 2, title: '二、申請流程' },
+        { id: 3, title: '三、Git' },
+        { id: 4, title: '四、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="30" fileType="learnList" />
@@ -5,15 +21,13 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、原由</a></li>
-            <li><a href="#act2">二、申請流程</a></li>
-            <li><a href="#act3">三、Git</a></li>
-            <li><a href="#act4">四、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>按照順序，本篇文章應該是要接著講如何將遠端儲存庫較新版本的檔案拉取（<em>pull</em>）到本機端的專案，不過適逢遇到 GitHub 資安政策的改變，意即自 2021 年 8 月 13 日開始不再允許密碼驗證的方式處理遠端與本機端經由 HTTPS 端的備份。假如你沒留意到 GitHub 官方的公告，那麼當你使用 HTPPS 方式執行同步指令時，也會看到指令視窗捎來這樣的回覆：</p>
         <blockquote class="is-warning">
             <p>remote: Support for password authentication was removed on August 13, 2021. Please use a personal access token instead.</p>
@@ -24,8 +38,8 @@
         </figure>
         <p>雖說 Git 遠端備份的平台並非只有 GitHub 一個選擇，但作為全世界工程師最大的「交友平台」，多數人仍會以其作為備份或展露作品的主要選擇，最好還是了解並處理這個問題。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、原由</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>所謂「無風不起浪」，GitHub 之所以要取消密碼驗證的方式，主要是想增強使用者資料的安全性，以下是官方於 2021 年 8 月 12 日發布的<a href="https://github.blog/changelog/2021-08-12-git-password-authentication-is-shutting-down/" target="_blank">公告</a>，全文如下：</p>
         <figure>
             <img src="/images/learn/dev/git-token-1.jpg">
@@ -39,8 +53,8 @@
             <li><b>隨機性：</b><br>Token 碼皆由系統亂數產生，相較於使用者設想的密碼更能抵抗外部的暴力破解。</li>
         </ol>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、申請流程</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>申請 Token 的流程並不複雜，首先在 GitHub 網頁的右上角點擊自己的頭像，呼叫出下拉式選單後，選擇「<b>Setting</b>」。</p>
         <figure>
             <img src="/images/learn/dev/git-token-2.jpg">
@@ -62,8 +76,8 @@
         </figure>
         <p>申請按鈕送出後即會得到一組 Token 碼，後續本機端 Git 存取 GitHub 遠端儲存庫時就會需要透過它實行驗證。由於網頁重整之後就會看不到它了，所以最好是先複製記錄到個人記事本裡。</p>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、Git</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p>假設現在手邊已有版控專案需要推送到遠端儲存庫進行備份，我們使用 <em>push</em> 傳達指令：</p>
         <figure>
             <img src="/images/learn/dev/git-token-6.jpg">
@@ -84,8 +98,8 @@
         </div>
         <p>如此便完成設定，未來推送專案版控時就會略過使用者帳號與 Token 的驗證要求了。要注意的是，倘若有天你移除了 GitHub 裡的 Token，遺留在本機端 Git 專案的設定也會隨之失效，必須重新進行設定。</p>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <dl>
             <dd><a href="https://github.blog/changelog/2021-08-12-git-password-authentication-is-shutting-down/" target="_blank">GitHub</a></dd>
             <dd><a href="https://iter01.com/611820.html" target="_blank">GitHub不再支援密碼驗證解決方案：SSH免密與Token登入配置</a></dd>
@@ -95,10 +109,3 @@
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

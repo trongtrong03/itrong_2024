@@ -1,3 +1,20 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、變數提升' },
+        { id: 2, title: '二、函式提升' },
+        { id: 3, title: '三、變數與函式提升的練習' },
+        { id: 4, title: '四、Hoisting 的原理' },
+        { id: 5, title: '五、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="57" fileType="learnList" />
@@ -5,20 +22,17 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、變數提升</a></li>
-            <li><a href="#act2">二、函式提升</a></li>
-            <li><a href="#act3">三、變數與函式提升的練習</a></li>
-            <li><a href="#act4">四、Hoisting 的原理</a></li>
-            <li><a href="#act5">五、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>根據 <a href="https://developer.mozilla.org/zh-TW/docs/Glossary/Hoisting" target="_blank">mdn web docs</a> 的敘述，Hoisting 這個專有名詞在 JavaScript 裡是找不到的，至少在目前 ECMAScript® 2015（即 ES6）版本裡還沒有這個名詞的專欄介紹。中文通常翻譯為「提升」的 Hoisting，其實是釐清 JaveScript 在執行階段時，如何運行程式腳本的思路，屬於一種行為概念衍生的名詞。Hoisting 概念主要牽涉變數及函式宣告在程式腳本執行過程中被「提升」到其作用域頂部的現象，依據變數、函式在不同作用域或上下文作宣告，對程式執行可能會產生不同的影響，這個特性是 JavaScript 特有的，和其他程式語言不同，故對很多初入門的開發者來說很容易混淆，因此搞懂 Hoisting 的概念遂成為學習 JavaScript 很重要的課題之一。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、變數提升</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>如果我們試圖去向一個沒有被宣告的變數取值，例如：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-javascript">console.log(dog);    // Uncaught ReferenceError: dog is not defined </code></pre>
@@ -78,8 +92,8 @@ let dog = "阿比";    // Uncaught ReferenceError: Cannot access 'dog' before in
         <p>還記得章節一開始在沒有宣告變數的情況下就去呼叫該變數，瀏覽器會回傳 <b>Uncaught ReferenceError: dog is not defined</b> 這樣的錯誤訊息嗎？今天如果我們透過 <em>let</em> 宣告變數，得到的結果卻是 <em>Uncaught ReferenceError: Cannot access 'dog' before initialization</em>，這就意味著 <em>let</em> 確實還是有被 Hoisting 的，該錯誤訊息意思是我們「不能在變數（dog）被初始化之前嘗試訪問它」，具體來說就是當我們使用 <em>let</em>（<em>const</em> 亦然）宣告變數時，該變數會在 JavaScript 預處理階段被建立，但不會被初始化，至於賦值的部份和 <em>var</em> 相同，不管有沒有給值都不會被提升。</p>
         <p>然後如果我們在宣告之前就先訪問該變數，將會觸發 JavaScript Temporal Dead Zone（TDZ，暫時性死區）機制，當開發者使用 <em>let</em> 及 <em>const</em> 宣告變數及常數，但還沒有賦值給它們之前，會產生一段它們不能被調用的狀況，這段空窗時間就是暫時性死區。暫時性死區確保我們使用 <em>let</em>、<em>const</em> 必須先進行宣告，以避免像 <em>var</em> 那樣還沒被宣告就可以拿來使用，導致潛藏一些錯誤問題。只有在變數宣告的敘述句真正被執行的時候，變數才會被初始化，此時 JavaScript 才會安全地訪問它。</p>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、函式提升</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>除了變數之外，函式也有 Hoisting 概念，函式有 Hoisting 的好處是我們可以在定義好函式之前就先呼叫它。一般正常情況下，我們會這樣定義與呼叫函式：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-javascript">function Animal(){
@@ -147,8 +161,8 @@ function Animal(dog) {
 }</code></pre>
         </div>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、變數與函式提升的練習</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p>中場小結一下函式、參數與變數之間的 Hoisting 順序，其依序為「函式宣告」、「傳入函式的參數」，最後才是「變數宣告」。知道優先順序後，我們需要透過練習來驗證是否真的有搞懂 JavaScript Hoisting 的機制運作，試著回答以下程式碼片段中各個 Console 所要打印回傳的結果：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-javascript">var dog = "阿比";
@@ -333,8 +347,8 @@ Animal();
 console.log("Q8.", cat);    // 咪咪</code></pre>
         </div>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、Hoisting 的原理</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <p>說到底，JavaScript Hoisting 機制存在意義主要還是想解決函式無法互相呼叫的問題，以下面程式碼為例：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-javascript">function loop(n){
@@ -481,8 +495,8 @@ Animal("阿比");</code></pre>
         </div>
         <p>因為函式內第二行的變數「dog」執行後，Variable Object 裡面的「dog」屬性值就被「咪咪」取代了，因此回到程式執行階段，下方的 Console 回傳的是「咪咪」此一結果。</p>
     </div>
-    <div class="text-block" id="act5">
-        <h2>五、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[5].id">
+        <h2 v-text="catalog[5].title"></h2>
         <dl>
             <dd><a href="https://developer.mozilla.org/zh-TW/docs/Glossary/Hoisting" target="_blank">mdn web docs 提升（Hoisting）</a></dd>
             <dd><a href="https://blog.techbridge.cc/2018/11/10/javascript-hoisting/" target="_blank">我知道你懂 hoisting，可是你了解到多深？</a></dd>
@@ -496,10 +510,3 @@ Animal("阿比");</code></pre>
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

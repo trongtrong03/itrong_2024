@@ -1,3 +1,26 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、Animation 的基本語法' },
+        { id: 2, title: '二、要如何製作動畫影格並讓指定元素取得它？' },
+        { id: 3, title: '三、我可以讓動畫延遲播放嗎？' },
+        { id: 4, title: '四、我可以讓動畫重複執行嗎？' },
+        { id: 5, title: '五、動畫首尾呼應需要設定相同的關鍵影格嗎？' },
+        { id: 6, title: '六、如何調整動畫的速度曲線？' },
+        { id: 7, title: '七、如何讓元素在動畫執行完後保持最後結束的狀態？' },
+        { id: 8, title: '八、補充一：控制動畫運行的狀態' },
+        { id: 9, title: '九、補充二：關鍵影格的三兩事' },
+        { id: 10, title: '十、結語' },
+        { id: 11, title: '十一、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="8" fileType="learnList" />
@@ -5,26 +28,17 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、Animation 的基本語法</a></li>
-            <li><a href="#act2">二、要如何製作動畫影格並讓指定元素取得它？</a></li>
-            <li><a href="#act3">三、我可以讓動畫延遲播放嗎？</a></li>
-            <li><a href="#act4">四、我可以讓動畫重複執行嗎？</a></li>
-            <li><a href="#act5">五、動畫首尾呼應需要設定相同的關鍵影格嗎？</a></li>
-            <li><a href="#act6">六、如何調整動畫的速度曲線？</a></li>
-            <li><a href="#act7">七、如何讓元素在動畫執行完後保持最後結束的狀態？</a></li>
-            <li><a href="#act8">八、補充一：控制動畫運行的狀態</a></li>
-            <li><a href="#act9">九、補充二：關鍵影格的三兩事</a></li>
-            <li><a href="#act10">十、結語</a></li>
-            <li><a href="#act11">十一、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>過去若想製作網頁元素動畫，譬如元素要在時間內改變樣式、延遲多少秒才執行動畫、動畫過渡想遊快變慢...等等，不外乎是透過動態影像（GIF、FLASH...），或利用 JavaScript、jQuery 撰寫腳本去實現，這不僅耗時，也很費力。然而隨著 CSS3 的問世，不僅網頁前端開發產生巨大的變革，它同時也減輕網頁對 Javascript 的重度依賴，「動畫」便是其中一項，CSS3 的 <em>animation</em> 屬性讓網頁動畫製作不再那麼繁瑣，往往只需要設置幾個屬性就能搞定。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>Animation 的基本語法</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>CSS3 定義動畫效果的核心屬性為 <em>animation</em>，它的單一屬性撰寫規則是：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-css">element {
@@ -95,8 +109,8 @@
 }</code></pre>
         </div>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、要如何製作動畫影格並讓指定元素取得它？</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>基本上 CSS3 動畫一個週期由四個階段所組成，分別是「初始狀態」、「等待期」、「執行期」、「完成期」。在初始狀態階段，我們可以先建立好指定元素想呈現的動畫內容（注意喔，這裡用的詞彙是「可以」，意思是說你也可以先設定好動畫相關參數，再來寫動畫內容），定義動畫規則的屬性為 <em>@keyframes</em>，並於自定義的關鍵影格（幀）中設置其他屬性樣式。其語法規則為：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-css">@keyframes animationName {
@@ -161,8 +175,8 @@
 }</code></pre>
         </div>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、我可以讓動畫延遲播放嗎？</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p>答案是「可以」，有時我們不想要網頁一載入馬上執行動畫內容，想要等待一些時間再開始播放，而四大階段中的「等待期」指的就是動畫開始觸發前的這段過渡時間。使動畫延遲執行的屬性叫做 <em>animation-delay</em>，例如我們要讓動畫延遲 <em>0.5</em> 後再執行動畫：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-css">div {
@@ -172,8 +186,8 @@
         <p>但要注意的是，CSS3 的 <em>animation-delay</em> 屬性只要瀏覽器載入樣式表後就會作用，並不支援使用者的互動行為──像是網頁很常見的滑鼠滾輪觸發動畫事件，這就不在 <em>animation-delay</em> 應用範疇內，如果有類似功能的需求，則還是需要借助 JavaScript 的協助。</p>
         <p>常見的滾輪觸發套件：<a href="https://wowjs.uk/" target="_blank">WOW.js</a>、<a href="https://michalsnik.github.io/aos/" target="_blank">AOS</a>...等。</p>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、我可以讓動畫重複執行嗎？</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <p><em>animation-iteration-count</em> 可以用來設定動畫的執行次數，通常在主流瀏覽器的內建預設值為 <em>1</em>，也就是目標元素在沒有特別設定此屬性的情況下，動畫內容只會執行一次。假如想要讓動畫無限循環播放，則參數值要設置為 <em>infinite</em>：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-css">div {
@@ -182,8 +196,8 @@
         </div>
         <p>有趣的是，雖然這個屬性的值不能設置為負數，卻允許使用小數點，假如我們給其 <em>0.5</em> 的值，代表動畫只播放一次動畫關鍵影格規則裡的一半。</p>
     </div>
-    <div class="text-block" id="act5">
-        <h2>五、動畫首尾呼應需要設定相同的關鍵影格嗎？</h2>
+    <div class="text-block" :id="'act' + catalog[5].id">
+        <h2 v-text="catalog[5].title"></h2>
         <p>如果我們要製作頭尾相呼應的動畫，對 Animation 相關屬性還沒那麼熟悉的新手直覺想到的可能是在關鍵影格 <em>0%</em> 和 <em>100%</em> 設定一樣的屬性值，然後把其他動畫過程加入在中間的關鍵點。我們拿前面 <em>fadeIn</em> 作為範例，導入前面的思維，將會把關鍵影格規則改寫成：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-css">@keyframes fadeIn {
@@ -232,8 +246,8 @@
         </div>
         <p>表中的 <em>0%</em>、<em>100%</em> 指的就是 <em>@keyframes</em> 起始與結束的關鍵影格，所以當我們將參數值設置為 <em>reverse</em> 時，即意味著動畫要採倒敘播放。</p>
     </div>
-    <div class="text-block" id="act6">
-        <h2>六、如何調整動畫的速度曲線？</h2>
+    <div class="text-block" :id="'act' + catalog[6].id">
+        <h2 v-text="catalog[6].title"></h2>
         <p>所謂的「速度曲線」指的是動畫執行的過程，可能由快到慢、由慢到快，甚至忽慢忽快，並不完全是如一條水平線平平穩穩般從開始播放到結束。我們也可以將速度曲線理解成是加速度或是節奏，利用不同的節奏，使動畫看起來更加生動活潑、乃至於更貼近真實感。</p>
         <p>在 CSS3，定義動畫速度曲線的屬性為下：</p>
         <div class="text-code" v-pre>
@@ -276,8 +290,8 @@
         </div>
         <p>貝茲曲線可以讓開發者自行設定動畫速度曲線兩端的錨點，計算出符合其預想的加速度路徑。假如不太會計算或需要即時結果查看動畫演進的畫面，可以利用 <a href="https://cubic-bezier.com/" target="_blank">https://cubic-bezier.com/</a> 這個線上工具。</p>
     </div>
-    <div class="text-block" id="act7">
-        <h2>七、如何讓元素在動畫執行完後保持最後結束的狀態？</h2>
+    <div class="text-block" :id="'act' + catalog[7].id">
+        <h2 v-text="catalog[7].title"></h2>
         <p>動畫四階段中，完成期與初始狀態是相對的存在，指的是動畫跑完之後的狀態。有些人會以為關鍵影格的終點格就是完成狀態，但這其實並不是完全正確的說法，如同我們在執行期中會給動畫加上部分控制屬性，它們都會影響該元素在最後動畫完成時的樣式狀態。甚至，當 <em>animation-iteration-count</em> 為 <em>infinite</em>（無限循環）的時候，該目標動畫便沒有完成期可言。</p>
         <p>決定動畫「等待期」與「完成期」狀態的關鍵屬性為 <em>animation-fill-mode</em>，但是在解答標題內容之前，我們先來看在預設值（即不設置該屬性）條件下，元素動畫播放完會是什麼樣子。</p>
         <p>動畫規則為下：</p>
@@ -386,8 +400,8 @@
             </div>
         </div>
     </div>
-    <div class="text-block" id="act8">
-        <h2>八、補充一：控制動畫運行的狀態</h2>
+    <div class="text-block" :id="'act' + catalog[8].id">
+        <h2 v-text="catalog[8].title"></h2>
         <p>除了前面林林總總介紹到的 <em>animation</em> 屬性外，還有一種可以控制動畫運行狀態的屬性，名叫 <em>animation-play-state</em>，它有兩個參數值：</p>
         <div class="text-flex">
             <div class="f-width">
@@ -414,8 +428,8 @@
             </p>
         </div>
     </div>
-    <div class="text-block" id="act9">
-        <h2>九、補充二：關鍵影格的三兩事</h2>
+    <div class="text-block" :id="'act' + catalog[9].id">
+        <h2 v-text="catalog[9].title"></h2>
         <p>第一個章節有介紹關鍵影格的基本語法，這個章節將對其他用法進行補充：</p>
         <h5>多個關鍵影格：</h5>
         <p>倘若動畫規則裡需要多個關鍵影格，我們可以在理想變化的關鍵點以百分比的方式加入屬性變值，例如：</p>
@@ -492,8 +506,8 @@
         </div>
         <p>如果關鍵影格裡的屬性使用到了 <em>!important</em> 參數，其屬性將直接被忽略。</p>
     </div>
-    <div class="text-block" id="act10">
-        <h2>十、結語</h2>
+    <div class="text-block" :id="'act' + catalog[10].id">
+        <h2 v-text="catalog[10].title"></h2>
         <p>儘管不能說 CSS3 <em>animation</em> 可以完全取代 Javascript，畢竟若要更有效地操控動畫，Javascript 仍然比 CSS3 好用許多，但如果只是要實現一些簡單的元素動畫，並設置它的執行時間、循環次數...等，那麼不妨大膽地使用 <em>animation</em> 去實現吧。倘若看完 <em>animation</em> 所有屬性的說明仍然摸不著頭緒要如何下手寫動畫，別擔心，網路上已有許多現成的工具可以輔助開發者達到理想效果，以下列舉幾項實用的工具網站或套件：</p>
         <ul>
             <li><a href="https://animate.style/" target="_blank">Animate.css</a>：提供許多現成的 CSS 動畫並提供下載到自己的專案裡使用。</li>
@@ -502,8 +516,8 @@
         </ul>
         <p>儘管和 CSS 沒有直接關係，不過最後推薦一篇 <a href="https://cssanimation.rocks/cn/principles/" target="_blank">网页动画的十二原则</a> 的文章，當我們多了解現實物件運動的規律後，在創作動畫方面也會得心應手許多。</p>
     </div>
-    <div class="text-block" id="act11">
-        <h2>十一、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[11].id">
+        <h2 v-text="catalog[11].title"></h2>
         <dl>
             <dd><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/@keyframes" target="_blank">MDN web docs --@keyframes</a></dd>
             <dd><a href="https://segmentfault.com/q/1010000003867335" target="_blank">如何理解animation-fill-mode及其使用？</a></dd>
@@ -513,10 +527,3 @@
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

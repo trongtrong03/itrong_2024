@@ -1,3 +1,23 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、狀態管理的本質' },
+        { id: 2, title: '二、集中式狀態管理' },
+        { id: 3, title: '三、Vuex 與 Pinia' },
+        { id: 4, title: '四、Pinia 安裝與設定' },
+        { id: 5, title: '五、儲存與讀取資料數據' },
+        { id: 6, title: '六、修改狀態資料的方式' },
+        { id: 7, title: '七、defineStore 另一種寫法' },
+        { id: 8, title: '八、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="75" fileType="learnList" />
@@ -5,24 +25,18 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、狀態管理的本質</a></li>
-            <li><a href="#act2">二、集中式狀態管理</a></li>
-            <li><a href="#act3">三、Vuex 與 Pinia</a></li>
-            <li><a href="#act4">四、Pinia 安裝與設定</a></li>
-            <li><a href="#act5">五、儲存與讀取資料數據</a></li>
-            <li><a href="#act6">六、修改狀態資料的方式</a></li>
-            <li><a href="#act7">七、defineStore 另一種寫法</a></li>
-            <li><a href="#act8">八、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>細看目前的網頁前端開發生態，將龐大的程式碼切割成更細小，分離出可管理的部分，好讓開發者可以重複使用，這樣的作法儼然已是不可避免的主流趨勢，實現這樣理想的常見有兩種設計方法，一是「模組化」（Modularization），另一種則是「組件化」（Componentization）。前者通常可以由原生 JavaScript ES6 Modules 機制實現，或是 Node.js 的 CommonJS、Asynchronous Module Definition（AMD）等；後者則有我們熟知的 Vue.js、React.js 這類著名的前端框架工具，它們將程式分解為各自獨立、可重複使用的模組，每個模組都可稱為組件，這些組件通常都具有明確定義的功能和介面。儘管模組化與組件化設計原則看起來十分相似，不過兩者的著重點與應用場景略有不同，模組化較著重於程式碼結構的分解與組織，組件化則比較關注使用者介面的建構和管理。</p>
         <p>因為本系列文章的主角是 Vue.js，所以重點會聚焦在組件化的討論，而 Vue.js、React.js 這些前端框架之所以能成為現今網頁前端開發的主流，除了其提供最基本的組件化功能外，它們還重視另一個非常重要的特性──狀態管理。什麼是狀態管理？為什麼要重視？它能為組件化設計帶來哪些正面影響？接下來的內容將要深入探討組件與狀態管理之間的關係。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、狀態管理的本質</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>在開始講狀態管理之前，我們需要先認識組件的概念。儘管之前一系列的文章已經提到各式各樣不同名詞的組件，例如父與子組件、一般與路由組件等，但這些組件名稱多半是依據功能面與結構面來做稱呼。如果要銜接之後要敘述的狀態管理，那麼我們應該要把組件精確分成兩種類型，分別是「原語组件」（Primitive Component）以及「複合組件」（Composite Component）</p>
         <p><br></p>
         <h3>原語組件（Primitive Component）：</h3>
@@ -48,8 +62,8 @@
         <h4>5. 非同步（異步）處理：</h4>
         <p>某些狀態管理庫還提供了非同步處理功能，允許開發人員處理非同步操作（例如API請求）並在操作完成後更新狀態。</p>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、集中式狀態管理</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>雖然前面提過狀態管理庫採用的是集中式狀態管理，不過狀態管理實際上可分為兩種形式，分別是「分散式」狀態管理以及「集中式」狀態管理，在集中式狀態管理出現之前，狀態管理的形式基本處於分散式的管理方式，這是因為每個組件都有自己的狀態，且只為自己的狀態負責，單就局部來看，組件各自管理自己的狀態似乎沒有什麼不妥，因為我們如果需要查找或修改某個狀態，只需要在該組件文件裡頭作業就好。</p>
         <p>分散式狀態管理示意圖：</p>
         <figure>
@@ -63,8 +77,8 @@
         </figure>
         <p>複合組件功能被削弱後，它就變成了單純驅動畫面的函式組件，所有需要渲染的資料數據都從名為「State」的狀態中心獲取，任何變更亦由這個狀態中心去提交，資料數據的結構從原本的樹狀圖轉變成放射狀，使得管理變得更加扁平化。也因為功能變單純了，函式組件比起複合組件來得更容易重複使用及組裝。</p>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、Vuex 與 Pinia</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p>在 Vue.js 框架比較常見，或者說主流的狀態管理工具有兩款，分別是 <a href="https://vuex.vuejs.org/zh/" target="_blank">Vuex</a> 以及 <a href="https://pinia.vuejs.org/" target="_blank">Pinia</a>，它們分別各自對應 Vue 2 與 Vue 3 推薦的首款選擇，如果第一次接觸狀態管理工具且使用的版本為 Vue 3 ，多數前輩或教學都會建議直接學 Pinia 就好，那是因為 Pinia 不僅是基於 Vuex 之上改善後者一些缺點及更加優化功能，同時也專門配合 Vue 3 Composition API 語法格式，且相容 TypeScript。</p>
         <p><br></p>
         <h3>Vuex 的起源與挑戰</h3>
@@ -113,8 +127,8 @@
         <p><br></p>
         <p>前面提到集中式狀態管理的精髓是將複合組件的功用扁平化，將資料數據通通撈出來到狀態中心整合管理，複合組件將成為只有處理視覺的函式組件。然而，在 Pinia 的概念裡，比較強調只要將「共享」的資料數據撈出來集中管理就好，個別組件獨有的資料還是留在該組件，沒有必要定義在狀態中心反而使得文件不易閱讀。</p>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、Pinia 安裝與設定</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <h6>1. NPM 安裝 Pinia 套件：</h6>
         <p>在專案裡下達 Pinia 安裝指令：</p>
         <div class="text-code" v-pre>
@@ -191,8 +205,8 @@ app.use(pinia);    // 安裝 pinia</code></pre>
         </div>
         <p>根組件沒有什麼特別的地方，主要就是調用前面寫好的組件，使其渲染並運作。</p>
     </div>
-    <div class="text-block" id="act5">
-        <h2>五、儲存與讀取資料數據</h2>
+    <div class="text-block" :id="'act' + catalog[5].id">
+        <h2 v-text="catalog[5].title"></h2>
         <p>以 <b>Count.vue</b> 為例，首先在 <b>store/</b> 中建立一個名稱為 <b>count</b> 的 TS 文件，並且在文件開頭引入 Pinia 功能：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-javascript">import { defineStore } from "pinia";</code></pre>
@@ -287,8 +301,8 @@ function minus(){
         </figure>
         <p>現在 <b>Count.vue</b> 組件原先持有的總和狀態資料已經改由使用狀態中心的總和狀態資料，所以如果有其他組件也需要這個統計總和的資料，只要如法炮製即可。</p>
     </div>
-    <div class="text-block" id="act6">
-        <h2>六、修改狀態資料的方式</h2>
+    <div class="text-block" :id="'act' + catalog[6].id">
+        <h2 v-text="catalog[6].title"></h2>
         <p>如果要修改 store 定義的狀態資料一般有三種方式，以 <b>Count.vue</b> 為例，前面我們已經展示了第一種，就是直接從組件引用的 <em>countStore</em> 獲取指定的資料 <em>sum</em> 進行修改的動作。</p>
         <p><br></p>
         <h3>1. 直接修改狀態的值：</h3>
@@ -475,8 +489,8 @@ export const useCountStore = defineStore("count", {
         </div>
         <p>縱使效果是一樣的，但如果有多個組件都使用到相同判斷邏輯的時候，每個組件都要各自寫一次判斷邏輯，在需要維護修改時就會相對比較不方便。</p>
     </div>
-    <div class="text-block" id="act7">
-        <h2>七、defineStore 另一種寫法</h2>
+    <div class="text-block" :id="'act' + catalog[7].id">
+        <h2 v-text="catalog[7].title"></h2>
         <p>上個章節我們學到在 store 創建狀態管理文件的定義格式為：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-javascript">export const useCountStore = defineStore("count", {
@@ -517,8 +531,8 @@ export const useCountStore = defineStore("count", {
 });</code></pre>
         </div>
     </div>
-    <div class="text-block" id="act8">
-        <h2>八、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[8].id">
+        <h2 v-text="catalog[8].title"></h2>
         <dl>
             <dd><a href="https://cn.vuejs.org/" target="_blank">Vue.js</a></dd>
             <dd><a href="https://pinia.vuejs.org/introduction.html" target="_blank">Pinia</a></dd>
@@ -531,10 +545,3 @@ export const useCountStore = defineStore("count", {
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

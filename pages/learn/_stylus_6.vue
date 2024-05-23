@@ -1,3 +1,20 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、媒體查詢（@media）' },
+        { id: 2, title: '二、關鍵影格（@keyframes）' },
+        { id: 3, title: '三、CSS Literal' },
+        { id: 4, title: '四、導入（@import）' },
+        { id: 5, title: '四、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="20" fileType="learnList" />
@@ -5,20 +22,17 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、媒體查詢（@media）</a></li>
-            <li><a href="#act2">二、關鍵影格（@keyframes）</a></li>
-            <li><a href="#act3">三、CSS Literal</a></li>
-            <li><a href="#act4">四、導入（@import）</a></li>
-            <li><a href="#act5">五、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>前面幾篇文章已經將 Stylus 比較常使用的大部份語法介紹完畢，本篇為 Stylus 系列的最後一篇筆記，將剩下的零星但開發專案時仍可能會用到的功能補齊介紹。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、媒體查詢（@media）</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>媒體查詢主要是用來讓網站在不同裝置媒體環境下，顯示不一樣的 CSS 樣式。基本上 Stylus 的 <em>@media</em> 用法和 CSS 差不多，例如：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-stylus">@media print
@@ -148,8 +162,8 @@ img
 }</code></pre>
         </div>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、關鍵影格（@keyframes）</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p><em>@keyframes</em> 是 CSS3 用來定義動畫（<em>animation</em>）規則的語法，而在 Stylus 中使用 <em>@keyframes</em>，可輸出與各大主流瀏覽器兼容的前綴詞，直接省去我們重複書寫或安裝輔助套件的步驟。</p>
         <div class="text-code" v-pre>
             <pre><code class="language-stylus">@keyframes fadeIn 
@@ -241,8 +255,8 @@ img
 }</code></pre>
         </div>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、CSS Literal</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p>如果有不想經過編譯直接輸出內容的需求，可以直接把程式碼寫在 <em>@css</em> 的嵌套裡，例如：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-stylus">.ie-opacity {
@@ -267,8 +281,8 @@ img
 }</code></pre>
         </div>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、導入（@import）</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <p>先前曾提過 Stylus 可以一口氣編譯整個資料夾裡的 <b>.styl</b> 檔案，我們不需要一個、一個檔案地下達編譯指令。但由於一個 CSS 檔案對應一個 Style 檔案，輸出檔案太多反而不利網頁管理，因此我們在執行專案前，最好先部屬好 Style 的整體架構，透過 <em>@import</em> 使一支 <b>.styl</b> 檔案去導入其他檔案。如此一來，我們只需要編譯 / 監測該檔案就好，輸出的 CSS 檔也只會有一個。舉例來說：</p>
         <figure>
             <img src="/images/learn/css/stylus-14.jpg">
@@ -310,8 +324,8 @@ img
             <pre><code class="language-stylus">@import "layout/*"</code></pre>
         </div>
     </div>
-    <div class="text-block" id="act5">
-        <h2>五、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[5].id">
+        <h2 v-text="catalog[5].title"></h2>
         <dl>
             <dd><a href="https://stylus-lang.com/" target="_blank">stylus</a></dd>
         </dl>
@@ -320,10 +334,3 @@ img
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

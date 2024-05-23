@@ -1,3 +1,21 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、Synchronous（同步）' },
+        { id: 2, title: '二、Asynchronous（非同步）' },
+        { id: 3, title: '三、為什麼需要非同步？' },
+        { id: 4, title: '四、JavaScript 的非同步處裡' },
+        { id: 5, title: '五、阻塞與非阻塞' },
+        { id: 6, title: '六、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="55" fileType="learnList" />
@@ -5,22 +23,18 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、Synchronous（同步）</a></li>
-            <li><a href="#act2">二、Asynchronous（非同步）</a></li>
-            <li><a href="#act3">三、為什麼需要非同步？</a></li>
-            <li><a href="#act4">四、JavaScript 的非同步處裡</a></li>
-            <li><a href="#act5">五、阻塞與非阻塞</a></li>
-            <li><a href="#act6">六、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>我們對於「同步」定義的理解，通常是指「同時進行一或多件事情」，或者說「不同事件進行的步調協同一致」，但是在電腦科學領域則不然──同步行為「一次只會做一件事情，做完才繼續做下一件事」；而非同步概念則相反，它可以「同時做很多事情，且不需要等前面的事情完成」。而對 JavaScript 來說，它是一種「單執行緒」（Single-Thread）的程式語言，意思就是程式碼是依序逐一執行的，如果安排很多事件請它執行，後面的事情得等前面事情做完才會被輪到去做，這就是同步的定義：一次只會執行一件事情。</p>
         <p>儘管 JavaScript 係屬單執行緒模式，不過實際上它仍然可以進行非同步處理事件，至於具體是怎麼做到的？為什麼需要非同步？以下將通過同步與非同步的詳細介紹，一一揭開這些謎題的面紗。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、Synchronous（同步）</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>電腦程式語言的同步，通常指的是「一次只會做一件事情，做完才繼續做下一件事」，若要打個比方，我們以下用炸雞店作業流程舉例：假設炸雞店只有一名員工，顧客甲點完餐點後，員工開始烹炸，等餐點做完並交給顧客甲後，才會繼續服務顧客乙，點餐、做餐、交餐、下一位...然後重複一樣的流程──後面的顧客永遠不會比前面顧客早拿到自己點的餐點。</p>
         <p>看完上面例子，我們接著來觀察單執行緒的 JavaScript 是如何運行的，以下是範例程式碼片段：</p>
         <div class="text-code" v-pre>
@@ -46,8 +60,8 @@ console.log("執行D任務");</code></pre>
         </figure>
         <p>不難看出同步處理每一個任務事件都是前面的完成後才會接著去做後面的事件，圖示中特意為每一個任務事件加上耗費時間，以方便後續與「非同步」做比較。</p>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、Asynchronous（非同步）</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>非同步，顧名思義就是同步的相反，如果說同步一時間只能做一件事情，那麼非同步不僅能同時做很多事情，而且後面的事情也不用非得等待前面事件完成才能開始執行。</p>
         <p>我們同樣以炸雞店作舉例：當店員接收到顧客甲的訂單後開始進行烹炸，在同步定義下，顧客乙必須等待顧客甲的訂單完成並交餐後才能換他開始點餐。然而如果是非同步行為模式，店員把顧客甲的炸物投入油鍋，烹炸等待的空檔就能回到櫃台，接受顧客乙的點單作業。假設顧客乙的炸物也下鍋但顧客甲的炸物尚未完成，店員便能趁這段空窗期再接著顧客丙、丁、戊......的訂單，直到顧客甲的餐點完成再呼叫顧客甲來索取。</p>
         <p>假設顧客丙的訂單很簡單，興許就只單純買杯冷飲，於是店員收到訂單後立即把飲料盛裝交付給顧客丙，那麼他的訂單就會比顧客甲與顧客乙還早完成。如此一來，炸雞店工作效率不但顯著提升，顧客也不需要非得等候前面的餐點完成才能輪到他們的訂單。</p>
@@ -81,16 +95,16 @@ console.log("執行D任務");</code></pre>
         </figure>
         <p>配合前面同步的圖一起看，你會發現任務數數量相同、各別執行時間也相同，但非同步的處理時間卻遠比同步還來的快。這也是為什麼 JavaScript 沒有非同步機制，我們仍需要透過非同步去處理一些特定狀況事件的原因之一。</p>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、為什麼需要非同步？</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p>試想倘若我們都不導入非同步處理的用法到 JavaScript，單單只有同步機制的話會發什麼事？</p>
         <figure>
             <img src="/images/learn/js/learn-saa-1.jpg">
         </figure>
         <p>回顧同步的示意圖，假設這五個任務是 JavaScript 載入網頁時要做的五件事情，這些事件指令要全部完成，使用者才能對網頁進行動作，換言之，在使用者得以開始操作網頁前，必須要先等候 37 秒，而這還不包含其他外部因素，也許實際等待時間會更長。實務上當然不可能讓使用者空等這麼久，所以才需要非同步處理那些像是向後端伺服器請求與回應這類需要等候且相對較耗時的指令，在他們執行過程同時，JavaScript 也能同步處理其他任務。</p>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、JavaScript 的非同步處裡</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <p>縱使前面已經繁複提及許多遍，但這裡還是要再次強調，JavaScript 屬於單執行緒（Single-Thread）程式語言，所以我們所熟知的那些非同步方法，皆非來自 JavaScript 本身的方法。由於 JavaScript 基本是在瀏覽器內運行的，而瀏覽器本身提供許多 Web APIs，其中包含數種被定義為非同步的處理方法，JavaScript 可以藉由與瀏覽器 Web APIs 的交互行為，實現非同步的事件處理。</p>
         <p>那麼非同步處理的 Web APIs 方法有哪些？以下列出一些常見的語法：</p>
         <p><br></p>
@@ -182,16 +196,16 @@ myPromise.then((result) => {
         </div>
         <p>在此範例中，當 myPromise 被建立時，它處於待定狀態。根據非同步操作的結果，它將解決為已完成狀態（使用 <em>resolve</em>）或已拒絕狀態（使用 <em>reject</em>）。接著，我們使用 <em>then</em> 方法來處理操作成功的情況，使用 <em>catch</em> 方法來處理操作失敗的情況。</p>
     </div>
-    <div class="text-block" id="act5">
-        <h2>五、阻塞與非阻塞</h2>
+    <div class="text-block" :id="'act' + catalog[5].id">
+        <h2 v-text="catalog[5].title"></h2>
         <p>最後稍微談談阻塞（blocking）與非阻塞（non-blocking），它們的概念並不難理解，如果以本文舉的炸雞店案例來看，阻塞與非阻塞其實就是以顧客的角度來看待店員同步與非同步的行為模式。假如顧客甲點完餐到店員出餐的過程，除了等待不能有其他動作，這就是阻塞；但如果在店員處理訂單的期間，顧客可以去做其他事情（例如滑滑手機，或去隔壁買別的東西），等到店員呼叫後再回來拿餐點，這就是非阻塞。</p>
         <p>對 JavaScript 來說，阻塞代表程式執行時，會卡在當下正在處理的事件，直到結果產生，才會繼續進行下一個事件。而非阻塞則代表程式不會卡在當下正在執行的事件，當下事件的結果也不會馬上回傳給程式，而是需要回呼函式來接收結果。</p>
         <blockquote>
             <p>在很多JavaScript 文章裡，同步與阻塞通常會劃上等號，非同步則與非阻塞相當。</p>
         </blockquote>
     </div>
-    <div class="text-block" id="act6">
-        <h2>六、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[6].id">
+        <h2 v-text="catalog[6].title"></h2>
         <dl>
             <dd><a href="https://blog.huli.tw/2019/10/04/javascript-async-sync-and-callback/#sync" target="_blank">JavaScript 中的同步與非同步（上）：先成為 callback 大師吧！</a></dd>
             <dd><a href="https://shawnlin0201.github.io/JavaScript/JavaScript-synchronous-and-asynchronous/" target="_blank">JavaScript 深入淺出 Synchronous & Asynchronous 同步與非同步</a></dd>
@@ -205,10 +219,3 @@ myPromise.then((result) => {
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

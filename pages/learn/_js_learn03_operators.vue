@@ -1,3 +1,23 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、什麼是運算式？' },
+        { id: 2, title: '二、什麼是運算子？' },
+        { id: 3, title: '三、一元運算子（Unary operator）' },
+        { id: 4, title: '四、二元運算子（Binary operator）' },
+        { id: 5, title: '五、三元運算子（Ternary operator）' },
+        { id: 6, title: '六、運算子的優先級' },
+        { id: 7, title: '七、總結' },
+        { id: 8, title: '八、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="47" fileType="learnList" />
@@ -5,23 +25,17 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、什麼是運算式？</a></li>
-            <li><a href="#act2">二、什麼是運算子？</a></li>
-            <li><a href="#act3">三、一元運算子（Unary operator）</a></li>
-            <li><a href="#act4">四、二元運算子（Binary operator）</a></li>
-            <li><a href="#act5">五、三元運算子（Ternary operator）</a></li>
-            <li><a href="#act6">六、運算子的優先級</a></li>
-            <li><a href="#act7">七、總結</a></li>
-            <li><a href="#act8">八、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>我們在寫 JavaScript 的時候往往會用到大量的函式與方法，但佔據整個程式碼比例的通常不是這些語法，而是各種我們對於想要實現指定需求效果的陳述，比如交代程式在什麼情況下要做什麼事情，或是向它索取特定的結果等等，在 JavaScript 語言裡，陳述需求、表達指令的語法大抵來說可分成兩大類：一是「敘述句」（Statement），二是「運算式」（Expression），而運算式的構成裡通常會包含一些運算符號，我們稱之為「運算子」（Operator），其中，運算式與運算子正是本篇文章要聚焦的主題。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、什麼是運算式？</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>運算式原文名稱為 Expression，也可稱為表達式。在前言已有稍微提到 JavaScript 的程式陳述方式概略可分成敘述句（Statement）與運算式兩種語法，敘述句主要用來執行指定動作或操作，例如：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-javascript">if (height > 0) {
@@ -52,8 +66,8 @@ dog = "阿比";    // 有指定值，可視為運算式
 var x = "阿比" + "蹦蹦跳";    // 等號左邊敘述變數宣告，右邊賦值，可視為運算式</code></pre>
         </div>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、什麼是運算子？</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>運算式構成要素基本上都ㄧ定會包含運算子（operators），這是因為運算式的操作必須依賴它們才能進行。JavaScript 提供了大量的運算子提供運算式進行計算，不同種類的運算子，理所當然產生不同類型的運算式，例如算術運算式、比較運算式...等等。它們幫助程式開發者得以從一或多個值中，產生一個結果值。</p>
         <p>就目前 JavaScript 版本來說，運算子可分為以下這些類型：</p>
         <ul>
@@ -74,8 +88,8 @@ var x = "阿比" + "蹦蹦跳";    // 等號左邊敘述變數宣告，右邊賦
         </ul>
         <p>只是以上也僅是粗略的分類法，這些分類法所歸類的各種運算符，在某些文章或用途也會賦予不同的運算子名稱，實在很難逐一去做細分。但是根據它們與運算元之間交互的特性，我認為整體上可以劃分成三種大類，分別是：一元運算子、二元運算子、三元運算子，即使用它們時所必須含帶的基本運算元數量來做歸類，接下來會將它們各自用一個章節來做介紹。</p>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、一元運算子（Unary operator）</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p>表示該運算子只需要一個運算元就能運算出結果，格式為 <em>運算子 運算元</em> 或 <em>運算元 運算子</em>，例如：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-javascript">3++;
@@ -287,8 +301,8 @@ console.log(y); // ["b", 3, "n"]</code></pre>
         </div>
         <p>這種用法一般稱其為「解構賦值」（Destructuring），可以想像成鏡像的方式來進行賦值，而除了陣列之外，也可以用來解構物件（<em>{ ... }</em>）。</p>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、二元運算子（Binary operator）</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <p>JavaScript 大部份的運算子都屬於此類，指的就是需要具備兩個運算元才能成立的運算子，格式為 <em>運算元 運算子 運算元</em>，例如：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-javascript">3 + 5;
@@ -722,8 +736,8 @@ console.log(total);    // 11</code></pre>
         <p><br></p>
 
     </div>
-    <div class="text-block" id="act5">
-        <h2>五、三元運算子（Ternary operator）</h2>
+    <div class="text-block" :id="'act' + catalog[5].id">
+        <h2 v-text="catalog[5].title"></h2>
         <p>「三元運算子」（Ternary Operator）亦可稱為條件運算子（Conditional Operator），從名字不難看出與條件式有關，事實上此運算子的確也常被用來當作條件式（<em>if</em>）的簡潔寫法。據 <a href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Operators/Conditional_Operator" target="_blank">MDN Web Docs</a> 文件所示，條件運算子的基礎語法為：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-javascript">condition ? exprIfTrue : exprIfFalse</code></pre>
@@ -780,8 +794,8 @@ var status =
 console.log(status);    // 我三十而立</code></pre>
         </div>
     </div>
-    <div class="text-block" id="act6">
-        <h2>六、運算子的優先級</h2>
+    <div class="text-block" :id="'act' + catalog[6].id">
+        <h2 v-text="catalog[6].title"></h2>
         <p>基礎數學運算中流傳一句琅琅上口的箴言：「先乘除後加減」，此句句中的先與後實際上就是優先順序的概念，而 JavaScript 運算子也不例外，我們稱為「運算子優先序」（Operator precedence），它決定運算子彼此之間被語法解析的方式，優先序較高的運算子會成為優先序較低運算子的運算元（operands）。怎麼說呢？且看以下範例：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-javascript">console.log(3 + 4 * 5);    // 23</code></pre>
@@ -978,8 +992,8 @@ console.log(status);    // 我三十而立</code></pre>
         </div>
         <p>回到先乘除後加減這句話，假設我們希望算式中的加減或部分算式能先被執行，則會使用「括號」，括號內的算式就會先計算出結果，然後再繼續做其他運算。程式語言也是相同的道理，所以在上表中我們會看到滿分 19 分的最高優先序正是分組運算子。</p>
     </div>
-    <div class="text-block" id="act7">
-        <h2>七、總結</h2>
+    <div class="text-block" :id="'act' + catalog[7].id">
+        <h2 v-text="catalog[7].title"></h2>
         <p>回顧本篇文章，精簡總結一下我們從運算子與運算式身上學到哪些東西：</p>
         <h5>1. 運算式</h5>
         <ul>
@@ -1023,8 +1037,8 @@ console.log(status);    // 我三十而立</code></pre>
             </div>
         </div>
     </div>
-    <div class="text-block" id="act8">
-        <h2>八、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[8].id">
+        <h2 v-text="catalog[8].title"></h2>
         <dl>
             <dd><a href="https://www.books.com.tw/products/0010744702" target="_blank">《JavaScript & JQuery：網站互動設計程式進化之道》</a></dd>
             <dd><a href="https://hackmd.io/@F8_ZGXr0SHWEX7aKUyrU9w/BJVrhtIbO" target="_blank">Javascript 第三章 運算元和運算子</a></dd>
@@ -1039,10 +1053,3 @@ console.log(status);    // 我三十而立</code></pre>
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

@@ -1,3 +1,23 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、Transform 的基本語法' },
+        { id: 2, title: '二、有哪些變形效果？' },
+        { id: 3, title: '三、我能同時套用多個變形效果嗎？' },
+        { id: 4, title: '四、如何改變元素變形的中心點起始位置？' },
+        { id: 5, title: '五、3D 變形效果的透視概念（perspective）' },
+        { id: 6, title: '六、3D 變形效果的屬性運用' },
+        { id: 7, title: '七、進階：Transform 的 Matrix（矩陣）' },
+        { id: 8, title: '八、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="9" fileType="learnCSS" />
@@ -5,23 +25,17 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、Transform 的基本語法</a></li>
-            <li><a href="#act2">二、有哪些變形效果？</a></li>
-            <li><a href="#act3">三、我能同時套用多個變形效果嗎？</a></li>
-            <li><a href="#act4">四、如何改變元素變形的中心點起始位置？</a></li>
-            <li><a href="#act5">五、3D 變形效果的透視概念（perspective）</a></li>
-            <li><a href="#act6">六、3D 變形效果的屬性運用</a></li>
-            <li><a href="#act7">七、進階：Transform 的 Matrix（矩陣）</a></li>
-            <li><a href="#act8">八、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>CSS3 中的 Transform 系列屬性是一種使元素形貌產生變化的屬性，它就像 Photoshop 的「變形」功能，可以讓元素旋轉、縮放、傾斜，且變形範圍不僅侷限於二維空間，三維方向同樣可以做變化。Transform 令 HTML 元素運用更加靈活，也降低對外部媒介（譬如：JavaScript、透過專業軟體處理輸出成影像......等）的依賴，是 CSS3 相當具代表性的屬性之一。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、Transform 的基本語法</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>Transform 的 CSS 語法屬性名稱為 <em>transform</em>，和 CSS3 另一個使用率廣泛的 <em>animation</em> 屬性相比，<em>transform</em> 的語法規則比較單純，各種變化效果只需透過 <em>transform</em> 一行就能設置：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-css">element {
@@ -35,8 +49,8 @@
 }</code></pre>
         </div>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、有哪些變形效果？</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>變形效果分為 2D 與 3D 兩種，由於 3D 變形效果的規則比較複雜，這裡只先談 2D 變形的部分。總的來說，CSS3 Transform 提供四種直觀的效果參數，分別是：</p>
         <div class="text-flex">
             <div class="f-width">
@@ -151,8 +165,8 @@
 }</code></pre>
         </div>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、我能同時套用多個變形效果嗎？</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p>有些人會疑惑是否能在單一元素同時套用多個 <em>transform</em> 的效果？答案是可以的。但有別於許多人容易搞混的 <em>transition</em> 屬性，是以「逗號」來區隔不同的屬性值數組，<em>transform</em> 則以「空白符」區別不同的變形效果設置。例如：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-css">div {
@@ -160,8 +174,8 @@
 }</code></pre>
         </div>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、如何改變元素變形的中心點起始位置？</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <p>在第二個章節問題中，眼尖的你會發現在我們介紹各種變形效果時，語句裡時不時會提到「以參考點為中心」之句讀，那麼究竟什麼是參考點？要如何知道它中心點的位置？又是否能修改它？</p>
         <p>首先我們要知道，元素進行任何變化時，都必須要以其內部的某一個點為中心，這個點就是參考點，以下拿 Photohop 當作範例：</p>
         <figure>
@@ -184,8 +198,8 @@
         </div>
         <p>如果 <em>transform-origin</em> 僅填入一個數值，則代表其三軸參考點位置皆相同；若只填入兩個值，則 Z 軸會被忽略。</p>
     </div>
-    <div class="text-block" id="act5">
-        <h2>五、3D 變形效果的透視概念（perspective）</h2>
+    <div class="text-block" :id="'act' + catalog[5].id">
+        <h2 v-text="catalog[5].title"></h2>
         <p>二維與三維最大的不同，在於方向除了 X 軸與 Y 軸外，還多了 Z 軸，示意圖如下：</p>
         <figure>
             <img src="/images/learn/css/transform-3d-1.jpg">
@@ -241,8 +255,8 @@
         </div>
         <p>（建議與前一個範例 <em>perspective</em> 比較會更容易感受到 <em>perspective-origin</em> 的作用。）</p>
     </div>
-    <div class="text-block" id="act6">
-        <h2>六、3D 變形效果的屬性運用</h2>
+    <div class="text-block" :id="'act' + catalog[6].id">
+        <h2 v-text="catalog[6].title"></h2>
         <p>基本上，CSS3 Transform 3D 內建的直接效果屬性值與 2D 是一樣的，除了沒有「傾斜」（Skew）以外，有支援另外三個變形效果的 3D 模式：</p>
         <div class="text-flex">
             <div class="f-width">
@@ -361,8 +375,8 @@
             <p>90deg = 100grad = 0.25turn ≈ 1.570796326794897rad</p>
         </blockquote>
     </div>
-    <div class="text-block" id="act7">
-        <h2>七、進階：Transform 的 Matrix（矩陣）</h2>
+    <div class="text-block" :id="'act' + catalog[7].id">
+        <h2 v-text="catalog[7].title"></h2>
         <p>除了熟知的位移（Translate）、旋轉（Rotate）、縮放（Scale）以及傾斜（Skew）這四大基礎變形效果外，CSS3 Transform 屬性其實還有一個「隱藏版」的變形效果──Matrix，也就是矩陣的意思。但要說它是隱藏版其實也不大對，只是因為要會活用這個效果屬性，本身必須具備一定程度的數學底子，對於我們這些非數學應用相關科系領域出身的人來說，並不那麼容易上手，實務上大部分的網頁前端需求也不大會使用到 Matrix，因此該屬性效果自然比起其他幾個基礎效果也較鮮為人知。</p>
         <h3>什麼是矩陣？</h3>
         <p>矩陣是一個由列（row）與行（column）多個元素排成的方陣，例如下圖：</p>
@@ -559,8 +573,8 @@
         </div>
         <p>目前還不太清楚範例中 <em>matrix3d</em> 的 3D 位移效果為何沒有作用，等日後蒐羅到更多更詳盡的資料時再回頭檢視。至於傾斜與旋轉的部分...姑且先以一句「未完待續」作結吧。</p>
     </div>
-    <div class="text-block" id="act8">
-        <h2>八、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[8].id">
+        <h2 v-text="catalog[8].title"></h2>
         <dl>
             <dd><a href="https://developer.mozilla.org/zh-TW/docs/Web/CSS/transform-function" target="_blank">MDN web docs --transform-function</a></dd>
             <dd><a href="https://juejin.im/post/5ab8b5ed51882548fe4a2069#heading-10" target="_blank">CSS3 transform 属性详解</a></dd>
@@ -582,10 +596,3 @@
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

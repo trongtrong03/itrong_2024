@@ -1,3 +1,20 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、Tabnine 介紹' },
+        { id: 2, title: '二、安裝與使用' },
+        { id: 3, title: '三、優劣分析' },
+        { id: 4, title: '四、其他產品' },
+        { id: 5, title: '四、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="39" fileType="learnList" />
@@ -5,22 +22,19 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、Tabnine 介紹</a></li>
-            <li><a href="#act2">二、安裝與使用</a></li>
-            <li><a href="#act3">三、優劣分析</a></li>
-            <li><a href="#act4">四、其他產品</a></li>
-            <li><a href="#act5">五、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>以前在學校修程式語言課程的時候，教授期中、期末考都是用紙筆請學生正確寫出一套指定的程式結構，為了通過考試，大夥兒花費很多心思去背教科書裡的程式碼格式和行句。但是出社會從事程式開發的工作後，發現其實沒什麼人在乎你能不能直接默寫出一段程式，基本上都是複製已經寫好的過來改，要不就是使用編輯器內建的輔助輸入工具，遠比一個字一個字慢慢敲來得有效率。當然啦，說這些不是要否定以前教授教學的方法，死背硬記其實也是培養程式碼敏銳度的一種方式，然而在資訊技術快速發展的現代，企業往往更注重如何更高效率產出客戶需要的東西，所以我們在開發的時候，自然也是要選擇適合自己且又保有效率的開發模式。</p>
         <p>現在開發程式的自動輔助工具已經非常豐富多樣，在寫 CSS 與 HTML 方面，個人習慣使用的輔助套件是「<a href="https://emmet.io" target="_blanl">Emmet</a>」，只需要輸入指定語法其中一兩個字，編輯器立即就會出現浮窗提示我們對應的語法，且容錯判斷也做的相當不錯。又或者是依照他們釋出的速查表，輸入簡單的公式代碼，一個 <b>Tab</b> 鍵就能快速生成完整的程式碼結構，大幅縮短重複輸入的作業。</p>
         <p>不過本篇的主角不是 Emmet，有關它的介紹和用法之後再開篇幅去填坑，今天要介紹的是前陣子從網路廣告上看到的一套蠻有趣的套件，和 Emmet 一樣都是輔助使用者產出程式碼的開發工具，它的名字叫做 <a href="https://www.tabnine.com/" target="_blanl">Tabnine</a>。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、Tabnine 介紹</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <figure>
             <img src="/images/learn/dev/tabnine-intro-1.jpg">
         </figure>
@@ -51,8 +65,8 @@
         </figure>
         <p>除了最基本的個人免費版（Free）之外，Tabnine 為團隊（Team）或企業（Enterprise）分別提供不同付費方案，企業級方案姑且不討論，免費版與團隊版主要差異在AI 先進運算程度、團隊學習，以及後者會提供更完善的資安、備份服務。</p>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、安裝與使用</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <h3>安裝：</h3>
         <p>我們可以在 Tabnine <a href="https://www.tabnine.com/install" target="_blank">install</a> 頁中搜尋團隊或自己平常使用的 IDE（基本上目前主流的 IDE 都有支援），找到並點擊圖示後就能看見套件的安裝方式。</p>
         <figure>
@@ -78,8 +92,8 @@
         </figure>
         <p>因為個人才剛開始用沒多久，還感覺不到明顯有效的地方，不過據說隨著時間進展，Tabnine 也會變得越來越好用，或許就是在印證它們 AI 智能會配合使用者開發習慣進行學習，以提供更加精準、完善的服務吧。</p>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、優劣分析</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p>再優質的產品，也不可能 100% 盡善盡美。這個章節除了闡述 Tabnine 帶給使用者的好處外，也會說說一些個人實際使用上，或從網路其他網友分享心得蒐集下來的負面影響。</p>
         <p><br></p>
         <h3>優點：</h3>
@@ -107,8 +121,8 @@
         <p><br></p>
         <p>當然，Tabnine 的優點在有些人眼裡可能算不上優點，缺點對他們而言也可能在尚可接受的範圍，最主要的還是找到最適合自己與團隊舒服、順暢的開發模式，這些程式碼擴充套件主要是用來輔助我們開發更加省時，而非妨礙工作效率。</p>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、其他產品</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <p>最後我們來認識一下除了 Tabnine 之外，坊間還有什麼同性質的 AI 人工智能程式工具吧：</p>
         <h3>OpenAI GPT-3</h3>
         <figure>
@@ -124,8 +138,8 @@
         <p><a href="https://copilot.github.com/" target="_blank">GitHub Copilot</a> 是 GitHub 與 OpenAI 聯手推出的 AI 程式碼產生工具，不僅可以自動補齊程式碼，也能根據使用者已開發的程式碼，自動猜測接下來的程式函數，性質與 Tabnine 非常相似，互相叫板的意味濃厚。</p>
         <p>有趣的是，GitHub Copilot 的核心模型 Codex 主要借助的就是 GPT-3 強大的生成能力。前面介紹 GPT-3 有說該模型並非專攻程式語言這個領域，但是後來開放 API 之後，被許多神通廣大的網路神人運用在程式開發上，這也讓 OpenAI 發現其寫程式的潛力。</p>
     </div>
-    <div class="text-block" id="act5">
-        <h2>五、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[5].id">
+        <h2 v-text="catalog[5].title"></h2>
         <dl>
             <dd><a href="https://www.tabnine.com/" target="_blank">tabnine</a></dd>
             <dd><a href="https://codertw.com/%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80/700335/" target="_blank">IDEAI自動補全插件TabNine</a></dd>
@@ -139,10 +153,3 @@
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

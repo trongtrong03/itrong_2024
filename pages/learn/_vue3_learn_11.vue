@@ -1,3 +1,19 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、將接收到的 params 作為 props 傳遞給路由' },
+        { id: 2, title: '二、用函式決定哪種參數作為 props 傳遞給路由' },
+        { id: 3, title: '三、用物件決定哪種參數作為 props 傳遞給路由' },
+        { id: 4, title: '四、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="72" fileType="learnList" />
@@ -5,15 +21,13 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、將接收到的 params 作為 props 傳遞給路由</a></li>
-            <li><a href="#act2">二、用函式決定哪種參數作為 props 傳遞給路由</a></li>
-            <li><a href="#act3">三、用物件決定哪種參數作為 props 傳遞給路由</a></li>
-            <li><a href="#act4">四、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>上一篇文章分別練習了路由之間傳遞參數的兩種屬性：<em>query</em> 與 <em>params</em>，無論用的是哪一種屬性，要在接收參數的組件裡的模板調用參數對應的資料，格式都不外乎長這樣：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-html">&lt;template&gt;
@@ -33,8 +47,8 @@
         <p>很多人程式寫久了就會有一種職業病，看到太多相似的語法，就會想要盡可能將其簡化。就拿 Params 的模板程式碼片段來說，每個渲染的資料屬性都要加上 <em>route.params</em>，如果整個模板接收的資料很多，儘管實質上不會影響程式的運作，但閱讀起來可能多少還是會覺得有些刺眼，總覺得應該有更好的寫法能讓整體結構更簡潔一些。</p>
         <p>本篇文章要聊的 <em>props</em> 便是可用來解決這方面需求的手段之一，這裡的 <em>props</em> 指的是路由的 <em>props</em>，與組件的 <em>props</em> 是不一樣的功能。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、將接收到的 params 作為 props 傳遞給路由</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>首要之事是打開專案裡的 <b>router/index.js</b> 設定文件，於 NewsView 設定的地方，加入 <em>props</em> 屬性，並賦予其布林值為 <em>true</em>：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-javascript">routes: [
@@ -76,8 +90,8 @@
         <p>如此模板裡的程式碼看起來就十分簡潔好讀許多。</p>
         <p>然而，誠如章節標題所述，上面的作法只限於路由使用 <em>params</em> 參數進行傳遞時才有效用，若路由傳遞參數是透過 <em>query</em> 參數去實作的，套用上述方法雖然 URL 能正常接收到參數，但卻無法同步響應在模板相應的顯示位置。</p>
     </div>
-    <div class="text-block" id="act2">
-        <h2>用函式決定哪種參數作為 props 傳遞給路由</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>相比第一種方法，這種方法彈性更大些，這個方法不僅可以接收 <em>params</em> 轉換為 props，<em>query</em> 同樣也可以。在路由設定文件 NewsView 組件所在位置，加入以下 props 語法：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-javascript">routes: [
@@ -122,8 +136,8 @@
 &lt;/script&gt;</code></pre>
         </div>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、用物件決定哪種參數作為 props 傳遞給路由</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p>和第二種方法類似，只不過函式的寫法改成用物件形式來表示，但由於它無法接收動態參數，只能在文件中引用固定的屬性值。例如：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-javascript">routes: [
@@ -161,8 +175,8 @@
         <p>因為 props 進來的值是固定的，所以不管我們點擊哪一筆動態資料，DOM 裡面對應的欄位資料都不會發生任何變化，所以這種方式使用到的機率很低。</p>
         <p>既然如此，為什麼又會需要這種 props 固定數值的寫法呢？這就回到先前提到如何辨別我們寫的組件是一般組件還是路由組件的議題上，一般組件會在模板裡透過標籤來引用，所以 props 傳遞接收其他組件的資料可以直接在標籤裡面寫接收屬性，但路由組件沒辦法這麼做，因為路由組件是直接寫在設定文件裡的，所以如果要讓路由組件接收 props，就只能在路由設定文件裡費工。</p>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <dl>
             <dd><a href="https://cn.vuejs.org/" target="_blank">Vue.js</a></dd>
             <dd><a href="https://www.youtube.com/watch?v=49b150tKIUc&list=PLmOn9nNkQxJEnGM4Jf0liBcyedAtuQq-O&index=39" target="_blank">【极简Vue3】039 路由 props配置</a></dd>
@@ -172,10 +186,3 @@
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

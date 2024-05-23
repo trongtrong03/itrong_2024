@@ -1,3 +1,20 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、Vue 3 與 Vue 2' },
+        { id: 2, title: '二、建立 Vue 3 專案' },
+        { id: 3, title: '三、從 setup 開始' },
+        { id: 4, title: '四、ref 基本型別的響應式資料' },
+        { id: 5, title: '五、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="62" fileType="learnList" />
@@ -5,20 +22,17 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、Vue 3 與 Vue 2</a></li>
-            <li><a href="#act2">二、建立 Vue 3 專案</a></li>
-            <li><a href="#act3">三、從 setup 開始</a></li>
-            <li><a href="#act4">四、ref 基本型別的響應式資料</a></li>
-            <li><a href="#act5">五、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>在技術如高鐵飛速發展的網頁前端開發領域，Vue.js 一直以其簡單、靈活和高效的特性，長年位於前端框架熱門排行的尖端。隨著 Vue 3 推出，我們有了更多且必要的理由去深入探索這個強大的框架。Vue 3 不僅僅是 Vue 2 的升級版，它帶來了許多引人注目的新功能和改進，為開發者提供了更好的工具來建立現代化的前端應用。從效能提升到全新的 Composition API，從更友善的 TypeScript 支援到更靈活的響應式系統，可以看到現在絕大多數的公司皆視 Vue 為必備網頁前端技能。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、Vue 3 與 Vue 2</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>相同技術一旦出現新的大型版本，除了帶來新的功能外，一部分肯定也是為了改善原有技術一些不便，Vue 3 不僅僅是容量、效能等優化方面都比 Vue 2 有著更卓越的提升之外，最令開發者明顯肉眼感受到的差異，首屬 Composition API 與採用 TypeScript 作為主要撰寫語言。</p>
         <p><br></p>
         <h3>Composition API：</h3>
@@ -35,8 +49,8 @@
         <p>那麼當我們要修改 Finction B，直接在其程式碼區域查找與修改即可。</p>
         <p>雖然根據官方文件的說明，即便到了 Vue 3，也依然可以向下兼容 Vue 2 的語法，只不過 Vue 2 已經正式在 2023 年底停止維護，這不僅僅明示希望所有使用 Vue 開發專案的工程師未來一律採用 Vue 3 進行開發，也在暗示過往使用 Vue 2 建立的那些持續性專案，假以時日最好也將程式碼更新到 Vue 3 的形式。</p>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、建立 Vue 3 專案</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>創建 Vue 專案環境的方式有很多種，過往比較著名的有 Vue CLI──基於 Webpack 建立的框架工具，要繼續用它來進入 Vue 3 也未嘗不是不行，只是官方提供更好的選擇；Vite 構建工具。Vite 具有以下這些優勢：</p>
         <ol>
             <li>輕量。</li>
@@ -119,8 +133,8 @@ createApp(App).mount('#app')</code></pre>
         <p><em>&lt;template&gt;</em>：用來寫 HTML 要呈現的內容。</p>
         <p><em>&lt;style&gt;</em>：用來寫有關網頁元素的樣式。</p>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、從 setup 開始</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p><em>setup</em> 是 Vue 3 新增的一個配置屬性，舉凡組件使用到的資料、方法、計算屬性、監視......等作用項目，均配置在 <em>setup</em> 裡面，可以說是整個 Vue 3 Composition API 的核心。在開始講述 <em>setup</em> 如何處理上述那些作用項之前，我們先模擬一個用 Vue 2 建構的組件。</p>
         <p>其細節如下：</p>
         <p><b>App.vue</b>：</p>
@@ -368,8 +382,8 @@ export default defineConfig({
 &lt;/script&gt;</code></pre>
         </div>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、ref 基本型別的響應式資料</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <p>上一章曾提到，我們在 <em>setup</em> 建立的變數資料不是響應式資料，因此資料渲染進 DOM 以後，我們即使後續改變了資料的值，也無法同步給 DOM 對應的資料帶來更新。而 Vue 2 <em>data</em> 則因為裡定義的資料自動就是響應式，故沒有這方面的困擾。</p>
         <p>在 Vue 3 Composition API 則由兩個方法來定義響應式資料，分別是 <em>ref</em> 以及 <em>reactive</em>。</p>
         <p>先談談 <em>ref</em>，在用它來定義資料前，必須先 <em>import</em> 它：</p>
@@ -446,8 +460,8 @@ console.log(age);    // RefImpl {__v_isShallow: false, dep: undefined, __v_isRe
         <p><br></p>
         <p>篇幅過長的緣故，另一種響應式資料定義方法 <em>reactive</em> 於下一篇文章再來筆記，但其實有關 <em>ref</em> 也只是先講完最基本的基本型別響應而已，還有一些更進階的概念，一併留到下篇繼續作探討。</p>
     </div>
-    <div class="text-block" id="act5">
-        <h2>五、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[5].id">
+        <h2 v-text="catalog[5].title"></h2>
         <dl>
             <dd><a href="https://cn.vuejs.org/" target="_blank">Vue.js</a></dd>
             <dd><a href="https://v4.vitejs.dev/" target="_blank">Vite</a></dd>
@@ -458,10 +472,3 @@ console.log(age);    // RefImpl {__v_isShallow: false, dep: undefined, __v_isRe
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

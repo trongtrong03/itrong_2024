@@ -1,3 +1,23 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、客製化 checkbox / radio' },
+        { id: 2, title: '二、取消那些煩人的表單預設樣式' },
+        { id: 3, title: '三、阻止使用者隨意拖曳 textarea 大小' },
+        { id: 4, title: '四、改變 input 的 placeholder 樣式' },
+        { id: 5, title: '五、input 的 autofill' },
+        { id: 6, title: '六、隨內容自動撐起高度' },
+        { id: 7, title: '七、select 也有 placeholder？' },
+        { id: 8, title: '八、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="40" fileType="learnList" />
@@ -5,23 +25,17 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、客製化 checkbox / radio</a></li>
-            <li><a href="#act2">二、取消那些煩人的表單預設樣式</a></li>
-            <li><a href="#act3">三、阻止使用者隨意拖曳 textarea 大小</a></li>
-            <li><a href="#act4">四、改變 input 的 placeholder 樣式</a></li>
-            <li><a href="#act5">五、input 的 autofill</a></li>
-            <li><a href="#act6">六、隨內容自動撐起高度</a></li>
-            <li><a href="#act7">七、select 也有 placeholder？</a></li>
-            <li><a href="#act8">八、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>關於表單元素（<em>&lt;input&gt;</em>、<em>&lt;select&gt;</em>、<em>&lt;textarea&gt;</em>...）的樣式呈現，一直以來都是設計師與前端工程師之間溝通的難題之一。大部分的設計師來都不太喜歡瀏覽器預設呈現的表單元素樣式──儘管部份表單元素類別可以兼容 CSS 直接設定的屬性內容，但像核選方塊（<em>checkbox</em>）、單選按鈕（<em>radio</em>）等就無法直接套用指定樣式，必須透過其他方式來達成我們想要的設計。本篇將介紹如何實現上述那些類型的表單元素客製化樣式的方法，除此之外，也將介紹一些 CSS3 表單元素的新增屬性和功用。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、客製化 checkbox / radio</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>HTML 的 <em>&lt;input&gt;</em> 標籤依據 <em>type</em> 屬性的參數不同，在表單用途上也有很大的不同，其中有兩個性質相似，偶爾新手會搞混使用時機的兩種 Type，分別是 <em>checkbox</em> 與 <em>radio</em>，這兩種的功能基本上都是讓使用者選擇既定的選項，當表單送出後，會將使用者勾選的項目值傳遞給 JavaScript 或後端進行處理。在稱謂上，<em>checkbox</em> 一般稱作「核選方塊」，至於 <em>radio</em> 則以「單選按鈕」稱之居多，這兩者最主要的差別在於前者通常用於複數選擇的表單內容，而後者通常只允許使用者在選擇項目裡選擇其中一項，也就是複選題與單選題的概念。</p>
         <p>關於表單元素深入的用法這裡先不多提，單純來講講 CSS 樣式美化的部分，許多設計師都不甚喜歡瀏覽器預設的表單元素樣式，拿 <em>checkbox</em> 來說，在不設置任何 CSS 樣式的預設模樣，通常會長這樣：</p>
         <div class="text-example">
@@ -109,8 +123,8 @@ input[type="checkbox"]:checked + label::before {
         <p><br></p>
         <p>至於單選按鈕 <em>radio</em> 也是相同作法，只需要將 CSS <em>input</em> 中的 <em>type</em> 參數改為 <em>radio</em> 即可。</p>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、取消那些煩人的表單預設樣式</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>上一個章節曾提到 HTML 的表單元素在各家瀏覽器都有自己的預設呈現樣式，即便透過 CSS 進行美化，也不見得所有屬性都能完全套用上去，像 <em>checkbox</em>、<em>radio</em> 這類按鈕能透過 <em>label</em> 對應觸發的尚能「繞道」用別種方式去取代其原本的樣式，但其他表單元素可就沒那麼好說話了。所幸，CSS3 新增一籮筐的各種應用屬性中，有一個屬性可以用來對瀏覽器對表單元素預設的樣式外觀進行變化，它就是 <em>appearance</em> 屬性。</p>
         <p>appearance 翻成中文意為「出現」，在 CSS 世界中，這個屬性則是用於改變指定元素對象的「外觀」，什麼意思呢？舉例來說，像 <em>&lt;input&gt;</em>、<em>&lt;select&gt;</em>、<em>&lt;button&gt;</em>......這些可與使用者觸發互動的表單元素，在各大瀏覽器中都有其預設的基本樣式。例如：</p>
         <div class="text-codepen">
@@ -150,8 +164,8 @@ input[type="checkbox"]:checked + label::before {
         </div>
         <p>嗯......似乎有些微妙？</p>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、阻止使用者隨意拖曳 textarea 大小</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p>CSS3 有個 <em>resize</em> 屬性，其目的用於使指定元素是否可以讓使用者調整大小，譬如表單文字區域元素 <em>&lt;textarea&gt;</em> 其範圍右下角的那顆可以拖曳尺寸的小三角形。</p>
         <p>語法：</p>
         <div class="text-code" v-pre>
@@ -219,8 +233,8 @@ input[type="checkbox"]:checked + label::before {
             <img src="/images/learn/css/input-style-2.jpg">
         </figure>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、改變 input 的 placeholder 樣式</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <p><em>placeholder</em> 屬性用於設定表單元素提示訊息的樣式，語法為：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-css">input::placeholder {
@@ -267,8 +281,8 @@ input:-moz-placeholder {
             </div>
         </div>
     </div>
-    <div class="text-block" id="act5">
-        <h2>五、input 的 autofill</h2>
+    <div class="text-block" :id="'act' + catalog[5].id">
+        <h2 v-text="catalog[5].title"></h2>
         <p>相信這是不少開發者都會遇到的問題：在 Chrome 瀏覽器裡的表單輸入內容時，輸入框會自動變色，如下圖：</p>
         <figure>
             <img src="/images/learn/css/input-style-3.jpg">
@@ -303,8 +317,8 @@ input:-webkit-autofill:active  {
             <pre><code class="language-html">&lt;form autocomplete="off"&gt;</code></pre>
         </div>
     </div>
-    <div class="text-block" id="act6">
-        <h2>六、隨內容自動撐起高度</h2>
+    <div class="text-block" :id="'act' + catalog[6].id">
+        <h2 v-text="catalog[6].title"></h2>
         <p>最後額外補充一個和 CSS 沒有什麼關聯的小技巧，這是前陣子開發專案時業主提出的需求，希望使用者在表單欄位輸入內容時，輸入框的高度可以隨著內容換行而自動增高。儘管過去自己也不是沒看過相關案例，但仔細想想還真想不出 <em>input</em>、<em>textarea</em> 屬性可以實現這個效果。經上網搜尋關鍵字發現，類似案例處理方式除了透過 JavaScript 實現之外，還有一個更簡單且單純的方式──那就是使用 <em>contentEditable</em> 方法。</p>
         <p><em>contentEditable</em> 是 HTML 其中一個全域屬性，主要用來設定元素是否可以被編輯：</p>
         <div class="text-code" v-pre>
@@ -323,8 +337,8 @@ input:-webkit-autofill:active  {
             <p><em>contentEditable</em> 屬性在 IE 瀏覽器中不能直接使用在 <em>&lt;table&gt;</em> 相關的元素，包含 <em>&lt;tr&gt;</em>、<em>&lt;td&gt;</em>、<em>&lt;col&gt;</em> ...等。</p>
         </blockquote>
     </div>
-    <div class="text-block" id="act7">
-        <h2>七、select 也有 placeholder？</h2>
+    <div class="text-block" :id="'act' + catalog[7].id">
+        <h2 v-text="catalog[7].title"></h2>
         <p>雖然章節標題下的很聳動，但眾所皆知 <em>placeholder</em> 屬性在 <em>&lt;select&gt;</em> 是無效的，不過這也不代表 <em>&lt;select&gt;</em> 就無法實現類似 <em>&lt;input&gt;</em> 提示文字的效果，只是方法會有一些些複雜。</p>
         <p>首先是 HTML 的部份：</p>
         <div class="text-code" v-pre>
@@ -359,8 +373,8 @@ option {
         </div>
         <p>如此一來，就能讓 <em>&lt;select&gt;</em> 也能製作出類似 <em>&lt;input&gt;</em> Placeholder 提示文字的效果了。</p>
     </div>
-    <div class="text-block" id="act8">
-        <h2>八、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[8].id">
+        <h2 v-text="catalog[8].title"></h2>
         <dl>
             <dd><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/appearance" target="_blank">MDN web docs</a></dd>
             <dd><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLElement/contentEditable" target="_blank">HTMLElement.contentEditable</a></dd>
@@ -371,10 +385,3 @@ option {
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

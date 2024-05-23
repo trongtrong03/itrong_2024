@@ -1,3 +1,19 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、建立一個響應式資料相加的範例' },
+        { id: 2, title: '二、使用 computed 計算屬性' },
+        { id: 3, title: '三、讓計算屬性從唯讀變成可修改的值' },
+        { id: 4, title: '四、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="64" fileType="learnList" />
@@ -5,21 +21,19 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、建立一個響應式資料相加的範例</a></li>
-            <li><a href="#act2">二、使用 computed 計算屬性</a></li>
-            <li><a href="#act3">三、讓計算屬性從唯讀變成可修改的值</a></li>
-            <li><a href="#act4">四、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>這個章節學習的主題是 <em>computed</em>，也就是「計算」屬性，計算屬性是早在 Vue 早期版本便具有的功能之一，用途如其名，用於定義計算屬性的選項。計算屬性是一種依賴其他屬性值並且具有快取機制的屬性。它們的值是根據相關屬性值計算得出的，只有在相關屬性發生變化時才會重新計算，否則會直接傳回快取的結果。</p>
         <p>計算屬性的引入使得在 Vue.js 組件中可以非常方便地定義複雜的計算邏輯，並且可以在模板中像存取普通屬性一樣使用這些計算屬性。這種方式使得組件的模板更加簡潔和易讀，同時也提高了程式碼的可維護性和可讀性。在 Vue 3 版本中，計算屬性並沒有顯著的變化，大抵與 Vue 2 版本保持一致，只是因為 Vue 3 導入 Composition API，加上渲染效能提升等因素，計算屬性比起過去版本來得更加靈活、高效及容易使用。</p>
         <p>也因為計算屬性本身使用方式並沒有太大變革，即便站在 Vue 3 角度學習它，其概念回到 Vue 2 乃至於 Vue 1 也依然適用。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、建立一個響應式資料相加的範例</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>在開始操作計算屬性之前，我們先建立一個範例，這個範例的功能需要兩個輸入框，分別是姓氏和名字，該輸入框可以即時接收使用者輸入的內容，然後在表單下方將姓氏與名字相結合並輸出成純文字。</p>
         <p>程式碼結構範例：</p>
         <div class="text-code" v-pre>
@@ -69,8 +83,8 @@
         </figure>
         <p>需求實現是實現了，但，不覺得這樣子寫非常難以閱讀嗎？況且 Vue 官方總是強調開發者應該避免在模板上添加過多的程式碼，盡可能讓模板看起來簡單乾淨，顯然上面的寫法已經違反此一原則。</p>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、使用 computed 計算屬性</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>承接上一章節的尾段，比起把模板搞得花花綠綠，Vue 官方更希望開發者將這些程式碼轉移到 <em>&lt;script&gt;</em> 裡面，透過 <em>computed</em> 計算屬性來撰寫程式運算邏輯。過往 Vue 2 Options API 的 <em>computed</em> 屬性配置是這樣調用：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-javascript">new Vue({
@@ -191,8 +205,8 @@
         </figure>
         <p>截圖就不截到底了，總之就是 4 * 5 總共輸出了 20 次「computed!」。</p>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、讓計算屬性從唯讀變成可修改的值</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p>根據前面練習的範例，事實上我們在輸入框修改的內容，並不會直接傳給 <em>fullName</em>。舉例來說，當我們於 <em>lastName</em> 輸入框修改它原本的值「阿比」變更為「喵喵」，首先是 <em>lastName</em> 這個響應式資料的值更新成「喵喵」，然後才經由 <em>fullName</em> 進行計算，最後返回到畫面上的元素。</p>
         <figure>
             <img src="/images/learn/js/vue3-learn-3-8.jpg">
@@ -325,8 +339,8 @@ function changeFullName(){
 &lt;/script&gt;</code></pre>
         </div>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <dl>
             <dd><a href="https://cn.vuejs.org/" target="_blank">Vue.js</a></dd>
             <dd><a href="https://www.youtube.com/watch?v=9PhQoYMQjWw&list=PLmOn9nNkQxJEnGM4Jf0liBcyedAtuQq-O&index=16" target="_blank">【极简Vue3】016 computed计算属性</a></dd>
@@ -336,10 +350,3 @@ function changeFullName(){
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

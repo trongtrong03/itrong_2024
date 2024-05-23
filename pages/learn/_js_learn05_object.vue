@@ -1,3 +1,22 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、什麼是物件？' },
+        { id: 2, title: '二、如何建立物件？' },
+        { id: 3, title: '三、存取物件裡的屬性' },
+        { id: 4, title: '四、刪除物件裡的屬性' },
+        { id: 5, title: '五、更新物件裡的屬性' },
+        { id: 6, title: '六、總結' },
+        { id: 7, title: '七、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="49" fileType="learnList" />
@@ -5,23 +24,18 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、什麼是物件？</a></li>
-            <li><a href="#act2">二、如何建立物件？</a></li>
-            <li><a href="#act3">三、存取物件裡的屬性</a></li>
-            <li><a href="#act4">四、刪除物件裡的屬性</a></li>
-            <li><a href="#act5">五、更新物件裡的屬性</a></li>
-            <li><a href="#act6">六、總結</a></li>
-            <li><a href="#act7">七、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>如果你正在學習或曾經學習過 JavaScript，也許或多或少聽說過一個說法：「JavaScript 裡的東西都是『物件』。」雖說這不是百分百正確的論述，因為部分基本資料型別以及特殊值就不屬於物件的一種，例如字串、數字、布林值...（資料型別）等，或是 <em>NaN</em>、<em>Infinity</em>...這類特殊符號。僅管如此，我們仍可以透過這句話窺探 JavaScript 這門程式語言的內在，從諸如字串與陣列的核心功能、到以 JavaScript 建構的瀏覽器 API，大部分語法都可算是物件。言簡意賅地說 JavaScript 便是一門「物件導向」（Object-Oriented；OO）本質的程式語言。</p>
         <p>那麼，究竟物件是什麼？物件主要在做些什麼？而我們該如何使用物件？本篇的主題就來聊聊關於 JavaScript 物件的點點滴滴。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、什麼是物件？</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>想像一下，當你置身在一處場景，眼前有一輛汽車，還有一棟旅館，而旅館的背後則種植了好幾棵樹。如果今天建構這個場景的造物主是我們，那麼汽車、房屋，還有樹木，便通通都是我們建立的不同種類的物件（Object），站在程式語言的角度，這些物件則各自代表不同類型（Type）的實體（Instance）。每個物件皆有自己的三大組成成份，分別是：</p>
         <ul>
             <li>特性（Properties）</li>
@@ -42,8 +56,8 @@
         <p>綜上所述，我們以行駛中的汽車代入程式語言的表述方式：</p>
         <p>物件類型為汽車，它其中一個特性名稱為 <em>currentSpeed</em>，匹配的值是 <em>60mph</em>，表示該車輛目前時速。車內的駕駛人可以透過 <em>brake</em> 與 <em>accelerate</em> 事件定義的行為，令車輛減速或加速。當事件觸發時，呼叫 <em>changeSpeed()</em> 方法，來增加或減少──也就是更新 <em>currentSpeed</em> 特性值。</p>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、如何建立物件？</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>複習一下先前第一篇主題「變數」文章裡所整理的資料型別表格：</p>
         <div class="text-flex">
             <div class="f-width">
@@ -149,8 +163,8 @@ console.log(num === 3);  // false</code></pre>
         <p>注意到了嗎？明明 <em>num</em> 的資料型別判定為物件，它卻可以和數字 <em>1</em> 相加得到 <em>4</em> 的運算結果，如果我們一開始期望建立的東西是物件，那麼它應該要被轉換為字串，得到 <em>31</em> 這個字串與數字拼接的結果。</p>
         <p>至於物件實字的宣告方式就不會發生上述情況，因為使用 <em>{ }</em> 是無法直接傳入參數來建立物件的，必須添加屬性才能儲存我們要傳入的值。</p>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、存取物件裡的屬性</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p>如果要存取物件裡的屬性，主要有兩種方法：</p>
         <p><br></p>
         <h3>1. 點記法（Dot notation）：</h3>
@@ -252,8 +266,8 @@ console.log(car[carName]);    // C-HR</code></pre>
         </div>
         <p>括弧記法允許我們使用變數中儲存的屬性名，<em>car[carName]</em> 實際上指的就是 <em>car["name"]</em>，這個 <em>name</em> 又被指定給我們宣告的變數 <em>carName</em>，所以通過括弧技法我們能順利地取得「C-HR」這個屬性值。</p>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、刪除物件裡的屬性</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <p>倘如要刪除物件裡的屬性，我們可以使用 <em>delete</em> 關鍵字，具體操作方式為下：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-javascript">delete object.property;</code></pre>
@@ -275,8 +289,8 @@ console.log(car);    // { "brand": "TOYOTA" }</code></pre>
         </div>
         <p>最後 <em>car</em> 物件裡的屬性便只剩下 <em>brand</em> 一條而已。</p>
     </div>
-    <div class="text-block" id="act5">
-        <h2>五、更新物件裡的屬性</h2>
+    <div class="text-block" :id="'act' + catalog[5].id">
+        <h2 v-text="catalog[5].title"></h2>
         <p>前面的章節主要闡述如何索取物件裡已經宣告的屬性，而我們也可以另外賦值以更新原本的屬性值。方法很簡單，請看下例：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-javascript">var car = {
@@ -302,8 +316,8 @@ car.currentSpeed();   // Now speed is 60 mph!</code></pre>
         <p><br></p>
         <p>以上是 JavaScript 物件的基本知識與使用語法介紹，但這些僅僅還只是皮毛，繼續深入窺探會發現它底下是非常巨大的深坑，畢竟 JavaScript 本身就是一個「物件導向」本質的程式語言。進一步窺探會發現還有「物件原型」（Prototype）、「原型繼承」（Prototypal inheritance）、「執行環境」（This）...等和物件息息相關的概念需要認識、學習，這些東西幾乎都需要單獨開篇幅來詳細記述，所以就留待後續再繼續做文章筆記囉。</p>
     </div>
-    <div class="text-block" id="act6">
-        <h2>六、總結</h2>
+    <div class="text-block" :id="'act' + catalog[6].id">
+        <h2 v-text="catalog[6].title"></h2>
         <p>回顧本篇文章，精簡總結一下我們從物件基礎身上學到哪些東西：</p>
         <h5>1. 物件的組成</h5>
         <ul>
@@ -344,8 +358,8 @@ car.currentSpeed();   // Now speed is 60 mph!</code></pre>
             </div>
         </div>
     </div>
-    <div class="text-block" id="act7">
-        <h2>七、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[7].id">
+        <h2 v-text="catalog[7].title"></h2>
         <dl>
             <dd><a href="https://www.books.com.tw/products/0010744702" target="_blank">《JavaScript & JQuery：網站互動設計程式進化之道》</a></dd>
             <dd><a href="https://www.fooish.com/javascript/object.html" target="_blank">JavaScript Object (物件)</a></dd>
@@ -358,10 +372,3 @@ car.currentSpeed();   // Now speed is 60 mph!</code></pre>
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

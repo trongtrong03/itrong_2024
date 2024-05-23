@@ -1,3 +1,22 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、什麼是 MPA 與 SSR？' },
+        { id: 2, title: '二、什麼是 SPA 與 CSR？' },
+        { id: 3, title: '三、MPA 與 SPA 比一比' },
+        { id: 4, title: '四、什麼是 SSG？' },
+        { id: 5, title: '五、ISR......？' },
+        { id: 6, title: '六、總結' },
+        { id: 7, title: '七、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="53" fileType="learnList" />
@@ -5,25 +24,20 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、什麼是 MPA 與 SSR？</a></li>
-            <li><a href="#act2">二、什麼是 SPA 與 CSR？</a></li>
-            <li><a href="#act3">三、MPA 與 SPA 比一比</a></li>
-            <li><a href="#act4">四、什麼是 SSG？</a></li>
-            <li><a href="#act5">五、ISR......？</a></li>
-            <li><a href="#act6">六、總結</a></li>
-            <li><a href="#act7">七、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <figure>
             <img src="/images/learn/others/spa-01.jpg">
         </figure>
         <p>之所以會想寫這個主題，是因為前陣子面試某一間公司，其筆試問題中有一題題目是「請說明什麼是 SPA，並列舉它的優缺點」，讀完題目的當下我愣了一晌......SPA 我聽過，也知道它翻譯成中文可以叫做「單頁式網頁應用」，大概的特性我也懂，但一時間就是分析不順它的重點和優劣之處，最後也只能寫個大略的皮毛交卷。儘管事後上網查資料覺得和我當下寫的內容相差無幾（指皮毛的部分），但想想自己對於網頁領域的專有名詞認識也實在不夠完全，於是決定筆記這篇文章，記錄下 SPA 與 MPA 這兩種網頁開發上的主要思維模式。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、什麼是 MPA 與 SSR？</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>在講 SPA 之前，先來談談 MPA。MPA 全名「Multi-Page Application」，意指多頁面網頁應用，也就是採用 MPA 模式架設的網站，其網頁根據網頁內容有多少功能，就會有多少個頁面，當使用者點擊連結，瀏覽器視窗會重新刷新整個畫面，並導覽到指定的頁面，或者說是向伺服器發送請求，接著伺服器再將指定的頁面檔案資料回傳給瀏覽器顯示。</p>
         <p>例如：</p>
         <div class="text-code" v-pre>
@@ -92,8 +106,8 @@
         <p>由於每一次的頁面導航都會重新刷新瀏覽器，變成每一次重新整理都要發送請求給伺服器，如果某些頁面需要用到比較多資源，相對需要花費比較多的時間去讀取，使用者體驗上有時就沒那麼舒服，而且頻繁地和伺服器互動也會增加伺服器的負擔。</p>
         <p>為了改善這些問題，SPA 技術應用便於焉而生。</p>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、什麼是 SPA 與 CSR？</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>SPA 完整英文名稱為「Single-Page Application」，即單一頁面網頁應用的意思，顧名思義，整個網站只會有一個頁面，透過特定的技術，回應使用者的任何操作，SPA 的特色是動態重新渲染頁面的內容，而不用重新刷新整個網頁，因此使用者瀏覽體驗上會比 MPA 來得流暢，不太會因為各種可能影響讀取速度的問題，導致使用者等候過久的狀況發生。</p>
         <p>就拿近年來在華語程式圈最火紅的 JavaScript 框架 Vue.js 來說，它便是實現 SPA 最常見的技術之一，利用組件（Templates）與路由器（Router）渲染、切換各個網站的內容，普通使用者操作時看似與 MPA 沒什麼兩樣，然而當我們打開程式碼一看，往往只會看到用來建構組件內容的網頁檔案，只有一個 <em>&lt;div id="app"&gt;&lt;/div&gt;</em> 這樣簡短的標籤，儘管這不是判斷該網頁是否為 SPA 的唯一標準，卻也已是 SPA 技術的代表性標幟之一。</p>
         <p>不過前面 MPA 有舉了頁面導覽的程式碼結構例子，所以這裡也稍微提供相對應的範例，一般來說 MPA 的頁面導覽的網頁連結尾端通常是所使用網頁格式的副檔名，像是 <em>.html</em>、<em>.php</em> 等。而 SPA 網站導覽的網址大多都是用路由來表示，主要有以下兩種：</p>
@@ -158,8 +172,8 @@ http://example.com/news/20240101</code></pre>
         <p>也因為不用重新讀取整個網頁，所以在使用者體驗方面，SPA 評價往往優於 MPA，不過這也並不代表 SPA 全面輾壓 MPA，因為單一頁面也存在一些壞處，譬如不利於 SEO（儘管有其他解，但對比 MPA 而言仍比較麻煩），以及初次載入頁面的時間可能會比 MPA 來得還要久。</p>
         <p>至於為什麼說 SPA 不利於 SEO 搜尋，那是因為過往 SPA 建站的資料都是從用戶端由 AJAX 之類的技術向伺服器端發送請求，由於資料都在伺服器端那，搜尋引擎的爬蟲自然而然就很難取得資料，或者說 SPA 大部分內容都是通過 JavaScript 動態產生，但搜尋爬蟲通常在抓取內容時通常不會執行 JavaScript 程式碼，這些都大大提升 SEO 的難度。</p>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、MPA 與 SPA 比一比</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p>凡事都一體兩面，即使再美好的事物也是一樣。雖然 SPA 的問世是為了妥善解決 MPA 傳統網頁架構一些為人詬病的問題，不過 SPA 也存在著一些缺點，以下我們就透過表格來分析這兩種網頁應用各自的優劣之處。</p>
         <div class="text-flex">
             <div class="f-width">
@@ -211,8 +225,8 @@ http://example.com/news/20240101</code></pre>
         <p>其實基本上就是我方的優點就是對方缺點的概念，至於什麼網站適合使用哪一種網頁應用技術，說白了也是要看公司或團隊的需求，但通常來說，比較需要透過 SEO 強化搜尋曝光度的網站類型，例如電子商務平台、購物網站......等，可能較適合傳統 MPA 的開發模式；而網站需求希望以快速渲染為主，且在平板、手機等行動裝置上也能快速切換畫面內容，那麼 SPA 就是首選。</p>
         <p>不過無論是 MPA 或 SPA，實際上也都有其他方法弭補它們本身存在的缺點，只是相對直接使用另一個技術來說，開發過程會顯得更佳繁瑣、耗費時間。</p>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、什麼是 SSG？</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <p>SSG 全名為「Static Site Generation」，中文稱作「靜態頁面生成」，SSG 技術的主要概念之一就是為了解決傳統 SPA 不利於 SEO 的麻煩。</p>
         <p>SSG 技術通常與一些前端框架（Vue、React......等）一同使用，在框架建構（Build）時生成靜態頁面，當使用者訪問網站時，將會直接接收到已經生成好的靜態頁面，而不需要先在伺服器上動態產生頁面，然後才回傳給用戶端，既可以提高網能效能，也能減少伺服器端的負擔，同時又方便 SEO 優化。</p>
         <p>以下具體述說 SSG 有哪些優點：</p>
@@ -248,8 +262,8 @@ http://example.com/news/20240101</code></pre>
         <p>它的功能同樣也是把框架編寫好的內容打包輸出成靜態網站，只不過和 <em>generate</em> 相比，<em>build</em> 主要在做的事情只有將我們寫的內容打包成網頁佈署時所需的靜態資源，並不包含產生靜態網頁，所以我們可以說 <em>generate</em> 指令包含了 <em>build</em> 在做的事情。</p>
         <p>既然如此為什麼 Nuxt 要保留 <em>build</em>？主要是因為 Nuxt 的宗旨之一是想確保與其他前端開發工具的相容性，或許有部分開發者會同時使用 Nuxt 或其他框架工具，譬如 Jenkins、Travis CI、CircleCI 之類的 CI/CD 工具，又或者 React、Vue.js、Angular 等其他框架，因此才保留 <em>build</em> 這個通用指令增加相容性與靈活度。至於 <em>generate</em> 則是 Nuxt 本身獨有的指令，其他開發工具是不支援這個指令的。</p>
     </div>
-    <div class="text-block" id="act5">
-        <h2>五、ISR......？</h2>
+    <div class="text-block" :id="'act' + catalog[5].id">
+        <h2 v-text="catalog[5].title"></h2>
         <p>前面看了這麼多縮寫成三個字母的網頁渲染技術的專有名詞，想必已經感到視覺疲乏和思想錯亂了吧？放心，相較前面 CSR、SSR、SSG，ISR 比較沒那麼常見，因為 ISR 是 React 衍生框架 Next.js 獨有的功能。</p>
         <p>ISR，全名「Incremental Static Regeneration」，中文譯為「增量靜態生成」，它是一種結合了 SSG 和動態內容更新的概念。上個章節曾點出 SSG 的缺點：傳統 SSG 在建構時生成靜態 HTML 檔案，如果需要修改或更新網站部分內容，通常必須要重新建構整個網站，進而拖累維護效率──ISR 便是誕生來解決這個問題。</p>
         <p>ISR 允許使用者訪問網站時，動態地更新部分頁面的內容，而不是等待整個網站的重新構建。當使用者瀏覽某個頁面，如果該頁面的靜態 HTML 文件已經存在，則會立即返回給客戶端。同時，Next.js 會在後台檢查該頁面的資料是否已經過時，如果需要更新，則會在後續的請求中重新生成該頁面的靜態 HTML 文件，並在下一次用戶訪問時回傳更新後的內容。這樣的做法既可以保持原本 SSG 的優勢（載入快速、有利於 SEO），同時也解決部分內容需要動態更新的需求，讓使用者可以立即獲得最新的內容，而不需要等待整個網站重新建構。</p>
@@ -265,8 +279,8 @@ http://example.com/news/20240101</code></pre>
         <p><br></p>
         <p>至於 Next.js 具體怎麼使用 ISR 在本篇文章就不多提了，有興趣的看官可以自行前往 <a href="https://nextjs.tw/docs/basic-features/data-fetching/incremental-static-regeneration" target="_blank">Next.js</a> 官方文件自行研究。</p>
     </div>
-    <div class="text-block" id="act6">
-        <h2>六、總結</h2>
+    <div class="text-block" :id="'act' + catalog[6].id">
+        <h2 v-text="catalog[6].title"></h2>
         <p>最後，來為 MPA、SPA、CSR、SSR、SSG 做總結整理：</p>
         <h4>1. MPA（Multi-Page Application）多頁面網頁應用：</h4>
         <ul>
@@ -324,8 +338,8 @@ http://example.com/news/20240101</code></pre>
         <p>回到前言提到的撰文初衷，現在有些公司面試徵人的過程中，會透過詢問應徵者是否瞭解 MPA、SPA，或什麼專案該使用 CSR 還是 SSR，藉以瞭解該求職者對於網頁渲染及自身使用工具的理解程度。其實當時我的那份試卷，還有一題就是在考 CSR 與 SSR 的意思是什麼，但當時我對這兩個術語並不怎麼瞭解，於是給了個大空白，針對本篇文章主題在蒐集資料的過程才發現它們和 MPA、SPA 也有很深的關聯。</p>
         <p>光於 CSR 與 SSR 的優缺點前面已經提非常多了，所以最後只講講實務應用上的建議回覆：網站的首頁可以嘗試採取 SSR，使其獲得較好的 SEO 優化，而其他頁面則採用 CSR，增進使用者體驗同時也減輕伺服器端的負擔。不過最終還是要遵循整個團隊的建議，畢竟網站同時使用 CSR 與 SSR 將會增加程式碼複雜度，以及開發與維護的技術成本。</p>
     </div>
-    <div class="text-block" id="act7">
-        <h2>七、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[7].id">
+        <h2 v-text="catalog[7].title"></h2>
         <dl>
             <dd><a href="https://hackmd.io/@ivaSrwTTSkC1jb66rpGfnQ/BkzAoh6Oq" target="_blank">搞懂網頁技術名詞 SSR、CSR、MPA、SPA</a></dd>
             <dd><a href="https://israynotarray.com/other/20210529/2519649612/" target="_blank">淺談 SPA、CSR、SSR、MPA、SSG 專有名詞</a></dd>
@@ -342,10 +356,3 @@ http://example.com/news/20240101</code></pre>
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

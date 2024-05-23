@@ -1,3 +1,21 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、語法該如何寫？' },
+        { id: 2, title: '二、Media Types 有哪些類型？' },
+        { id: 3, title: '三、什麼是 Media Features？' },
+        { id: 4, title: '四、是否有其他的邏輯應用方式？' },
+        { id: 5, title: '五、什麼情況我會需要用到 Media Queries？' },
+        { id: 6, title: '六、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="2" fileType="learnList" />
@@ -5,21 +23,17 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、語法該如何寫？</a></li>
-            <li><a href="#act2">二、Media Types 有哪些類型？</a></li>
-            <li><a href="#act3">三、什麼是 Media Features？</a></li>
-            <li><a href="#act4">四、是否有其他的邏輯應用方式？</a></li>
-            <li><a href="#act5">五、什麼情況我會需要用到 Media Queries？</a></li>
-            <li><a href="#act6">六、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>Media Queries 敘述的語意是先「詢問」（query）「媒體」（media）的屬性，然後再針對其定義樣式，不僅可以根據指定的裝置型態（例如螢幕或列印）或特定特徵（例如螢幕解析度或瀏覽器可視範圍寬度）套用指定的樣式屬性，更是實現響應式網頁（RWD）不可或缺的重要方法。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、語法該如何寫？</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>一個 <b>media query</b> 是由一個可選的 <b>media types</b> 及不定數量的 <b>media features</b> 運算式構成。<b>media query</b> 本身具有邏輯的概念，若指定的 <b>media types</b> 與正在顯示的裝置內容相符，且 <b>media features</b> 運算式結果也為 <em>true</em> 時，回傳為 <em>true</em>（套用屬性樣式），否則為 <em>false</em>（不套用屬性樣式）。<br>假如設定的 <b>media types</b> 是未知的類型，則該 <b>media query</b> 將會永遠是 <em>false</em>。</p>
         <p>範例：</p>
         <div class="text-code" v-pre>
@@ -32,8 +46,8 @@
             <p>除了 <em>and</em> 之外，還有 <em>or</em>、<em>not</em>、<em>only</em>一共四種應用方法，這部份將保留至後面再提。</p>
         </blockquote>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、Media Types 有哪些類型？</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>Media Types 描述裝置類型，有以下四種參數：</p>
         <div class="text-flex">
             <div class="f-width">
@@ -76,8 +90,8 @@
         </div>
         <p>逗號是邏輯 <em>and</em> 的意思。</p>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、什麼是 Media Features？</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p><b>Media features</b> 也可以稱為特徵，用來給 <b>Media Types</b> 更加詳細的設定，要注意的是，每一個特徵都需要用括號包覆起來，並與邏輯關鍵字（<em>and</em>、<em>or</em>、<em>not</em>、<em>only</em>）結合，以下將特徵分門別類為視窗或頁面尺寸、顯示品質、顏色、互動這四大項來一一介紹。</p>
         <p><br></p>
         <h3>視窗或頁面尺寸（Viewport/Page Dimensions）：</h3>
@@ -219,8 +233,8 @@
             </div>
         </div>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、是否有其他的邏輯應用方式？</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <p>前面曾提過 Media Queries 的邏輯使用除了 <em>and</em> 外，還有另外三種方式，分別是：</p>
         <div class="text-flex">
             <div class="f-width">
@@ -269,8 +283,8 @@
             <p>在定義 <em>not</em> 及 <em>only</em> 時也有需要謹記的地方，若要使用這兩者，後方必須接續 Media Types 始可生效，否則將無任何效果。</p>
         </blockquote>
     </div>
-    <div class="text-block" id="act5">
-        <h2>五、什麼情況我會需要用到 Media Queries？</h2>
+    <div class="text-block" :id="'act' + catalog[5].id">
+        <h2 v-text="catalog[5].title"></h2>
         <p>大致看完 Media Queries 的邏輯和參數後，許多人最關心的莫過於它什麼時候會用到？在網頁程式裡扮演什麼樣的角色？以目前網頁設計環境中，CSS Media Queries 最常使用在網頁響應式設計（Responsive Web Design，RWD）的開發上。有些開發者會透過 JavaScript 程式去判斷使用者的畫面視窗大小，除此之外，我們也能利用 Media Queries 的 <b>Media features</b>「視窗與頁面尺寸」的特徵，讓瀏覽器去判斷使用者目前畫面的大小，去呈現與其相符的 CSS 樣式內容，其中，又以視窗的「寬度」（<em>width</em>）最被廣泛作為判定的依據。</p>
         <p><br></p>
         <p>我們先假定需要實現以下畫面：</p>
@@ -349,8 +363,8 @@
         <p><br></p>
         <p>儘管我們可能會常在具權威的 Coding Style 文章看到 Media Queries 應該怎麼寫怎麼寫才是最「正確」的，但其實只要清楚知道自己所使用的邏輯，或是配合團隊的共同規則，那麼也沒那麼必要執著應該是要由小到大、還是要由大到小的書寫方式了。</p>
     </div>
-    <div class="text-block" id="act6">
-        <h2>六、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[6].id">
+        <h2 v-text="catalog[6].title"></h2>
         <dl>
             <dd><a href="https://developer.mozilla.org/zh-TW/docs/Web/CSS/Media_Queries/Using_media_queries" target="_blank">使用 media queries</a></dd>
             <dd><a href="https://www.w3schools.com/css/css3_mediaqueries_ex.asp" target="_blank">CSS Media Queries - Examples</a></dd>
@@ -361,10 +375,3 @@
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

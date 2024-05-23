@@ -1,3 +1,21 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、JavaScript 的繼承機制' },
+        { id: 2, title: '二、constructor 與 prototype' },
+        { id: 3, title: '三、this 關鍵字' },
+        { id: 4, title: '四、總結' },
+        { id: 5, title: '五、框架語言的差異' },
+        { id: 6, title: '六、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="56" fileType="learnList" />
@@ -5,24 +23,20 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、JavaScript 的繼承機制</a></li>
-            <li><a href="#act2">二、constructor 與 prototype</a></li>
-            <li><a href="#act3">三、this 關鍵字</a></li>
-            <li><a href="#act4">四、ES6 帶來的影響</a></li>
-            <li><a href="#act5">五、框架語言的差異</a></li>
-            <li><a href="#act6">六、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>在電腦程式語言的世界中，<em>this</em> 通常用來參照當前執行上下文中的物件或實例（instance）。其主要作用是允許開發者在函式或方法裡訪問和操作該物件的屬性與方法。這個關鍵字的具體作用和行為方式可能略有不同，主要取決於所使用的程式語言。</p>
         <p>譬如 C# 或 C++，<em>this</em> 用於在類別的方法內引用類別自身的成員，以區分類別成員和相同名稱的參數或局部變數。又或者像 Java、Python 等物件導向程式語言，<em>this</em> 用於在類別中引用「當前」實例（物件）的屬性和方法，這有助於區分實例變數和類別變數，並確保正確訪問實例特有的資訊。</p>
         <p>然而，<em>this</em> 到了 JavaScript 反而變成複雜的存在，因為我們能在任何地方存取到它，基本取決於函式式如何被調用的，它用於訪問當前函式執行的上下文，可能是全局物件（當在全局作用域中調用函式時）、調用該函式的物件（當作為方法調用時），又或者透過 <em>.call()</em>、<em>.apply()</em> 等方式，這些不同的調用方式導致 <em>this</em> 的行為在不同情況下可能會有所不同，最終指向不同的對象或值。</p>
         <p>總而言之，本篇文章的主題將要來探討 JavaScript 的 <em>this</em> 用法，雖說如此，但要真正了解它之前，我們可能還需要先認識 JavaScript 物件導向及原型鏈等概念，才能更容易地幫助我們理解 JavaScript 複雜的 <em>this</em> 機制。廢話不多說，以下進入正題。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、JavaScript 的繼承機制</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>JavaScript 開發者 Brendan Eich 在一開始設計這個程式語言的時候，只是想要一個簡單的程式操作可以處理瀏覽器與網頁之間互動的需求，對一個簡易的程式語言來說，並不太需要「繼承」機制。所謂的「繼承」，指的是程式語言中，允許一個類別（或物件）繼承另一個類別（或物件）的特性，包括屬性和方法。這種繼承機制使得開發者可以重用現有的程式碼，並建立層次結構，以更有效地組織和管理程式碼。</p>
         <p>不過由於當時的時空背景 1994 年正處於物件導向編程（object-oriented programming，OOP）最興盛的時期，而繼承則是物件導向編程中很重要的一項概念，作為所有數據類型都是「物件」（object）的 Javascript 而言，這一點與 JAVA 十分相似，但 JAVA 是典型的物件導向編程語言，其所有程式都是在建立在「類別」（class）與「物件」（object）概念之上，Javascript 也必須有一套機制將所有物件聯繫起來，所以，Brendan Eich 最終還是選擇在 Javascript 設計繼承的概念。</p>
         <p>Brendan Eich 在設計階段時候，考慮到 C++ 與 JAVA 都是使用 <em>new</em> 的命令來生成實例，舉例來說，這是 C++ 實例的創建方法：</p>
@@ -108,8 +122,8 @@ console.log(cat.color);    // 黃色</code></pre>
         <p>當我們將屬性與方法定義在建構函式的 <em>prototype</em> 物件中，這意味著它們只會被保存一次，而不若最原先將共用屬性建立在原型物件的作法，會讓新建立的實例都複製一次共用的屬性，這種作法的好處可以減少記憶體的佔用，特別是在我們需要建立很大量的共用物件的時候。</p>
         <p>總結來說，由於所有實例物件共享同一個 <em>prototype</em> 物件，那麼在外界眼裡，<em>prototype</em> 物件彷彿就像這些實例物件的原型，乍看之下實例物件就好像「繼承」了 <em>prototype</em> 物件裡的屬性與方法，這就是 JavaScript 繼承機制的設計思想。</p>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、constructor 與 prototype</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <div class="text-code" v-pre>
             <pre><code class="language-javascript">function Animal(name){
     this.name = name;
@@ -221,8 +235,8 @@ console.log("name" in dog);    // true
 console.log("color" in dog);    // true</code></pre>
         </div>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、this 關鍵字</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p>在先前的範例過程中，我們用了很多次 <em>this</em>，它是 JavaScript 的其中一個關鍵字，與其它程式語言相比，JavaScript 的 <em>this</em> 相對複雜許多，根據其在不同的上下文，可能具有不同的值，總體來說可分為以下四種情況：</p>
         <p><br></p>
         <h3>1. 單純函式調用：</h3>
@@ -302,8 +316,8 @@ dog.x.apply(dog);    // 阿比</code></pre>
         </div>
         <p>與 <em>apply()</em> 相似的還有 <em>call()</em>，兩者皆是 JavaScript 中用於調用函式的方法，主要差別在於傳參數的方式不同。</p>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、ES6 帶來的影響</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <p>雖然在文章前面有提過，JavaScript 作為一個定位在處理簡單需求的程式語言，並沒有導入 JAVA、C++ 這類 OOP 物件導向編程擁有類別的概念，不過到了 ES6 版本，JavaScript 新增了許多特性和語法糖，類別（Class）便是其中之一，除此之外 ES6 版本裡還引進了「箭頭函式」，它和 Class 都為 JavaScript 複雜的 <em>this</em> 用法帶來了些許變化。</p>
         <p><br></p>
         <h3>箭頭函式（Arrow Functions）：</h3>
@@ -367,8 +381,8 @@ dog.sayHello();    // 阿比</code></pre>
         </div>
         <p>在類別（Class）中定義的方法會直接綁定到實例上，所以我們可以不用透過 <em>apply()</em>、<em>call()</em>、<em>bind()</em> 等方法明確綁定 <em>this</em>，大大簡化原本繁瑣的程式書寫過程。當然，無論是箭頭函式還是 <em>class</em>，這篇文章提到的內容僅僅不過是冰山一角，主要還是圍繞 <em>this</em> 關鍵字做基本探討，有關語法糖的詳細內容留至其他文章再行筆記。</p>
     </div>
-    <div class="text-block" id="act5">
-        <h2>五、框架語言的差異</h2>
+    <div class="text-block" :id="'act' + catalog[5].id">
+        <h2 v-text="catalog[5].title"></h2>
         <p>隨著技術發展，基於 JavaScript 開發的框架語言也越來越繁多，從早期為人所熟知的 jQuery，到現今十分熱門的 React、Vue 等，它們不僅使 JavaScript 變得更容易上手使用，也補足、解決一些 JavaScript 比較為人詬病的一些問題沉痾，其中自然也包括了 <em>this</em> 的用法。以下就來說明一些目前比較熱門的框架語言，其針對原生 JavaScript 複雜的 <em>this</em> 關鍵字，做出什麼樣的應對，讓開發者可以更直觀地去使用它。</p>
         <p><br></p>
         <h3>jQuery：</h3>
@@ -421,8 +435,8 @@ dog.sayHello();    // 阿比</code></pre>
 </code></pre>
         </div>
     </div>
-    <div class="text-block" id="act6">
-        <h2>六、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[6].id">
+        <h2 v-text="catalog[6].title"></h2>
         <dl>
             <dd><a href="https://www.ruanyifeng.com/blog/2011/06/designing_ideas_of_inheritance_mechanism_in_javascript.html" target="_blank">Javascript继承机制的设计思想</a></dd>
             <dd><a href="https://www.ruanyifeng.com/blog/2010/04/using_this_keyword_in_javascript.html" target="_blank">Javascript 的 this 用法</a></dd>
@@ -435,10 +449,3 @@ dog.sayHello();    // 阿比</code></pre>
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

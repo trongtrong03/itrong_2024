@@ -1,3 +1,19 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、任意組件之間的通信（mitt）' },
+        { id: 2, title: '二、祖孫組件之間的通信（$attrs）' },
+        { id: 3, title: '三、祖孫組件之間的通信（provide＆inject）' },
+        { id: 4, title: '四、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="78" fileType="learnList" />
@@ -5,19 +21,17 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、任意組件之間的通信（mitt）</a></li>
-            <li><a href="#act2">二、祖孫組件之間的通信（$attrs）</a></li>
-            <li><a href="#act3">三、祖孫組件之間的通信（provide＆inject）</a></li>
-            <li><a href="#act4">四、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>本篇文章承襲上一篇文章的主題「組件之間的通信」，此為第二篇，而上一篇文章主要在記述父子組件之間的資料數據交換的各種方式，這篇則要探討其他關係的通信方式，根據不同的組件關係，所使用的操作方法也有所不同。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、任意組件之間的通信（mitt）</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>前面兩個章節都在展示父子組件之間的資料溝通，接下來這個章節則是要講述平輩組件之間如何互相傳遞資料。按照慣例要先建立基本的範例結構：準備兩個組件，其結構分別是：</p>
         <p>組件 <b>Child1.vue</b>：</p>
         <div class="text-code" v-pre>
@@ -205,8 +219,8 @@ onUnmounted(() => {
         <h5><em>.off</em>：</h5>
         <p>取消事件監聽器的註冊，停止指定類型的事件觸發時執行指定的處理函數。</p>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、祖孫組件之間的通信（$attrs）</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>首先我們閱讀以下父子組件的程式碼結構範例：</p>
         <p>父組件 <b>Parents.vue</b>：</p>
         <div class="text-code" v-pre>
@@ -389,7 +403,8 @@ onUnmounted(() => {
             <img src="/images/learn/js/vue3-learn-17-10.jpg">
         </figure>
     </div>
-    <div class="text-block" id="act3">
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <h2>三、祖孫組件之間的通信（provide＆inject）</h2>
         <p>本章節一樣要敘述的是祖孫之間的資料通信，上一章節我們揭露透過 <em>$attrs</em> 可以將祖組件的資料存放在 attrs 此一特殊屬性內，讓孫組件自由去存取祖組件特定的資料，不過如果要使用 <em>$attrs</em>，非但祖孫組件都要進行相關設定，中間層的子組件同樣也需要 <em>v-bind="attrs"</em>，扮演祖孫之間資料通信的橋樑。然而事實上，Vue 還有另一種方式，讓祖孫組件之間可以直接溝通，而不需要子組件居中進行協調。</p>
         <p>按照慣例，先準備練習範例的前置程式碼，首先是父組件（祖先）<b>Parents.vue</b> 的部分：</p>
@@ -555,8 +570,8 @@ provide("myInfo", user);</code></pre>
             <pre><code class="language-javascript">const {num, changeNumber} = inject("myNum", {num:0, changeNumber:(params:number)=>{}});</code></pre>
         </div>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <dl>
             <dd><a href="https://cn.vuejs.org/" target="_blank">Vue.js</a></dd>
             <dd><a href="https://github.com/developit/mitt" target="_blank">Github - mitt</a></dd>
@@ -569,10 +584,3 @@ provide("myInfo", user);</code></pre>
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

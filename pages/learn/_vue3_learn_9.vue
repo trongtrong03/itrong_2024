@@ -1,3 +1,21 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、路由基本切換' },
+        { id: 2, title: '二、辨別路由組件與一般組件' },
+        { id: 3, title: '三、路由器的工作模式' },
+        { id: 4, title: '四、to 屬性寫法與路由命名' },
+        { id: 5, title: '五、路由的重新定向' },
+        { id: 6, title: '六、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="70" fileType="learnList" />
@@ -5,17 +23,13 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、路由基本切換</a></li>
-            <li><a href="#act2">二、辨別路由組件與一般組件</a></li>
-            <li><a href="#act3">三、路由器的工作模式</a></li>
-            <li><a href="#act4">四、to 屬性寫法與路由命名</a></li>
-            <li><a href="#act5">五、路由的重新定向</a></li>
-            <li><a href="#act6">六、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>路由是一種網路設備或軟體的功能，用於將資料包從一個網路傳輸到另一個網路。它決定資料包應該通過哪條路徑進行傳輸，以確保它們能夠到達目的地。</p>
         <p>用來管理路由的設備就叫路由器，它們在網路中幫助不同裝置連接不同的網路並管理資料流量的傳輸。路由器透過查看封包中的目標位址，並根據預先配置的路由表來決定最佳路徑。這樣，它們可以將封包從發送方傳送到接收方，即使這兩者位於不同的網路中也可以實現。</p>
         <p>用說的不好咀嚼，直接看示意圖會比較快一些：</p>
@@ -28,8 +42,8 @@
         </figure>
         <p>所以，站在網頁程式語言的角度來看，路由（route）指的是一組 key 與 value 的對應關係，若存在多組路由，則需要經過路由器（router）的管理。那麼，網頁為什麼會需要路由？其實主要是為了實現 SPA 單頁式網頁應用，用來切換不同資訊的頁面內容。至於具體如何設定、有哪些功能，以及其它一些相關知識，本篇文章將逐一進行探討。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、路由基本切換</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>我們首先要知道 Vue.js 實現 SPA 路由導航需要有哪些東西：</p>
         <ol>
             <li>導航區塊、展示區塊</li>
@@ -195,8 +209,8 @@ app.mount('#app');</code></pre>
         </figure>
         <p>這樣即使沒有畫箭頭示意，也能明確看出目前展示的內容是來自於哪一個頁面路由導航。</p>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、辨別路由組件與一般組件</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>簡單扼要來說，要分辨使用的組件究竟是哪一種，最通俗直接的方法就是那些需要手動寫在標籤裡引用的都可以稱為一般組件，比如有一個 <b>SearchResult.vue</b> 組件，如果要引用它的方式是 <em>&lt;SearchResult/&gt;</em>，那便是一般組件。而路由組件不是經過標籤去實現，而是依靠路由規則所渲染出來的，比如在路由設定文件裡設定：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-javascript">import Products from "../components/Products.vue";
@@ -235,8 +249,8 @@ const router = createRouter({
         </div>
         <p>歸類好後記得回頭更改路由設定文件裡的路徑位置。</p>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、路由器的工作模式</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p>之前有提到，如果要讓路由器能順利運作，必須在 <em>createRouter</em> 設定它的工作模式：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-javascript">history: createWebHistory(),</code></pre>
@@ -269,8 +283,8 @@ const router = createRouter({
 
         
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、to 屬性寫法與路由命名</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <p>使用 <em>&lt;RouterLink&gt;</em> 實作路由導航，會透過 <em>to</em> 屬性設定該導航項目指向的組件路徑，譬如：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-html">&lt;RouterLink to="/about"&gt;About&lt;/RouterLink&gt;</code></pre>
@@ -298,8 +312,8 @@ const router = createRouter({
         </div>
         <p>在網頁只需要一層路由的情況下，使用純字串定義路由導航通常沒什麼問題，不過如果網站的路由有多個嵌套，就會比較需要物件型別式的寫法了。</p>
     </div>
-    <div class="text-block" id="act5">
-        <h2>五、路由的重新定向</h2>
+    <div class="text-block" :id="'act' + catalog[5].id">
+        <h2 v-text="catalog[5].title"></h2>
         <p>你可能已經發現，前面的範例練習一直存在著一個問題，那就是當網頁沒有進入任何組件的時候（或者也可以說是首頁），RouterView 是一片空白：</p>
         <figure>
             <img src="/images/learn/js/vue3-learn-9-6.jpg">
@@ -343,8 +357,8 @@ const router = createRouter({
         </figure>
         <p>因為根路徑會強制轉到 home 組件，所以路由判定會附加選中狀態的樣式，只是使用者造訪網頁根路徑（首頁）時，網址後方必定會有網站指定的導向路由名稱，對部分人來說可能看起來就沒那麼美觀。</p>
     </div>
-    <div class="text-block" id="act6">
-        <h2>六、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[6].id">
+        <h2 v-text="catalog[6].title"></h2>
         <dl>
             <dd><a href="https://cn.vuejs.org/" target="_blank">Vue.js</a></dd>
             <dd><a href="https://www.youtube.com/watch?v=49b150tKIUc&list=PLmOn9nNkQxJEnGM4Jf0liBcyedAtuQq-O&index=30" target="_blank">【极简Vue3】030 对路由的理解</a></dd>
@@ -359,10 +373,3 @@ const router = createRouter({
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

@@ -1,3 +1,22 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、如何定義函式？' },
+        { id: 2, title: '二、如何傳入參數？' },
+        { id: 3, title: '三、調用方法有哪些？' },
+        { id: 4, title: '四、return 是什麼？' },
+        { id: 5, title: '五、parameters 與 arguments' },
+        { id: 6, title: '六、總結' },
+        { id: 7, title: '七、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="46" fileType="learnList" />
@@ -5,18 +24,13 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、如何定義函式？</a></li>
-            <li><a href="#act2">二、如何傳入參數？</a></li>
-            <li><a href="#act3">三、調用方法有哪些？</a></li>
-            <li><a href="#act4">四、return 是什麼？</a></li>
-            <li><a href="#act5">五、parameters 與 arguments</a></li>
-            <li><a href="#act6">六、總結</a></li>
-            <li><a href="#act7">七、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <blockquote>
             <p>A JavaScript function is a block of code designed to perform a particular task.</p>
             <p><br></p>
@@ -26,8 +40,8 @@
         <p>若要用日常生活的例子來形容，假設今天我們養了一條名字叫阿比的狗，每天都需要執行餵食、帶出去散步、幫忙鏟屎、擼毛...等事情，我們興許會用「照顧阿比」來統納這一連串的動作。站在 JavaScript 角度來看，「照顧阿比」這整個過程就可以稱為一個函式，其函式名稱就叫做「照顧阿比」，而餵食、散步、鏟屎等例行事項就是函式裡面要執行的程式，當我們安排每天行程表（某事）的時候，或是當別人問我們每天都在做些什麼事情（某事）的時候，便可以直接用「照顧阿比」來簡述（調用），而不用鉅細靡遺地把所有細項都寫出來，這就是函式的目的，也是它的好處──簡化程式碼，而且也能重複被調用。</p>
         <p>當然函式也沒有這麼單純，從定義到方法，還有傳入的參數、調用...等等，有很多東西值得深入探討，本篇文章主題將著重於函式各項知識及運用的詳細記錄。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、如何定義函式？</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>部份聰明的人或許已經從前言列舉的「照顧阿比」範例中推敲出 JavaScript 為什麼會需要函式來處理程式腳本，不過在這個章節還是詳細說明一下。在哲宇老師的 JavaScript 教程曾經說過，程式開發者寫程式時應該避免以下三件事情：「重複相同程式碼」、「無規劃 / 命名陳述目的」、「無法重複使用」。這些不好的撰寫方式都會導致程式執行效率不佳或帶來維護不易的麻煩，舉例來說：</p>
         <figure>
             <img src="/images/learn/js/learn-function-1.jpg">
@@ -311,8 +325,8 @@ console.log(sum(5));    // 6</code></pre>
             <li>不能作為構造函式使用。</li>
         </ul>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、如何傳入參數？</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>以下先列舉一則模擬情境──有間主打彩繪手機殼的商店，提供顧客客製化彩繪的服務，依據上門顧客提供的樣本，來產出符合顧客需求的彩繪手機殼，此乃店家接單製作的標準作業流程。假如今天要用 JavaScript 表示，我們可以將「從接收訂單到將成品提交給顧客」這一連串的過程寫成函式，例如：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-javascript">function 訂單() {
@@ -397,8 +411,8 @@ console.log(result);     // 15</code></pre>
 dog("阿比");    // 阿比</code></pre>
         </div>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、調用方法有哪些？</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p>在第一個章節的練習中，我們已經知道函式定義完成後，必須在其前或後方添加該函式的名稱，方能執行函式裡的內容，例如：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-javascript">function dog() {
@@ -467,8 +481,8 @@ dog.apply(null, ["阿比"]);    // 阿比</code></pre>
             <pre><code class="language-html">&lt;a href="javascript:函式名稱()"&gt;&lt;/a&gt;</code></pre>
         </div>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、return 是什麼？</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <p><em>return</em> 是 JavaScript 內建的關鍵字之一，我們很常在函式裡面看到它的蹤影。那麼，<em>return</em> 是什麼？它究竟有什麼用處？其實，<em>return</em> 的用途就如同它的字面意思，主要用來回傳函式調用後返回的值。</p>
         <p>例如：</p>
         <div class="text-code" v-pre>
@@ -563,8 +577,8 @@ console.log(dog("阿比"));    // 阿比, undefined</code></pre>
             <li>如果單獨使用 <em>return</em> 沒有附加值，則返回 <em>undefined</em>。</li>
         </ul>
     </div>
-    <div class="text-block" id="act5">
-        <h2>五、parameters 與 arguments</h2>
+    <div class="text-block" :id="'act' + catalog[5].id">
+        <h2 v-text="catalog[5].title"></h2>
         <p>parameters 中文譯作「參數」，也就是我們第二章所介紹的主角，arguments 翻譯成中文同樣也叫做「參數」，但是就實際表現來看，或許用「引數」來稱呼它會更加貼切，說是這樣說，究竟兩者之間究竟存在什麼差別呢？</p>
         <p>儘管第二章已經介紹過參數（parameters）的定義和用途，但在深入認識 arguments 之前，還是得回頭補充一些 parameters 不甚詳盡的部分。首先，我們已經知道 parameters 就是我們定義函式用來傳遞值的變數，例如：</p>
         <div class="text-code" v-pre>
@@ -657,8 +671,8 @@ dog("阿比", 5, "公");</code></pre>
             <p>JavaScript 於 ES6 版本新增了新的運算子，名叫「展開運算子」（Spread），其格式為 <em>...</em>，其用途可以將函式裡在調用時額外新增的參數，新增成為一個新的陣列。由於 <em>arguments</em> 本身可以允許函式在沒有定義參數的情況下通過它去訪問到傳遞給函式的所有參數值，展開運算子也能做到這點，所以現代大多數的寫法已以展開運算子為主流。</p>
         </blockquote>
     </div>
-    <div class="text-block" id="act6">
-        <h2>六、總結</h2>
+    <div class="text-block" :id="'act' + catalog[6].id">
+        <h2 v-text="catalog[6].title"></h2>
         <p>回顧本篇文章，精簡總結一下我們從函式身上學到哪些東西：</p>
         <h5>1. 函式定義方式</h5>
         <ul>
@@ -732,8 +746,8 @@ dog("阿比", 5, "公");</code></pre>
             </div>
         </div>
     </div>
-    <div class="text-block" id="act7">
-        <h2>七、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[7].id">
+        <h2 v-text="catalog[7].title"></h2>
         <dl>
             <dd><a href="https://www.books.com.tw/products/0010744702" target="_blank">《JavaScript & JQuery：網站互動設計程式進化之道》</a></dd>
             <dd><a href="https://javascript.alphacamp.co/function.html" target="_blank">JavaScript 入門指南 - Function 函式</a></dd>
@@ -750,10 +764,3 @@ dog("阿比", 5, "公");</code></pre>
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

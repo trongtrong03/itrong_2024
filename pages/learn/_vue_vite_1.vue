@@ -1,3 +1,20 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、基本介紹' },
+        { id: 2, title: '二、環境安裝' },
+        { id: 3, title: '三、結構說明' },
+        { id: 4, title: '四、使用套件' },
+        { id: 5, title: '五、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="59" fileType="learnList" />
@@ -5,21 +22,18 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、基本介紹</a></li>
-            <li><a href="#act2">二、環境安裝</a></li>
-            <li><a href="#act3">三、結構說明</a></li>
-            <li><a href="#act4">四、使用套件</a></li>
-            <li><a href="#act5">五、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>有關 Vue.js 的發展云云相信絕大多數網頁前、後端開發者都已耳熟能詳，從發布早期一片讚嘆聲中卻仍略夾帶一些技術還不成熟的聲浪，如今討論更多的則是要如何從雨後春筍不斷冒升的 Vue.js 框架與技術，挑出一款最適合自己或團隊開發需求的工具，而本篇文章主題要介紹的 Vite 就是其中一款非常熱門的 Vue.js 前端建構工具，它正是由 Vue.js 創始人 Evan You 所打造的，畢竟是為自己親兒子量身打造的工具，自然是再熟悉不過了。不過這裡倒也不會直接斷言 Vite 是 Vue 所有衍生編譯工具中最強大、最廣泛的，只是看見大多數使用 Vue.js 的公司都將 Vite 列為必要或加分條件，即便無關偏好或習慣，個人皆認為 Vite 都有學習、瞭解其使用方式的必要。</p>
         <p>廢話不多說，以下開始吧。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、基本介紹</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <figure>
             <img src="/images/learn/js/vite-1-1.jpg">
         </figure>
@@ -43,8 +57,8 @@
         <p>同樣都有 HMR，Vite 的作法則是將 HME 掛在瀏覽器原生的 ESM 上執行，藉此提升畫面即時渲染的速度，無論是在本機端專案的冷啟動，或是專案改動時的熱模組更新，速度都相當卓越，大大提升開發者的「使用者體驗」。</p>
         <p>Vite 中文文件原文 <a href="https://cn.vitejs.dev/guide/why.html" target="_blank">为什么选 Vite</a> 一文有更詳細完整的解釋，有興趣深入瞭解者可自行點擊觀看。</p>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、環境安裝</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>目前應該已經很少開發者會遇到此問題，但還是不免俗提醒一下：由於 Vite 將部分任務轉移給瀏覽器內建的 ESM，因此開發者編譯使用的瀏覽器必須支援原生 ESM。正常來說，現代主流瀏覽器皆已支援所有最新的 JavaScript 與 CSS 特性，倘若你建構的 Vite 專案在瀏覽器上真的有問題卻又遲遲找不出具體原因，或許試著檢查看看自己使用的瀏覽器版本是否過舊。</p>
         <h3>Node.js：</h3>
         <p>與多數開發工具一樣，要使用 Vite 必須先確認工作環境是否有安裝 <a href="https://nodejs.org/en/">Node.js</a>，而且版本必須在 18 以上。</p>
@@ -112,8 +126,8 @@
         </figure>
         <p>會發現畫面自動更新成我們修改的內容了，這樣我們就不用每次要確認修改畫面都要按一次重新整理的按鈕，儘管可能對一些人來說多按一次重新整理按鈕也不過是一瞬間的事情，但所謂積沙成塔嘛，而且對多螢幕開發者來說，不用手動整理網頁，意味著可以直接專注在編輯器一邊撰寫程式碼一邊確認畫面，不用視窗切換來切換去，工作效率自然也有所提升。</p>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、結構說明</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p>雖然執行完 Vite 與 <b>node_modules/</b> 的安裝後就能順利進入開發編譯，但這還不是 Vite 這套工具的完全體，尚有許多環境與變數要調整設定、或安裝擴充套件來使整個 Vite 專案更飽滿。不過在那之前，我們先來了解一下 <em>npm create vite</em> 裝進來的檔案各自有什麼用途，以及它的 Vue 結構是怎麼樣建置的。</p>
         <p>如果要轉成 MPA 當然也可以，不過我們需要自行手動調整結構，只是這部分不在本文章討論範圍內，所以暫時不作相關探討。</p>
         <figure>
@@ -224,8 +238,8 @@ createApp(App).mount('#app')</code></pre>
         <p>● <b>utils/</b></p>
         <p>用於存放網頁應用的工具函式、幫助函式等。這些工具函式可以被專案中的其他程式碼引用和調用，提供一些共享的功能。</p>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、使用套件</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <p>為了加速網頁開發效率與效能優化，現今的技術與優化工具可謂百花齊放，縱然 Vite 本身已經提供網頁開發的基本所需，但還是有不少第三方套件可以提供更高效率的服務，事實上，Vite 之所以啟動能這麼迅速，一部分原因也是捨棄掉了許多實用的第三方套件，例如 Vue router、Pinia 等，這些套件在其他框架大多都已經包含在安裝指令裡，Vite 則是要再額外手動自己裝進來，算是使用 Vite 的一個小小缺點吧。但基本上大多數的開發工具都可以透過 Node.js 安裝這些第三方套件到自己專案內作使用，Vite 自然也不例外。</p>
         <p>Vite 用來管理這些第三方套件引用的相關設定主要集中在 <b>vite.config.js</b> 這支檔案裏面，以下是其初始的程式碼內容：</p>
         <div class="text-code" v-pre>
@@ -340,8 +354,8 @@ export default defineConfig({
         </div>
         <p>然而不是所有的第三方套件都是在 <b>vite.config.js</b> 作設定，有的會告訴我們說要在 <b>main.js</b> 之類的入口文件作引用的動作，在閱讀套件相關說明文件時需多加留意。</p>
     </div>
-    <div class="text-block" id="act5">
-        <h2>五、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[5].id">
+        <h2 v-text="catalog[5].title"></h2>
         <dl>
             <dd><a href="https://v4.vitejs.dev/" target="_blank">Vite</a></dd>
             <dd><a href="https://www.youtube.com/watch?v=rNQIA0Fe9KQ&list=PLbOfcOk7bN42Kzp1wQsoLuU0vPUmFBe-X&index=1" target="_blank">Vue3 + Vite 快速上手 Get Startrd</a></dd>
@@ -354,10 +368,3 @@ export default defineConfig({
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

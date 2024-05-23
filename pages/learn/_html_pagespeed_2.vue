@@ -1,3 +1,20 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、如何檢測？' },
+        { id: 2, title: '二、四大效能診斷' },
+        { id: 3, title: '三、SEO 的白帽與黑帽' },
+        { id: 4, title: '四、優化實作' },
+        { id: 5, title: '五、網站效能工具的迷思' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="13" fileType="learnList" />
@@ -5,20 +22,17 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、如何檢測？</a></li>
-            <li><a href="#act2">二、四大效能診斷</a></li>
-            <li><a href="#act3">三、SEO 的白帽與黑帽</a></li>
-            <li><a href="#act4">四、優化實作</a></li>
-            <li><a href="#act5">五、網站效能工具的迷思</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>這篇文章接續前篇，是探討網頁優化項目的下篇，本文主要是要介紹目前時下最流行的網站效能評測工具──<a href="https://pagespeed.web.dev/" target="_blank">Google PageSpeed Insights</a>，它是由 Google 提供網站速度測試與效能優化程度的一款檢測工具。PageSpeed 意譯直翻為「網頁速度」，若網頁速度越快，則代表使用者開啟網頁時只需要花費很短的時間就能閱覽網頁裡的第一個畫面，通常網頁速度也是各大搜尋引擎進行 SEO 排名的主要指標之一。由於 Google 是近年來最廣為人知且使用的搜尋引擎，理所當然由其開發的網頁測試工具，也是開發者評測自家網站速度與效能的首選。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、如何檢測？</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>Google PageSpeed Insights 的使用方式很簡單，只要將你要檢測的網站網址，貼到其輸入框，按下「分析」按鈕即可進行檢測：</p>
         <figure>
             <img src="/images/learn/html/pagespeed-12.jpg">
@@ -47,8 +61,8 @@
         </figure>
         <p>「效能」評分非常之低，遠不及電腦版測定的 77 分，一部分原因是出自此網站沒有做 RWD，也沒有針對行動裝置採取完善的支援所導致。</p>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、四大效能診斷</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>接著我們再來看另一個專案網站的檢測報告，這次會細部去認識各個類別的細部項目評分標準為何。電腦版結果：</p>
         <figure>
             <img src="/images/learn/html/pagespeed-15.jpg">
@@ -360,8 +374,8 @@
         <h4>6. 持續更新內容</h4>
         <p>持續更新網站內容將非常有助於增進 SEO 自然排名。</p>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、SEO 的白帽與黑帽</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p>前面有提過，為了追求更快速衝排名的方式，國內外各個企業的行銷團隊無不使出渾身解數，所求為的就是提高 SEO 的分數，但如果用了錯誤甚至違規的方法做 SEO，最終可能會帶來後悔莫及的結果。在 SEO 術語中，有所謂的「黑帽」（Black Hat SEO）與「白帽」（White Hat SEO）定義，用來告訴大家如何謹慎且正確的去執行 SEO 優化。</p>
         <p><br></p>
         <h3>白帽（White Hat SEO）：</h3>
@@ -411,8 +425,8 @@
         </figure>
         <p>所以只要妥善改善這些項目，配合白帽 SEO 作法，就能有效提高這部分的評分。</p>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、優化實作</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <p>經過前面章節的介紹，已大致了解目前網站效能優化的相關要點，以及最具代表性的 Google PageSpeed Insights 評測工具的稽核基準，在這個章節則要來進行實作，來改善並優化<a href="https://shiqingdesign.com/">拾青網頁媒體設計</a>的效能。以下是其在 Google PageSpeed Insights 的評分結果：</p>
         <p>電腦版：</p>
         <figure>
@@ -679,8 +693,8 @@
         </blockquote>
         <p><br></p>
     </div>
-    <div class="text-block" id="act5">
-        <h2>五、網站效能工具的迷思</h2>
+    <div class="text-block" :id="'act' + catalog[5].id">
+        <h2 v-text="catalog[5].title"></h2>
         <p>不單是網站經營者，包含網站設計團隊在內，許多人都會將網站送到像 Google PageSpeed Insights 這樣具有大眾公信力的效能評測工具，依照其檢測並提供的效能優化建議，來對自家的網站進行改善。然而，這些網站效能測試工具所測試出來的結果，真的就是百分之百正確的嗎？</p>
         <p>事實上，WP Rocket 曾發表一篇有關 Google PageSpeed Insights 的文章：<a href="https://wp-rocket.me/blog/the-truth-about-google-pagespeed-insights/?sscid=41k7_dnvj1&utm_source=shareasale&utm_medium=affiliate&utm_campaign=2065420_1075949" target="_blank">Why You Should Care About Google PageSpeed Insights</a>，內文其實就建議大家不需過度追求 Google PageSpeed Insights 的分數。他們認為，過度追求成績是某程度上是浪費時間，沒有一個網站能獲得完美的成績，且實務上也幾乎不可能實現，並且由於它與真實效能速度並非絕對相關，新手要注意避免落入這種迷思。</p>
         <p>舉例來說，同樣的 A 網站，在不同的測試工具可能會獲得不同的評比結果。比如在 Google PageSpeed Insights 的效能分僅能得到 59 分，但是在另一個測速工具（例如 Pingdom）評測的載入時間只耗時約 300 毫秒，速度其實已經相當快速。</p>
@@ -724,10 +738,3 @@
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

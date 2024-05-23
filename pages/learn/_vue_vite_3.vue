@@ -1,3 +1,19 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、Vite CSS 結構配置' },
+        { id: 2, title: '二、導入 CSS 預處理器' },
+        { id: 3, title: '三、使用 PostCSS' },
+        { id: 4, title: '四、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="61" fileType="learnList" />
@@ -5,15 +21,13 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、Vite CSS 結構配置</a></li>
-            <li><a href="#act2">二、導入 CSS 預處理器</a></li>
-            <li><a href="#act3">三、使用 PostCSS</a></li>
-            <li><a href="#act4">四、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>如果先前已有使用過別種框架或工具實現 SPA 網頁應用，應該都知道將 CSS 寫在各自的單元組件是一種常見且也是蔚為主流的做法，所以 Vite 也不例外。這種方式一般稱之為「組件範圍的 CSS」或「作用域 CSS」，它有以下這些優點：</p>
         <p>1. 封裝性：</p>
         <p>將 CSS 寫在組件中可以使組件更加獨立且可重複使用，每個組件的樣式只適用於該組件，不會影響其他組件，從而增加了程式碼封裝性與可維護性。</p>
@@ -24,8 +38,8 @@
         <p><br></p>
         <p>雖說在使用 Vite 之前我已經先碰過 Nuxt，也知道 Nuxt 預設同樣採用作用域 CSS 來定樣各組件的樣式，但當時我還是習慣傳統 MPA 將 CSS 集中在一支檔案，讓所有頁面共用它。說實在這對追求網頁讀取效率的 SPA 而言這並不是很好的做法，藉由這次學習 Vite 的機會，順道讓自己習慣將 CSS 限定在組件範圍內做開發。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、Vite CSS 結構配置</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>專案結構：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-bash">index.html
@@ -114,8 +128,8 @@ src
         <p>那麼 Vite 在渲染的時候就會將此 <em>&lt;style&gt;</em> 識別為 Sass 的 SCSS 格式。除了 Sass 之外，其他熱門的預處理器如 Less、Stylus 等也都可以被識別，然而，並非直接添加 <em>lang</em> 就可以被判別，我們需要提前透過 NPM 安裝相應的預處理器語言，Vite 才能正常進行解析。</p>
         <p>有關具體使用方法會在下一個章節進行說明。</p>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、導入 CSS 預處理器</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>我們先來看在沒有安裝預處理器套件之前，直接在 <em>&lt;style&gt;</em> 標籤定義 <em>lang</em> 屬性會發生什麼事：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-html">&lt;style lang="scss"&gt;
@@ -142,8 +156,8 @@ src
         </div>
         <p>可能有些調皮的人會問說：那我能不能不同組件使用不同 CSS 預處理器？答案是可以的，只要專案內有把需要使用的預處理器依賴都確認安裝進去，那麼要在 A 組件使用 SCSS，B 組件使用 Sass、C 組件使用 less......都不會影響編譯運作，只是這種做法無疑也是為他人和自己找麻煩而已。</p>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、使用 PostCSS</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p>為什麼 Vite 官方不提倡使用預處理器撰寫網頁應用的樣式，以下是它們給出的解釋：</p>
         <blockquote>
             <p>由於 Vite 的目標僅為現代瀏覽器，因此建議使用原生 CSS 變數和實作 CSSWG 草稿的 PostCSS 外掛程式（例如 postcss-nesting）來編寫簡單的、符合未來標準的 CSS。</p>
@@ -214,8 +228,8 @@ export default defineConfig({
         </div>
         <p>只是舊版的瀏覽器普遍都不支援此功能：<a href="https://caniuse.com/?search=nesting" target="_blank">Can I use</a>，如果使用者瀏覽器尚未更新到 2023 年之後的版本，應該都無法判斷 CSS Nesting 寫的樣式，考量到相容性問題，短時間內可能還是得先繼續仰賴預處理器的協助。</p>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <dl>
             <dd><a href="https://v4.vitejs.dev/" target="_blank">Vite</a></dd>
             <dd><a href="https://cn.vitejs.dev/guide/features.html#import-inlining-and-rebasing" target="_blank">Vite CSS 预处理器</a></dd>
@@ -226,10 +240,3 @@ export default defineConfig({
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

@@ -1,3 +1,20 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、如何建立陣列？' },
+        { id: 2, title: '二、陣列的屬性' },
+        { id: 3, title: '三、陣列實例與原型的關係' },
+        { id: 4, title: '四、總結' },
+        { id: 5, title: '五、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="50" fileType="learnList" />
@@ -5,16 +22,13 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、如何建立陣列？</a></li>
-            <li><a href="#act2">二、陣列的屬性</a></li>
-            <li><a href="#act3">三、陣列實例與原型的關係</a></li>
-            <li><a href="#act4">四、總結</a></li>
-            <li><a href="#act5">五、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>試想如果我們今天要用 JavaScript 建立一份班級名冊，每個座號對應與號碼匹配對應的學生姓名，如果程式語言還在初出茅廬的階段，直覺或許會這樣寫：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-javascript">var number1 = "王小明";
@@ -25,8 +39,8 @@ var number3 = "張小芬";
         <p>上面程式碼片段所展示的解答是將座號當作變數名稱，依次宣告號碼對應的同學姓名，或許當班級總人數少的情況下，可能還不覺得有什麼不方便之處。但萬一人數很多呢？又或者未來某天來了名轉學生，勢必得需要額外宣告新的變數名稱（numberN），以在名冊裡加入新同學的資料。可是當每一筆資料都單獨通過變數命名存取，在程式操作上會相當不方便（例如變數只宣告到 <em>number50</em>，我就只能存取到 <em>number50</em> 以內的變數），且不確定資料數量情況下，這種所有資料都以變數命名各自管理的模式也顯得不具彈性，更別提資源消耗之類更深入的問題了。</p>
         <p>因此，遇到這類需要建立大量資料的需求，程式設計師一般都會利用「陣列」（Array）來建立名單並執行各種操作，不僅快速方便，也比較容易維護，本篇學習筆記的主角便要來談談 JavaScript 陣列基礎的概念及操作方法。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、如何建立陣列？</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>所謂的陣列，簡略來說是一種類似列表的物件。回首檢視在先前變數一文整理的 JavaScript 資料型別表格裡，有關物件型別的欄位內容：</p>
         <div class="text-flex">
             <div class="f-width">
@@ -102,8 +116,8 @@ console.log(nameList[0]);    // 盧小小</code></pre>
         </div>
         <p>假如有看過上一篇關於物件基礎的介紹，你會發現修改陣列的值和更新物件既存屬性值的方式其實是一模一樣的，畢竟陣列就是物件之一。</p>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、陣列的屬性</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>就如同物件都有自己的屬性與方法，身為物件之一的陣列自然也有既存的屬性、方法，陣列內建的屬性有以下這些：</p>
         <p><br></p>
         <h3>1. constructor</h3>
@@ -202,8 +216,8 @@ while (!result.done) {
         </div>
         <p>簡單來說 <em>for...of</em> 這個 JavaScript 語法糖簡化了迭代器遍歷資料的過程，讓開發者可以用更簡潔的方式去撰寫程式碼。</p>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、陣列實例與原型的關係</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p>在開始練習陣列各種操作方法前，我們必須先認識一個觀念：在 JavaScript 世界中，<em>Array.prototype</em> 是所有陣列物件的原型，我們通過變數宣告所建立的陣列，例如 <em>var arr = [];</em>，<em>arr</em> 又叫做陣列實例（Instances），其指向該陣列建構函式本身（Array，只是範例用 <em>[ ]</em> 簡化）而非 <em>Array.prototype</em>，但是它會繼承原型中的方法和屬性。</p>
         <p>JavaScript 提供陣列許許多多操作方法，有部分是直接定義在陣列建構函式（Array）上的，另外大部分則是定義在原型（Array Prototype）身上，一般來說，定義在建構函式的方法通常就於建構函式本身進行操作，又稱為「靜態方法」；而原型提供的方法主要用於針對實例上的操作，是為「原型方法」，靜態方法通常用於建立或轉換實例，而原型方法用於對實例執行操作或修改它們的狀態。</p>
         <p>不過在實務上有些原型的方法也可以當作靜態方法來使用，所以也不用太糾結面對需求究竟該使用靜態還是原型方法，一切都依照當下的用途及需求而定。</p>
@@ -431,8 +445,8 @@ while (!result.done) {
         </div>
         <p>以上就是目前為止 JavaScript 所提供的陣列全部可操作的方法了，下一篇文章將針對其中比較常使用的方法深入說明並進行練習。</p>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、總結</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <p>回顧本篇文章，精簡總結一下我們從陣列基礎身上學到哪些東西：</p>
         <h5>1. 陣列宣告方式</h5>
         <ul>
@@ -488,8 +502,8 @@ while (!result.done) {
             </div>
         </div>
     </div>
-    <div class="text-block" id="act5">
-        <h2>五、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[5].id">
+        <h2 v-text="catalog[5].title"></h2>
         <dl>
             <dd><a href="https://www.books.com.tw/products/0010744702" target="_blank">《JavaScript & JQuery：網站互動設計程式進化之道》</a></dd>
             <dd><a href="https://www.fooish.com/javascript/array/" target="_blank">JavaScript Array (陣列)</a></dd>
@@ -503,10 +517,3 @@ while (!result.done) {
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

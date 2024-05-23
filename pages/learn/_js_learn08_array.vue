@@ -1,3 +1,24 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、排序陣列資料（sort）' },
+        { id: 2, title: '二、檢索陣列資料（indexOf、find、at）' },
+        { id: 3, title: '三、判斷陣列資料（every、some、includes）' },
+        { id: 4, title: '四、篩選陣列資料（filter）' },
+        { id: 5, title: '五、遍歷陣列資料（forEach、map）' },
+        { id: 6, title: '六、扁平化陣列資料（flat、flatMap）' },
+        { id: 7, title: '七、累積陣列資料（reduce）' },
+        { id: 8, title: '八、轉換陣列資料為字串（toString、join）' },
+        { id: 9, title: '九、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="52" fileType="learnList" />
@@ -5,24 +26,17 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、排序陣列資料（sort）</a></li>
-            <li><a href="#act2">二、檢索陣列資料（indexOf、find、at）</a></li>
-            <li><a href="#act3">三、判斷陣列資料（every、some、includes）</a></li>
-            <li><a href="#act4">四、篩選陣列資料（filter）</a></li>
-            <li><a href="#act5">五、遍歷陣列資料（forEach、map）</a></li>
-            <li><a href="#act6">六、扁平化陣列資料（flat、flatMap）</a></li>
-            <li><a href="#act7">七、累積陣列資料（reduce）</a></li>
-            <li><a href="#act8">八、轉換陣列資料為字串（toString、join）</a></li>
-            <li><a href="#act9">九、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>本篇主角依然是陣列，承襲前一篇介紹陣列的方法運用，繼續介紹及實作練習其他常用的操作方法。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、排序陣列資料（sort）</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p><em>sort()</em> 方法可以對陣列重新進行排序，如果不使用函式判斷的預設情況下，<em>sort()</em> 會將陣列內的資料轉換成字串，並採用 <a href="https://zh.wikipedia.org/wiki/Unicode" target="_blank">Unicode</a> 的標準判斷排序先後順序。</p>
         <p><br></p>
         <h4>1. 純數字排序：</h4>
@@ -110,8 +124,8 @@ console.log(nameList);</code></pre>
 ]</code></pre>
         </div>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、檢索陣列資料（indexOf、find、at）</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>JavaScript 用來檢索陣列裡指定或符合條件的方法有好幾種：</p>
         <p><br></p>
         <h4>1. indexOf、lastIndexOf：</h4>
@@ -220,8 +234,8 @@ var result = nameList.at(10);
 console.log(result);    // undefined</code></pre>
         </div>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、判斷陣列資料（every、some、includes）</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p>上一個章節介紹了幾種檢索陣列符合指定條件的方法，而接下來要介紹幾種用來判斷陣列中的資料「是否」有符合我們自行定義的條件。</p>
         <p><br></p>
         <h3>every：</h3>
@@ -269,8 +283,8 @@ var result = nameList.includes("大");
 console.log(result);    // false</code></pre>
         </div>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、篩選陣列資料（filter）</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <p><em>filter()</em> 方法用來使陣列依據指定的判斷函式，依序對裡頭每一筆資料進行判斷，並篩選出符合條件的資料。例如：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-javascript">function aryFilter(n) {
@@ -303,8 +317,8 @@ var result = nameList.filter(function(n) {
 console.log(result);    // ["Bryant","James","Davis","Curry"]</code></pre>
         </div>
     </div>
-    <div class="text-block" id="act5">
-        <h2>五、遍歷陣列資料（forEach、map）</h2>
+    <div class="text-block" :id="'act' + catalog[5].id">
+        <h2 v-text="catalog[5].title"></h2>
         <h3>forEach：</h3>
         <p><em>forEach()</em> 方法可用來將陣列的「每一個值」傳遞到函式進行運算，其具體語法規則為下：</p>
         <div class="text-code" v-pre>
@@ -359,8 +373,8 @@ console.log(result);    // [10, 20, 30, 40, 50]</code></pre>
         </div>
         <p>回頭說說 <em>undefined</em> 的部分，由於 <em>forEach()</em> 只針對目標陣列執行指定的操作，不會返回任何的值，或者說，它返回的值就只會是 <em>undefined</em>，所以即使我們宣告新的變數去調用 <em>forEach()</em> 執行的結果，也只會得到 <em>undefined</em>。反過來說使用 <em>map()</em> 則會返回其操作的結果，於是我們就可以建立新的變數去存儲其返回的資料，藉以產生新的陣列。</p>
     </div>
-    <div class="text-block" id="act6">
-        <h2>六、扁平化陣列資料（flat、flatMap）</h2>
+    <div class="text-block" :id="'act' + catalog[6].id">
+        <h2 v-text="catalog[6].title"></h2>
         <p>什麼是扁平化？為什麼要把陣列資料扁平化、或者也可以說是攤平，看似有些抽象的術語實際上也沒那麼複雜，其實就是有時候要處理的陣列是一個多維陣列──也就是陣列裡面的資料也是陣列，更甚者陣列裡面的陣列，還有個陣列......反正就是有好幾層陣列資料，這種陣列我們通常稱為多維陣列。假設有個處理需求是希望能把多維陣列裡面的資料通通「展開攤平」成相同階層的陣列資料，我們可以透過 <em>flat()</em> 實現此一需求。</p>
         <p><br></p>
         <h3>flat：</h3>
@@ -412,8 +426,8 @@ console.log(flattenedNumbers);    // [2,4,6,8,10,12]</code></pre>
         </div>
         <p><em>flatMap()</em> 運作原理基本上差不多，只是它是 <em>flat()</em> 和 <em>map()</em> 方法的組合。</p>
     </div>
-    <div class="text-block" id="act7">
-        <h2>七、累積陣列資料（reduce）</h2>
+    <div class="text-block" :id="'act' + catalog[7].id">
+        <h2 v-text="catalog[7].title"></h2>
         <p>先說結論，雖然 <em>reduce()</em> 方法用法和部分陣列方法例如 <em>map()</em>、<em>filter()</em> 等類似，但差別是 <em>reduce()</em> 返回的結果會是一個值，而並非陣列，因此，這也使它的語法結構和程式邏輯與其他方法不太相同。</p>
         <p><em>reduce()</em> 的語法結構為：</p>
         <div class="text-code" v-pre>
@@ -514,8 +528,8 @@ console.log(peopleMap);
 console.log(result);    // { "id": 2, "name": "盧小小" }</code></pre>
         </div>
     </div>
-    <div class="text-block" id="act8">
-        <h2>八、轉換陣列資料為字串（toString、join）</h2>
+    <div class="text-block" :id="'act' + catalog[8].id">
+        <h2 v-text="catalog[8].title"></h2>
         <p><em>toString()</em> 方法可以將陣列物件型別轉換為字串並輸出，舉例來說，手邊有一筆陣列資料，內容如下：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-javascript">var nameList = ["王小明", "李大華", "張小芬"];
@@ -546,8 +560,8 @@ var message = "三年甲班的同學有：" + nameList.join("、");
 console.log(message);    // "三年甲班的同學有：王小明、李大華、張小芬"</code></pre>
         </div>
     </div>
-    <div class="text-block" id="act9">
-        <h2>九、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[9].id">
+        <h2 v-text="catalog[9].title"></h2>
         <dl>
             <dd><a href="https://www.books.com.tw/products/0010744702" target="_blank">《JavaScript & JQuery：網站互動設計程式進化之道》</a></dd>
             <dd><a href="https://www.fooish.com/javascript/array/" target="_blank">JavaScript Array (陣列)</a></dd>
@@ -563,10 +577,3 @@ console.log(message);    // "三年甲班的同學有：王小明、李大華、
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

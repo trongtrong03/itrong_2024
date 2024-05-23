@@ -1,3 +1,19 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、優點' },
+        { id: 2, title: '二、導航分類' },
+        { id: 3, title: '三、設計建議' },
+        { id: 4, title: '四、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="5" fileType="learnList" />
@@ -5,19 +21,17 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、優點</a></li>
-            <li><a href="#act2">二、導航分類</a></li>
-            <li><a href="#act3">三、設計建議</a></li>
-            <li><a href="#act4">四、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>我們很常在別人網站上看到主內容上方有一排告訴使用者當前網頁停留路徑的字串（例如「首頁 > 產品介紹 > XX分類」），它其實有個專業級的稱呼，叫做「麵包屑導航」（Breadcrumb Trail）。「麵包屑」一詞源自格林童話故事《糖果屋》的情節，內容描述一對遭遺棄在森林的孩童，試圖透過沿路布置的麵包屑尋找回家的路。這正好與網站指示客戶循序漸進、漸出的宗旨的導航輔助相吻合，故便以 Breadcrumb Trail 稱之。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、優點</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>麵包屑導航不僅幫助我們明確理解目前所在頁面於整個網站內的層級結構，同時也可以為網站大幅度提升 SEO 關鍵字搜尋優化的友好度。</p>
         <p>為網站添加麵包屑導航有以下好處：</p>
         <ol>
@@ -27,8 +41,8 @@
             <li>有利於 SEO，畢竟多次強調網站關鍵字，擴大了關鍵字的範圍。</li>
         </ol>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、導航分類</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>常見的麵包屑導航分類大體可歸類三種：</p>
         <h3>1. 位置型（Location）：</h3>
         <p>位置型的麵包屑導航是最被廣泛使用的，它展示目前所在頁面至首頁之間的所有階層，使用者可以非常清楚自己目前在網頁的位置，對網站整體結構也會有一定程度的掌握。</p>
@@ -48,8 +62,8 @@
             <img src="/images/learn/html/breadcrumbs-3.jpg">
         </figure>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、設計建議</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p>將麵包屑導航功能引入網站可說是好處多多，即便如此，要將其優勢完全展現仍建立在網頁設計師如何呈現其形式之上。關於麵包屑導航的設計，需要記住以下幾個建議：</p>
         <ol>
             <li>評估網站使用麵包屑導航功能的必要性？</li>
@@ -61,8 +75,8 @@
             <li>包含首頁在內，導覽層級應避免超過五層以上。</li>
         </ol>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <dl>
             <dd><a href="https://read01.com/QodoDa.html#.Xnm3CYgzY-U" target="_blank">網頁面包屑導航是什麼？</a></dd>
             <dd><a href="https://kknews.cc/zh-tw/code/8bvvmrg.html" target="_blank">什麼是麵包屑導航？—SEO相關知識</a></dd>
@@ -73,10 +87,3 @@
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

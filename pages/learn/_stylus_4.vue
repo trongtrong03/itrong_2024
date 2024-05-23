@@ -1,3 +1,19 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、混合（@mixins）' },
+        { id: 2, title: '二、繼承（@extend）' },
+        { id: 3, title: '三、區塊（@block）' },
+        { id: 4, title: '四、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="18" fileType="learnList" />
@@ -5,19 +21,17 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、混合（@mixins）</a></li>
-            <li><a href="#act2">二、繼承（@extend）</a></li>
-            <li><a href="#act3">三、區塊（@block）</a></li>
-            <li><a href="#act4">四、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>本篇主題將聚焦 <em>@mixins</em>（混合）、<em>@extend</em>（繼承）、<em>@block</em>（區塊）──這三個比較容易令人分不清楚差異的功能進行介紹。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、混合（@mixins）</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>有些中文教學文章會將 <em>@mixins</em> 稱為「混入」語法，不管怎樣，它的概念類似函式，只是要定義的是一連串的屬性。使用 <em>@mixins</em> 時，先宣告函式名稱，然後加上括號，接著在嵌套（<em>{ }</em>）裡加入 CSS 屬性或其他敘述句，嵌套在 Stylus 中可以省略不寫。</p>
         <p>範例：</p>
         <div class="text-code" v-pre>
@@ -110,8 +124,8 @@ div
 }</code></pre>
         </div>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、繼承（@extend）</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p><em>@extend</em> 可以建立一個樣式模型，然後讓要套用該模型的選擇器去「繼承」它，雖然乍看之下和 <em>@mixin</em> 很像，但實際上兩者區別仍挺明顯的，我們直接透過實例來看會更能了解差異：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-stylus">.templete
@@ -216,8 +230,8 @@ div
 }</code></pre>
         </div>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、區塊（@block）</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p><em>@block</em> 建立的樣式模型本身不會被輸出成 CSS，不像 <em>@extend</em> 繼承對象本身就是一個選擇器。例如：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-stylus">block =
@@ -245,8 +259,8 @@ div
         <p><em>block</em> 即表示其區塊名稱，後方必須加上 <em>=</em> 符號，否則編譯時將會被誤認為是選擇器。至於其他選擇器要使用該區塊模型時，只需要在下方加上嵌套（<em>{ }</em>），並將區塊名稱填入即可。</p>
         <p>只是我們也可以用 <em>@mixin</em> 實現相同的概念，而且還能用變數控制屬性值，令不同選擇器填入各自參數值。因此和前面兩個比起來，<em>@block</em> 的使用率比較沒那麼高。</p>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <dl>
             <dd><a href="https://stylus-lang.com/" target="_blank">stylus</a></dd>
         </dl>
@@ -255,10 +269,3 @@ div
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

@@ -1,3 +1,22 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、監視 ref 基本型別響應式資料' },
+        { id: 2, title: '二、監視 ref 物件型別響應式資料' },
+        { id: 3, title: '三、監視 reactive 物件型別響應式資料' },
+        { id: 4, title: '四、參考資料' },
+        { id: 5, title: '五、監視多筆指定資料' },
+        { id: 6, title: '六、解除對響應式資料的監視' },
+        { id: 7, title: '七、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="65" fileType="learnList" />
@@ -5,18 +24,13 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、監視 ref 基本型別響應式資料</a></li>
-            <li><a href="#act2">二、監視 ref 物件型別響應式資料</a></li>
-            <li><a href="#act3">三、監視 reactive 物件型別響應式資料</a></li>
-            <li><a href="#act4">四、監視 ref 或 reactive 物件裡的指定屬性</a></li>
-            <li><a href="#act5">五、監視多筆指定資料</a></li>
-            <li><a href="#act6">六、解除對響應式資料的監視</a></li>
-            <li><a href="#act7">七、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p><em>watch</em> 也是 Vue 元老級的特殊屬性，它的功能如其名所示，用來監視資料數據的變化，即便到了 Vue 3，它也依然扮演同樣的角色。只不過在 Vue 3，它能監看的項目有被明確陳述出來，分別是以下四種資料類型：</p>
         <ul>
             <li><em>ref</em> 定義的響應式資料</li>
@@ -26,8 +40,8 @@
         </ul>
         <p>而監視這四樣資料類型時可能會產生五種情境，而這五種情境便是本篇文章各個章節的主軸。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、監視 ref 基本型別響應式資料</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>首先，我們建立一個可響應同步資料的範例：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-html">&lt;template&gt;
@@ -80,8 +94,8 @@ watch(Val, (newValue, oldValue) => { ... }, { immediate: true })</code></pre>
             <img src="/images/learn/js/vue3-learn-4-1.jpg">
         </figure>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、監視 ref 物件型別響應式資料</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p><em>ref</em> 物件型別的響應式監視會比基本型別來得複雜一些，開始說明前同樣先建立個範例，這次就一併把 <em>watch</em> 定義進去，然後再慢慢說明細節：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-html">&lt;template&gt;
@@ -166,8 +180,8 @@ watch(Val, (newValue, oldValue) => { ... }, { immediate: true })</code></pre>
             <li>落修改 <em>ref</em> 物件資料裡的整個物件本身，<em>newValue</em> 會是新值，<em>oldValue</em> 則是舊值，因為它們已經不是同一個物件。</li>
         </ul>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、監視 reactive 物件型別響應式資料</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p>範例：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-html">&lt;template&gt;
@@ -245,8 +259,8 @@ watch(Val, (newValue, oldValue) => { ... }, { immediate: true })</code></pre>
         <p>可以看到即便修改的物件屬性位於該物件很深層的嵌套裡，<em>watch</em> 也依然可以在沒有引用 <em>{ deep: true }</em> 參數的情況下準確監視到 <em>reactive</em> 建立的物件資料。只不過要多注意的是，這種情況下的深層監視功能是無法被關閉的，即便加上 <em>{ deep: false }</em> 也無法關閉，而官方也為這種情境下的監視操作給予了一個正式專業術語：「隱式創建深層監視」。</p>
         <p>至於對眼睛依舊銳利的人會說，怎麼新值和舊值都是變更後的「淚眼問花花花不語」？這個問題的原理其實和上個章節最後講述的狀況是一樣的，響應式變更的資料是針對原物件的屬性值做更新，並沒有額外建立新的物件。</p>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、監視 ref 或 reactive 物件裡的指定屬性</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <p>這種情況的監視定義上比較複雜，但它也是僅次第一種監視基本型別資料情境，時常於實務上出沒的需求。為什麼會說比較複雜？因為物件指定的屬性值，有可能是基本型別的資料，譬如純數字、字串，但也有可能是物件格式的資料，根據型別的不同，監視的方法也會不同。</p>
         <p><br></p>
         <h3>如果指定的屬性值是基本型別的值</h3>
@@ -388,8 +402,8 @@ watch(Val, (newValue, oldValue) => { ... }, { immediate: true })</code></pre>
         </ol>
         <p>結論：監視的來源若是物件裡的屬性，無論屬性的值是基本型別還是物件，最好都用 <em>getter</em> 函式將其當作參數傳入。如果監視的物件是參考，且需要關注其內部其它屬性的變化，則要記得手動添加 <em>{ deep: true }</em> 開啟深層監視。</p>
     </div>
-    <div class="text-block" id="act5">
-        <h2>五、監視多筆指定資料</h2>
+    <div class="text-block" :id="'act' + catalog[5].id">
+        <h2 v-text="catalog[5].title"></h2>
         <p>前面四種監視情況都是針對某種整體類型或指定某物件裡屬性的資料，如果今天想在茫茫資料大海中只監視某幾項資料，函式邏輯要如何定義？</p>
         <p>這裡就不列出完整的模板程式碼了，只列出 <em>reactive</em> 資料定義的片段：</p>
         <div class="text-code" v-pre>
@@ -438,8 +452,8 @@ function changePets(){
         </figure>
         <p>（第一筆是觸發 <em>changeName</em>，第二筆則觸發 <em>changeB1</em>）</p>
     </div>
-    <div class="text-block" id="act6">
-        <h2>六、解除對響應式資料的監視</h2>
+    <div class="text-block" :id="'act' + catalog[6].id">
+        <h2 v-text="catalog[6].title"></h2>
         <p>不管是哪一種情境，一但事件觸發後，監視就會一直持續，即便該事件已經滿足某種預期的結果。以下這些情況通常都會希望停止響應式狀態的監視：</p>
         <h5>1. 條件變更時：</h5>
         <p>有時候你可能只需要在特定條件下監視某個狀態，一旦條件不再滿足，你就可以停止監視以節省資源。</p>
@@ -469,8 +483,8 @@ function changePets(){
         </figure>
         <p>可以看到雖然 <em>addSum</em> 事件一直持續在進行，但是當總和到達 5 （我們設定的條件）的時候，瀏覽器便停止了對響應式資料的監視。</p>
     </div>
-    <div class="text-block" id="act7">
-        <h2>七、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[7].id">
+        <h2 v-text="catalog[7].title"></h2>
         <dl>
             <dd><a href="https://cn.vuejs.org/" target="_blank">Vue.js</a></dd>
             <dd><a href="https://www.youtube.com/watch?v=c2ZaqEyLVZI&list=PLmOn9nNkQxJEnGM4Jf0liBcyedAtuQq-O&index=17" target="_blank">【极简Vue3】017 watch监视 情况一</a></dd>
@@ -480,10 +494,3 @@ function changePets(){
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

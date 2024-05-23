@@ -1,3 +1,24 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、Alpha 透明度（alpha）' },
+        { id: 2, title: '二、亮度（lightness）' },
+        { id: 3, title: '三、加深（darken）/減輕（lighten）' },
+        { id: 4, title: '四、顏色反轉（invert）' },
+        { id: 5, title: '五、加總（sum）' },
+        { id: 6, title: '六、平均值（avg）' },
+        { id: 7, title: '七、取得影像尺寸（image-size）' },
+        { id: 8, title: '八、嵌入連結（embedurl）' },
+        { id: 9, title: '四、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="17" fileType="learnList" />
@@ -5,24 +26,17 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、Alpha 透明度（alpha）</a></li>
-            <li><a href="#act2">二、亮度（lightness）</a></li>
-            <li><a href="#act3">三、加深（darken）/減輕（lighten）</a></li>
-            <li><a href="#act4">四、顏色反轉（invert）</a></li>
-            <li><a href="#act5">五、加總（sum）</a></li>
-            <li><a href="#act6">六、平均值（avg）</a></li>
-            <li><a href="#act7">七、取得影像尺寸（image-size）</a></li>
-            <li><a href="#act8">八、嵌入連結（embedurl）</a></li>
-            <li><a href="#act9">九、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>Stylus 有內建很多函式提供給開發者使用，因為功能實在太多了所以就不一一介紹，只列舉幾項個人比較常使用到的。其餘功能可自行點擊<a href="https://stylus-lang.com/docs/bifs.html" target="_blank">列表連結</a>瀏覽察看。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、Alpha 透明度（alpha）</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p><em>alpha</em> 函式通常用於顏色相關的透明度設定，其函式結構為：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-stylus">selector
@@ -50,8 +64,8 @@ alpha(rgba(0,0,0,0.4))
         </div>
         <p>由此可知 <em>alpha</em> 函式必須填入 <em>value</em> 值。此外，<em>value</em> 值也可以使用百分比表示，例如 <em>50%</em>。</p>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、亮度（lightness）</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p><em>lightness</em> 用來調整有關顏色屬性的色碼亮度，其函式結構為：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-stylus">selector
@@ -70,8 +84,8 @@ alpha(rgba(0,0,0,0.4))
         </div>
         <p>因為亮度設定為 <em>0%</em>，所以輸出結果為黑色。順便一提，<em>value</em> 裡的百分比符號（<em>%</em>）可以省略。</p>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、加深（darken）/減輕（lighten）</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p>這兩者分別可以使顏色加深或減輕，函式結構為：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-stylus">selector
@@ -92,8 +106,8 @@ alpha(rgba(0,0,0,0.4))
 }</code></pre>
         </div>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、顏色反轉（invert）</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <p>這個函式可把顏色屬性的色碼倒置，例如把白色（<em>#FFF</em>）反轉為黑色（<em>#000</em>）。其函式結構為：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-stylus">selector
@@ -111,8 +125,8 @@ alpha(rgba(0,0,0,0.4))
 }</code></pre>
         </div>
     </div>
-    <div class="text-block" id="act5">
-        <h2>五、加總（sum）</h2>
+    <div class="text-block" :id="'act' + catalog[5].id">
+        <h2 v-text="catalog[5].title"></h2>
         <p>前面幾個都是與顏色有關的函式（事實上內建函式大多也確實與顏色有關），這裡介紹運算型的「加總」函式，可將函式內的數值通通加起來。它的函式結構為：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-stylus">selector
@@ -131,8 +145,8 @@ alpha(rgba(0,0,0,0.4))
         </div>
         <p>有些人也許會想：「我直接在屬性後方寫運算式加加減減不就好了嗎？」...嗯，是的。</p>
     </div>
-    <div class="text-block" id="act6">
-        <h2>六、平均值（avg）</h2>
+    <div class="text-block" :id="'act' + catalog[6].id">
+        <h2 v-text="catalog[6].title"></h2>
         <p>相比加總（sum），平均值的實用性就比較高了，我們只要把要平均的數字通通丟進平均值函式裡，它就會自動幫我們輸出加總平均後的結果。</p>
         <div class="text-code" v-pre>
             <pre><code class="language-stylus">selector
@@ -150,8 +164,8 @@ alpha(rgba(0,0,0,0.4))
 }</code></pre>
         </div>
     </div>
-    <div class="text-block" id="act7">
-        <h2>七、取得影像尺寸（image-size）</h2>
+    <div class="text-block" :id="'act' + catalog[7].id">
+        <h2 v-text="catalog[7].title"></h2>
         <p>這是個頗實用的功能函式，我們可以透過此函式直接取得指定影像的尺寸，代入到寬度與高度，節省查詢影像尺寸的動作。其函式結構為：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-stylus">selector
@@ -172,8 +186,8 @@ alpha(rgba(0,0,0,0.4))
         </div>
         <p><em>image-size</em> 後方的陣列位置 <em>[0]</em> 代表影像的寬度值，<em>[1]</em> 則是影像高度的值。單位為像素（<em>px</em>）。</p>
     </div>
-    <div class="text-block" id="act8">
-        <h2>八、嵌入連結（embedurl）</h2>
+    <div class="text-block" :id="'act' + catalog[8].id">
+        <h2 v-text="catalog[8].title"></h2>
         <p><em>embedurl</em> 可以把影像編碼化，函式語法為：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-stylus">selector
@@ -197,8 +211,8 @@ alpha(rgba(0,0,0,0.4))
         </div>
         <p>此函式好處是即便有一天影像毀損或遺失了，因為已經將該影像編碼化，故不影響 CSS 顯示其內容。然而，取而代之的壞處就是程式碼的暴增，尤其當影像很複雜的時候，輸出的編碼更是令人瞠目結舌。</p>
     </div>
-    <div class="text-block" id="act9">
-        <h2>九、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[9].id">
+        <h2 v-text="catalog[9].title"></h2>
         <dl>
             <dd><a href="https://stylus-lang.com/" target="_blank">stylus</a></dd>
         </dl>
@@ -207,10 +221,3 @@ alpha(rgba(0,0,0,0.4))
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

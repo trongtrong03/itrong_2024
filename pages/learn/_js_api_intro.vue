@@ -1,3 +1,22 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、認識 API' },
+        { id: 2, title: '二、Web API' },
+        { id: 3, title: '三、Web API 的語法結構' },
+        { id: 4, title: '四、REST 與 RESTful API' },
+        { id: 5, title: '五、其他 Web API 類型' },
+        { id: 6, title: '六、前端與後端 API 的差異' },
+        { id: 7, title: '七、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="58" fileType="learnList" />
@@ -5,22 +24,17 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、認識 API</a></li>
-            <li><a href="#act2">二、Web API</a></li>
-            <li><a href="#act3">三、Web API 的語法結構</a></li>
-            <li><a href="#act4">四、REST 與 RESTful API</a></li>
-            <li><a href="#act5">五、其他 Web API 類型</a></li>
-            <li><a href="#act6">六、前端與後端 API 的差異</a></li>
-            <li><a href="#act7">七、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>不管是「打」API 還是「敲」API，其實都是比較口語化的用詞，若要用比較正式的術語來講，以「串接」API（API integration）為較主流的說法。而「打」這個詞通常用來指發送或請求的動作，所以整個意思就是「發送 API 請求」或「執行 API 操作」的程式行為。那麼，究竟什麼是 API？它在網頁裡扮演什麼樣的重要角色？為什麼我們很常在公司職缺應徵網頁前端工程師的專長需求列表裡，看到需要熟知串接 API 的技能？本篇文章就來聊聊 API 的相關知識。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、認識 API</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>API 是「Application Programming Interface」的縮寫，中文譯為「應用程式介面」，<a href="https://zh.wikipedia.org/zh-tw/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%8E%A5%E5%8F%A3" target="_blank">維基百科</a> 是這麼介紹的：</p>
         <blockquote>
             <p>應用程式介面（英語：application programming interface），縮寫為 API，是一種計算介面，它定義多個軟體中介之間的互動，以及可以進行的呼叫（call）或請求（request）的種類，如何進行呼叫或發出請求，應使用的資料格式，應遵循的慣例等。它還可以提供擴充機制，以便使用者可以通過各種方式對現有功能進行不同程度的擴充。一個 API 可以是完全客製化的，針對某個組件的，也可以是基於行業標準設計的以確保互操作性。通過資訊隱藏，API 實現了模組化編程，從而允許使用者實現獨立地使用介面。</p>
@@ -57,8 +71,8 @@
         <p><br></p>
         <p>從這三個例子是否可以理解 API 的功用了呢？在日常生活中，負責飾演 API 的角色、媒介主要在做的事情就是成為一個稱職的中間層，負責處理客戶端的需求，與伺服器端的回應，居中協調不同對象之間的互動，讓雙方往來更加高效與便利。程式語言的 API 亦是如此：API 負責處理請求和回應，並協調不同系統之間的互動，提高效率與便利性。</p>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、Web API</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>透過前一個章節的幾個生活案利，我們應該已經對 API 扮演什麼角色有了大概輪廓，接下來回歸網頁程式語言的部分，基本上只要是由網頁提供的第三方功能和服務，我們都可以稱之為網頁 API，通稱 Web API。Web API 運用非常廣泛，以下列舉常見但不限於這些的 Web API 應用範例：</p>
         <h4>1. 地圖 API：</h4>
         <p>Google Maps API、Mapbox API 等提供了在網頁中嵌入地圖和地理位置相關功能的能力。這些 API 可以用於顯示地圖、標記位置、獲取路線指引等。</p>
@@ -107,8 +121,8 @@
         <p><a href="https://swiperjs.com/" target="_blank">Swiper</a>，一款輪播圖套件，有提供 <a href="https://swiperjs.com/swiper-api" target="_blank">Swiper API</a> 整合並簡化功能讓開發者容易上手使用。</p>
         <p>所以啦，無論出自有意還是無意，我們都高機率曾已經碰觸並且使用過 Web API 技術。不過本篇文章要談的打 API，主要是針對伺服器端上的 JSON 資料，通過 HTTP 請求的方式去撈取資料下來到自己開發的網站內使用，和前面提到的地圖外嵌、JavaScript 動態效果套件這類提供比較偏向視覺化的 API 應用不太一樣。</p>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、Web API 的語法結構</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p>雖然實現資料串接的 Web API 技術有很多，但結構組成方面皆大同小異，以下是其主要構成成分：</p>
         <h4>1. 端點（Endpoints）：</h4>
         <p>API 提供的各種功能或服務通常透過特定的端點來存取。每個端點對應 API 中的一個功能或資源，例如取得使用者資訊、提交表單資料等。端點通常由 URL 表示，並且可能包含路徑參數、查詢參數等用於指定特定操作的資訊。</p>
@@ -181,8 +195,8 @@
             <p>也有一派將 Web API 語法結構濃縮為「CRUD」功能，分別對應 Create（新增）、Read（讀取）、Upated（更新）、Delete（刪除）這四項功能各取字首所組成的縮寫。也有的會加入 List（列表），使整體縮寫變為 CRUDL，但這派濃縮法相較罕見。</p>
         </blockquote>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、REST 與 RESTful API</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <p>很多人可能都聽或看過 RESTful，卻不見得真正深入去認識它，其實我也是。之所以會想把 REST 與 RESTful 也寫進這篇文章，主要是發現在蒐集 Web API 相關資料的過程中，RESTful 出現的頻率實在太高，好奇查了一下才發現兩者關係密不可分。</p>
         <p>先從結論開始講起吧，首先，Web API 是一門網頁應用介面技術，而 RESTful 則是符合 REST 原則發布的一種設計規範，Web API 的各種語法、實作方式基本上都是以 RESTful 為基礎進行設計的，故絕大部分教學都會建議初學者在學習 Web API 運用的過程，也一併汲取 REST 的相關知識。</p>
         <p>REST 為「Representational State Transfer」的縮寫，翻譯成中文術語叫作「表現層狀態轉換」，光看名字不說理解其含意，要記起來都十分困難，但無妨，首先 REST 一詞係由 HTTP 規範主要作者之一的 Roy Fielding 於其博士論文提出的概念，它是一種「軟體架構風格」而並非 HTTP 規範（標準）。這個理論誕生的目的是幫助幫助分散在世界各地不同的應用程式、軟體都能在網際網路上能夠互相傳遞訊息，每一個網頁都可以被視為一個「資源」（resource）提供使用者使用，其核心原則包括：</p>
@@ -287,8 +301,8 @@
         <p>這個例子顯示如何將 REST 的概念應用到日常生活中，以更有效地處理資源和操作。透過使用 RESTful 設計原則來組織和安排旅行，我們將可以更輕鬆地管理和規劃行程，同時也可以更好地與其他人分享和交流旅行資訊。</p>
         <p>通篇看下來 REST 似乎是系統開發者需要注意的事情，對一般使用者來說了不了解 REST 其實並非必要知識，因為比起系統架構和設計原則，使用者通常更在乎系統的功能面、易用程度與效能，甚至對我們這些專打他人 API 的前端工程師而言恐怕也是如此。儘管如此，身為前端工程師，在知曉 REST 的原理後，或許也能為自家網站提供正向的優化幫助，進而提升使用者操作體驗。</p>
     </div>
-    <div class="text-block" id="act5">
-        <h2>五、其他 Web API 類型</h2>
+    <div class="text-block" :id="'act' + catalog[5].id">
+        <h2 v-text="catalog[5].title"></h2>
         <p>事實上，Web API 不單單只有 RESTful API 這一種類型，在 RESTful API 崛起的前後，都還有其他實作 Web API 的方式，本章節主要就是要來聊聊它們。不過由於現今 Web API 的主流大多數都是採用 RESTful 設計理念，因此以下這些逐漸式微或比較專注於特定環境使用的其他類型 API 並不會太深入作介紹，至少大概留個印象，才不會哪天突然蹦到眼前來卻一無所知。</p>
         <p><br></p>
         <h3>SOAP API：</h3>
@@ -307,8 +321,8 @@
         <p>REST API 始終傳回整個資料內容。例如，從 REST API 中的 person 物件，會收到該人員的姓名、出生日期、地址和電話號碼。即使我們只需要電話號碼，卻仍然也會獲得所有資料。</p>
         <p>當然狀況不單只有這些，這些案例充其量只是要表示 GraphQL 的主要用途之一是克服 RESTful API 一些使用上的限制，盡可能達到相輔相成的效果。</p>
     </div>
-    <div class="text-block" id="act6">
-        <h2>六、前端與後端 API 的差異</h2>
+    <div class="text-block" :id="'act' + catalog[6].id">
+        <h2 v-text="catalog[6].title"></h2>
         <p>雖然，我們還沒開始撰寫程式碼串接 API 的實作練習，但是在本篇文章的最後想提前整理前後端各自處理 API 技術及概念是否存在差異。主要可分成三個面向：</p>
         <h3>1. 功能：</h3>
         <div class="text-flex">
@@ -373,8 +387,8 @@
             </div>
         </div>
     </div>
-    <div class="text-block" id="act7">
-        <h2>七、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[7].id">
+        <h2 v-text="catalog[7].title"></h2>
         <dl>
             <dd><a href="https://medium.com/@Tommmmm/%E5%B7%A5%E7%A8%8B%E5%B8%AB%E6%95%B4%E5%A4%A9%E6%8E%9B%E5%9C%A8%E5%98%B4%E9%82%8A%E7%9A%84api%E6%98%AF%E4%BB%80%E9%BA%BC-7ab8b522d3bc" target="_blank">工程師整天掛在嘴邊的API是什麼?</a></dd>
             <dd><a href="https://rlads2021.github.io/LabBook/ch10.html" target="_blank">10 擷取網路資料：Web API</a></dd>
@@ -393,10 +407,3 @@
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

@@ -1,3 +1,20 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 1, title: '一、錯誤訊息' },
+        { id: 2, title: '二、警告提示' },
+        { id: 3, title: '三、其他疑難雜症' },
+    ]);
+
+    // avtive
+    const isActive = ref(0);
+</script>
+
 <template>
     <NuxtLayout name="workshop">
         <hgroup class="text-heading">
@@ -7,23 +24,23 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act1">一、錯誤訊息</a></li>
-            <li><a href="#act2">二、警告提示</a></li>
-            <li><a href="#act3">三、其他疑難雜症</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、錯誤訊息</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <div class="text-accordin is-error">
         </div>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、警告提示</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <div class="text-accordin is-warning">
         </div>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、其他疑難雜症</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <div class="text-accordin is-others">
             <div class="accordin-item" :class="isActive==3001 ? 'is-active' : ''">
                 <div class="accordin-title" @click="isActive = 3001;">
@@ -64,12 +81,3 @@
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-
-    const isActive = ref(0);
-</script>

@@ -1,3 +1,19 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 1, title: '一、基本介紹' },
+        { id: 2, title: '二、安裝流程' },
+        { id: 3, title: '三、介面總覽' },
+        { id: 4, title: '四、標籤管理' },
+        { id: 5, title: '五、提高辨識' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="22" fileType="learnList" />
@@ -5,15 +21,13 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act1">一、基本介紹</a></li>
-            <li><a href="#act2">二、安裝流程</a></li>
-            <li><a href="#act3">三、介面總覽</a></li>
-            <li><a href="#act4">四、標籤管理</a></li>
-            <li><a href="#act5">五、提高辨識</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、基本介紹</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p><a href="https://tw.eagle.cool/" target="_blank">eagle</a> 是一款標榜輕鬆蒐集與管理素材，藉以激發靈感並增進工作效率的素材管理應用程式，其管理素材的範疇涵蓋圖片、影片甚至是音樂，通通都能在他們應用程式介面下進行操作。</p>
         <p>使用 eagle 有以下好處：</p>
         <ol>
@@ -25,8 +39,8 @@
         </ol>
         <p>不過要注意的是，eagle 並非免費的應用軟體，僅提供使用者 30 天的免費使用體驗，不過只需要花費 $900 台幣，就能獲得永久免費授權與免費更新的服務，而且單一序號還能「同時」綁定兩台裝置，這裡之所以強調「同時」，是因為即使未來更換電腦設備，只要解除汰換掉的裝置註冊後，就能在新的設備進行綁定，十分人性化。</p>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、安裝流程</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <h6>1. 首先至<a href="https://tw.eagle.cool/" target="_blank">官方網站</a>下載 eagle 的應用程式(有支援MacOS)。</h6>
         <figure>
             <img src="/images/learn/others/eagle/eagle-1.jpg">
@@ -63,8 +77,8 @@
             <img src="/images/learn/others/eagle/eagle-8.jpg">
         </figure>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、介面總覽</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>以下介紹 eagle 資料庫介面中幾個較常用到的功能：</p>
         <figure>
             <img src="/images/learn/others/eagle/eagle-9.jpg">
@@ -82,8 +96,8 @@
             <li>是否令預覽區域顯示的檔案包含子資料夾的內容(預設模式僅顯示當下資料夾同一層內的檔案)。</li>
         </ol>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、標籤管理</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p>除了透過資料夾分門別類外，我們可以透過 eagle 標籤的功能，來為不同分類的影像，建立共通的標籤，以利我們大方向的搜尋。</p>
         <p>可由左上角工具導覽列選項中找到標籤管理，也可以從尚未貼上標籤的影像右側資訊欄中，點擊「新增標籤」的按鈕。</p>
         <figure>
@@ -102,8 +116,8 @@
             <img src="/images/learn/others/eagle/eagle-13.jpg">
         </figure>
     </div>
-    <div class="text-block" id="act5">
-        <h2>五、提高辨識</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <p>當資料庫內的資料夾很多的情況下，一時間內肉眼捕捉不到自己要找的目標在所難免，因此 eagle 在這方面提供更換資料夾圖示的功能，來加強資料夾的辨識程度。</p>
         <figure>
             <img src="/images/learn/others/eagle/eagle-14.jpg">
@@ -121,10 +135,3 @@
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

@@ -1,3 +1,22 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、Vite 網頁應用的初始規劃' },
+        { id: 2, title: '二、使用 create-vue 建立 SPA' },
+        { id: 3, title: '三、Vue Router 路由設定：RouterLink' },
+        { id: 4, title: '四、Vue Router 路由設定：RouterView' },
+        { id: 5, title: '五、建立錯誤警示頁面路由' },
+        { id: 6, title: '六、建立嵌套路由' },
+        { id: 7, title: '七、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="60" fileType="learnList" />
@@ -5,24 +24,19 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、Vite 網頁應用的初始規劃</a></li>
-            <li><a href="#act2">二、使用 create-vue 建立 SPA</a></li>
-            <li><a href="#act3">三、Vue Router 路由設定：RouterLink</a></li>
-            <li><a href="#act4">四、Vue Router 路由設定：RouterView</a></li>
-            <li><a href="#act5">五、建立錯誤警示頁面路由</a></li>
-            <li><a href="#act6">六、建立嵌套路由</a></li>
-            <li><a href="#act7">七、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>安裝好 Vite 所需環境並建立好基本的專案架構後，從這篇文章開始我們將探索如何使用 Vite 創建單頁網頁應用程序（SPA），而本篇除了介紹 Vite 生成的架構外，也會把重點聚焦於各功能組件之間如何相互聯繫，也就「路由」設定。</p>
         <p>所謂的路由（Routing），是指在網頁應用中，根據用戶請求的 URL 來決定如何響應這個請求的過程。簡單來說，路由就是根據 URL 將用戶導向到不同頁面或視圖的過程。在前端開發中，特別是單頁網頁應用（SPA），路由是非常重要的概念。SPA 通常只有一個 HTML 文件，當用戶與應用互動時，它會動態地更新現有頁面內容，而不會重新加載整個頁面。路由的作用就是根據用戶操作，動態改變應用中的內容，從而實現不同頁面之間的切換和導航。</p>
         <p>此外，儘管 Vite 可同時支援 Vue2 Option API 與 Vue 3 Composition API 的語法格式，但本系列文章都會秉持能使用 Vue 3 就不用 Vue 2 來寫程式的原則進行練習。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、Vite 網頁應用的初始規劃</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>在 Vite 初始資料夾建置裡，網頁應用的結構長這樣：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-bash">index.html
@@ -110,8 +124,8 @@ src
         <p><br></p>
         <p>以上就是 Vite 初始建立的網頁應用範例的結構介紹了，當然這只是 Vite 提供給開發者當作參考的簡單樣板而已，要直接沿用架構來開發專案肯定還有許多問題和需要調整的地方，下個章節就來談談當我們開始執行專案開發時，要如何規劃「相對正常」的網頁應用架構。</p>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、使用 create-vue 建立 SPA</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>承襲上一章最後所述，光憑 Vite 範例的配置，很難應付專案實務上的訴求，比如說剛看完上一章的初始網頁應用的架構介紹，開始興致勃勃地要來建置手頭上的專案，各種問題逐漸在腦海裡湧現......</p>
         <ol>
             <li>我的網頁有好幾個功能頁面？</li>
@@ -179,8 +193,8 @@ src
         </div>
         <p>和先前 <em>create vite</em> 所安裝建立的版本不同的是，這個 <b>App.vue</b> 新加入了兩個和路由有關的標籤：<em>RouterLink</em> 與 <em>RouterView</em>，從前面的 <em>import</em> 很明確可以知道這兩個標籤是引用自 Vue Router 的功能，接下來的兩個章節將分別對它們作介紹。</p>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、Vue Router 路由設定：RouterLink</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p>我們也可以寫成 <em>router-link</em>，兩種標籤寫法皆表示同樣的功能，都是用來定義路由跳轉的連結目標。</p>
         <blockquote>
             <p><em>RouterLink</em> 是  Vue 3 Composition API <em>import</em> 進來的寫法；<em>router-link</em> 則是 Vue Router 提供的原生標籤。</p>
@@ -297,8 +311,8 @@ export default router</code></pre>
         <p>如果要像傳統手法那樣一頁頁手動去添加選中樣式也未嘗不行，只是既然 Vue Router 已經為我們設想周到提供這樣的功能，為何不直接使用 RouterLink 呢？</p>
         <p>但是強烈建議使用 RouterLink 的原則也僅適用於網頁應用功能之間的路由切換，若連結是要導向外部網站，那麼組件裡使用 <em>&lt;a&gt;</em> 標籤還是無傷大雅的。</p>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、Vue Router 路由設定：RouterView</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <p><b>App.vue</b>：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-html">&lt;script setup&gt;
@@ -341,8 +355,8 @@ const router = createRouter({
         <h3>同一檔案可以重複使用 RouterView 嗎？</h3>
         <p>答案是可以的，但通常不太有人會這麼作。正常情況下我們只會在父組件（<b>App.vue</b>）使用一次 <em>&lt;RouterView /&gt;</em> 來渲染路由畫面，使用多個 <em>&lt;RouterView /&gt;</em> 只是重複渲染相同的內容，沒什麼正向意義。</p>
     </div>
-    <div class="text-block" id="act5">
-        <h2>五、建立錯誤警示頁面路由</h2>
+    <div class="text-block" :id="'act' + catalog[5].id">
+        <h2 v-text="catalog[5].title"></h2>
         <p>製作 SPA 類型的網站，有許多眉眉角角需要注意，其中有一項是當使用者在網址列輸入錯誤的路由名稱，網站應該如何作因應？在傳統 MPA 網站，點擊或輸入到不存在的頁面，會顯示「404 Not found」警告字樣的畫面，一些有在注意畫面呈現與使用者體驗的網站，會特地製作網頁來回應使用者錯誤的頁面導向，例如巴哈姆特會自動導向 <b>missing.html</b>：</p>
         <figure>
             <img src="/images/learn/js/vite-2-11.jpg">
@@ -405,8 +419,8 @@ const router = createRouter({
         </figure>
         <p>需要注意的是，<em>routes</em> NotFound 的設定不能放在最前面，否則會影響動態路由的捕捉，一般來說都會放在整個 <em>routes</em> 陣列物件順序的最下方。</p>
     </div>
-    <div class="text-block" id="act6">
-        <h2>六、建立嵌套路由</h2>
+    <div class="text-block" :id="'act' + catalog[6].id">
+        <h2 v-text="catalog[6].title"></h2>
         <p>儘管前面已經學會如何透過 Vue Router 實現 SPA 多個功能頁面組件之間的路由切換，但實務上我們很快會發現，目前學的路由操作似乎無法完全適用於所有網站架構。舉一個明顯的狀況就是當網頁的架構有好幾層的時候，例如：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-bash">Home
@@ -579,8 +593,8 @@ src
         <p><br></p>
         <p>本篇有關路由的基礎應用先寫到這裡，不過說是基礎，其實還有很多基礎方法都沒有說到，包含動態錄由，<em>push</em>、<em>replace</em>、<em>go</em> 方法的應用與差異，以及 <b>router/index.js</b> 設定檔中的 <em>history</em> 設定......等等，更別說其他像是 Navigation Guards 以及 Fetching API 等進階概念，可見 Vue Router 為 SPA 網頁應用設計所提供的幫助有多重要，由於現階段還在極新手階段，只練習幾個靜態路由需要的設定及模擬實務上會遇到的狀況，前面提到那些尚未觸及的運用，暫且留到日後再行介紹。</p>
     </div>
-    <div class="text-block" id="act7">
-        <h2>七、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[7].id">
+        <h2 v-text="catalog[7].title"></h2>
         <dl>
             <dd><a href="https://v4.vitejs.dev/" target="_blank">Vite</a></dd>
             <dd><a href="https://router.vuejs.org/zh/introduction.html" target="_blank">Vue Router 官方中文文件</a></dd>
@@ -592,10 +606,3 @@ src
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

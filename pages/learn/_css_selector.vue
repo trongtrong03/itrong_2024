@@ -1,3 +1,21 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、什麼是選擇器？' },
+        { id: 2, title: '二、選擇器有哪些類型？' },
+        { id: 3, title: '三、如何辨別選擇器的優先順序？' },
+        { id: 4, title: '四、如何正確書寫選擇器 Coding Style？' },
+        { id: 5, title: '五、進階：CSS3 新增的選擇器一覽' },
+        { id: 6, title: '六、裝置可視單位' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="35" fileType="learnList" />
@@ -5,21 +23,17 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、什麼是選擇器？</a></li>
-            <li><a href="#act2">二、選擇器有哪些類型？</a></li>
-            <li><a href="#act3">三、如何辨別選擇器的優先順序？</a></li>
-            <li><a href="#act4">四、如何正確書寫選擇器 Coding Style？</a></li>
-            <li><a href="#act5">五、進階：CSS3 新增的選擇器一覽</a></li>
-            <li><a href="#act6">六、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>這篇文章要探討的主題是比較偏向基礎面的內容，也就是有關 CSS 選擇器（Selector）的介紹。選擇器是 CSS 語法規則三大核心之一，所以即便你不認識「選擇器」這個名詞，在撰寫語法的過程中也絕對時常編寫到它，選擇器的類型非常多樣，到了 CSS3 更是又新增了更加多元、更加複雜的用法，本篇文章除了介紹目前已知且常用的選擇器類別外，也會針對我們前端開發人員，在書寫 CSS 樣式表定義選擇器時，有哪些需要注意的地方（也就是所謂的 Coding Style）。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、什麼是選擇器？</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>CSS 的語法基本構成為：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-css">selector { property: value; }</code></pre>
@@ -35,8 +49,8 @@
         <p>上面舉例中的 <em>p</em> 便是選擇器的一種，表示 HTML 裡面所有的 <em>p</em> 元素都會套用該選擇器裡面設定的 CSS 樣式屬性。若常去觀賞別人寫的網站，很容易發現其 CSS 樣式表裡每一組 <em>{}</em> 前方大量使用到 <em>#</em> 及 <em>.</em> 開頭，並銜接自己命名的英文詞綴，這些也都是選擇器的種類之一，分別稱為「ID 選擇器」與「類別選擇器」。</p>
         <p>或許你會在某一網站的 CSS 樣式表中，看見它整個 CSS 檔案都是使用 ID 選擇器或類別選擇器進行書寫，但它們絕對不是選擇器唯二（若加上一開始範例裡的標籤選擇器則是唯三）寫法，CSS 發展迄今進入 CSS3 時代，選擇器的種類也變得非常多樣，我們將在下一個章節進行介紹。</p>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、選擇器有哪些類型？</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>由於 CSS3 選擇器比較複雜，會在後面單獨開篇章進行說明，本章節先來談談 CSS2 以前的選擇器種類有哪些。可別以為因為 CSS3 的問世，這些老一輩就被打入冷宮了，時至今日，這些行之有年的選擇器依然是許多開發者或團隊維持專案一貫撰寫的語法標準。</p>
         <p>簡表：</p>
         <div class="text-flex">
@@ -497,8 +511,8 @@ p::after {
             <p>以前偽類與偽元素都是用一個冒號表示，後來為區分兩者不同，W3C 便提倡用兩個冒號表示偽元素。許多瀏覽器仍相容偽元素僅使用一個冒號，儘管如此，雙冒號仍是目前表達偽元素最標準的用法。</p>
         </blockquote>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、如何辨別選擇器的優先順序？</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p>如果要談起選擇器的優先順序，我們一般會稱之為「權重」（Specificity），通常遇到權重問題，大概都是我們在某個 HTML 元素使用到某種 CSS 選擇器，但是在其他區塊同樣又需要用到該元素，可是某些樣式上卻需要調整的時候，我們需要額外在別的選擇器添加屬性去覆蓋它。可是，並不是盲目新增選擇器就能覆蓋掉原本的設定，例如下方案例：</p>
         <p>HTML：</p>
         <div class="text-code" v-pre>
@@ -631,8 +645,8 @@ li.old {
         <p><br></p>
         <p>總結一下內容，權重，指的是 CSS 的優先權，當 HTML 元素標籤存在多個選擇器，權重高的會覆蓋其他，若相同權重，後寫的 CSS 會覆蓋前面寫的 CSS。</p>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、如何正確書寫選擇器 Coding Style？</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <p>程式語言的 Coding Style 一直是摒除邏輯思路外，另一個時常被提及其重要性的議題。良好的書寫習慣可以幫助自己或團隊容易閱讀，日後維護時也不需額外費心去理解那些不經整理的程式碼。而 CSS Coding Style 方面，最常聽到的莫過於「屬性順序」與「選擇器命名」這兩件事，常見的「屬性順序」書寫方式有兩種：一種是按照屬性字母，通常這種寫法在以英文語言為主的使用者比較常見；另一種則是依照屬性相近性質作區分，把同類型的屬性放在一起，這種方式與前者相比相較不那麼嚴謹，但是在閱讀方面有時反而會比前者來得順暢，例如：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-css">div {
@@ -746,8 +760,8 @@ li.old {
             <pre><code class="language-html">&lt;div id="menuFunction" class="menu-wrap"&gt; ... &lt;/div&gt;</code></pre>
         </div>
     </div>
-    <div class="text-block" id="act5">
-        <h2>五、進階：CSS3 新增的選擇器一覽</h2>
+    <div class="text-block" :id="'act' + catalog[5].id">
+        <h2 v-text="catalog[5].title"></h2>
         <p>CSS3 除了新增許多過去 CSS 無法作到的動態與濾鏡之類的屬性外，也釋出更多的選擇器用法，我們先以一張表格披露目前 CSS3 新增的選擇器種類：</p>
         <div class="text-flex">
             <div class="f-width">
@@ -1067,8 +1081,8 @@ li:last-child {
 
 
     </div>
-    <div class="text-block" id="act6">
-        <h2>六、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[6].id">
+        <h2 v-text="catalog[6].title"></h2>
         <dl>
             <dd><a href="https://developer.mozilla.org/zh-TW/docs/Glossary/CSS_Selector" target="_blank">MDN web docs</a></dd>
         </dl>
@@ -1077,10 +1091,3 @@ li:last-child {
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

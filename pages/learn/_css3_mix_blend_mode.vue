@@ -1,3 +1,21 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、屬性介紹' },
+        { id: 2, title: '二、超級比一比' },
+        { id: 3, title: '三、mix-blend-mode V.S. background-blend-mode' },
+        { id: 4, title: '四、其它運用' },
+        { id: 5, title: '五、總結與相容性' },
+        { id: 6, title: '六、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="41" fileType="learnList" />
@@ -5,17 +23,13 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、屬性介紹</a></li>
-            <li><a href="#act2">二、超級比一比</a></li>
-            <li><a href="#act3">三、mix-blend-mode V.S. background-blend-mode</a></li>
-            <li><a href="#act4">四、其它運用</a></li>
-            <li><a href="#act5">五、總結與相容性</a></li>
-            <li><a href="#act6">六、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>很多前端工程師在執行切版的時候，必須肩負設計稿出圖的作業。如果你是屬於這類需要自行出圖的開發者，相信對 Adobe Photoshop 應該不陌生，作為視覺設計最常被使用的電腦繪圖軟體之一，我們拿到的 Photoshop 設計稿時常遇到部分影像圖層使用到了圖層混合效果（或者說混色）的功能，例如下圖：</p>
         <figure>
             <img src="/images/learn/css/mix-blend-mode-1.jpg">
@@ -23,8 +37,8 @@
         <p>遇到這類型的混合效果，我們通常都是不做他想直接轉存成圖片了事，事實上，這樣的做法也沒什麼問題，畢竟本來這個畫面橫豎就是要透過影像來表達......惟比較困擾的狀況為：倘若同一張原圖在不同互動行為（例如點擊或滑鼠移入）分別使用了不同的混合效果，意味著上述常態作法得分別輸出多張圖片。先不說工程師得先搞懂 Photoshop 各個圖層效果前後關係的時間消耗，網頁載入過程也得花時間讀取這些「底圖相同只是混合效果不同」所輸出的個別圖片，假如單張圖片檔案很大，勢必讀取等待時間也愈長，這在講求要讓使用者快速取得資訊並獲得良好操作體驗的現代，似乎不是很好的現象。</p>
         <p>其實早在多年前，CSS3 就有釋出可以將影像（正確來說可能是元素）添加混色效果改變其色彩模式的屬性，只是初期有提供支援的瀏覽器鮮少，開發者大多都僅止於知道但實務上仍趨保守的階段。如今各家瀏覽器發展迅速，也紛紛對相關屬性提供了支援，我們逐漸能在一些網站上看到他們對原形圖片所在的元素施加 CSS3 屬性，達到近似於 Photoshop 圖層混合的效果。以下我們就來看看實際要如何應用吧！</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、屬性介紹</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>Blend Mode，中文直翻叫做「混合模式」，是 CSS3 主要用來針對元素裡的內容改變其色彩呈現的屬性，它近似 Photoshop 的圖層混合特效，可以透過不同選項，讓圖片與圖片、圖片與圖層之間產生各種獨特、有趣的色差效果。CSS 混合模式屬性主要有兩個，分別是 <em>mix-blend-mode</em> 與 <em>background-blend-mode</em>，嗅覺靈敏的你應該已經隱隱約約察覺到這兩者不同，不過實際應用差異仍暫且保留到後面再說。</p>
         <p>無論是 <em>mix-blend-mode</em> 還是 <em>background-blend-mode</em>，它們的屬性值皆相同，以下以表格展列之：</p>
         <div class="text-flex">
@@ -122,8 +136,8 @@
         </figure>
         <p>下個章節將直接透過實際範例的展示以及與 Photoshop 內套用的相同效果來做一個比較。</p>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、超級比一比</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>接下來將以下方這張原圖，逐個套用 CSS <em>mix-blend-mode</em> 屬性，並與 Photoshop 相同的效果放在一起做對照，觀察看看由 CSS3 產生的效果與其是否相似。</p>
         <p>使用圖片與背景色：</p>
         <div class="text-flex">
@@ -591,8 +605,8 @@
         </div>
         <p>透過上方範例可以發現文字也能套用混和模式的效果，真是妙不可言。</p>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、mix-blend-mode V.S. background-blend-mode</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p>上一個章節是以 <em>mix-blend-mode</em> 這個屬性來介紹 CSS3 Blend Mode，接著來談談另一個混合屬性──<em>background-blend-mode</em>，儘管這兩個屬性吃的值一模一樣，實際運用場合則略有所不同。如同字面上意思與背景有關，<em>background-blend-mode</em> 主要用於同一元素內存在多張背景圖的時候，近似於塑造背景圖層疊合混色的概念。這個屬性只能用於背景，不像 <em>mix-blend-mode</em> 可以作用於整個元素的其他內容。</p>
         <p>範例：</p>
         <div class="text-codepen">
@@ -603,8 +617,8 @@
             </p>
         </div>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、其它運用</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <p>我們已經看完 CSS Blend Mode 各項參數值之於影像圖層混合的變化，其實除了用在圖片上面外，也可以利用其特性，塑造出其他不同的效果。</p>
         <p><br></p>
         <h3>1. 文字鏤空</h3>
@@ -629,8 +643,8 @@
             </p>
         </div>
     </div>
-    <div class="text-block" id="act5">
-        <h2>五、總結與相容性</h2>
+    <div class="text-block" :id="'act' + catalog[5].id">
+        <h2 v-text="catalog[5].title"></h2>
         <p>「圖片影像」的處理素來就是視覺設計、前後端工程師難捨難分的愛恨情仇，過多的圖片除了讓前端開發者不容易輸出之外，使用者也必須等待網頁載入所有圖片才能完整地閱覽內容；反過來若要求設計師減少圖片的使用，有可能讓設計師沒有辦法很好地傳達其設計理念。近年來 CSS3 不僅減少對 JavaScript 動態效果的需求，也大幅度補足視覺面的依賴，舉凡 SVG 向量繪圖的語法、Filter 濾鏡效果，以及本篇介紹的 Blend Mode 都是其中幾種經典表現。</p>
         <p>當我們面對那些使用相同原始圖片，只是單純透過不同圖層混合效果表達使用者不同操作情境下所呈現的互動樣貌，CSS Blend Mode 混合模式已經能充分取代出圖，我們從第二章節實際效果演示可以看到，由瀏覽器渲染的結果與 Photoshop 幾乎沒有差異。唯一需要考量的是各家瀏覽器相容與否的問題，我們來看看 <a href="https://caniuse.com/?search=mix-blend-mode" target="_blank">Can I use</a> 上的數據：</p>
         <figure>
@@ -638,8 +652,8 @@
         </figure>
         <p>可以看到全球（Global）整體瀏覽器支援比率已高達 93.77%，幾乎所有主流瀏覽器都完全相容 CSS Blend Mode 相關語法（除了連微軟自家人都已經棄用的舊 IE），因此我們已不太需要擔心使用這些相關屬性是否會令各家瀏覽器使用者無法順利閱覽網頁的內容了。</p>
     </div>
-    <div class="text-block" id="act6">
-        <h2>六、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[6].id">
+        <h2 v-text="catalog[6].title"></h2>
         <dl>
             <dd><a href="https://www.w3schools.com/cssref/pr_background-blend-mode.asp" target="_blank">w3schools</a></dd>
             <dd><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/mix-blend-mode" target="_blank">mda</a></dd>
@@ -651,10 +665,3 @@
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

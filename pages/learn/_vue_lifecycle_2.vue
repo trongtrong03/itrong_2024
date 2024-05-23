@@ -1,3 +1,19 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、Vue 3.0 的生命週期' },
+        { id: 2, title: '二、setup 入口函式' },
+        { id: 3, title: '三、生命週期鉤子' },
+        { id: 4, title: '四、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="44" fileType="learnList" />
@@ -5,19 +21,17 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、Vue3.0 的生命週期</a></li>
-            <li><a href="#act2">二、setup 入口函式</a></li>
-            <li><a href="#act3">三、生命週期鉤子</a></li>
-            <li><a href="#act4">四、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>承襲上一篇 <a href="_vue_lifecycle_1">〈循序漸進學 Vue3：認識 Vue1.0 到 Vue3.0 的生命週期（Lifecycle Diagram）-上〉</a> 文章，本篇要接著認識 Vue 3.0 的生命週期，並觀察及整理其與 Vue 2.0 有什麼不同。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、Vue3.0 的生命週期</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>在 Vue3.0 版本中，官方提供的生命週期流程圖是這個樣子的：</p>
         <figure>
             <img src="/images/learn/js/vue-lifecycle-10.jpg">
@@ -25,8 +39,8 @@
         <p>乍看與 2.0 生命週期頗為相似，但仔細比對會發現還是有許多不同之處，最顯著的差別，在於 Vue3.0 導入了全新的 Composition API，使得組件的代碼結構更加組織化和可重用。相對於 Vue 2的 Option API，Composition API 讓開發者可以更自由地編寫組件邏輯，這對於生命週期方法的使用有一定影響，至於 Composition API 與 Option API 具體的差異留到後面的章節再來說明，此刻先聚焦生命週期的部份。</p>
         <p>表示生命週期鉤子的藍色與紅色框線項目一共有九項，不過濃縮一下其實也就四個動作，分別是 <em>create</em>、<em>mount</em>、<em>update</em>、<em>unmount</em>，再加上它們被觸發前的幾個動作。</p>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、setup 入口函式</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>嚴格來說，<em>setup</em> 並不是生命週期鉤子，而是一個函式，它會在 Vue 實例尚未被建立之前執行，是組件中使用 Composition API 的入口，所以我們也可以稱之為「入口函式」，或者也可以說 Vue3 Composition API 附帶了一個 <em>setup</em> 這樣的方法，用於設置組件的初始狀態、數據、方法以及其他配置，取代了 Vue2.0 原先 <em>data</em>、<em>mehtods</em>、<em>computed</em> 等 Option API，使組件的結構更方便重複利用與更好的組織、模組化，而非根據屬性的類型（<em>data</em>、<em>mehtods</em>、<em>computed</em>...）進行分離管理。</p>
         <p>因為 <em>setup</em> 函式會在 <em>beforeCreate</em> 之前調用，此時 Vue 實例的數據和方法還沒有被初始化，若在這個生命週期鉤子使用 <em>this</em>，它無法指向實例裡的內容。此外，一方面也與 Vue3.0 版本鼓勵開發者不要使用 <em>this</em> 的方式有關，Vue3.0 傾向將所有相關的狀態和方法都明確地公開在 <em>setup</em> 函式的返回對象中，既可以簡化程式碼，減少程式碼中的誤用和混淆，也能增加可讀與一致性。</p>
         <p>舉例來說，這是 Vue2.0 使用 <em>this</em> 來訪問組件的數據與方法的範例：</p>
@@ -166,8 +180,8 @@ export default {
             </div>
         </div>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、生命週期鉤子</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <h3>beforeCreate、created</h3>
         <p>這兩個生命週期鉤子主要進行一些數據或方法初始化的作業，這時 Vue 實例尚未渲染到 <em>el</em> 和 <em>$el</em>，因此 DOM 還看不到我們創建的 Vue 實例。至於 Vue 實例在 <em>beforeCreate</em> 階段仍無法透過其創建時定義的 VM（ViewModel）獲取裡面建立的數據（Data）、方法（Methods），直到 <em>created</em> 這個階段才能取得內容。</p>
         <p>儘管 Vue3.0 的生命週期表中仍將這兩個生命鉤子列入實例流程圖裡，但由於 Vue3.0 Composition API 新增 <em>setup</em> 入口函式，其實已經不再需要使用 <em>beforeCreate</em> 與 <em>created</em>，但為了保留對 Vue2.0 的相容性，故現階段我們仍可以在 Vue3.0 的生命週期表裡看見這兩個鉤子的存在，不過誠如前面所述，Vue3.0 開始已經不需要它們，在官方文件 <a href="https://cn.vuejs.org/api/composition-api-lifecycle.html#onunmounted" target="_blank">Composition API</a> 說明中也已看不到相關敘述。</p>
@@ -181,8 +195,8 @@ export default {
         <h3>beforeUnmount、unmounted</h3>
         <p>雖然換了個名字，但生命週期定義和用途與 Vue2.0 的 <em>beforeDestroyed</em>、<em>destroyed</em> 相同，表示 Vue 實例進入銷毀階段，<em>beforeUnmount</em> 表示在銷毀之前，<em>unmounted</em> 階段則完全銷毀綁定的資料數據、事件監聽、Watch 等方法（雖說是銷毀，但不意味著這些已經掛載到 DOM 裡面的內容就會被移除，它銷毀的涵義其實是指操作它的實例已不會再繼續追蹤、管理）。</p>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <dl>
             <dd><a href="https://cn.vuejs.org/guide/essentials/lifecycle.html" target="_blank">Vue.js 3.0</a></dd>
             <dd><a href="https://ithelp.ithome.com.tw/articles/10242633" target="_blank">vue3 Composition API 學習手冊-13 生命週期</a></dd>
@@ -196,10 +210,3 @@ export default {
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

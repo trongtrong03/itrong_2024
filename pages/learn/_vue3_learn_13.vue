@@ -1,3 +1,19 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、聲明式路由導航的劣勢' },
+        { id: 2, title: '二、編程式路由導航' },
+        { id: 3, title: '三、router.replace' },
+        { id: 4, title: '四、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="74" fileType="learnList" />
@@ -5,20 +21,18 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、聲明式路由導航的劣勢</a></li>
-            <li><a href="#act2">二、編程式路由導航</a></li>
-            <li><a href="#act3">三、router.replace</a></li>
-            <li><a href="#act4">四、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>截至目前為止，我們所有的路由範例練習，都是在組件模板裡添加 <em>&lt;RouterLink&gt;</em> 標籤來切換不同的組件，如果我們在組件模板裡使用 <em>&lt;RouterLink&gt;</em>，那麼 DOM 渲染出來的 HTML 將會是傳統常見的 <em>&lt;a&gt;</em> 標籤。這種直接在模板添加路由標籤的方式稱為「聲明式」路由導航。</p>
         <p>聲明式是 Vue.js 理想的路由導航方式，將路由導航的邏輯與視圖分離，使得模板更加清晰，使用也簡單易懂。既然如此，為什麼還會產生另一種路由導航，也就是本文要介紹的「編程式」路由導航？事情是這樣的，聲明式路由導航方便歸方便、簡單歸簡單，卻無法處理比較詳細的程式邏輯需求，比如延遲幾秒再載入指定路由組件、進入某組件前先判斷是否符合指定條件（例如會員功能需要先判斷是否已登入會員），這些程式邏輯必須在程式裡撰寫，無法直接透過 <em>&lt;RouterLink&gt;</em> 實現，這些比較複雜的操作都必須仰賴編程式路由導航的協助。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>一、聲明式路由導航的劣勢</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>聲明式路由導航是透過在模板中使用 Vue Router 提供的組件和指令來實現的，例如：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-html">&lt;template&gt;
@@ -56,8 +70,8 @@ onMounted (()=>{
         <p>使用 <em>onMounted</em> 生命鉤子，表示組件渲染後執行其鉤子裡的程式邏輯。</p>
         <p>這時可能就會卡關了，<em>setTimeout</em> 函式裡面該怎麼寫？難道直接把 <em>&lt;RouterLink&gt;</em> 塞進去嗎？這顯然不是正確的方法，因為 <em>&lt;RouterLink&gt;</em> 標籤屬於HTML 結構，並不是 JavaScript 腳本。所以正確的方式是在函式裡面寫一段 JavaScript 邏輯，再讓「編程式」路由導航實現切換的功能。</p>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、編程式路由導航</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p>編程式路由導航是透過在 Vue 組件中透過 JavaScript 程式碼來實現路由的導航邏輯，通常是使用 Vue Router 所提供之 router 實例上的方法，所以回到前面的範例，我們要在 <em>setTimeout</em> 加入編程式路由導航的邏輯之前，要先引用這個東西：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-javascript">import { useRouter } from 'vue-router';</code></pre>
@@ -257,8 +271,8 @@ let router = useRouter();</code></pre>
             <img src="/images/learn/js/vue3-learn-13-6.jpg">
         </figure>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、router.replace</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p>上一個章節練習編程式路由導航，路由器使用的是 <em>push</em> 方法來導航不同的動態資料內容，我們都知道路由導航有 <em>push</em> 和 <em>replace</em> 兩種，是否表示這裡也能使用 <em>replace</em>？答案是肯定的，原本 <em>showNewsView</em> 函式：</p>
         <div class="text-code" v-pre>
             <pre><code class="language-javascript">function showNewsView(item){
@@ -295,8 +309,8 @@ let router = useRouter();</code></pre>
         </ol>
         <p>這些跳轉功能都需要藉由 JavaScript 輔助判斷，所以只能在 JavaScript 裡面同時編寫路由導航來實現。對比單純只能用於簡單路由切換的 RouterLink 來說更加靈活、可控，但也因為要撰寫程式邏輯所以相對繁瑣，維護起來也會比 RouterLink 來得費心費力。</p>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <dl>
             <dd><a href="https://cn.vuejs.org/" target="_blank">Vue.js</a></dd>
             <dd><a href="https://www.youtube.com/watch?v=49b150tKIUc&list=PLmOn9nNkQxJEnGM4Jf0liBcyedAtuQq-O&index=41" target="_blank">【极简Vue3】041 路由 编程式路由导航</a></dd>
@@ -307,10 +321,3 @@ let router = useRouter();</code></pre>
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>

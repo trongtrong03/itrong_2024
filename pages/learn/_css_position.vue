@@ -1,3 +1,20 @@
+<script setup lang="ts">
+    // layout
+    definePageMeta({
+        layout: false
+    });
+
+    // 目錄
+    const catalog = reactive([
+        { id: 0, title: '序、前言' },
+        { id: 1, title: '一、Position 是什麼？' },
+        { id: 2, title: '二、Position 有哪些參數？' },
+        { id: 3, title: '三、座標偏移與 z-index' },
+        { id: 4, title: '四、transform 中的 translate 有影響嗎？' },
+        { id: 5, title: '五、參考資料' },
+    ]);
+</script>
+
 <template>
     <NuxtLayout name="article">
         <TempArticle :propValue="34" fileType="learnList" />
@@ -5,20 +22,17 @@
 <div class="text-content">
     <div class="text-catalog">
         <ul>
-            <li><a href="#act0">序、前言</a></li>
-            <li><a href="#act1">一、Position 是什麼？</a></li>
-            <li><a href="#act2">二、Position 有哪些參數？</a></li>
-            <li><a href="#act3">三、座標偏移與 z-index</a></li>
-            <li><a href="#act4">四、transform 中的 translate 有影響嗎？</a></li>
-            <li><a href="#act5">五、參考資料</a></li>
+            <li v-for="item in catalog" :key="item.id">
+                <a :href="'#act' + item.id" v-text="item.title"></a>
+            </li>
         </ul>
     </div>
-    <div class="text-block" id="act0">
-        <h2>序、前言</h2>
+    <div class="text-block" :id="'act' + catalog[0].id">
+        <h2 v-text="catalog[0].title"></h2>
         <p>對絕大多數的網頁前端初學者，包含我在內，<em>position</em> 無非是 CSS 中難以跨越的關卡之一，但偏偏許多排版的呈現，都必須借重 <em>position</em> 的特性，以達到理想中的布局效果。其實只要多花一些時間理解概念並多加練習，<em>position</em> 也沒有想像中那樣困難，本篇文章將一一介紹其幾種固有布局模式屬性的運用概念，以及 CSS3 新增的 <em>sticky</em> 屬性。</p>
     </div>
-    <div class="text-block" id="act1">
-        <h2>Position 是什麼？</h2>
+    <div class="text-block" :id="'act' + catalog[1].id">
+        <h2 v-text="catalog[1].title"></h2>
         <p>CSS 的 <em>position</em> 和 <em>display</em> 屬性可以說是網頁排版裡地位舉足輕重，且所有前端開發者皆不得不學習的兩大重要屬性，<em>position</em> 主要用途在改變當前目標元素相對父元素或瀏覽器的空間位置，雖然用純文字敘述會覺得有些抽象，但後續章節透過示意圖搭配實際演練就會比較容易理解了。</p>
         <p>雖說 <em>position</em> 在 CSS 發展中已經存在很久，但它本身沒有什麼系列屬性，語法規則定義就一種：</p>
         <div class="text-code" v-pre>
@@ -28,8 +42,8 @@
         </div>
         <p><em>static</em> 是預設值，表示調用該選擇器的 HTML 元素 <em>position</em> 值為「靜態定位」，不受偏移屬性影響。所謂的偏移屬性指的是 <em>top</em>、<em>right</em>、<em>bottom</em>、<em>left</em> 這四大各自代表不同方向的屬性，依據 <em>position</em> 參數的不同，這些偏移屬性也將會對其產生不同影響。</p>
     </div>
-    <div class="text-block" id="act2">
-        <h2>二、Position 有哪些參數？</h2>
+    <div class="text-block" :id="'act' + catalog[2].id">
+        <h2 v-text="catalog[2].title"></h2>
         <p><em>position</em> 一共有五個參數，分別是：</p>
         <div class="text-flex">
             <div class="f-width">
@@ -292,8 +306,8 @@
             <p>過往要實現這樣的效果大多需要依賴 JavaScript 的幫助，但 CSS3 新增此屬性值後只要幾行樣式就能搞定，非常方便。儘管如此，和其他 CSS3 屬性相同，無法為舊版本瀏覽器所相容，因此使用前仍須評估是否要兼顧舊版本的瀏覽器使用者體驗。</p>
         </blockquote>
     </div>
-    <div class="text-block" id="act3">
-        <h2>三、座標偏移與 z-index</h2>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
         <p>這個篇章的重點將重申或補充一些關於座標偏移與 <em>z-index</em> 等屬性的幾個觀念：</p>
         <p><br></p>
         <h3>座標偏移：</h3>
@@ -369,8 +383,8 @@
             </p>
         </div>
     </div>
-    <div class="text-block" id="act4">
-        <h2>四、transform 中的 translate 有影響嗎？</h2>
+    <div class="text-block" :id="'act' + catalog[4].id">
+        <h2 v-text="catalog[4].title"></h2>
         <p>這個算是許多初學者實務上容易產生混亂的問題之一，我們都知道影響目標對象位置的 CSS 屬性除了本篇文章介紹的「偏移」屬性外，尚有 <em>transform</em> 的位移函數 <em>translate</em>，那麼，在目標對象已經添加 <em>position</em> 及偏移屬性，或已經使用 <em>translate</em> 函數的情況下，再套用另一個偏移屬性會互相牴觸或影響嗎？</p>
         <p>答案是不會互相牴觸，不過由於偏移與位移會個別運作，因此當兩類屬性同時存在於單一目標對象時，該對象會同時吃偏移屬性的設定和位移函數的值。實務上比較常見兩者同時運用的場合，當屬要將不確定尺寸的對象元素在區域內居中對齊的時候，其寫法為：</p>
         <div class="text-code" v-pre>
@@ -389,8 +403,8 @@
             </div>
         </div>
     </div>
-    <div class="text-block" id="act5">
-        <h2>五、參考資料</h2>
+    <div class="text-block" :id="'act' + catalog[5].id">
+        <h2 v-text="catalog[5].title"></h2>
         <dl>
             <dd><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/position" target="_blank">MDN web docs</a></dd>
             <dd><a href="https://www.cnblogs.com/coco1s/p/6402723.html" target="_blank">使用 position:sticky 实现粘性布局</a></dd> 
@@ -400,10 +414,3 @@
 <!-- end -->
     </NuxtLayout>
 </template>
-
-<script setup lang="ts">
-    // layout
-    definePageMeta({
-        layout: false
-    });
-</script>
