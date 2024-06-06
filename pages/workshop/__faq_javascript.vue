@@ -9,6 +9,7 @@
         { id: 1, title: '一、錯誤訊息' },
         { id: 2, title: '二、警告提示' },
         { id: 3, title: '三、其他疑難雜症' },
+        { id: 4, title: '四、功能筆記' },
     ]);
 
     // avtive
@@ -242,6 +243,48 @@ var d+o+g = "阿比";    // Uncaught SyntaxError: Unexpected token '+'</code></p
                 </div>
                 <div class="accordin-content">
                     <p>如果不是直接使用 JavaScript 內建的時間格式，而是自行建立的時間物件，格式最好遵循 ISO 8601 格式，也就是 YYYY-MM-DD，盡量不要是其他寫法例如 YYYY.MM.DD 或 YYYY/MM/DD 之類的，因為這可能導致不同瀏覽器或裝置設備無法正確地作出解析，唯有 ISO 8601 是跨平台公認的標準格式。</p>
+                </div>
+                <button class="accordin-close" @click="isActive = 0;"></button>
+            </div>
+        </div>
+    </div>
+    <div class="text-block" :id="'act' + catalog[3].id">
+        <h2 v-text="catalog[3].title"></h2>
+        <div class="text-accordin is-others">
+            <div class="accordin-item" :class="isActive==4001 ? 'is-active' : ''">
+                <div class="accordin-title" @click="isActive = 4001;">
+                    <p>用來計算並返回零或多個數字的最大值</p>
+                </div>
+                <div class="accordin-content">
+                    <p>範例：</p>
+                    <div class="text-code" v-pre>
+                        <pre><code class="language-javascript">var result = Math.max(0, 5000 - 9000)
+console.log(result);    // 0</code></pre>
+                    </div>
+                    <p><em>Math.max</em> 是 JavaScript 中的函數，用於傳回零個或多個數值中的最大值。當你傳遞兩個或更多數值給 <em>Math.max</em> 時，它會計算並傳回其中最大的那個數值。</p>
+                    <p>例如，在表達式 Math.max(0, 5000 - 9000) 中，5000 - 9000 會先計算，結果是 -4000。然後，函數會比較 0 和 -4000，並傳回較大的值，即 0。</p>
+                    <p>其他使用範例：</p>
+                    <h5>1. 單一數字</h5>
+                    <div class="text-code" v-pre>
+                        <pre><code class="language-javascript">console.log(Math.max(5));    // 5</code></pre>
+                    </div>
+                    <h5>2. 多個數字</h5>
+                    <div class="text-code" v-pre>
+                        <pre><code class="language-javascript">console.log(Math.max(1, 10, 100, 1000));    // 1000</code></pre>
+                    </div>
+                    <h5>3. 負數與正數整合</h5>
+                    <div class="text-code" v-pre>
+                        <pre><code class="language-javascript">console.log(Math.max(-10, -20, 30, 40));    // 40</code></pre>
+                    </div>
+                    <h5>4. 使用擴充運算子傳遞數組</h5>
+                    <div class="text-code" v-pre>
+                        <pre><code class="language-javascript">const numbers = [1, 2, 3, 4, 5];
+console.log(Math.max(...numbers));    // 5</code></pre>
+                    </div>
+                    <h5>5. 全負數</h5>
+                    <div class="text-code" v-pre>
+                        <pre><code class="language-javascript">console.log(Math.max(-5, -10, -3));    // -3</code></pre>
+                    </div>
                 </div>
                 <button class="accordin-close" @click="isActive = 0;"></button>
             </div>
